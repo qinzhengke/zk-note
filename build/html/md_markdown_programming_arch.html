@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Related Pages</title>
+<title>My Project: 架构</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('pages.html','');});
+$(document).ready(function(){initNavTree('md_markdown_programming_arch.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -80,27 +80,24 @@ $(document).ready(function(){initNavTree('pages.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Related Pages</div>  </div>
+<div class="title">架构 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all related documentation pages:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_introduction.html" target="_self">zk-note 简介</a></td><td class="desc"></td></tr>
-<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_algorithm.html" target="_self">算法</a></td><td class="desc"></td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_arch.html" target="_self">架构</a></td><td class="desc"></td></tr>
-<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_bash.html" target="_self">bash</a></td><td class="desc"></td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_bat.html" target="_self">bat</a></td><td class="desc"></td></tr>
-<tr id="row_5_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_c_c_note.html" target="_self">c</a></td><td class="desc"></td></tr>
-<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cmake.html" target="_self">cmake</a></td><td class="desc"></td></tr>
-<tr id="row_7_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cplusplus_qt.html" target="_self">Qt</a></td><td class="desc"></td></tr>
-<tr id="row_8_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cplusplus_std_cpp.html" target="_self">标准C++</a></td><td class="desc"></td></tr>
-<tr id="row_9_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cplusplus_vcpp.html" target="_self">VC++</a></td><td class="desc"></td></tr>
-<tr id="row_10_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_debug.html" target="_self">debug经验</a></td><td class="desc"></td></tr>
-<tr id="row_11_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_opencv.html" target="_self">opencv</a></td><td class="desc"></td></tr>
-<tr id="row_12_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_python_python_note.html" target="_self">读取csv文件</a></td><td class="desc"></td></tr>
-</table>
-</div><!-- directory -->
-</div><!-- contents -->
+<div class="textblock"><h3>函数的输入输出</h3>
+<ol type="1">
+<li>输入 （IN）</li>
+<li>输出 （OUT）</li>
+</ol>
+<p>输入输出大家都知道，除了这些，还有下面两个比较重要的。</p>
+<ol type="1">
+<li>输入&amp;输出（INOUT） INOUT既是输入变量也是需要更改的变量，一般是需要迭代的变量，例如 （1）数据处理的序号，这些序号需要在处理的过程中更新，而且不仅仅是++那么简单，可能需要根据别的线程随时调整，如果将这些序号的处理放到函数外边，那么处理序号部分的代码封装性就不太好。 但是如果放函数里面，那么函数就会做一些与算法无关的序号处理，在算法移植到别处时可能就会出问题。 同步序号这种操作属于平台相关操作，平台相关的函数就算不上是独立的算法函数了，还是别想着去移植它了。</li>
+</ol>
+<p>（2）行号、列号、position等等，例如一大块数据，由于实时性的要求，某个算法一次性算不完，需要分多次进行计算，那么当前当前所处理完的部分需要标记，这些标记同样需要更新迭代。</p>
+<p>（3）一些历史队列，滤波、插值的时候经常会用到，都会用到历史数据，并且这些历史数据在队列里不断地滚动，这是算法相关的，即使独立的算法也可能会需要这样的操作。</p>
+<ol type="1">
+<li>调试输出（DEBUGOUT） 一些非PC平台系统，数据的记录与调试并不是很方便，而且在实际工程中，需要对一些偶发的问题进行记录，所以这类系统需要有对应的日志系统，日志并不都是文本的，可能是一些比较关系的数据曲线，这些数据无法通过printf直接输出，（） </li>
+</ol>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

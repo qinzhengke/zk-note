@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Related Pages</title>
+<title>My Project: git加载私钥</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('pages.html','');});
+$(document).ready(function(){initNavTree('md_markdown_programming_cplusplus_tools.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -80,27 +80,22 @@ $(document).ready(function(){initNavTree('pages.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Related Pages</div>  </div>
+<div class="title">git加载私钥 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all related documentation pages:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_introduction.html" target="_self">zk-note 简介</a></td><td class="desc"></td></tr>
-<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_algorithm.html" target="_self">算法</a></td><td class="desc"></td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_arch.html" target="_self">架构</a></td><td class="desc"></td></tr>
-<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_bash.html" target="_self">bash</a></td><td class="desc"></td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_bat.html" target="_self">bat</a></td><td class="desc"></td></tr>
-<tr id="row_5_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_c_c_note.html" target="_self">c</a></td><td class="desc"></td></tr>
-<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cmake.html" target="_self">cmake</a></td><td class="desc"></td></tr>
-<tr id="row_7_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cplusplus_qt.html" target="_self">Qt</a></td><td class="desc"></td></tr>
-<tr id="row_8_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cplusplus_std_cpp.html" target="_self">标准C++</a></td><td class="desc"></td></tr>
-<tr id="row_9_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cplusplus_vcpp.html" target="_self">VC++</a></td><td class="desc"></td></tr>
-<tr id="row_10_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_debug.html" target="_self">debug经验</a></td><td class="desc"></td></tr>
-<tr id="row_11_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_opencv.html" target="_self">opencv</a></td><td class="desc"></td></tr>
-<tr id="row_12_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_python_python_note.html" target="_self">读取csv文件</a></td><td class="desc"></td></tr>
-</table>
-</div><!-- directory -->
-</div><!-- contents -->
+<div class="textblock"><p>使用ssh生成密钥对之后，将公钥添加至服务器，</p>
+<p>ssh不会自动找到私钥，即使将私钥放在~/.ssh文件夹下，私钥需要添加至ssh</p>
+<p>使用ssh-add命令添加，</p>
+<div class="fragment"><div class="line">ssh-add ~/.ssh/zk_rsa</div></div><!-- fragment --><p>如果出现了cannot connect to agent 提示，则执行**ssh-agent bash命令**，即</p>
+<div class="fragment"><div class="line">ssh-agent bash</div></div><!-- fragment --><h2>fetch和pull的区别</h2>
+<p>fetch命令只是获取远程代码，并不会直接影响到本地代码，自然也不会出现冲突。pull命令实际是可以认为是fetch+merge，会加载到本地代码，并且尝试去合并。在smartgit中，仓库fetch之后会有一个向下的绿色箭头图标，pull之后就会消失。</p>
+<h2>git 查看某个文件修改历史</h2>
+<p>突然有一天，发现自己要用的某个源文件中被修改了！想查看到底是谁修改的，但是手动浏览太慢了，特别是主干提交非常多的情况。使用gitk命令可以直接查看某个文件的修改历史。gitk是一个gui形式的git浏览工具，貌似是和git同时提供的，很强大。</p>
+<div class="fragment"><div class="line"># syntax: gitk -- &lt;file_name&gt;</div><div class="line">gitk -- /some_directory/my_interest.c</div></div><!-- fragment --><h2>git报错：remote rejected *** change *** closed</h2>
+<p>在push到gerrit时出现了这个错误，在overflow查到了原因，我提交的change id和历史提交中的某个id重复了，需要删除change id，然后重新生成（删除后重新打开commit message即可），再Push就没有问题了。</p>
+<h2>git创建分支后记得尽快commit：</h2>
+<p>创建并且切换分支之后，修改了一些代码，如果没有commit，再切回原来的分支，那么这些修改也会影响原来的分支。所以切换回原来的分支之前要commit一下。 </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

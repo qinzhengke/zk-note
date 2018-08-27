@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Related Pages</title>
+<title>My Project: cmake</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function(){initNavTree('pages.html','');});
+$(document).ready(function(){initNavTree('md_markdown_programming_cmake.html','');});
 </script>
 <div id="doc-content">
 <!-- window showing the filter options -->
@@ -80,27 +80,18 @@ $(document).ready(function(){initNavTree('pages.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Related Pages</div>  </div>
+<div class="title">cmake </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all related documentation pages:</div><div class="directory">
-<table class="directory">
-<tr id="row_0_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_introduction.html" target="_self">zk-note 简介</a></td><td class="desc"></td></tr>
-<tr id="row_1_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_algorithm.html" target="_self">算法</a></td><td class="desc"></td></tr>
-<tr id="row_2_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_arch.html" target="_self">架构</a></td><td class="desc"></td></tr>
-<tr id="row_3_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_bash.html" target="_self">bash</a></td><td class="desc"></td></tr>
-<tr id="row_4_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_bat.html" target="_self">bat</a></td><td class="desc"></td></tr>
-<tr id="row_5_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_c_c_note.html" target="_self">c</a></td><td class="desc"></td></tr>
-<tr id="row_6_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cmake.html" target="_self">cmake</a></td><td class="desc"></td></tr>
-<tr id="row_7_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cplusplus_qt.html" target="_self">Qt</a></td><td class="desc"></td></tr>
-<tr id="row_8_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cplusplus_std_cpp.html" target="_self">标准C++</a></td><td class="desc"></td></tr>
-<tr id="row_9_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_cplusplus_vcpp.html" target="_self">VC++</a></td><td class="desc"></td></tr>
-<tr id="row_10_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_debug.html" target="_self">debug经验</a></td><td class="desc"></td></tr>
-<tr id="row_11_"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_opencv.html" target="_self">opencv</a></td><td class="desc"></td></tr>
-<tr id="row_12_" class="even"><td class="entry"><span style="width:16px;display:inline-block;">&#160;</span><a class="el" href="md_markdown_programming_python_python_note.html" target="_self">读取csv文件</a></td><td class="desc"></td></tr>
-</table>
-</div><!-- directory -->
-</div><!-- contents -->
+<div class="textblock"><p>#cmake</p>
+<h3>cmake 添加源文件</h3>
+<p>aux_source_directories(. a)本来就是追加的形式，不需要额外操作。 </p><div class="fragment"><div class="line">aux_source_directories(. a)</div><div class="line">aux_source_directories(.. a)</div><div class="line">aux_source_directories(../.. a)</div><div class="line">add_executable(exe_a ${a})</div></div><!-- fragment --><h3>cmake设置编译选项</h3>
+<p>cmake中设置了编译选项 </p><div class="fragment"><div class="line">set(CMAKE_C_FLAGS &quot;-std=c99&quot;)</div></div><!-- fragment --><p> 但是对应的Makefile里怎么都找不到对应的改动。</p>
+<p>后来通过git来查看，才知道，CMake生成的Makefile中不直接包含flag，flag相关的设置都在CMakeFiles/xxx.dir/flags.make文件中。</p>
+<p>这里不得不说git真是神器，让蛛丝马迹无处可藏。</p>
+<h3>cmake 工程引入math.h的lib</h3>
+<p>首先，cmake建的工程，居然math.h的Lib要手动加。。。。 其次，我们知道gcc -lm是加math库，但是cmake怎么加都不对。 最后，cmake对于加math库有独特的表达式。。。 </p><div class="fragment"><div class="line">target_link_libraries(exe_name, m)</div></div><!-- fragment --><p> 没错就是“m”，表示抽象的变量。 </p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
