@@ -31,3 +31,6 @@ namespace backward
 	backward::SignalHandling sh;
 }
 ~~~
+
+5.Debug编译方式
+别忘了一定要用Debug编译方式，否则可执行文件无法对应到行。
