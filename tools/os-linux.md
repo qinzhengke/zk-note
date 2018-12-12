@@ -36,3 +36,6 @@ tail -n 5 ./filename.txt
 ~~~{.sh} 
 while : ; do tail -n 5 ./filename.txt; sleep 1; done;
 ~~~
+
+## ln -s 命令无效？
+使用ln -s命令，一定要输入目标文件的绝对路径，而不是相对路径！
