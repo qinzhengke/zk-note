@@ -22,11 +22,11 @@ b.exe在代码里写这一句生成"c.txt"文件。
 Linux环境下
 ~~~{.cpp}
 #include <unistd.h>
-
 ...
 chdir(working_dir)
 ...
 ~~~
+其中，unistd表示unix环境下的标准接口，所以在windows下是用不了的。
 
 Windows环境下
 ~~~{.cpp}
