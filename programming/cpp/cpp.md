@@ -61,6 +61,7 @@ std::string converted_str = converter.to_bytes( string_to_convert );
 ```
 
 对应的tinydir_open，要使用wchar_t作为输入，如果输入常量字符串，可以这样写L"abcde"。
+codecvt头文件在gcc5才引入，如果使用gcc4，是无法通过编译的。
 
 ## 系统limit文件报错？
 有的时候系统源文件报错会让人摸不着头脑，开发者根本不知道哪里出错。这里列举一个遇到的问题。
@@ -73,3 +74,8 @@ std::string converted_str = converter.to_bytes( string_to_convert );
 虽然问题很怪，但是还是找出来了，实际上，这是一个**触发式**问题，加入的代码本身没有问题，例如添加一句include标准库，但是添加进去之后确实出了问题。
 实际上，include <local>触发了工程代码里面的一个隐藏问题，也就是上一篇所说的自身的工程定义了一个max宏，而且形参形式和标准库的max不一样，但是由于原来的工程真的再没有其他标准库里的函数调用max和min，所以就一直没有报错！但是添加<local>之后，local使用了max宏，但是本来是期望按照标准库的用法使用的，但是由于先编译了本地的max，所以local里的函数使用max时就报错。
  所以以后如果遇到了这种莫名其妙，include标准头文件都能报错的问题，就有可能是它触发了系统里原有的问题！
+ 
+ ## namespace语法错误？
+ namespace语法很简单，但是为什么会出错呢？
+ 有一种可能，就是在c文件或者c文件引用的头文件里定义或者使用的namespace，C语言没有明明空间，当然不支持。
+ 只不过编译器不会提示C文件不能定义namespace，只是会提示语法错误。
