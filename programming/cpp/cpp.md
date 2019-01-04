@@ -79,3 +79,6 @@ codecvt头文件在gcc5才引入，如果使用gcc4，是无法通过编译的�
  namespace语法很简单，但是为什么会出错呢？
  有一种可能，就是在c文件或者c文件引用的头文件里定义或者使用的namespace，C语言没有明明空间，当然不支持。
  只不过编译器不会提示C文件不能定义namespace，只是会提示语法错误。
+ 
+ ## memcpy报出 will always overflow destination buffer.
+ gcc编译memcpy的时候，如果目标地址是一个固定大小的静态的数组，那么编译器会检查copy的size是否会超过这块静态数组的大小，超出了就会报出错误，不得不说编译器做得非常不错。
