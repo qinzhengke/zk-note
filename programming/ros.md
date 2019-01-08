@@ -39,3 +39,11 @@ build目录选择catkin_ws/build
 caktin_make clean
 catkin_make
 ```
+
+## 断点调试
+就像使用cmake一样使用catkin_make，
+```sh
+catkin_make -DCMAKE_BUILD_TYPE=Debug
+```
+
+
