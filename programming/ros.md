@@ -46,4 +46,5 @@ catkin_make
 catkin_make -DCMAKE_BUILD_TYPE=Debug
 ```
 
-
+## ros launch额外传参
+如果使用ros launch启动节点，launch会额外在最后传入两个参数，所以main函数的argc会+2，在ros::init之后额外的两个参数会被剔除，argc会回归原值。
