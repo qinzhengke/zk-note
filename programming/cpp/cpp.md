@@ -87,3 +87,7 @@ codecvt头文件在gcc5才引入，如果使用gcc4，是无法通过编译的�
  c++中，枚举变量进行++操作会出现编译错误！
  然而C语言中，枚举变量++是允许的！
  C++已经不兼容C了？
+ 
+ ## passing 'const Type' as 'this' argument discard qulifiers
+ 如果const对象调用了非const成员函数，就会报这个错误，
+ const对象只能调用const方法，const修饰的成员函数会保证不会修改成员变量，所以const对象才能因此保证不被修改。
