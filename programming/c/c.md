@@ -370,3 +370,6 @@ target_compile_definitions(my_exe PRIVATE USE_SOMTHING=1)
 // End of Hacking
 ~~~
 用“hack”这个词非常好，既能够表达出这是对原有模块的破坏，一眼就能看出hack了那些地方，原来是什么代码，另外也很容易搜索。
+
+### 255.1f转换成uint8_t是多少？
+答案是255。
