@@ -357,7 +357,10 @@ static int i_am_devel_1;
 int i_am_devel2;
 #endif
 ~~~
-解决方法就是在b.h中也加入该宏。
+解决方法，使用编译工具的宏定义工具，例如cmake的
+~~~.cmake
+target_compile_definitions(my_exe PRIVATE USE_SOMTHING=1)
+~~~
 
 ### 万不得已修改第三方代码怎么注释？
 这种情况通常出现在两个第三方库之间有命名冲突，例如都存在某一些数学函数。
