@@ -65,3 +65,15 @@ tail -f xxx.log
 
 ## busybox
 这是一个工具的集合，很多比较简陋的嵌入式linux环境无法提供太多的工具，busybox就作为一个工具箱，提供丰富的工具支持，例如上述的tail命令。
+
+## script中的source
+script中的source命令是无效的！
+所以，如果想要在script中source ~/.bashrc，也是无效的。
+有点奇怪，有些说法是calling bash不受callee bash的影响。
+所以想要source ~/.bashrc可以这样
+
+```.sh
+# Add something to ~/.bashrc
+echo MY_VARIABLE > ~/.bashrc
+exec bash
+```
