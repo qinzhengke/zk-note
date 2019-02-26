@@ -27,10 +27,15 @@ int func(uint32_t *addr)
 但是，这种方式其实并不好，在64位系统中，指针的大小可能是64位的，这样赋值就会出错。
 仍然像想用这种方式的话，使用intptr_t类型，兼容32和64位，在C99中支持，在<stdint.h>中定义。
 
-### Designated initializer
-C99标准后，C语言有一个我没怎么见过的结构体初始化方法，就是“.+变量=目标的方式”，学名叫做"Designated initializer"，使用这种方式，这种方式可以在数组+结构体嵌套情况下下使用，据说很多操作系统内核用了这样的代码。
-赋值的顺序可以改变的，例如a2=0.0可以在a1=0之前，有点像python。
 
+
+
+### designated initializer
+C语言中结构体在C99中的一种新的初始化语法，叫做designated initializer，即指定初始化，之前我一直找不到正式的名称，我一直称之为点变量初始化。。。
+
+```cpp
+MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
+```
 ```cpp
 type struct
 {
@@ -63,18 +68,13 @@ B bs[2] =
   }
 }
 ```
-
-### designated initializer
-C语言中结构体在C99中的一种新的初始化语法，叫做designated initializer，即指定初始化，之前我一直找不到正式的名称，我一直称之为点变量初始化。。。
-
-```cpp
-MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
-```
 这个东西与编译器无关，是C99的标准，gcc想用的话必须开启选项 -std=c99
 
+**注意，这是C语言的语法，不是C++的语法，至少c++11还没有包含，在C++代码中不要混用！**
 如果使用qtcreator构建工程，那么默认使用g++编译，然而如果designated initializer语句是在cpp文件里，g++是不支持的，不管CXX_FLAG 是不是加了c++11，或者C_FLAG 加了99，或者加入extern "C"，都不行， extern "C"只是指示c++编译器把函数编成C语言可识别的符号表，并不支持这种赋值语法。
 
 但是我发现了一种方法，就是强行改cpp后缀为c，这样g++就会调用gcc来编译c文件。
+
 
 ###代码区分不同操作系统
 ```cpp
