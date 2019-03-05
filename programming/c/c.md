@@ -378,3 +378,27 @@ target_compile_definitions(my_exe PRIVATE USE_SOMTHING=1)
 明明头文件的路径已经添加，并且在**QtCreator**里能够跟踪到该头文件，但是在**terminal** make的时候仍然找不到头文件？
 有一个原因：CMakeList.txt用了环境变量$ENV{}，并且QtCreator设置了这个环境变量，但是bash里面并没有设置！
 反过来，能编译，但是QtCreator老是找不到头文件，或者在QtCreator内部构建失败。
+
+### 获取变量的名字
+```c
+#include <stdio.h>
+
+#define PRINTER(name) printer(#name, (name))
+
+void printer(char *name, int value) {
+    printf("name: %s\tvalue: %d\n", name, value);
+}
+
+int main (int argc, char* argv[]) {
+    int foo = 0;
+    int bar = 1;
+
+    PRINTER(foo);
+    PRINTER(bar);
+
+    return 0;
+}
+
+name: foo   value: 0
+name: bar   value: 1
+```
