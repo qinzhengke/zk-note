@@ -77,3 +77,5 @@ script中的source命令是无效的！
 echo MY_VARIABLE > ~/.bashrc
 exec bash
 ```
+### /bin/sh&M bad interpreter
+直接原因是第一行结尾字符有问题，一般的源头是bash的脚本文件在Windows被重新编辑过，Windows和Linux下的换行是不同的字符表达的，回到Linux时就可能出错。
