@@ -94,3 +94,9 @@ codecvt头文件在gcc5才引入，如果使用gcc4，是无法通过编译的�
  
  ## \_Bool类型
  \_Bool类型是C99引入的专属于C语言的布尔类型，如果要使用，必须包含stdbool.h头文件。
+
+## C语言和C++混用的可能问题。
+1.c模块依赖包含c++特性的c++模块
+这将导致编译不过，产生的问题类似namespace非法，因为C语言根本没有namespace。
+2.extern C 封装起来的代码包含C++特性
+这将导致编译不过，产生的报错例如“template with C linkage”。
