@@ -402,3 +402,21 @@ int main (int argc, char* argv[]) {
 name: foo   value: 0
 name: bar   value: 1
 ```
+
+### 函数指针常量怎么定义？
+```c
+// normal pointer to function
+int (*func)(int);
+
+// pointer to const function -- not allowed
+int (const *func)(int);
+
+// const pointer to function. Allowed, must be initialized.          
+int (*const func)(int) = some_func;
+
+// Bonus: pointer to function returning pointer to const
+void const *(*func)(int);
+
+// triple bonus: const pointer to function returning pointer to const.
+void const *(*const func)(int) = func.
+```
