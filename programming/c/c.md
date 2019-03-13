@@ -467,3 +467,22 @@ int main( int argc, char* argv[] )
 　return 0;
 }
 ```
+
+### 函数指针作为函数传参
+
+```c
+typedef void (*callback_function)(void); // type for conciseness
+
+callback_function disconnectFunc; // variable to store function pointer type
+
+void D::setDisconnectFunc(callback_function pFunc)
+{
+    disconnectFunc = pFunc; // store
+}
+
+void D::disconnected()
+{
+    disconnectFunc(); // call
+    connected = false;
+}
+```
