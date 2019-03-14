@@ -486,3 +486,11 @@ void D::disconnected()
     connected = false;
 }
 ```
+
+### sizeof用于静态数组
+sizeof变量如果用在静态数组，那么是可以得到静态数组的总长度的，
+```c
+double array[10];
+sizeof(array); // 8*10 = 80
+```
+```
