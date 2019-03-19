@@ -18,4 +18,8 @@ git config --global core.editor "vim"
 git checkout my_branch
 # setup the tracked remote branch.
 git branch --set-upstream-to=origin/my_branch
+#或者
+git branch -u origin/my_branch
 ```
+
+
