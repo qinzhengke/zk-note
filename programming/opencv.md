@@ -1,4 +1,4 @@
-OpenCV{#opencv}
+开源计算机视觉库：OpenCV{#opencv}
 ==================
 
 此页面记录opencv使用过程中遇到的问题。

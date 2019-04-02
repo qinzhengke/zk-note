@@ -1,4 +1,4 @@
-Python{#programming-python}
+编程语言：Python{#python}
 ===========================
 
 此页面记录一些有用的标准python语法。

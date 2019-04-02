@@ -1,4 +1,7 @@
-# Libre Office
+开源办公软件：Libre Office{#libre_office}
+======================================
+
+
 LibreOffice是一款开源、免费，而且非常好用的Office软件，配合Texmath插件0.44画图很流啤。
 
 ## LibreOffice可以插入Latex公式吗？

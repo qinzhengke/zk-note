@@ -24,3 +24,12 @@ find_package(Qt5Widgets CONFIG REQUIRED)
 ~~~{.cmake}
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++")
 ~~~
+
+## 添加预定义宏
+有些代码的使用需要使用者改动或者添加一些宏设置，但是作为用户又不想修改被调用代码，那么怎么在编译环境中加入预定义的宏定义呢？
+
+cmake的答案如下所示
+~~~{.sh}
+add_compile_definitions(exe MY_DEF=1)
+~~~
+
