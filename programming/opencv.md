@@ -33,3 +33,19 @@ step2:步骤一会弹出错误并且将接下来要设置的几个路径都高�
 ~/Qt5.11.2/gcc_64/lib/cmake/Qt5Concurrent
 ~~~
 其他几个路径举一反三即可。
+
+### CV_EXPORT宏
+
+```cpp
+#if (defined _WIN32 || defined WINCE || defined __CYGWIN__) && defined CVAPI_EXPORTS
+#  define CV_EXPORTS __declspec(dllexport)
+#elif defined __GNUC__ && __GNUC__ >= 4
+#  define CV_EXPORTS __attribute__ ((visibility ("default")))
+#else
+#  define CV_EXPORTS
+#endif
+```
+
+那么，visibility属性又是什么呢？下面的网页解释的很好。
+
+> https://www.ibm.com/developerworks/cn/aix/library/au-aix-symbol-visibility/index.html

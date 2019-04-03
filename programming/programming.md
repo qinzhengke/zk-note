@@ -8,9 +8,11 @@
 
 @subpage python
 
-@subpage cmake
+@subpage bash
 
-@subpage android_make
+@subpage bat
+
+@subpage qt
 
 @subpage opencv
 
@@ -19,4 +21,10 @@
 @subpage gtest
 
 @subpage lib_backward
+
+@subpage cmake
+
+@subpage android_make
+
+@subpage soft_engineering
 
