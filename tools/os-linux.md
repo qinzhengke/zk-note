@@ -80,3 +80,15 @@ exec bash
 ```
 ### /bin/sh&M bad interpreter
 直接原因是第一行结尾字符有问题，一般的源头是bash的脚本文件在Windows被重新编辑过，Windows和Linux下的换行是不同的字符表达的，回到Linux时就可能出错。
+
+### .netrc文件注册网络账户和密码
+很多web应用需要用户提供账户和密码，如果一开始没有在web端设置好，或者说没有办法在web端设置，例如gerrit上http形式的仓库URL，交互程序一般会阻塞并弹出输入账户和密码的提示。
+这样的交互有2点不好。
+1.有些账户密码很长，还不能够自行设置，没错，说的就是gerrit的anomynous http地址，每次都要从gerrit上复制密码，降低效率。
+2.自动化脚本，无法执行交互。
+那有没有办法解决这个问题呢？其实是可以的，使用Linux自带的feature：.netrc文件，文件在`~`目录下
+下面就是.netrc文件的内容示例。
+~~~{.sh}
+machine github.com login qinzhengke password xxxxx
+machine 192.168.0.5 login qinzhengke password xxxx
+~~~

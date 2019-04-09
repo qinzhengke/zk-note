@@ -3,4 +3,6 @@
 
 @subpage interpolate
 
+@subpage robotics_basic
+
 @subpage sgbm

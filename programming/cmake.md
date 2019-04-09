@@ -63,3 +63,18 @@ target_link_libraries(exe_name, m)
 ```
 没错就是“m”，表示抽象的变量。
 
+### install
+~~~{.sh}
+\# 安装可执行文件
+set(CMAKE_INSTALL_PREFIX ..)
+install(TARGETS my_exe
+        RUNTIME DESTINATION bin
+      )
+\# 安装一些配置文件
+install(FILES xxx/config.txt
+        DESTINATION bin
+)
+~~~
+注意，install函数里面的路径如果没有以”/“开头，那么都是以CMAKE_INSTALL_PREFIXX为起点的相对路径。
+注意，CMAKE_INSTALL_PREFIX如果设置了相对路劲，那么这个相对路径的起点是cmake运行的地方，而不是CMakeLists.txt所在的地方。
+注意，如果install函数所在脚本被更高一级的脚本包含，那么CMAKE_INSTALL_PREFIX一定要在最高一级的脚本设置，在install函数所在脚本设置是无效的。
