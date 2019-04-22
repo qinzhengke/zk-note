@@ -62,3 +62,10 @@ gitk -- /some_directory/my_interest.c
 
 创建并且切换分支之后，修改了一些代码，如果没有commit，再切回原来的分支，那么这些修改也会影响原来的分支。所以切换回原来的分支之前要commit一下。
 
+## 推送到远程分支
+git push origin HEAD:tmp/xxx
+
+虽然推送的标记是只有HEAD，但是实际上会把<=HEAD的节点都给推上去。
+
+## 删除远程分支
+git push origin --delete tmp/xxx
