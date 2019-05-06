@@ -69,3 +69,7 @@ git push origin HEAD:tmp/xxx
 
 ## 删除远程分支
 git push origin --delete tmp/xxx
+
+## untracked files.
+使用了`git reset --hard`或者`git stash --keep-index`，仍然无法去掉untracked files？
+尝试使用`git clean -d -f`
