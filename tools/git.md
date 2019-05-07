@@ -78,3 +78,7 @@ git push origin --delete tmp/xxx
 ~~~{bash}
 git checkout HEAD -- my-file.txt
 ~~~
+
+## repo sync
+repo sync是不会删除已有的git的，即如果把repo的manifest.xml里面有某个git给删除掉后，运行reposync，该git还是会存在的。
+repo sync会生成git但是不会删除git，这就会导致来回切repo的时候，遗留的git会越来越多，有可能导致重定义，需要手动删除。
