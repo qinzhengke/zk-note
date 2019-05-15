@@ -7,7 +7,6 @@
 chmod 700 ./private_key_file
 ```
 
-
 ## Change commit editor
 ```shell
 git config --global core.editor "vim"
@@ -89,3 +88,14 @@ merge类型的commit是无法直接被cherry-pick的，因为它有两个父节�
 git cherry-pick XXX -m 1
 ~~~
 这里的数字“1”需要使用者指定，通过git log可以看到merge commit的两个父节点的commit id，两个父节点的顺序就和-m参数后面跟的顺序是一样的。
+
+## 使用rebase进行分支合并
+我们通常会建立topic分支进行开发，一开始topic分支和develo是合在一起的，但是由于在开发topic过程中，有别人向develop推送了新的commit，这时topic和develop产生了分歧。topic开发完毕的时候，必须要叠在develop分支上才能进行提交，否则很有可能出现merge conflict。
+笨办法：checkout到develop分支，然后cherry-pick topic分支（假设topic分支已经合成一个commit）,然后以develop的身份推送到remote。这种办法会让develop分支发生变动，而且topic分支还需要手动reset到develop分支。
+好办法：使用rebase进行合并，站在topic分支直接`git rebase develop`即可。
+
+## 对某个文件撤销改动
+对某个文件撤销改动是常常用到的feature。
+笨办法：`git reset --mixed HEAD^`,然后再把真正希望提交的内容重新提交一次。两个缺点：（1）需要手动提交每一个真正要提交的内容，如果内容很多，很浪费时间。（2）`--mixed`很容易打成`--hard`，万一哪天喝了酒然后对没有commit的内容使用了`git reset --hard`，就等着哭吧。
+好办法：直接在reset 命令后面加上要目标文件即可，`git reset HEAD unstage_file`。
+
