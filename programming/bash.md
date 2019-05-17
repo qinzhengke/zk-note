@@ -22,3 +22,24 @@ FOR /L %%a IN (1,1,15) DO (
 my.exe
 )
 ```
+
+### if表达式
+注意：1.中括号和括号里的内容一定要用空格隔开
+     2.只有if和else if后面需要then，else后面不需要then。
+
+~~~{bash}
+if [ $# -gt 0 ] 
+then
+
+  if[ $1 == 'target1' ]
+  then
+    do_somthing.
+  else if [ $1 == 'target2' ]
+  then
+    do_other_things
+  
+  fi
+
+else
+fi
+~~~
