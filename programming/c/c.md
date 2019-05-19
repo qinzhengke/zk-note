@@ -923,3 +923,11 @@ int func(int x)
 ~~~
 如果数组的size不大，而且具有明确的含义，例如某种过程处理通道的个数，可以考虑使用枚举来代替。
 使用枚举的好处是，枚举变量一定不会超出定义域的范围，在编译阶段就决定了不会产生数组的越界。
+
+### `static const char *` 定义但未使用
+定义全局的`static const char*`字符串会提示变量定义但未使用。
+原因是未解之谜，可以考虑换种方法。
+~~~{c}
+static const char * a = "abcdef"; //有问题
+static cosnt char a[] = "abcdef"; //OK
+~~~
