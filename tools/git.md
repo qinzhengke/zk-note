@@ -73,7 +73,7 @@ git push origin --delete tmp/xxx
 使用了`git reset --hard`或者`git stash --keep-index`，仍然无法去掉untracked files？
 尝试使用`git clean -d -f`
 
-## reset 某一个文件
+## reset 某一个文件到某个commit
 ~~~{bash}
 git checkout HEAD -- my-file.txt
 ~~~
