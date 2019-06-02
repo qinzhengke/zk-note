@@ -99,3 +99,16 @@ git cherry-pick XXX -m 1
 笨办法：`git reset --mixed HEAD^`,然后再把真正希望提交的内容重新提交一次。两个缺点：（1）需要手动提交每一个真正要提交的内容，如果内容很多，很浪费时间。（2）`--mixed`很容易打成`--hard`，万一哪天喝了酒然后对没有commit的内容使用了`git reset --hard`，就等着哭吧。
 好办法：直接在reset 命令后面加上要目标文件即可，`git reset HEAD unstage_file`。
 
+## cherry-pick a merge commit
+通常来说我们无法直接cherry-pick一个merge commit，因为merge commit包含两个parent commits。git无法确定到底使用哪一个commit作为parent commit，除非你告诉它。
+~~~{bash}
+git cherry-pick -m 1 <commit_id>
+~~~
+默认情况下，1是merge分支，即主干，2是被merge的分支，即topic分支。
+
+## 向gerrit推送一个merge commit
+上一个问题我们说过，cherry-pick一个merge commit必须加入-m参数以确定parent commit。
+而我们的gerrit同样也是使用cherry-pick来收集我们的提交，但是很多情况下gerrit cherry-pick行为是无法自行加参数的，至少非管理员是不能加的。
+这时候，如果不想通过联系管理员解决（管理员最大的可能是让提交者自行解决），用下面的方法。
+1.新建一个push分支，站在和develop同一个节点，然后cherry-pick -m merge节点，然后在推送push分支，虽然多了一步，但是目前是最方便的做法了。
+
