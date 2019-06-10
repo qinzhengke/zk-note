@@ -1156,3 +1156,17 @@ static cosnt char a[] = "abcdef"; //OK
 1.（初级）在多个源文件中定义了相同的非static函数或者非static变量。
 2.（初级）Coding层面上确实只定义了一个变量，但是这个变量定义在头文件中，而且是非static的，一旦有多个源文件包含这个头文件，这一个变量就会变成多个。
 3.（中级）不同的lib或者exe编译了同一个源文件，而且.o文件放在了不同的目录，Linker会发现多个同名.o文件，自然里面的变量也会重复定义。
+
+
+### 怎样printf size_t类型才不会报warning
+~~~{C}
+// C89
+size_t foo;
+...
+printf("foo = %lu\n", (unsigned long) foo);
+// For C99 and later, use %zu:
+
+size_t foo;
+...
+printf("foo = %zu\n", foo);
+~~~
