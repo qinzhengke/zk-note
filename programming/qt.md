@@ -310,7 +310,7 @@ signals:
 ### QtCreator 统一修改局部变量
 Ctrl+Shift+R，编辑完后按Esc退出统一修改模式。
 
-### qt程序打包，非常爽快
+### Windows下qt程序打包
 2.1 使用 Qt 自带的 windeployqt.exe 寻找依赖文件
 在 cmd 中，运行如下命令：
 
@@ -319,3 +319,27 @@ Ctrl+Shift+R，编辑完后按Esc退出统一修改模式。
 ```
 程序会找到该可执行程序所需的所有依赖文件，并集成进该可执行文件所在的目录：
 
+
+### linux下qt程序打包
+1.下载linuxdeployqt.AppImage工具和appimagetools.AppImage工具，网上一搜很多
+2.执行linuxdeployqt.AppImage
+~~~{bash}
+linuxdeployqt.AppImage my_exe -qmake="/home/zrinker/softs/Qt5.xx/5.xx/gccxx/bin/qmake" -appimage
+~~~
+上面命令中，qmake路径只是一个示例，自己运行的时候要找准。
+3.运行完后，当前目录会多出包含库文件的lib目录，AppRun超链接（直接运行它也可以跑程序），以及一个default.desktop文件。
+4.linuxdeployqt得到的default.desktop文件缺少categories项，要手动添加。
+~~~{bash}
+[Desktop Entry]
+Name=FooCorp Painter Pro
+Exec=foocorp-painter-pro
+Icon=foocorp-painter-pro
+Type=Application
+Categories=GTK;GNOME;Utility; 
+~~~
+最后一行是要手动加的，类别选择一个就行，但是别忘记分号！
+5.使用appimagetools工具打包整个目录成AppImage
+~~~{bash}
+appimagetool-x86_64.AppImage build/ #build目录就是我的可执行文件的目录，打包前把乱七八糟的中间文件删除掉，否则AppImage体积很大。
+~~~
+6.愉快地使用生成出来的AppImage吧。
