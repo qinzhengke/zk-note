@@ -112,3 +112,6 @@ git cherry-pick -m 1 <commit_id>
 这时候，如果不想通过联系管理员解决（管理员最大的可能是让提交者自行解决），用下面的方法。
 1.新建一个push分支，站在和develop同一个节点，然后cherry-pick -m merge节点，然后在推送push分支，虽然多了一步，但是目前是最方便的做法了。
 
+## 报错：cannot update paths and switch to branch xxx at the same time
+使用git checkout -b local_branch origin/branch的时候，遇到这个错误，字面上的意思是不能同时更改路径和切换分支，实际上该问题的一个根源是orign/branch在本地没有被登记，需要git remote update 或者 git fetch origin/branch来更新，然后再checkout。
+
