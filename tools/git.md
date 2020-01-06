@@ -115,3 +115,11 @@ git cherry-pick -m 1 <commit_id>
 ## 报错：cannot update paths and switch to branch xxx at the same time
 使用git checkout -b local_branch origin/branch的时候，遇到这个错误，字面上的意思是不能同时更改路径和切换分支，实际上该问题的一个根源是orign/branch在本地没有被登记，需要git remote update 或者 git fetch origin/branch来更新，然后再checkout。
 
+## 自动沿用上一次冲突解决策略
+解决冲突之后，如果觉得不满意，想要重新解决，会发现再一次cherry-pick\rebase时，已经没有冲突了，并且git会提示
+“Resolved xxx using previous resolution”
+这就是git的自动沿用上一次冲突解决策略。
+可以使用下面的命令关掉。
+```{shell}
+git config --global rerere.enabled true
+```
