@@ -29,3 +29,12 @@ step 2: 在"configurations"项目下的"defines"插入宏定义即可。
 ### 如何使用clang-format进行代码格式化？
 步骤1：`File`->`Preference`->`Settings`->搜索“format”，选择“Editor:Format On Save”。
 步骤2：同样在`Settings`界面，搜索“C_Cpp”，在“C_Cpp:Clang_format_style”下方的编辑框中填入“file”，即使用工作空间的“.clang-format”文件作为style，工作空间就是vscode打开的目录，例如打开目录的时候使用“code .”，那么工作空间就是“.”，记住不是.vscode目录！
+
+### markdown代码片
+1.“File”->“Preference”->“User snippets”，然后在下拉列表中选择“markdown.json”
+2.按照模板来编辑，简单的例子如下：
+3.markdown格式是默认没有打开intellsense功能的，需要手动打开，在“File”->“Preference”->“language”->“markdown”->“edit in settings.json”
+按照如下方式添加：
+"[markdown]":{
+    editor.quickSuggestions":true
+}
