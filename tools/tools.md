@@ -14,3 +14,7 @@
 @subpage libre_office
 
 @subpage useful_tools
+
+@subpage vim
+
+@subpage vscode

@@ -21,3 +21,17 @@ sudo apt-get install texlive-latex-extra
 
 .dox文件是doxygen特有的文件，默认情况下当做C++语言处理，所以在dox文件中直接定义一些\\section命令是无效的，
 想要使用\\section等特性，还是在.md文件中写吧。
+
+\section doxygen_bilibili 插入哔哩哔哩视频
+
+1. 点击视频分享，拷贝嵌入代码
+
+2. 嵌入代码没有加入传输协议，需要手动添加“https:”
+
+3. doxygen 使用 \\htmlonly 和 \\endhtmlonly来包裹嵌入代码。
+
+~~~{.dox}
+\htmlonly
+<iframe src="https://player.bilibili.com/player.html?aid=97804448&bvid=BV1fE411w7ac&cid=166959951&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+\endhtmlonly
+~~~

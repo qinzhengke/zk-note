@@ -1,4 +1,4 @@
-Visual Studio Code{#vs_code}
+Visual Studio Code{#vscode}
 ================
 
 

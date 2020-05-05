@@ -1,12 +1,16 @@
-zk-note 简介{#mainpage}
+覃政科的主页{#mainpage}
 ======================
 
-这只是一个简单的笔记而已。
+“覃”念"qin"，第二声。
 
-@subpage algorithm
+工作1： DJI Mavic双目避障。
 
-@subpage programming
+\htmlonly
 
-@subpage technology
+<iframe src="https://player.bilibili.com/player.html?aid=32639123&bvid=BV1VW411S7o5&cid=57114943&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:640px; height:460px"> </iframe>
 
-@subpage tools
+\endhtmlonly
+
+<hr>
+转到\ref zk_note
+
