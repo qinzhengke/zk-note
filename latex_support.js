@@ -1,0 +1,14 @@
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax:{
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [['$$','$$'],["\\[","\\]"]],
+        processEscapes: true
+    },
+    "HTML-CSS": {fonts: ["TeX"]},
+    TeX: {
+        extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"],
+        equationNumbers: {autoNumber: "all"},
+    }
+});

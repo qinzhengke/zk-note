@@ -31,9 +31,9 @@ sudo apt-get install texlive-latex-extra
 3. doxygen 使用 \\htmlonly 和 \\endhtmlonly来包裹嵌入代码。
 
 ~~~{.dox}
-\htmlonly
+\\htmlonly
 <iframe src="https://player.bilibili.com/player.html?aid=97804448&bvid=BV1fE411w7ac&cid=166959951&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-\endhtmlonly
+\\endhtmlonly
 ~~~
 
 \section ref_excel 引用excel表格
@@ -43,6 +43,61 @@ sudo apt-get install texlive-latex-extra
 下面介绍如何在doxygen中引用excel表格。
 
 step 1: 在excel中编辑表格
+
 step 2: 另存为->格式选择html，范围选择“已选择”->保存成html网页。
+
 step 3: 使用文本文件打开html网页，复制<table></table>部分。
+
 step 4：复制到doxygen源文件，注意：一定要使用\\htmlonly 和 \\endhtmlonly包裹，否则显示会出现错乱。
+
+<hr>
+\section numbered_eq 带编号的公式
+Doxygen使用了MathJax来渲染公式，实际上Doxygen设置编号也就是MathJax设置编号。
+
+step 1: 建立一个js文件，存放MathJax的配置，如下所示：
+
+\verbatim
+// latex_support.js
+MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax:{
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [['$$','$$'],["\\[","\\]"]],
+        processEscapes: true
+    },
+    "HTML-CSS": {fonts: ["TeX"]},
+    TeX: {
+        extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"],
+        equationNumbers: {autoNumber: "all"},
+    }
+});
+\endverbatim
+
+具体的原理好像是先转成latex，具体太复杂，官网讲公式编号配置的篇幅用十几次滚轮都看不完，就不去深究了。
+
+step 2: 在doxygen配置文件中引用该js文件，如下所示：
+
+~~~{.bash}
+MATHJAX_CODEFILE = ./latex_support.js
+~~~
+
+然后就可以愉快的使用带编号的公式。
+
+<hr>
+\section ref_eq 引用公式
+
+\verbatim
+    \f[
+        \label{eq}
+        E = mc^2
+    \f]
+    \\eqref{eq}
+\endverbatim
+
+注意是引用处使用双反斜杠。
+
+<hr>
+\section raw_format 原始格式输出
+
+使用 \\verbatim 和 \\endverbatim包裹。
