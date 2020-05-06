@@ -35,3 +35,14 @@ sudo apt-get install texlive-latex-extra
 <iframe src="https://player.bilibili.com/player.html?aid=97804448&bvid=BV1fE411w7ac&cid=166959951&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 \endhtmlonly
 ~~~
+
+\section ref_excel 引用excel表格
+前言：markdown表格不支持合并单元格操作，表达能力有限，我们需要表达能力更强的html表格。
+然而，手打html表格是一种低效操作，有位名人说过：“手打html表格是不可能手打的，这辈子都不可能手打的”。
+
+下面介绍如何在doxygen中引用excel表格。
+
+step 1: 在excel中编辑表格
+step 2: 另存为->格式选择html，范围选择“已选择”->保存成html网页。
+step 3: 使用文本文件打开html网页，复制<table></table>部分。
+step 4：复制到doxygen源文件，注意：一定要使用\\htmlonly 和 \\endhtmlonly包裹，否则显示会出现错乱。
