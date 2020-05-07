@@ -101,3 +101,11 @@ MATHJAX_CODEFILE = ./latex_support.js
 \section raw_format 原始格式输出
 
 使用 \\verbatim 和 \\endverbatim包裹。
+
+<hr>
+\section majax_issue github page上MaJax公式没有正确渲染
+
+明明离线版本Majax公式能够正常渲染，但是传到github page上就不行了？
+一个很重要的原因就是Doxyfile里面Majax的CDN地址使用http作为传输协议，github page上应该是禁止了http协议，导致CDN没法正常访问。
+
+解决办法很简单，只要把CDN地址中的“http”改成“https”即可。
