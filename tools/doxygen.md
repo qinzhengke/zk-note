@@ -109,3 +109,17 @@ MATHJAX_CODEFILE = ./latex_support.js
 一个很重要的原因就是Doxyfile里面Majax的CDN地址使用http作为传输协议，github page上应该是禁止了http协议，导致CDN没法正常访问。
 
 解决办法很简单，只要把CDN地址中的“http”改成“https”即可。
+
+<hr>
+\section boldsymbol_vs_mathbf boldsymbol和mathbf的区别。
+
+boldsymbol和mathbf都是latex中粗体的语法，但是boldsymbol明显要比textbf好看很多，如下图所示
+<center>
+![](./figures/boldsymbol_vs_mathbf.png)
+</center>
+
+<hr>
+\section dfrac_vs_frac dfrac vs frac
+
+dfrac明显尺寸要还原得更好一些，如下图所示。
+![](./figures/dfrac_vs_frac.png)
