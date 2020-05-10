@@ -6,3 +6,5 @@
 @subpage sgbm
 
 @subpage slam
+
+@subpage awsome_cv_websites.md

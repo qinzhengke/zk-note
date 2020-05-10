@@ -18,3 +18,5 @@
 @subpage vim
 
 @subpage vscode
+
+@subpage latex
