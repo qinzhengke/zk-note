@@ -111,3 +111,10 @@ print res
 print(type(rp))
 print(type(res))
 ```
+
+\section 限制浮点数精度
+前沿：在print或者matplotlib输出是，过长的小数会让人特别烦恼。
+限制浮点数精度方法如下：
+~~~
+np.round(np.arange(0, 0.51, 0.1),2)
+~~~
