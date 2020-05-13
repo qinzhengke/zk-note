@@ -16,6 +16,11 @@ for i,x in enumerate(x):
 \section 数组和常数相加
 使用Python内置数组是做不到的，会报错，但是转换成np.array之后就可以了。
 
+\section 生成等差数列
+~~~
+numpy.arange(0, 100, 1) # [0,1)区间取100个数
+~~~
+
 ### 读取csv文件
 
 读取csv文件的方式有很多种，标准库、numpy、panda都能提供，但是我觉得最方便的还是numpy提供的方法：
