@@ -118,3 +118,20 @@ print(type(res))
 ~~~
 np.round(np.arange(0, 0.51, 0.1),2)
 ~~~
+
+\section 使用latex
+~~~
+ax.set_title(r'$\theta$'))
+~~~
+
+\section 优雅的读取csv文件
+~~~
+# 优雅的方式
+[x,y,z] = numpy.genfromtxt('data.csv', delimiter=",")
+
+#不优雅的方式
+data = numpy.genfromtxt('data.csv', delimiter=",")
+x = data[0]
+y = data[1]
+z = data[2]
+~~~
