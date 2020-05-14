@@ -24,6 +24,15 @@ step 3: 那么一共能够输出N个二进制数，即为特征描述子。
 
 由于是二进制的序列，相似度使用汉明距离表达，参考 \ref hamming_dist 。
 
+\section 优缺点
 
+优点：计算量小
+缺点：
+
+1. 对噪声敏感
+
+2. 不具备旋转不变性
+
+3. 不具备尺度不变性
 
 参考文献：M Calonder, BRIEF:Binary Robust Independent Elementary Features, 2010
