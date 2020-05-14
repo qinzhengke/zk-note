@@ -8,6 +8,8 @@
 
 @subpage python
 
+@subpage matplotlib
+
 @subpage bash
 
 @subpage bat

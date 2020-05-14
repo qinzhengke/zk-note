@@ -1,10 +1,16 @@
 计算机视觉(CV){#cv}
 =================
 
-@subpage calibration
+\subpage feature_entry
 
-@subpage sgbm
+\subpage calibration
 
-@subpage slam
+\subpage sgbm
 
-@subpage awsome_cv_websites.md
+\subpage vslam_entry
+
+\subpage sfm
+
+\subpage robotics_basic
+
+\subpage awsome_cv_websites.md

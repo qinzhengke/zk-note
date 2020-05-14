@@ -1,10 +1,14 @@
 数学基础{#math}
 =============
 
-@subpage group
+\subpage interpolate
 
-@subpage matrix_analysis
+\subpage quaternion
 
-@subpage optimization
+\subpage group
 
-@subpage kalman_filter
+\subpage matrix_analysis
+
+\subpage optimization
+
+\subpage kalman_filter

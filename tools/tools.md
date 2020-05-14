@@ -1,22 +1,24 @@
 工具{#tools}
 ===========
 
-@subpage os-linux
+\subpage os-linux
 
-@subpage os-lubuntu
+\subpage os-lubuntu
 
-@subpage os-windows
+\subpage os-windows
 
-@subpage git
+\subpage git
 
-@subpage doxygen
+\subpage doxygen
 
-@subpage libre_office
+\subpage libre_office
 
-@subpage useful_tools
+\subpage useful_tools
 
-@subpage vim
+\subpage vim
 
-@subpage vscode
+\subpage vscode
 
-@subpage latex
+\subpage latex
+
+\subpage valgrind

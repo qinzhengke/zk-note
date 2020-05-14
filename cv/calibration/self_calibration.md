@@ -1,4 +1,4 @@
-自标定方法{#selfcali}
+自标定方法{#self_cali}
 ====================
 
 \section 一种双目Rotation自标定方法：

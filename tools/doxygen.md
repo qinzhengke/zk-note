@@ -123,3 +123,45 @@ boldsymbol和mathbf都是latex中粗体的语法，但是boldsymbol明显要比t
 
 dfrac明显尺寸要还原得更好一些，如下图所示。
 ![](./figures/dfrac_vs_frac.png)
+
+<hr>
+\section 生成参考文献
+
+step 1: 安装texbib工具
+
+~~~
+sudo apt-get install texlive-bibtex-extra
+~~~
+
+step 2: 在doxygen配置文件中添加要显示的bib文件
+
+~~~
+CITE_BIB_FILES         = cv/cv.bib
+~~~
+
+step 3: 在bib文件中放置参考文件引用代码，引用代码可以从各种文献搜索引擎找到，例如谷歌学术。
+
+~~~
+// cv/cv.lib
+
+@inproceedings{rosten2006machine,
+  title={Machine learning for high-speed corner detection},
+  author={Rosten, Edward and Drummond, Tom},
+  booktitle={European conference on computer vision},
+  pages={430--443},
+  year={2006},
+  organization={Springer}
+}
+~~~
+
+step 4: 在doxygen文档处使用 \\cite 进行引用。
+
+\verbatim
+图：FAST角点原理示意图，图像来源为 \cite rosten2006machine 。
+\endverbatim
+
+结果如图所示：
+
+![](./figures/doxygen_cite_bib_01.png)
+
+![](./figures/doxygen_cite_bib_02.png)
