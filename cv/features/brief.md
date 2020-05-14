@@ -2,6 +2,7 @@ BRIEF描述子{#brief_descriptor}
 ========================
 
 \section 基本方法
+
 全称：Binary RobustIndependent Elementary Features，（有故意拼凑单词brief的嫌疑）。
 
 step 1: 以关键点为中心选择一个区域S，在S中随机选择N个点对。
