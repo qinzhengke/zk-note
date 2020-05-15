@@ -14,3 +14,5 @@
 \subpage cpp_qt_faq
 
 \subpage sparse_matrix
+
+\subpage cpp_questions
