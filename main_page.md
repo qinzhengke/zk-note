@@ -38,9 +38,37 @@
 
 2008.9~2012.7: 学士, 华中科技大学
 
-### 兴趣：
+<b> 兴趣：</b>
 CV, Robotics
+
+<b>联系方式：</b> qinzhengke@qq.com
 
 <hr>
 转到\ref zk_note
+
+<!-- <hr>
+\htmlonly
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_u</span>人次
+</span> -->
+
+\endhtmlonly
+
+@htmlonly
+ <script type="text/javascript">
+ function displayDate()
+ {
+ document.getElementById("demo").innerHTML=Date();
+ }
+ </script>
+ <div id="demo">date</div>
+ <script type="text/javascript">displayDate();</script>
+ <br/>
+ <button type="button" onclick="displayDate()">Refresh Date</button>
+@endhtmlonly
+
 
