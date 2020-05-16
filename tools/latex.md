@@ -59,6 +59,12 @@ y
 </td></tr> 
 
 <tr><td> 
+\f$ \hat{a}, \check{a} \f$
+</td><td>
+\verbatim \hat{a}, \check{a} \endverbatim
+</td></tr> 
+
+<tr><td> 
 </td><td>
 </td></tr> 
 
