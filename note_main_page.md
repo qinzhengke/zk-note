@@ -1,16 +1,18 @@
 学习笔记{#zk_note}
 ================
 
-@subpage math
+\subpage math
 
-@subpage algorithm
+\subpage algorithm
 
-@subpage cv
+\subpage cv
 
-@subpage programming
+\subpage ml_entry
 
-@subpage technology
+\subpage programming
 
-@subpage tools
+\subpage technology
 
-@subpage online_tools
+\subpage tools
+
+\subpage online_tools
