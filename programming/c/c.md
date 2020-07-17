@@ -1,19 +1,73 @@
 C语言{#c}
 ========
 
-此页面记录使用C语言是遇到过的问题。
+<hr>
+\section 预编译篇
 
-## 语法篇
+<hr>
+\subsection sharp_in_macro 宏定义中的\#
 
-### \_Bool变量
+\# （stringizing）是字符串化操作符。其作用是：将宏定义中的传入参数名转换成用一对双引号括起来参数名字符串。
+其只能用于有传入参数的宏定义中，且必须置于宏定义体中的参数名前。
+
+如：
+
+~~~{cpp}
+#define PRINT(instr) printf("the input string is:/t%s/n",#instr)
+#define CONVERT(instr) #instr
+PRINT(abc)；  // 在编译时将会展开成：printf("the input string is:/t%s/n","abc");
+string str=CONVERT(abc)； // 将会展成：string str="abc"；
+~~~
+
+注意其对空格的处理
+
+1.忽略传入参数名前面和后面的空格。
+
+   如：str=FUNC1(   abc )； 将会被扩展成 str="abc"；
+
+b.当传入参数名间存在空格时，编译器将会自动连接各个子字符串，用每个子字符串中只以一个空格连接，忽略其中多余一个的空格。
+
+   如：str=exapme( abc    def); 将会被扩展成 str="abc def"；
+
+ 
+
+<hr>
+\subsection sharp_in_macro 宏定义中的\#\#
+\#\# （token-pasting）符号连接操作符
+
+宏定义中：参数名，即为形参，如#define sum(a,b) (a+b)；中a和b均为某一参数的代表符号，即形式参数。
+
+而##的作用则是将宏定义的多个形参成一个实际参数名。
+
+如：
+
+~~~{cpp}
+#define NUM(n) num##n
+int num9=9;
+int num=NUM(9); 将会扩展成 int num=num9;
+~~~
+
+注意：
+
+1.当用##连接形参时，##前后的空格可有可无。
+
+如：#define NUM(n) num ## n 相当于 #define NUM(n) num##n
+
+2.连接后的实际参数名，必须为实际存在的参数名或是编译器已知的宏定义
+
+<hr>
+\section 编译篇
+
+<hr>
+\subsection \_Bool变量
 将在线代码分离成离线代码的时候，发现有些文件里面定义了_Bool类型，而gcc编译器居然不识别。
 Google后发现，_Bool类型是C语言的布尔类型，从C99才开始引入的。
 C99以前的C语言都是用int或者枚举的野路子来表示布尔型。。。
 我们平时用的bool都是C++的东西。。。
 也就是说如果在 extern "C"中间使用bool，是不被支持的，除非引用了头文件stdbool.h
 
-
-### 将指针赋值给uint32_t
+<hr>
+\subsection 将指针赋值给uint32_t
 很多32位平台的程序喜欢使将指针赋值给整数，这样就不需要二级指针，例如
 
 ```cpp
@@ -27,10 +81,8 @@ int func(uint32_t *addr)
 但是，这种方式其实并不好，在64位系统中，指针的大小可能是64位的，这样赋值就会出错。
 仍然像想用这种方式的话，使用intptr_t类型，兼容32和64位，在C99中支持，在<stdint.h>中定义。
 
-
-
-
-### designated initializer
+<hr>
+\subsection designated_initializer designated initializer
 C语言中结构体在C99中的一种新的初始化语法，叫做designated initializer，即指定初始化，之前我一直找不到正式的名称，我一直称之为点变量初始化。。。
 
 ```cpp
@@ -75,8 +127,8 @@ B bs[2] =
 
 但是我发现了一种方法，就是强行改cpp后缀为c，这样g++就会调用gcc来编译c文件。
 
-
-###代码区分不同操作系统
+<hr>
+\subsection 代码区分不同操作系统
 ```cpp
 #ifdef __linux__ 
     //linux code goes here
@@ -87,7 +139,8 @@ B bs[2] =
 #endif
 ```
 
-### printf 如何输出红色字符串？
+<hr>
+\subsection printf_red 如何打印红色字符串？
 ```cpp
 #include<stdarg.h>
 ...
@@ -101,7 +154,9 @@ void printf_red(const char *cmd, ...)
     printf("\x1B[0m")   // 回到默认设置
 }  
 ```
-### printf 中的uint64整数
+
+<hr>
+\subsection printf 中的uint64整数
 使用printf过程中，一定要写对%字符串，之前遇到过一个问题，使用%d来打印一个int64的数是错误的，例如下列代码
 
 ```cpp
@@ -110,7 +165,8 @@ printf("%d\n",a); // 错误
 ```
 实际上，%u，%ld，%lu都不对，在曾经一个ARM平台编译器上，正确的结果是%llu，因为在该平台上，sizeof(long)=sizeof(int)=4，而uint64_t真正的类型是long long，在不同平台时，要注意类型字节数可能不一样。
 
-### linux-arm-gcc 中的char默认是unsigned char!!!
+<hr>
+\subsection linux-arm-gcc 中的char默认是unsigned char!!!
 好可怕，给char类型变量赋值一个负数，会得到错误的结果，而且编译器不会报错或者警告
 只有使用==判别时才提出警告。
 
@@ -121,21 +177,23 @@ if(a == -10)
   printf("error") // 编译报错
 ```
 
-### extern 声明
+<hr>
+\subsection extern 声明
 默认的全局变量都开放成全局可用变量，其他模块想用该变量只需要extern声明即可。
 例如a.c文件中定义int a = 0; b.c文件中声明extern int a;
 那么b文件中使用的变量其实就是a文件中的变量
 **a.c文件和b.c文件不需要什么相互依赖的关系，也和头文件无关**。
 但是一般来说，在a.h中声明extern int a;然后b.c文件再include a.h文件，这样的用法会比较规范。
 
-## 编译篇
 
-### multiple definition?
+<hr>
+\subsection multiple definition?
 1. 函数重复定义了，如果非要使用同名函数，加入static修饰符，只供本地函数使用。
 2. 头文件没有加入#ifdef #define #endif保证内容只定义一次。
 3. 前两个条件都没问题，仍然报这问题？查看一下有没有在头文件中定义变量？如果定义了变量，那么该头文件被多次include的时候，变量会重复的定义，解决的办法有两种，第一种，直接使用static修饰变量，那么h文件中的变量，就会在include的时候变成c文件的static变量，自然不会有冲突，第二种就是定义函数替代变量，函数里再定义这个全局变量，按理说全局变量本就应该使用函数访问。
 
-### unresolved external symbol？
+<hr>
+\subsection unresolved external symbol？
 如果这个symbol在源文件里：
 - 看看这个源文件有没有被加到工程中。
 - symbol在源文件中，并且已经添加到了工程，还会报这个错？看看是不是调用了.c文件，记得用EXTERN C封装，即在c文件函数声明的地方使用
@@ -155,29 +213,32 @@ int my_c_function();
 - 看看这个库有没有添加到工程。
 - 库已经添加到工程，但是仍然报这个错？那就将库的版本和当前编译器版本保持一致，包括平台（x86或者x64）和版本（vc08，vc10，vc12，vc14）以及是否调试（debug和release）。
 
-### 工程内外的头文件区别？
+<hr>
+\subsection 工程内外的头文件区别？
 C语言头文件不管是放在工程内部还是工程外部都可以include，那么这两种方式有什么区别呢？
 目前发现的区别有一点，就是工程内部的头文件内部再include别的头文件的时候可以享用工程文件已经添加的路径。
 举个例子，a.h是工程部内的，b.h是工程外部的，main.cpp里面把这两个头文件都include了，工程pro（qtcreator）文件里包含了opencv的库目录。
 那么打开a.h时输入“include <opencv.....”，此时creator会自动补全，但是在b.h中输入则没有任何反应，这就是目前发现的一个区别。
 但是我估计实际编译的时候应该没有问题，这只是IDE的识别问题而已。
 
-### core.hpp header must be compiled as c++
+<hr>
+\subsection core.hpp header must be compiled as c++
 在c文件中include Opencv的hpp头文件就会出现这个问题，因为编译c文件时是使用C编译器编译的，而.c文件是不认识.hpp文件的，实现的方式就是c编译器并未定义__cplusplus宏。按照道理说c文件不应该包含hpp文件，最好把c文件改成cpp文件。如果硬是不改，在VisualStudio中可以设置compile as c++。
 
-
-### 头文件重复包含
+<hr>
+\subsection 头文件重复包含
 我们都知道头文件一开始两行都是#ifndef和#define，是为了避免头文件重复包含，从逻辑上和减少编译时间看，都需要消除这种重复包含，
 那么消除重复包含的工作为什么不丢给程序员做呢？
 1. 这样的工作非常枯燥而繁琐，包含的链路太长的话，光是找到公共头文件节点就很麻烦；
 2. 更重要的是，部分模块常常需要独立运行，这种冗余保证了模块也能够独立地运行。
 
-
-### utf-8文件的bom字节
+<hr>
+\subsection utf-8文件的bom字节
 很蛋疼，读utf-8文件前面3个字节都不是文件中的内容，而是0xef,0xbb,0xbf，后来一查，发现这是utf-8文件的bom字节，就是byte order mark,
 读utf-8文件时，一定要去掉前面三个字节。
 
-### utf-8文件中的行结尾'\r'
+<hr>
+\subsection utf-8文件中的行结尾'\r'
 很蛋疼+1，读utf-8文件的时候，行结尾都是以'\r'结束，
 当文件内容是另一个文件的路径的时候，例如
 ```
@@ -190,19 +251,23 @@ C语言头文件不管是放在工程内部还是工程外部都可以include，
 我一般喜欢在文件路径后面加上'/'，方便后面读取。
 但是如果在\r后面加上'/'就会搞错。。
 
-### qtcreator中开启gcc的c99支持
+<hr>
+\subsection qtcreator中开启gcc的c99支持
 ```
 QMAKE_CFLAGS += -std=c99
 ```
 
 
-## 性能篇
+<hr>
+\section 性能篇
 
-### 一个float不够用的例子
+<hr>
+\subsection 一个float不够用的例子
 x = {3137995, 3137895, 3137978}
 A = {{x0\*x0, x0, 1},{x1\*x1, x1, 1},{x2\*x2, x2, 1}}
 
-### 下采样拷贝时间
+<hr>
+\subsection 下采样拷贝时间
 下采样拷贝虽然点数少，但是需要多次拷贝操作，那么这种方式和全拷贝速度差异如何呢？
 
 ```cpp
@@ -249,7 +314,8 @@ ARM
 | t1   | 644  | 654  | 652  | 645  | 670  | 685  |
 | t2   | 667  | 208  | 97.6 | 28.2 | 69.0 | 48.4 |
 
-### 浮点转定点中的四舍五入
+<hr>
+\subsection 浮点转定点中的四舍五入
 浮点数转定点数不能直接截取，必须四舍五入，否则精度会丢失，有时候会丢失很多！
 例如下面的代码，将浮点数转换成16Q8的定点数，当输入0.035时，0.035\*256.0=8.96，直接截取就变成了8，然而8对应着0.03125，9对应着0.03515625，很明显应该是9更合适。
 我们自然而然地想到+0.5，例如第二行代码所示，但是这样仍然是有问题的，就是在使用负数的时候。
@@ -265,9 +331,11 @@ printf("%d,%d\n", Q168_FROM_FLOAT(0.35), Q168_FROM_FLOAT(-0.35))
 //结果为 9和-9，正确！
 ```
 
-## 代码规范篇
+<hr>
+\section 代码规范篇
 
-### 全局变量用处
+<hr>
+\subsection 全局变量用处
 1.静态表格常量
 2.调试系统
 
@@ -275,7 +343,8 @@ printf("%d,%d\n", Q168_FROM_FLOAT(0.35), Q168_FROM_FLOAT(-0.35))
 （1）那么函数参数就会很多，
 （2）调试系统需要查看的变量集可能会经常变化，层层递归修改函数形参。
 
-### C语言算法中的数学参数放在哪里？
+<hr>
+\subsection C语言算法中的数学参数放在哪里？
 程序运行过程中始终不变的数学常量称为参数，做算法的代码会有特别多的参数，要怎么放置这些参数呢？
 1. 直接在调用的地方用数字常量表示，例如
 ```cpp
@@ -301,9 +370,11 @@ float para_xxx[2][3] = {{1.0000, 2.0000, 3.0000},
     这种方式算是一种比较整洁的解决方案，但是全局变量用多了之后
     
     
-## 实用代码片段
+<hr>
+\section 实用代码片段
 
-### 彩色规范打印
+<hr>
+\subsection 彩色规范打印
 
 ```c
 #indef PRINT_ERROR
@@ -329,13 +400,15 @@ float para_xxx[2][3] = {{1.0000, 2.0000, 3.0000},
 
 ```
 
-### 头文件多次包含于只展开一次矛盾？
+<hr>
+\subsection 头文件多次包含于只展开一次矛盾？
 写代码的时候发现一个“问题”，我们一般用#ifdef包裹头文件，保证头文件只展开一次，否则会出现重复定义。
 那么多个c文件包含同一个头文件时，后面的c文件是否就无法获取h文件里的内容了呢？
 当然，通过实际编程经验，我们都知道答案是否定的，但是怎么解释呢？
 我自己的解释是，头文件展开过程和c文件包含h文件过程是两码事，头文件展开在第一次被c文件包含的时候进行，之后再次被c文件包含时，就不在进行，而是仅仅拷贝h文件已经展开的内容。
 
-### 宏在c文件中的作用域
+<hr>
+\subsection 宏在c文件中的作用域
 宏定义有时候不一定会在c文件中起作用，如下面的例子所示。
 main.c依赖a.h和a.c，而a.h又依赖b.h，所以我们自然而然的认为在main.c里包含a.h之前加入某一个宏，它能够在a.h和b.h都生效。
 在头文件中，这是没有问题的，但是对于b.c文件，就不管用了（实际工作碰到的例子），因为b.h和b.c在编译的时候他们并不依赖其他模块，所以有可能b模块比main编译的时刻还要早（编译成obj文件），另外，如果仅仅是修改了宏，a.h和a.c的内容不会改变，那么a.o根本就不会重新发生编译。
@@ -362,7 +435,8 @@ int i_am_devel2;
 target_compile_definitions(my_exe PRIVATE USE_SOMTHING=1)
 ~~~
 
-### 万不得已修改第三方代码怎么注释？
+<hr>
+\subsection 万不得已修改第三方代码怎么注释？
 这种情况通常出现在两个第三方库之间有命名冲突，例如都存在某一些数学函数。
 注释方法：
 ~~~.c
@@ -371,15 +445,18 @@ target_compile_definitions(my_exe PRIVATE USE_SOMTHING=1)
 ~~~
 用“hack”这个词非常好，既能够表达出这是对原有模块的破坏，一眼就能看出hack了那些地方，原来是什么代码，另外也很容易搜索。
 
-### 255.1f转换成uint8_t是多少？
+<hr>
+\subsection 255.1f转换成uint8_t是多少？
 答案是255。
 
-### 找不到头文件？
+<hr>
+\subsection 找不到头文件？
 明明头文件的路径已经添加，并且在**QtCreator**里能够跟踪到该头文件，但是在**terminal** make的时候仍然找不到头文件？
 有一个原因：CMakeList.txt用了环境变量$ENV{}，并且QtCreator设置了这个环境变量，但是bash里面并没有设置！
 反过来，能编译，但是QtCreator老是找不到头文件，或者在QtCreator内部构建失败。
 
-### 获取变量的名字
+<hr>
+\subsection 获取变量的名字
 ```c
 #include <stdio.h>
 
@@ -403,7 +480,8 @@ name: foo   value: 0
 name: bar   value: 1
 ```
 
-### 函数指针常量怎么定义？
+<hr>
+\subsection 函数指针常量怎么定义？
 ```c
 // normal pointer to function
 int (*func)(int);
@@ -421,7 +499,8 @@ void const *(*func)(int);
 void const *(*const func)(int) = func.
 ```
 
-### const也不是完美的常量？
+<hr>
+\subsection const也不是完美的常量？
 C99中，全局变量和静态变量初始化必须使用常量，而且这个常量只能是字面上的常量，例如“1，0xff”以及枚举。
 const修饰的常量是二等公民，不能用于初始化，坑了我很久。
 例如
@@ -431,8 +510,8 @@ const int a =10;
 int b = a; // 错误，const变量也不能用于全局变量初始化。
 ```
 
-
-### C语言调用C++函数的正确姿势
+<hr>
+\subsection C语言调用C++函数的正确姿势
 大家都知道，C++调用C语言模块很容易，就是在函数生命的地方使用#ifdef \_\_cplusplus extern "C" #endif 包起来就行。
 但是有的时候需要在C语言环境中调用C++的模块，虽然这种调用感觉很不合理，但是仍然不可避免，例如组里的顶层框架代码是C，我们自身的模块是C++，这时候必须要把C++模块塞到C模块里。
 首先，c++模块头文件需要把函数声明用extern "C"包裹，
@@ -468,7 +547,8 @@ int main( int argc, char* argv[] )
 }
 ```
 
-### 函数指针作为函数传参
+<hr>
+\subsection 函数指针作为函数传参
 
 ```c
 typedef void (*callback_function)(void); // type for conciseness
@@ -487,55 +567,16 @@ void D::disconnected()
 }
 ```
 
-### sizeof用于静态数组
+<hr>
+\subsection sizeof用于静态数组
 sizeof变量如果用在静态数组，那么是可以得到静态数组的总长度的，
 ```c
 double array[10];
 sizeof(array); // 8*10 = 80
 ```
-```
-## 结构体初始化
 
-C99标准后，C语言有一个我没怎么见过的结构体初始化方法，就是“.+变量=目标的方式”，使用这种方式，这种方式可以在数组+结构体嵌套情况下下使用，据说很多操作系统内核用了这样的代码。
-赋值的顺序可以改变的，例如a2=0.0可以在a1=0之前，有点像python。
-
-```cpp
-type struct
-{
-  int a1;
-  float a2;
-}A;
-
-typedef struct
-{
-  A sa;
-  int b1;
-  float b2;
-}B;
-
-B bs[2] = 
-{
-  {
-    {
-      a1 = 0,
-      a2 = 0.0,
-    }
-    b1 = 0,
-    b2 = 0.0,
-  },
-  {
-    {
-      a1 = 1,
-      a2 = 1.0,
-    }
-    b1 = 1,
-    b2 = 1.0,
-  }
-}
-```
-
-
-### 下采样拷贝时间
+<hr>
+\subsection 下采样拷贝时间
 下采样拷贝虽然点数少，但是需要多次拷贝操作，那么这种方式和全拷贝速度差异如何呢？
 
 ```cpp
@@ -559,6 +600,7 @@ for(uint32_t r=0; r<Hd; r++)
 t = cv::getTickCount()-t;
 cout<<t/cv::getTickFrequency()<<endl;
 ```
+
 PC上运行的结果，t1是全拷贝的时间，t2是下采样拷贝的时间，可以看到在debug版本中，2倍采样和3倍采样时间都要长于全采样，直到4倍采样开始时间才小于全采样，这是因为下采样需要设计循环，依次赋值，全拷贝肯定在汇编层面做了优化的。
 有意思的是在Release版本中，2倍采样的时间就小于全拷贝，这就说明debug版本对于循环有着更深的影响，下采样最大运行时间相差了接近6倍。
 
@@ -583,7 +625,8 @@ ARM
 | t2 | 667  | 208 | 97.6 | 28.2 | 69.0 | 48.4 |
 
 
-### 图像浏览工具
+<hr>
+\subsection 图像浏览工具
 做图像算法的时候经常要处理图像buffer，就是最原始指针那种，因为程序运行在嵌入式平台，所以有的时候调试起来看图不是特别方便，很多时候我们从板子上存下来的图是原始的raw格式，或者我们想传入我们自己的图像进行测试，这时候就需要某种图像转换和浏览工具。
 
 下面是代码，其实思路很简单，使用opencv将raw格式的文件打开，然后转换成bmp，再使用bat调用图片浏览工具，实现双击就能浏览的效果。
@@ -650,7 +693,8 @@ bin_viewer.exe %1 out.bmp
 "C:\Program Files\ImageGlass\ImageGlass.exe" out.bmp
 ```
 
-### 遇到unresolved external symbol怎么办？
+<hr>
+\subsection 遇到unresolved external symbol怎么办？
 如果这个symbol在源文件里：
 - 看看这个源文件有没有被加到工程中。
 - symbol在源文件中，并且已经添加到了工程，还会报这个错？看看是不是.c文件和.cpp文件互相调用了，如果互相调用，记得用EXTERN C封装。
@@ -662,17 +706,20 @@ bin_viewer.exe %1 out.bmp
 - 看看这个库有没有添加到工程。
 - 库已经添加到工程，但是仍然报这个错？那就将库的版本和当前编译器版本保持一致，包括平台（x86或者x64）和版本（vc08，vc10，vc12，vc14）以及是否调试（debug和release）。
 
-### 工程内外的头文件区别？
+<hr>
+\subsection 工程内外的头文件区别？
 C语言头文件不管是放在工程内部还是工程外部都可以include，那么这两种方式有什么区别呢？
 目前发现的区别有一点，就是工程内部的头文件内部再include别的头文件的时候可以享用工程文件已经添加的路径。
 举个例子，a.h是工程部内的，b.h是工程外部的，main.cpp里面把这两个头文件都include了，工程pro（qtcreator）文件里包含了opencv的库目录。
 那么打开a.h时输入“include <opencv.....”，此时creator会自动补全，但是在b.h中输入则没有任何反应，这就是目前发现的一个区别。
 但是我估计实际编译的时候应该没有问题，这只是IDE的识别问题而已。
 
-### core.hpp header must be compiled as c++
+<hr>
+\subsection core.hpp header must be compiled as c++
 在c文件中include Opencv的hpp头文件就会出现这个问题，因为编译c文件时是使用C编译器编译的，而.c文件是不认识.hpp文件的，实现的方式就是c编译器并未定义__cplusplus宏。按照道理说c文件不应该包含h文件，最好把c文件改成cpp文件。如果硬是不改，在VisualStudio中可以设置compile as c++。在别的环境就不知道怎么搞了。
 
-### 浮点转定点中的四舍五入
+<hr>
+\subsection 浮点转定点中的四舍五入
 浮点数转定点数不能直接截取，必须四舍五入，否则精度会丢失，有时候会丢失很多！
 例如下面的代码，将浮点数转换成16Q8的定点数，当输入0.035时，0.035\*256.0=8.96，直接截取就变成了8，然而8对应着0.03125，9对应着0.03515625，很明显应该是9更合适。
 我们自然而然地想到+0.5，例如第二行代码所示，但是这样仍然是有问题的，就是在使用负数的时候。
@@ -688,7 +735,8 @@ printf("%d,%d\n", Q168_FROM_FLOAT(0.35), Q168_FROM_FLOAT(-0.35))
 //结果为 9和-9，正确！
 ```
 
-### printf 中的uint64整数
+<hr>
+\subsection printf 中的uint64整数
 使用printf过程中，一定要写对%字符串，之前遇到过一个问题，使用%d来打印一个int64的数是错误的，例如下列代码
 
 ```cpp
@@ -699,12 +747,14 @@ printf("%d\n",a); // 错误
 实际上，%u，%ld，%lu都不对，在曾经一个ARM平台编译器上，正确的结果是%llu，因为在该平台上，sizeof(long)=sizeof(int)=4，而uint64_t真正的类型是long long，在不同平台时，要注意类型字节数可能不一样。
 
 
-### 多周期算法
+<hr>
+\subsection 多周期算法
 两种结构：
 1. 启动计算独立
 2. 启动计算不独立
 
-### linux-arm-gcc 中的char默认是unsigned char!!!
+<hr>
+\subsection linux-arm-gcc 中的char默认是unsigned char!!!
 好可怕，给char类型变量赋值一个负数，会得到错误的结果，而且编译器不会报错或者警告
 只有使用==判别时才提出警告。
 
@@ -715,7 +765,8 @@ if(a == -10)
   printf("error") // 编译报错
 ```
 
-### C语言算法中的数学参数放在哪里？
+<hr>
+\subsection C语言算法中的数学参数放在哪里？
 程序运行过程中始终不变的数学常量称为参数，做算法的代码会有特别多的参数，要怎么放置这些参数呢？
 1. 直接在调用的地方用数字常量表示，例如
 ```cpp
@@ -740,17 +791,20 @@ float para_xxx[2][3] = {{1.0000, 2.0000, 3.0000},
 3. 用全局变量直接定义
 这种方式算是一种比较整洁的解决方案，但是全局变量用多了之后
 
-### 一个float不够用的例子
+<hr>
+\subsection 一个float不够用的例子
 x = {3137995, 3137895, 3137978}
 A = {{x0\*x0, x0, 1},{x1\*x1, x1, 1},{x2\*x2, x2, 1}}
 
-### 头文件重复包含
+<hr>
+\subsection 头文件重复包含
 我们都知道头文件一开始两行都是#ifndef和#define，是为了避免头文件重复包含，从逻辑上和减少编译时间看，都需要消除这种重复包含，
 那么消除重复包含的工作为什么不丢给程序员做呢？
 1. 这样的工作非常枯燥而繁琐，包含的链路太长的话，光是找到公共头文件节点就很麻烦；
 2.更重要的是，部分模块常常需要独立运行，这种冗余保证了模块也能够独立地运行。
 
-### extern 声明
+<hr>
+\subsection extern 声明
 默认的全局变量都开放成全局可用变量，其他模块想用该变量只需要extern声明即可。
 例如a.c文件中定义int a = 0; b.c文件中声明extern int a;
 那么b文件中使用的变量其实就是a文件中的变量
@@ -759,7 +813,8 @@ A = {{x0\*x0, x0, 1},{x1\*x1, x1, 1},{x2\*x2, x2, 1}}
 
 
 
-### 全局变量用处
+<hr>
+\subsection 全局变量用处
 1.静态表格常量
 2.调试系统
 
@@ -767,7 +822,8 @@ A = {{x0\*x0, x0, 1},{x1\*x1, x1, 1},{x2\*x2, x2, 1}}
 （1）那么函数参数就会很多，
 （2）调试系统需要查看的变量集可能会经常变化，层层递归修改函数形参
 
-### \_Bool变量
+<hr>
+\subsection \_Bool变量
 将在线代码分离成离线代码的时候，发现有些文件里面定义了_Bool类型，而gcc编译器居然不识别。
 Google后发现，_Bool类型是C语言的布尔类型，从C99才开始引入的。
 C99以前的C语言都是用int或者枚举的野路子来表示布尔型。。。
@@ -775,7 +831,8 @@ C99以前的C语言都是用int或者枚举的野路子来表示布尔型。。�
 也就是说如果在 extern "C"中间使用bool，是不被支持的，除非引用了头文件stdbool.h
 
 
-### 将指针赋值给uint32_t
+<hr>
+\subsection 将指针赋值给uint32_t
 很多32位平台的程序喜欢使将指针赋值给整数，这样就不需要二级指针，例如
 
 ```cpp
@@ -789,7 +846,8 @@ int func(uint32_t *addr)
 但是，这种方式其实并不好，在64位系统中，指针的大小可能是64位的，这样赋值就会出错。
 仍然像想用这种方式的话，使用intptr_t类型，兼容32和64位，在C99中支持，在<stdint.h>中定义。
 
-### designated initializer
+<hr>
+\subsection designated initializer
 C语言中结构体在C99中的一种新的初始化语法，叫做designated initializer，即指定初始化，之前我一直找不到正式的名称，我一直称之为点变量初始化。。。
 
 ```cpp
@@ -801,7 +859,8 @@ MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
 
 但是我发现了一种方法，就是强行改cpp后缀为c，这样g++就会调用gcc来编译c文件。
 
-###代码区分不同操作系统
+<hr>
+\subsection代码区分不同操作系统
 ```cpp
 #ifdef __linux__ 
     //linux code goes here
@@ -812,11 +871,13 @@ MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
 #endif
 ```
 
-### utf-8文件的bom字节
+<hr>
+\subsection utf-8文件的bom字节
 很蛋疼，读utf-8文件前面3个字节都不是文件中的内容，而是0xef,0xbb,0xbf，后来一查，发现这是utf-8文件的bom字节，就是byte order mark,
 读utf-8文件时，一定要去掉前面三个字节。
 
-### utf-8文件中的行结尾'\r'
+<hr>
+\subsection utf-8文件中的行结尾'\r'
 很蛋疼+1，读utf-8文件的时候，行结尾都是以'\r'结束，
 当文件内容是另一个文件的路径的时候，例如
 ```
@@ -829,12 +890,14 @@ MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
 我一般喜欢在文件路径后面加上'/'，方便后面读取。
 但是如果在\r后面加上'/'就会搞错。。
 
-### qtcreator中开启gcc的c99支持
+<hr>
+\subsection qtcreator中开启gcc的c99支持
 ```
 QMAKE_CFLAGS += -std=c99
 ```
 
-### printf 如何输出红色字符串？
+<hr>
+\subsection printf 如何输出红色字符串？
 ```cpp
 #include<stdarg.h>
 ...
@@ -850,7 +913,8 @@ void printf_red(const char *cmd, ...)
 ```
 
 
-### 规范打印
+<hr>
+\subsection 规范打印
 
 ```c
 #indef PRINT_ERROR
@@ -877,14 +941,17 @@ void printf_red(const char *cmd, ...)
 
 ```
 
-### 重复定义
+<hr>
+\subsection 重复定义
 如果发现某个变量明明只有一处，但是编译器老是提出重复定义，就要看看头文件是否没有写#ifndef #define #endif三连。
 
-### .o文件里发现重复定义
+<hr>
+\subsection .o文件里发现重复定义
 很有可能的原因是：
 在头文件中定义了变量和函数，这会导致头文件被多个c文件引用，h文件里的变量和函数就会出现在多个.o文件中，最后链接的时候出现错误。
 
-### 二维数组的传参和“引用”
+<hr>
+\subsection 二维数组的传参和“引用”
 ~~~{.cpp}
 void func_a(int a[][10])
 {
@@ -904,10 +971,12 @@ void main()
 ~~~
 注意：第二种方式中的`*b`必须使用括号括起来，否则就变成了一维的数组指针了。
 
-### No rules to make target
+<hr>
+\subsection No rules to make target
 这个提示表示编译模块时时找不到源代码，检查一下C和C++文件是否在构建脚本中添加进去了。
 
-### 使用enum代替整数的好处
+<hr>
+\subsection 使用enum代替整数的好处
 防止数组访问溢出
 假设在函数func里操作一个size为N的数组，函数传入需要操作的index，那么在没有前置判断溢出的情况下，需要加入判断是否溢出的语句。
 ~~~{c}
@@ -924,7 +993,8 @@ int func(int x)
 如果数组的size不大，而且具有明确的含义，例如某种过程处理通道的个数，可以考虑使用枚举来代替。
 使用枚举的好处是，枚举变量一定不会超出定义域的范围，在编译阶段就决定了不会产生数组的越界。
 
-### `static const char *` 定义但未使用
+<hr>
+\subsection `static const char *` 定义但未使用
 定义全局的`static const char*`字符串会提示变量定义但未使用。
 原因是未解之谜，可以考虑换种方法。
 ~~~{c}
@@ -932,7 +1002,8 @@ static const char * a = "abcdef"; //有问题
 static cosnt char a[] = "abcdef"; //OK
 ~~~
 
-### 运算符优先级cheatsheet
+<hr>
+\subsection 运算符优先级cheatsheet
 
 <table class="wikitable">
 
@@ -1146,19 +1217,23 @@ static cosnt char a[] = "abcdef"; //OK
 <td> 从左到右
 </td></tr></tbody></table>
 
-## GCC 编译(链接）报错指南
+<hr>
+\section GCC 编译(链接）报错指南
 
-### undefined reference
+<hr>
+\subsection undefined reference
 1.（初级）变量或者函数没有定义
 2.（初级）变量或者函数所在的源文件没有加入到编译配置里
 
-### multiple definition
+<hr>
+\subsection multiple definition
 1.（初级）在多个源文件中定义了相同的非static函数或者非static变量。
 2.（初级）Coding层面上确实只定义了一个变量，但是这个变量定义在头文件中，而且是非static的，一旦有多个源文件包含这个头文件，这一个变量就会变成多个。
 3.（中级）不同的lib或者exe编译了同一个源文件，而且.o文件放在了不同的目录，Linker会发现多个同名.o文件，自然里面的变量也会重复定义。
 
 
-### 怎样printf size_t类型才不会报warning
+<hr>
+\subsection 怎样printf size_t类型才不会报warning
 ~~~{C}
 // C89
 size_t foo;
