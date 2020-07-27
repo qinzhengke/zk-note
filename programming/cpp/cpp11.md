@@ -65,7 +65,7 @@ int main(int argc, char** argv)
 bind是一种机制，可以预先把指定的可调用的实体的某些参数绑定到已有的变量，产生一个新的可调用实体。
 它作为一个通用函数适配器，接收一个可调用对象，生成一个新的可调用对象来适应原对象的参数列表。
 
-## bind的使用方法
+### bind的使用方法
 
 比如，存在一个这样的函数check_size，因为这是一个二元函数，当我们要将它作为find_if的参数，会出错。因为find_if只接受一元函数，那么如何解决呢？
 一个方法是Lambda表达式，还有一个方法就是使用std::bind
@@ -81,7 +81,7 @@ bool check_size(const string &s,string::size_type sz)
 auto wc = find_if(words.begin(),words.end(),bind(check_size,_1,sz));
 ~~~
 
-## bind的传参问题
+### bind的传参问题
 
 ~~~{.cpp}
 auto g = bind(f,a,b,_2,c,_1);
@@ -92,7 +92,11 @@ auto g = bind(f,a,b,_2,c,_1);
 
 需要注意：bind对于直接绑定的值，是以值传递的方式，对于用_1这类，是使用引用传递。bind的返回值是可以调用的实体，所以通常我们都会将它和function联合在一起使用。
 
-## bind引用参数
+### bind的一个亲身应用实例
+
+参见 \ref evpp_callback
+
+### bind引用参数
 
 有时候对于有些绑定的参数我们希望以引用方式传递，或者说要绑定的参数无法拷贝。
 比如ostream 流对象是无法拷贝的，那么我们希望将它传递给bind而不拷贝它，就需要使用ref。
@@ -102,7 +106,7 @@ ref返回一个对象，包含给定的引用，是可以拷贝的。
 for_each(words.begin(),words.end,bind(print,ref(os),_1,' '));
 ~~~
 
-## std::bind绑定成员函数和静态成员函数
+### std::bind绑定成员函数和静态成员函数
 
 对于成员函数的绑定，我们一定需要一个调用者，也就是类的实例！
 需要注意的是，bind无法绑定重载函数，因为当重载函数的参数个数不相同时，bind也失去了它的意义。
@@ -139,7 +143,7 @@ int main(void) {
 }
 ~~~
 
-## bind与function搭配
+### bind与function搭配
 
 在cocos2dx的源码中，我们经常可以看到function作为函数形参，而bind作为实参传入
 
