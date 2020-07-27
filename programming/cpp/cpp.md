@@ -16,3 +16,5 @@
 \subpage sparse_matrix
 
 \subpage cpp_questions
+
+\subpage cpp_libraries

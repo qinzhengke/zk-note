@@ -15,6 +15,12 @@ target_compile_features(my_exe PRIVATE cxx_std_11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 ~~~
 
+\section 库文件的一般基本引用方法
+~~~{.cmake}
+target_link_libraries(exe /usr/local/lib/xxx.so)
+\# 一般情况下使用make install安装的库都文件都放在/usr/local/lib目录。
+~~~
+
 \section  链接OpenCV的库
 ~~~{.cmake}
 target_link_libraroes(exe ${OpenCV_LIBS})

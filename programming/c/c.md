@@ -59,6 +59,23 @@ int num=NUM(9); 将会扩展成 int num=num9;
 \section 编译篇
 
 <hr>
+\subsection 如何将可变长度参数传入printf?
+前言：函数A接收可变长参数，有的时候我们希望把可变长的参数直接传入函数A内部的sprintf和printf，
+即我既想把输出保存起来，也想同时打印到屏幕，该如何操作呢？
+
+方法：如下代码所示，vfprintf也可以改成vsprintf或者vsnprintf。
+
+~~~{cpp}
+void Error(const char* format, ...)
+{
+    va_list argptr;
+    va_start(argptr, format);
+    vfprintf(stderr, format, argptr);
+    va_end(argptr);
+}
+~~~
+
+<hr>
 \subsection \_Bool变量
 将在线代码分离成离线代码的时候，发现有些文件里面定义了_Bool类型，而gcc编译器居然不识别。
 Google后发现，_Bool类型是C语言的布尔类型，从C99才开始引入的。

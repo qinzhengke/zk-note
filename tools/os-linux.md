@@ -61,6 +61,21 @@ find . -name xxx
 find . -name xxx | xargs rm
 ~~~
 
+\subsection 几种Linux发送网络包的命令
+
+UDP包：
+~~~{.bash}
+echo "This is my data" > /dev/udp/127.0.0.1/1053
+\# 其中127.0.0.1就是IP地址，1053就是端口
+~~~
+
+http包
+~~~{.bash}
+curl "http://127.0.0.1:9009/echo" -d "Hello, world"
+\# 其中127.0.0.1是IP地址，9090是端口
+~~~
+
+
 <hr>
 
 \subsection Linux上环境变量的配置
@@ -396,3 +411,15 @@ apt-get是Debian系列操作系统的软件安装工具，这个工具可以连�
 2. Install -d 可以用于下载二进制软件包而不安装。
 3. 下好的软件包放在/var/cache/apt/archives里，而正在下载的软件包放在 /var/cache/apt/archives/partial。
 4. 使用apt-get clean可以清空上面两个文件夹。
+
+<hr>
+\subsection flameshot-Ubuntu下一个超强截图工具
+安装
+~~~{.sh}
+sudo apt-get install flameshot
+~~~
+
+使用：
+1. windows键，输入keyboard，进入键盘设置
+2. 将print(print screen)键解绑，然后添加新的print键快捷操作“flameshot gui”
+3. 按print键，享受截图、涂鸦、注释的快感吧。
