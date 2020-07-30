@@ -148,3 +148,27 @@ A x = {
  a = 10 // 解冲突时忘记了逗号，
  b = 20,
 ```
+
+<hr>
+\section const_issue passing ... as 'this' argument ...  discards qualifiers
+
+问题：问题的全称是
+~~~{.bash}
+error: passing ‘const Base’ as ‘this’ argument of ‘virtual void Base::test()’ discards qualifiers [-fpermissive]
+~~~
+
+问题的原因是函数传入的const类型的对象a，但是函数内部调用了a的非const类型成员函数，有可能会导致类内部成员被修改，编译器不允许。
+
+解决方法：
+
+1. 如果成员函数没有修改任何对象变量，则可以用const修饰成员函数，例如
+
+~~~{.cpp}
+class A{
+    void a() const{ 
+        // Do something
+    }
+}
+~~~
+
+2. 如果成员函数确实修改了对象变量，那么成员函数不能定义为const类型，则在传入a的时候，就不能用const修饰，因为你确实要修改这个对象。

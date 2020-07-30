@@ -23,6 +23,70 @@ step 2: 在"configurations"项目下的"defines"插入宏定义即可。
 }
 ```
 
+<hr>
+\section 在vscode中单步调试
+
+Step 1: 在CMakeLists.txt中添加以下debug设置
+
+~~~{.cmake}
+set(DEFAULT_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS_DEBUG "{CMAKE_CXX_FLAGS} -o0 -ggbd")
+add_compile_options(-g)
+~~~
+
+Step 2: 在.vscode目录中按照如下设置
+
+~~~{.json}
+{
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/msft",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "test_intersection",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/3rd-party/ha_math/unit_test/build/test_intersection",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+    ]
+}
+~~~
+
+其中，program设置为目标可执行文件。
+
+Step 3: 按F5进行调试，F10单步（跳过函数），F11单步（跳入函数）。
+
 \section 如何使用clang-format进行代码格式化？
 
 步骤1：`File`->`Preference`->`Settings`->搜索“format”，选择“Editor:Format On Save”。
@@ -79,6 +143,12 @@ step 2: 在"configurations"项目下的"defines"插入宏定义即可。
 
 然而我们通常要在光标处触发其他代码片，这就需要使用到$0，它表示，光标最终的位置，即如果没有$x，代码片自动输出时就退出了代码片模式，自然就可以触发其他的代码片。
 
+<hr>
 \section Latex常用的代码片
 
 参见 \subpage vscode_markdown_snippet
+
+<hr>
+\section vscode如何对变量进行一改全改？
+
+按F2，输入新的名称，然后在下方点击打钩图标即可。
