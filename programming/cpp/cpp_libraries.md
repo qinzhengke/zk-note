@@ -65,6 +65,22 @@ bind特别的神奇，它可以无视函数传参规则，强行将N个参数的
 只能硬着头皮看源码，全局搜索SetMessageHandler参数，还真的发现了传入3个参数的调用，一看就是使用了std::bind。
 研究一番后，终于成功的用上了，作者的C++11还是非常厉害的。
 
+\subsection 如何获取sockect_fd？
+
+问题：根据evpp源码实例，我们知道udp::SendMesssage需要提供socket_fd作为参数，然而在evpp源码所有的实例中，socket_fd都是从接收callback函数中的Message参数里拿到。
+那么如果我只想发送，如何获取socket_fd呢？
+
+回答：使用createUDPSocket()函数，
+
+~~~{.cpp}
+evpp_socket_t fd = udp::sock::createUDPSocket(3030); // source port
+struct sockaddr_in sin;
+sin.sin_family = AF_INET;
+sin.sin_addr.s_addr = htonl(0x7f000001);    // 127.0.0.1
+sin.sin_port = htons(8080);    // Destination port
+evpp::udp::SendMessage(fd, (struct sockaddr *)&sin, buffer, buffer_size);
+~~~
+
 <hr>
 \section glog glog-google的日志库
 
