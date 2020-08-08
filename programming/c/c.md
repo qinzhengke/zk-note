@@ -274,6 +274,24 @@ C语言头文件不管是放在工程内部还是工程外部都可以include，
 QMAKE_CFLAGS += -std=c99
 ```
 
+<hr>
+\section 库函数篇
+
+\subsection FLT_EPSILON宏
+
+问题：做除法的时候，我们知道分母不能为0，那么如何检查呢？ “if(a!=0.0f)”这种小学生的错误就不要犯了。
+
+解决方法：一般来说我们需要拿到一个很小的数，如果分母的绝对值小于这个数，就认为分母为零。
+最适合的方法是使用<float.h>提供的FLT_EPSILON。
+
+~~~{.c}
+#include <float.h>
+float a = 0;
+if(fabs(a)<FLT_EPSILON){
+  // return error.
+}
+~~~
+
 
 <hr>
 \section 性能篇

@@ -3,7 +3,8 @@
 
 此页面记录opencv使用过程中遇到的问题。
 
-## Linux离线环境编译opencv
+<hr>
+\section Linux离线环境编译opencv
 cmake会在编译opencv时下载ippicv和ffmpeg库，这会导致离线环境编译opencv被卡在下述语句。
 ```{.sh}
 IPPICV:Download:ippicv_2017u3_lnx_intel64_general_20180518.tgz
@@ -19,13 +20,15 @@ step2:下载对应版本的包，然后打开opencv/3rdparty/ippicv/ippicv.cmake
 "file:///home/zrinker/.../ippicv....tar.gz"
 ```
 
-## 编译contrib库
+<hr>
+\section 编译contrib库
 如果要使用contrib库，就需要自己行编译，编译时指定opencv_contrib/modules路径即可
 ~~~{.cmake}
 set(OPENCV_EXTRA_MODULES_PATH ~/opencv_contrib/modules)
 ~~~
 
-## 带Qt编译
+<hr>
+\section 带Qt编译
 带Qt编译后，imshow时opencv会调用更高级的一个gui，还是比较方便的。
 step1:在cmake-gui中搜索WITH-QT，勾上，然后重新configure；
 step2:步骤一会弹出错误并且将接下来要设置的几个路径都高亮显示， 大概是Qt5Concurrent_DIR、QtCore_DIR、Qt5Gui_DIR等等，设置到对应cmake路径，这里再举个例子
@@ -34,7 +37,8 @@ step2:步骤一会弹出错误并且将接下来要设置的几个路径都高�
 ~~~
 其他几个路径举一反三即可。
 
-### CV_EXPORT宏
+<hr>
+\section CV_EXPORT宏
 
 ```cpp
 #if (defined _WIN32 || defined WINCE || defined __CYGWIN__) && defined CVAPI_EXPORTS
@@ -49,3 +53,11 @@ step2:步骤一会弹出错误并且将接下来要设置的几个路径都高�
 那么，visibility属性又是什么呢？下面的网页解释的很好。
 
 > https://www.ibm.com/developerworks/cn/aix/library/au-aix-symbol-visibility/index.html
+
+<hr>
+\section 如何填充Mat？
+
+~~~{.cpp}
+Mat a(100,100,CV_8UC3);
+a.setTo(Scalar(0xff,0xff,0xff)) // 填充成白色
+~~~

@@ -152,3 +152,59 @@ Step 3: 按F5进行调试，F10单步（跳过函数），F11单步（跳入函�
 \section vscode如何对变量进行一改全改？
 
 按F2，输入新的名称，然后在下方点击打钩图标即可。
+
+\section vscode如何添加包含路径？
+
+问题：一些库安装后的头文件路径不是最标准的/usr/include，例如Eigen的安装头文件路径为/usr/local/include/eigen3，然而vscode默认不会搜索这个路径，导致vscode无法正确解析这些头文件。
+
+解决方法：在vscode中手动添加包含目录。
+
+step 1: 菜单 File -> Preference -> settings -> Extensions -> C/C++ -> Include Path，选择“Edit in settings.json”。
+
+step 2: 按照如下方式添加include path。
+
+~~~{.json}
+{
+    "cmake.configureOnOpen": true,
+    "C_Cpp.updateChannel": "Insiders",
+    "http.proxySupport": "off",
+    "[markdown]": {
+      "editor.quickSuggestions":true
+    },
+    "C_Cpp.default.includePath": ["/usr/local/include/eigen3"]  // 添加include path
+}
+~~~
+
+注意：由于这个设置是针对于vscode的，对于任何工程，这个路径都会自动添加。
+
+\section vscode中如何设置前后跳转？
+
+问题：在代码浏览过程中，个人比较习惯使用QtCreator的方式进行跳转，即Alt+右为向前跳转，Alt+左为向后跳转。
+vscode默认跳转方式为ctrl+alt+‘-’，这种组合对于非常常用的功能来说太复杂了。
+
+解决方法： 
+
+step 1: File -> Preference -> Keyboard Shortcuts
+step 2: 搜索“Forward”找到向前跳转的设置， 搜索“Backward“找到向后跳转的设置，按照提示设置即可。
+
+\section vscode 如何设置ruler?
+
+问题：编写代码的时候，ruler也就是右侧的竖线，ruler可以提醒我们一行代码是否太长，需要拆行。
+
+解决方法：
+
+Step 1: File -> Preference -> Settings，搜索“ruler”，选择“Edit in settings.json”
+
+Step 2: 按照一下方法进行设置
+
+~~~{.json}
+{
+    "cmake.configureOnOpen": true,
+    "C_Cpp.updateChannel": "Insiders",
+    "http.proxySupport": "off",
+    "[markdown]": {
+      "editor.quickSuggestions":true
+    },
+    "editor.rulers": [80,120] // 设置2个ruler，分别在80列和120列
+}
+~~~
