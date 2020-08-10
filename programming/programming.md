@@ -30,3 +30,4 @@
 
 @subpage soft_engineering
 
+@subpage coredump
