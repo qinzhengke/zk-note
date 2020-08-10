@@ -154,3 +154,15 @@ target_compile_features(opt_demo PRIVATE cxx_std_11)
 ~~~{.cmake}
 target_sources(my_exe PRIVATE my_src.c)
 ~~~
+
+<hr>
+\section target_link_libraries中的相对路径
+
+在cmake的target_link_libaraies语句中，想要link到某一个库文件，如果直接输入相对路径，那么不管怎么写，cmake都无法找到对应的库文件。
+
+必须使用${CMAKE_BINARY_DIR}来指定当前路径，这个路径也就是我们通常新建的build目录。
+
+~~~{.cmake}
+target_link_libraries(my_exe
+        ${CMAKE_BINARY_DIR}/3rd-party/libabc.so)
+~~~

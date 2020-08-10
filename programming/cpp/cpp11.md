@@ -186,3 +186,8 @@ function(function,a,b,Y,c,X);
 其中的arg1,arg2,arg4已经被绑定到a,b,c上。
 
 placeholder本身是命名空间，占位符实际上是“_1”，“_2”，“_3”等等。
+
+<hr>
+\section std::bind传入引用
+
+普通的&传入引用是无效的，结果仍然是复制传递，必须使用std::ref(a)进行另一种引用，才能真正的引用传递，具体原理还没仔细了解。

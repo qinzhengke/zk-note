@@ -90,3 +90,15 @@ evpp::udp::SendMessage(fd, (struct sockaddr *)&sin, buffer, buffer_size);
 <hr>
 \section libevent libevent-事件框架库
 
+<hr>
+\subsection 基于libevent的定时器
+
+
+<hr>
+\section PcapPlusplus PcapPlusplus－一个解析pcap文件的库。
+
+\subsection pcpp_issue1 一个小坑
+
+pcpp::PcappFileReaderDevice这个类的拷贝构造函数是private的，这使得std::vector在push_back的时候报错。
+并且没有public的空构造函数，
+很神奇，不知道为何这样做，要push到vector，只能通过new的方式新建指针,然后把指针push到vector里面。
