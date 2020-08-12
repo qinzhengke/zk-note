@@ -1,6 +1,8 @@
 视觉SLAM简介{#vslam_entry}
 ====================
 
+\subpage vlsam_intro
+
 SLAM是“Simultaneous Localization And Mapping”的缩写，VSLAM也就是视觉SLAM。
 
 此页面记录VSLAM相关知识。

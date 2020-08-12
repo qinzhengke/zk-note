@@ -1,4 +1,4 @@
-C++的lambda表达式{#cpp_lambda}
+C++的lambda表达式{#cpp11_lambda}
 ============================
 
 

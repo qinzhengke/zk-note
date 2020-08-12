@@ -1,6 +1,8 @@
 C语言{#c}
 ========
 
+\subpage c_debug_lesson
+
 <hr>
 \section 预编译篇
 

@@ -22,3 +22,5 @@
 \subpage cpp11
 
 \subpage cpp_linux_deploy
+
+\subpage cpp_factory_mode

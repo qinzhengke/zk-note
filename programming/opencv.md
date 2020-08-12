@@ -1,4 +1,4 @@
-开源计算机视觉库：OpenCV{#opencv}
+OpenCV：经典开源计算机视觉库{#cpp_lib_opencv}
 ==================
 
 此页面记录opencv使用过程中遇到的问题。

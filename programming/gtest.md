@@ -1,4 +1,4 @@
-谷歌测试框架：Google Test{#gtest}
+gtest：谷歌测试框架{#gtest}
 ===================
 
 ## find_package寻找gtest

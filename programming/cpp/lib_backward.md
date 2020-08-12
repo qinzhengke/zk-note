@@ -1,4 +1,4 @@
-实用库：backward{#lib_backward}
+backward：程序崩溃调试神器{#cpp_lib_backward}
 ===========================
 
 backward这个库用来定位程序crash的地方，并且以源代码行号的形式给出，特别的直观，提升debug效率。

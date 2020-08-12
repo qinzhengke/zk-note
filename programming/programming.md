@@ -14,15 +14,7 @@
 
 @subpage bat
 
-@subpage qt
-
-@subpage opencv
-
 @subpage ros
-
-@subpage gtest
-
-@subpage lib_backward
 
 @subpage cmake
 

@@ -1,6 +1,8 @@
 C++11{#cpp11}
 =============
 
+\subpage cpp11_lambda
+
 <hr>
 \section std_function std::function是什么？
 
