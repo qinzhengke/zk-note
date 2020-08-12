@@ -172,3 +172,20 @@ class A{
 ~~~
 
 2. 如果成员函数确实修改了对象变量，那么成员函数不能定义为const类型，则在传入a的时候，就不能用const修饰，因为你确实要修改这个对象。
+
+<hr>
+\section 类成员函数声明和定义处同时使用static修饰
+
+这样的做法会编译报错，具体原因待了解。
+正确的做法是只在声名处用static修饰。
+
+<hr>
+\section 类成员函数声明和定义同时使用默认参数
+
+这样的做法会导致编译报错，具体原因待了解。
+正确的做法是只在声明处使用默认参数。
+
+<hr>
+\section extra_qualification extra qualification
+
+qualification是指双冒号符“::”，而“extra qualification”则一般出现在类中函数定义的时候重复用“类名::函数名”进行时声明。

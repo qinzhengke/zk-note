@@ -1284,3 +1284,8 @@ size_t foo;
 ...
 printf("foo = %zu\n", foo);
 ~~~
+
+<hr>
+\section 判断数字是否是nan
+
+isnan()函数。

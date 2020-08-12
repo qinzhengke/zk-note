@@ -21,10 +21,10 @@ Step 2:
 
 在文件末尾添加下面两行
 
-~~~{.sh}
+\code{.sh}
 kernel.core_pattern=/tmp/core-%e
 kernel.core_uses_pid = 0
-~~~
+\endcode
 
 Step 3: 执行命令进行配置
 
