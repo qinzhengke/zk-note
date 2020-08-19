@@ -1,6 +1,23 @@
 C++构建常见问题{#cpp_compile_faq}
 ================================
 
+<hr> \section static相关问题
+
+\subsection static类成员变量未定义
+
+static类成员变量在类中只是进行了声明，没有定义，而普通成员变量在生成定义对像的时候进行了定义。
+所以类成员变量需要而外定义。
+
+\code{.cpp}
+class A{
+    public:
+    A(){}
+    static int count;
+}
+
+int A::count = 0;   //必须在外面进行定义，否则编译器会提示未定义
+\endcode
+
 <hr>
 \section 链接的时候重复定义
 明明只定义了1处变量，但是为何多个obj文件会重复定义？

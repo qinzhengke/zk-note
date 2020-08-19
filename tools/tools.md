@@ -3,6 +3,10 @@
 
 \subpage os-linux
 
+\subpage os-ubunut
+
+\subpage gnome
+
 \subpage os-lubuntu
 
 \subpage os-windows

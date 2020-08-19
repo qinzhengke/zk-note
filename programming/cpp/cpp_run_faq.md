@@ -2,6 +2,35 @@ C++运行常见问题{#cpp_run_faq}
 ===========================
 
 <hr>
+\section vector::push_back函数中会执行析构函数
+
+记住push_back对象的时候会提前拷贝，拷贝的临时对象会被销毁，销毁时会调用析构函数，如果析构函数中有对static成员变量的操作，
+那么就很容易导致结果不符合预期，例如下面的例子，a用来记录A对象的实例个数，我们预期是每push_back一个对象，那么count就会+1。
+然而在push_back过程中，析构函数内a又被进行了-1操作，所以a仍然是0。
+
+\code{.cpp}
+struct A{
+    static int a;
+    A(){a++;}
+    ~A(){a--;}
+};
+int A::a = 0;
+int main(int argc, char* argv[]) {
+
+    vector<A> al;
+    A a;
+    al.push_back(a);
+    return 0;
+}
+
+\endcode
+
+结果输出
+
+    deconst, a:0
+    deconst, a:-1
+
+<hr>
 \section system_work_dir system()函数工作路径？
 system（）函数即使调用了其他路径的可执行文件，可执行文件也相当于在当前路径下运行，举个例子，在~/目录下运行a.exe，a.exe里有一句话是
 ```{.cpp}
