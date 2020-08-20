@@ -3,7 +3,7 @@
 
 \subpage os-linux
 
-\subpage os-ubunut
+\subpage os_ubuntu
 
 \subpage gnome
 

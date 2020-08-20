@@ -2,24 +2,28 @@
 ==================
 
 
-@subpage c
+\subpage c
 
-@subpage cpp
+\subpage cpp
 
-@subpage python
+\subpage python
 
-@subpage matplotlib
+\subpage matplotlib
 
-@subpage bash
+\subpage bash
 
-@subpage bat
+\subpage bat
 
-@subpage ros
+\subpage ros
 
-@subpage cmake
+\subpage cmake
 
-@subpage android_make
+\subpage android_make
 
-@subpage soft_engineering
+\subpage awesome_projects
 
-@subpage coredump
+\subpage soft_engineering
+
+\subpage coredump
+
+\subpage programming_debug

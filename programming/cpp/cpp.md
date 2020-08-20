@@ -11,6 +11,8 @@
 
 \subpage cpp_suggestion
 
+\subpage cpp_debug
+
 \subpage cpp_qt_faq
 
 \subpage sparse_matrix
@@ -24,3 +26,5 @@
 \subpage cpp_linux_deploy
 
 \subpage cpp_factory_mode
+
+\subpage cpp_singleton
