@@ -9,6 +9,8 @@
 
 \subpage cpp_file_io
 
+\subpage cpp_stl
+
 \subpage cpp_suggestion
 
 \subpage cpp_debug
