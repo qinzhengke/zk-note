@@ -41,3 +41,18 @@ Eigen::Matrix<float,9,9> a = Eigen::Matrix<float,9,9>::Zero();
 // 编译成功
 auto a = Eigen::Matrix3f::Zero();
 ~~~
+
+\section 传参时MatrixNd到MatrixXd的转换
+
+函数传参时，MatrixNd要转换成MatrixXd，（N表示具体的数字，例如3），编译器会自动转换，但是转换得到的是一个右值，是一个临时变量。
+如果函数的形参是非常量引用，那么编译器就会报错。
+
+\code{.cpp}
+void func(MatrixXd &a){
+
+}
+
+Matrix3d x;
+Matrix
+func(x);    // x传入之后自动cast，变成右值。
+\endcode

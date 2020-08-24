@@ -1,7 +1,7 @@
 OpenCV调试问题{#opencv_debug}
 ==========================
 
-\section imshow导致crash
+\section imshow_crash imshow导致crash
 
 问题：非常简单的imshow代码都会导致crash，就crash在imshow的位置。
 
@@ -21,3 +21,16 @@ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavform
 \endcode
 
 安装完这些依赖，然后重新编译安装opencv，再编译应用程序，就没有问题了。
+
+<hr>
+\section VideoWriter无法打开文件
+
+VideoWriter无法打开文件，一些常规原因：
+
+1. 目录没有写的权限
+2. 磁盘满了
+3. 目录不存在
+
+这些原因不值得用专门记下来，这里记录另外一个不寻常的原因：OpenCV的依赖没有安装好。
+
+解决方法参考 \ref imshow_crash
