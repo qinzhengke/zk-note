@@ -87,6 +87,14 @@ Step 2: 在.vscode目录中按照如下设置
 
 Step 3: 按F5进行调试，F10单步（跳过函数），F11单步（跳入函数）。
 
+<hr>
+\section vscode单步调试会先自动跳到末尾
+
+如题，vscode单步调试的时候，不知为何会自动先跳到末尾，这时候不要惆怅，只需要再按一次F5，程序就会自动运行下去，并且可以正常的调试。
+
+很奇怪，原因还未知道。
+
+<hr>
 \section 如何使用clang-format进行代码格式化？
 
 步骤1：`File`->`Preference`->`Settings`->搜索“format”，选择“Editor:Format On Save”。

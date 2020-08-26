@@ -56,3 +56,16 @@ Matrix3d x;
 Matrix
 func(x);    // x传入之后自动cast，变成右值。
 \endcode
+
+<hr>
+\section 四元数与欧拉角的转换
+
+\code{.cpp}
+// 从欧拉角到四元数
+Quaternionf q = AngleAxisf(roll, Vector3f::UnitX())
+    * AngleAxisf(pitch, Vector3f::UnitY())
+    * AngleAxisf(yaw, Vector3f::UnitZ());
+
+// 从四元数到欧拉角
+auto euler = q.toRotationMatrix().eulerAngles(0, 1, 2);
+\endcode
