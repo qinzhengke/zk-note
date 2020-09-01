@@ -65,3 +65,17 @@ B getB();
 struct B{int b;}
 A getA();
 \endcode
+
+<hr>
+\section 操作符优先级导致的bug
+
+\code{.cpp}
+uint8_t a = 0x0;
+if(a & 0x01 == 0){
+    printf("a[0]=0\n");
+}
+\endcode
+
+&的优先级比==要低，所以0x01==0会被先执行，为false，即0，最后整个结果输出为0。
+
+有的编译器会直接优化这种恒为0的代码，所以单步调试的时候，这段代码会被跳过。

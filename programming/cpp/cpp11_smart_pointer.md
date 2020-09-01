@@ -117,3 +117,50 @@ public:
 ----------------------------------------------------------------
 
 我遇到的问题类似,现在的项目中需要开启RTTI,链接的外部库是no-RTTI编译的,在现在的工程中重载外部库的带虚函数的类,连接的时候报错.原文说的dirty hack，是对单个文件加编译选项-fno-rtti 。因为我用的外部库是可以开启RTTI的,我用RTTI重新编译一次后,现在的工程不报错啦。
+
+<hr>
+\section shared_ptr不能指向this指针
+
+如下代码所示，本身对象b在main()函数结束之后自动析构，同时析构过程会把成员变量中的sp_this指向的对象（也就是自己）先行析构，所以最终会导致析构了两次。
+
+\code{.cpp}
+#include <iostream>
+#include <memory>
+
+using namespace std;
+
+class B{
+public:
+    B(){ sp_this = shared_ptr<B>(this);}
+    ~B(){ cout<<"~B"<<endl; }
+    shared_ptr<B> sp_this;
+};
+
+int main ()
+{
+  B b;
+  return 0;
+}
+\end
+
+如果一定想shared_ptr指向this指针，可以这样操作
+
+\code{.cpp}
+#include <iostream>
+#include <memory>
+
+using namespace std;
+
+class B :  public enable_shared_from_this<B>{
+public:
+    B(){ sp_this = shared_from_this();}
+    ~B(){ cout<<"~B"<<endl; }
+    shared_ptr<B> sp_this;
+};
+
+int main ()
+{
+  B b;
+  return 0;
+}
+\endcode

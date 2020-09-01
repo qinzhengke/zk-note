@@ -40,3 +40,32 @@ private:
 };
 
 \endcode
+
+<hr>
+\section 抽象类的构造函数不能运行成员虚成员函数
+
+其实原因很简单，当派生类在构造过程中，自己到底是什么类型是不知道的，从而不知道要调用那种类型的成员函数。
+只有构造完毕才能知道，实际上虚函数表指针也是在构造函数中进行赋值的。
+
+\code{.cpp}
+struct Abstract {
+    virtual void pure() = 0;
+    virtual void foo() {
+        pure();
+    }
+    Abstract() {
+        foo();
+    }
+    ~Abstract() {
+        foo();
+    }
+};
+
+struct X : public Abstract {
+    virtual void pure() { cout << " X :: pure() " << endl; }
+    virtual void impure() { cout << " X :: impure() " << endl; }
+};
+int main() {
+    X x;
+}
+\endcpp

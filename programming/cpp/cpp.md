@@ -3,13 +3,19 @@
 
 这个页面记录使用C++遇到的问题。
 
+\subpage cpp_articles
+
 \subpage cpp_compile_faq
+
+\subpage cpp_constructor
 
 \subpage cpp_run_faq
 
 \subpage cpp_file_io
 
 \subpage cpp_template
+
+\subpage cpp_container
 
 \subpage cpp_polymorphism
 
