@@ -3,6 +3,8 @@ C语言{#c}
 
 \subpage c_debug_lesson
 
+\subpage c_macro
+
 <hr>
 \section 预编译篇
 
@@ -1291,3 +1293,36 @@ printf("foo = %zu\n", foo);
 \section 判断数字是否是nan
 
 isnan()函数。
+
+<hr>
+<section> 角度归一化
+
+\code{.cpp}
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+double normAngle2pi(double x){
+    x = fmod(x,360);
+    return (x<0) ? x+360 : x;
+}
+
+double normAnglepp(double x){
+    x = fmod(x + 180,360);
+    return (x<0) ? x+180 : x-180; 
+}
+
+int main()
+{
+    cout<<normAngle2pi(-30)<<","<<normAngle2pi(370)<<endl;
+    cout<<normAnglepp(-30)<<","<<normAnglepp(370)<<endl;
+}
+
+int main()
+{
+    cout<<normAngle2pi(-30)<<","<<normAngle2pi(370)<<endl;
+    cout<<normAnglepp(-30)<<","<<normAnglepp(370)<<endl;
+}
+
+\endcode

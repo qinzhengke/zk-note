@@ -1,6 +1,7 @@
-std::map{#cpp_stl_map}
+std::map{#cpp_map}
 =====================
 
+<hr>
 \section 基本使用方法
 
 \code{.cpp}

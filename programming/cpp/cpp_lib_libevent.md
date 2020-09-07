@@ -15,3 +15,19 @@ printf("before\n"); // 会被打印
 event_dispatch();
 printf("afetr\n");  // 不会被打印
 \endcode
+
+<hr>
+\section event_add()函数在调用函数结束之后才会开始计时
+
+不能一进函数就设定下一个计时器。
+
+\code{.cpp}
+func(){
+    tv = {0,100000};
+    event_add(&tv);
+
+    do_something();//
+
+    // 从这里开始计时，到下一次运行。
+}
+\endcode

@@ -2,8 +2,19 @@ cmake{#cmake}
 =============
 
 <hr>
+\section 添加目录里所有源文件
+
+\code{.cmake}
+cmake_minimum_required(VERSION 2.8)
+file(GLOB helloworld_SRC
+    "*.h"
+    "*.cpp"
+)
+add_executable(helloworld ${helloworld_SRC})
+\endcode
+
+<hr>
 \section cmake_cpp11 C++11标准的引用
-<!-- \section abc -->
 
 方法一（3.11之后，现代写法，推荐）：
 ~~~{.cmake}

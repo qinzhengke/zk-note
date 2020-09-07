@@ -15,8 +15,6 @@
 
 \subpage cpp_template
 
-\subpage cpp_container
-
 \subpage cpp_polymorphism
 
 \subpage cpp_stl
