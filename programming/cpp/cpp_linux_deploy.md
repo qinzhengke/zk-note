@@ -56,3 +56,56 @@ LD_LIBRARY_PATH=$(pwd)/lib ./my_exe
 
 后记：
 这方法的“笨”在于需要重复查找缺失的so文件，并且只能串行查找，稍微花点时间。
+
+<hr>
+\section 聪明一点的方法
+
+Step 1: 使用ldd工具查出所有需要的so文件
+
+\code{.sh}
+ldd /bin/ls
+linux-vdso.so.1 =>  (0x00007fff87ffe000)
+libselinux.so.1 => /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007ff0510c1000)
+librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007ff050eb9000)
+libacl.so.1 => /lib/x86_64-linux-gnu/libacl.so.1 (0x00007ff050cb0000)
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ff0508f0000)
+libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007ff0506ec000)
+/lib64/ld-linux-x86-64.so.2 (0x00007ff0512f7000)
+libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007ff0504ce000)
+libattr.so.1 => /lib/x86_64-linux-gnu/libattr.so.1 (0x00007ff0502c9000)
+\endcode
+
+Step2: 剩下的步骤和上一节方法一致。
+
+<hr>
+\section 更聪明的办法
+
+通过sed工具，可以过滤出我们想要的文件名列表。
+
+\code{.sh}
+ldd /bin/ls | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//'
+\endcode
+
+sed -e 's/\t//' 意思是把制表符\t给删除（替换成无），语法和vim的替换是一样的。
+sed -e 's/.*=..//' 意思是把“=”前面的所有字符和“=”后面的两个字符删除掉（替换成无）。
+sed -e 's/ (0.*)//' 意思是" (0x-----)"都给删除掉。
+
+输出
+\code
+linux-vdso.so.1
+/lib/x86_64-linux-gnu/libselinux.so.1
+/lib/x86_64-linux-gnu/libc.so.6
+/lib/x86_64-linux-gnu/libpcre.so.3
+/lib/x86_64-linux-gnu/libdl.so.2
+/lib64/ld-linux-x86-64.so.2
+/lib/x86_64-linux-gnu/libpthread.so.0
+\endcode
+
+Step2: 批量拷贝
+\code{.sh}
+ldd /bin/ls | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | xargs -I {} cp {} ~/softs/cc/lib/
+\endcode
+
+xargs是linux的一个工具，可以通过管道"|"获取文件列表，然后批量执行cp操作，其中“xarg -I {}”表示使用列表中的内容替换后面实际执行命令的{}的内容，类似于编程语言中的参数传递。
+
+注意：拷贝的过程中会报出linux-vdso.so.1文件找不到，不用去管他，一般的linux系统都会有这个文件，不需要拷贝。

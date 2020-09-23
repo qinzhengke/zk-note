@@ -75,3 +75,14 @@ ffmpeg -i input.jpg -vf scale=320:-1 output_320.png
 -f 表示输入的文件
 
 最后文件会被解压到file目录。
+
+<hr>
+\section ssr ubuntu下的录屏工具 simple screen recorder
+
+\code{.sh}
+sudo apt-get install simplescreenrecorder
+\endcode
+
+亲测比较好用，一开始用的kazam，但是kazam出现了闪屏的问题，总是会有几帧出现别的窗口的内容。
+
+simple screen recorder开始会提示检测到nvidia显卡，然后建议关闭一个什么"flip"，按照提示操作就行。
