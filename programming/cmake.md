@@ -177,3 +177,27 @@ target_sources(my_exe PRIVATE my_src.c)
 target_link_libraries(my_exe
         ${CMAKE_BINARY_DIR}/3rd-party/libabc.so)
 ~~~
+
+<hr>
+\section 如何在cmake中设置程序版本？
+
+\code{.cmake}
+set_target_properties(my_exe PROPERTIES 
+        VERSION XXX)
+\endcode
+
+这样编译后的可执行文件或者库文件，都带有版本后缀，例如my_exe-1.0.0，如果是库文件，这是my_lib.so.1.0.0。
+
+<hr>
+\section 模块重复编译怎么办？
+假设用A<-B表示模块A依赖模块B，那么假设我们有这种结构：A <- B <- C，　A <- C，cmake构建的时候会提示出现重复的模块．
+
+C可能是一个很底层的模块，例如基础组件规范化打印．
+
+使用如下的语句，就可以防止提示重复模块．
+
+\code{.cmake}
++if(NOT TARGET ha_util)
+ add_subdirectory(3rd-party/ha_util)
++endif()
+\endcode

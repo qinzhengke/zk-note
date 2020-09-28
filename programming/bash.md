@@ -43,3 +43,10 @@ then
 else
 fi
 ~~~
+
+<hr>
+\section 如何把运行结果赋值给变量？
+
+\code{.bash}
+var = $(ls | grep aaa)
+\endcode

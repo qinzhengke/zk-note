@@ -28,6 +28,41 @@ du表示disk usage，-h参数表示使用人类可读的单位，即KB,MB,GB为�
 du -h -d 1 ./*
 ~~~
 
+<hr>
+\sbusection 如何拷贝符号链接文件本身？
+
+如果使用cp工具来拷贝符号链接(symbolic link)，那么最终拷贝的是符号链接指向的文件，有的时候我们只想拷贝符号链接文件本身。
+
+例如使用cmake&make工具链来构建的库文件，一般会得到符号链接a.so和真正的库文件a.so.1.0.0，在打包的时候，我们仍然想要保持符号链接＋文件本身的使用方式。
+
+如何实现呢？
+
+很简单：cp -P
+
+<hr>
+\subsection 如何查看哪些端口号被监听？
+
+基于网络socket通信的时候，一个端口只能被一个应用程序监听，（实际上，端口的内在定义就是应用程序的标识）。
+
+所以，在监听一个端口之前，如果这个端口已经被监听，那么再次监听会失败。
+
+我们通常会想查看当前端口被那个应用程序监听，如何实现呢？
+
+一种方式如下所示：
+\code{.sh}
+sudo lsof -i -P -n | grep LISTEN
+\endcode
+
+<hr>
+\subsection ls工具如何显示文件的全路径？
+
+众所周知，ls工具会输出文件列表，但是有的时候我们想要的是文件的全路径，如何实现呢？
+
+\code{.sh}
+$ ls -d $PWD/*
+\endcode
+
+<hr>
 \subsection 如何查看文件的后面n行？
 
 ~~~{.sh}
@@ -77,7 +112,6 @@ curl "http://127.0.0.1:9009/echo" -d "Hello, world"
 
 
 <hr>
-
 \subsection Linux上环境变量的配置
 
 Linux操作系统下三种配置环境变量的方法　　 
@@ -404,8 +438,8 @@ Gnome 3.10下的中文输入法：
 4. 注销后重新登录即可，另外Gnome里默认的切换输入法的快捷键是super+space而不是ctrl+space。
 
 <hr>
-
 \subsection Ubuntu中的Apt-get命令
+
 apt-get是Debian系列操作系统的软件安装工具，这个工具可以连接网络已有的软件库，下载并安装所有的开源软件包，下面记录常用的命令和选项。
 1. install是最常用的，直接下载安装软件包并且下载安装依赖的所有其他软件包。
 2. Install -d 可以用于下载二进制软件包而不安装。
@@ -423,3 +457,5 @@ sudo apt-get install flameshot
 1. windows键，输入keyboard，进入键盘设置
 2. 将print(print screen)键解绑，然后添加新的print键快捷操作“flameshot gui”
 3. 按print键，享受截图、涂鸦、注释的快感吧。
+
+

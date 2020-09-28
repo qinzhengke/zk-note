@@ -58,7 +58,7 @@ LD_LIBRARY_PATH=$(pwd)/lib ./my_exe
 这方法的“笨”在于需要重复查找缺失的so文件，并且只能串行查找，稍微花点时间。
 
 <hr>
-\section 聪明一点的方法
+\section 方法二：聪明一点的方法
 
 Step 1: 使用ldd工具查出所有需要的so文件
 
@@ -78,17 +78,18 @@ libattr.so.1 => /lib/x86_64-linux-gnu/libattr.so.1 (0x00007ff0502c9000)
 Step2: 剩下的步骤和上一节方法一致。
 
 <hr>
-\section 更聪明的办法
+\section 方法三：更聪明的办法
 
 通过sed工具，可以过滤出我们想要的文件名列表。
 
 \code{.sh}
-ldd /bin/ls | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//'
+ldd /bin/ls | sed -e 's/\t//' | sed -e 's/.*=..//' | sed -e 's/ (0.*)//' | grep -e '/.*'
 \endcode
 
 sed -e 's/\t//' 意思是把制表符\t给删除（替换成无），语法和vim的替换是一样的。
 sed -e 's/.*=..//' 意思是把“=”前面的所有字符和“=”后面的两个字符删除掉（替换成无）。
 sed -e 's/ (0.*)//' 意思是" (0x-----)"都给删除掉。
+grep -e '/.*'　表示选择以'/'为开头的字符串，也就是说把linux-vdso.so.1去掉，因为这个虚拟的库文件，由kenel提供，不需要拷贝。如果坚持拷贝的话，会出现找不到文件的提示。
 
 输出
 \code
