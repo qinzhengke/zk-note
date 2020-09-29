@@ -1,4 +1,4 @@
-航天飞行器{#aerospace}
+航天探测器{#aerospace_probe}
 ====================
 
 \section 飞行器

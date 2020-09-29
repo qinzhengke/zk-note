@@ -1,6 +1,8 @@
 C++常用库{#cpp_libraries}
 ========================
 
+\subpage cpp_boost
+
 \subpage cpp_lib_opencv
 
 \subpage cpp_lib_qt

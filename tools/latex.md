@@ -65,6 +65,18 @@ y
 </td></tr> 
 
 <tr><td> 
+\f$ \mathscr{T}, \mathscr{P} \f$
+</td><td>
+\verbatim \mathscr{T}, \mathscr{P} \endverbatim
+</td></tr> 
+
+<tr><td> 
+\f$ \in \notin \subset \not\subset \supset \not\supset \cap \cup \f$
+</td><td>
+\verbatim \in \notin \subset \not\subset \supset \note\supset \cap \cup \endverbatim
+</td></tr> 
+
+<tr><td> 
 </td><td>
 </td></tr> 
 

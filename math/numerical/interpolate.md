@@ -1,4 +1,4 @@
-插值{#interpolate}
+插值{#interpolation}
 =================
 
 ### 连续插值导致发散问题

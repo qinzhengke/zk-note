@@ -1,21 +1,19 @@
-覃政科的车库{#mainpage}
+覃政科的文件柜{#mainpage}
 ======================
 
 “覃”念"qin"，第二声。
 
-这个车库没有车，是玩耍的地方。
-
 “突破性格局限！”
 
 <hr>
-\section 工作2： DJI Mavic air、Mavic 2、 Mavic air 2 双目避障开发。
+\section work_1 工作2：DJI Mavic air、Mavic 2、 Mavic air 2 双目避障开发。
 
 \htmlonly
 <iframe src="https://player.bilibili.com/player.html?aid=32639123&bvid=BV1VW411S7o5&cid=57114943&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:640px; height:460px"> </iframe>
 \endhtmlonly
 
 <hr>
-\section 工作1：光学元件高精度视觉定位与引导
+\section work_2 工作1：光学元件高精度视觉定位与引导
 
 \htmlonly
 <table>

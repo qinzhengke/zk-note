@@ -7,6 +7,10 @@
 
 \subpage cv
 
+\subpage estimation_theory_entry
+
+\subpage msif_intro
+
 \subpage ml_entry
 
 \subpage programming
@@ -16,3 +20,5 @@
 \subpage tools
 
 \subpage online_tools
+
+\subpage astronomy_entry

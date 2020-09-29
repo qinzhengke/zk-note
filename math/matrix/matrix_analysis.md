@@ -1,4 +1,4 @@
-线性变换中的求导{#matrix_analysis}
+矩阵论基础{#matrix_entry}
 ===========================
 
 \section 一次项矩阵求导

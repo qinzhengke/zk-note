@@ -10,6 +10,8 @@
 
 \subpage matplotlib
 
+\subpage front_end
+
 \subpage bash
 
 \subpage bat
