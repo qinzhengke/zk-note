@@ -50,3 +50,12 @@ fi
 \code{.bash}
 var = $(ls | grep aaa)
 \endcode
+
+<hr>
+\section bash_var $()和${}的区别
+
+$()里面必需接命令，不能接受变量
+
+${}里面必需接受变量，不能接受命令
+
+两者不能混用

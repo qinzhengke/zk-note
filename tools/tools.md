@@ -25,4 +25,6 @@
 
 \subpage latex
 
+\subpage regex_entry
+
 \subpage valgrind

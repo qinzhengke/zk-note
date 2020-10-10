@@ -3,8 +3,10 @@
 
 这个页面主要记录一些Linux操作系统的知识
 
+<hr>
 \section 综合篇
 
+<hr>
 \subsection 如何非阻塞运行gui程序？
 问题：如果直接在终端运行某个gui程序，终端会阻塞直到gui关闭，例如运行gitk。
 那么如何运行程序，并且不阻塞终端呢？
@@ -14,6 +16,7 @@
 gitk &
 ~~~
 
+<hr>
 \subsection 如何查看目录和文件占用磁盘大小？
 
 ~~~{.sh}
@@ -96,6 +99,23 @@ find . -name xxx
 find . -name xxx | xargs rm
 ~~~
 
+<hr> 压缩文件夹与解压文件
+
+打包并压缩一个文件夹：
+
+\code{.sh}
+tar -zcf ${folder}.tar.gz ${folder}
+\endcode{.sh}
+
+解压一个tar.gz压缩包到当前目录：
+
+\code{.sh}
+tar -xf myfile.tar.gz
+\endcode
+
+如果压缩的时候是一个文件夹压缩的，那么解压出来的也是一个文件夹。
+
+<hr>
 \subsection 几种Linux发送网络包的命令
 
 UDP包：
@@ -458,4 +478,58 @@ sudo apt-get install flameshot
 2. 将print(print screen)键解绑，然后添加新的print键快捷操作“flameshot gui”
 3. 按print键，享受截图、涂鸦、注释的快感吧。
 
+<hr>
+\section 搜狗输入法切换全角半角以及中英标点符号
 
+在linux上，一般输入法会默认全角，打出来的英文字符很大，而且不是普通的英文字符，无法被匹配到，这时候需要切换为半角，不太懂全角的意义是什么。
+
+全角半角切换方法：shift+space
+
+切换中英标点符号方法：ctrl+.
+
+
+<hr>
+\section 启用ssh服务
+
+前言：为了安全，一般桌面版的linux操作系统是默认不安装ssh服务的，如果要基于ssh连接到某台桌面linux电脑，需要手动设置。
+
+方法：
+
+\code{.sh}
+sudo apt update
+# 安装ssh-server
+sudo apt install openssh-server
+# 自启动ssh服务
+sudo systemctl status ssh
+# 设置防火墙白名单，否则无法连接
+sudo ufw allow ssh
+\endcode
+
+<hr>
+\section 使用scp发送文件
+
+\code{.sh}
+scp my_file username@192.168.1.101:~/Downloads
+\endcode
+
+<hr>
+\section 根据进程的名称来kill
+
+前言：kill命令没有根据进程的名字来杀死进程的方法，需要自行写几句脚本根据进程名称找出PID，然后在杀死，具体方法如下所示。
+
+\code{.sh}
+pid=$(top -n 1 -b | grep -e 'node' | grep -e '[0-9]*' -o | head -1)
+if [ ! -z "$pid" ]
+then
+kill $pid
+echo "node stopped"
+fi
+\endcode
+
+其中：
+
+(1) `top -n 1 -b` 表示显示所有进程，并且不进入交互界面，直接printf所有进程。
+
+(2) `grep -o` 表示把所有匹配出来的结果列出来，列出时每一个match的内容会占一行。
+
+(3) `head -1` 表示取第一行的内容。
