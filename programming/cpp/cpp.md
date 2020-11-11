@@ -17,6 +17,8 @@
 
 \subpage cpp_polymorphism
 
+\subpage cpp_string
+
 \subpage cpp_stl
 
 \subpage cpp_suggestion

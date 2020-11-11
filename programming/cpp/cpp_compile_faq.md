@@ -206,3 +206,55 @@ class A{
 \section extra_qualification extra qualification
 
 qualification是指双冒号符“::”，而“extra qualification”则一般出现在类中函数定义的时候重复用“类名::函数名”进行时声明。
+
+
+<hr>
+\section cpp_compile_issue10 passing const as ‘this’ argument discards qualifiers
+
+尝试在const引用模式下调用非const函数，编译器为了阻止传入引用对象的改变。
+
+\code{.cpp}
+#include <stdint.h>
+#include <stdio.h>
+
+class A{
+public:
+    A(){}
+    void func(){
+        printf("A.func()\n");
+        x++;
+    }
+    void func_const() const {
+        printf("A.func_const()\n");
+    }
+    void func_const2() const;
+private:
+    int x = 0;
+};
+
+void A::func_const2() const {
+    printf("A.func_const2()\n");
+}
+
+void top_func(const A& a){
+     a.func();  //  编译报错
+    a.func_const(); // 编译成功
+    a.func_const2(); // 编译成功
+}
+
+int main()
+{
+    A a;
+    top_func(a);
+}
+
+\endcode
+
+编译结果如下：
+
+\code{.sh}
+ In function 'void top_func(const A&)':
+19:12: error: passing 'const A' as 'this' argument of 'void A::func()' discards qualifiers [-fpermissive]
+\endcode
+
+这里顺便提一下，如果成员函数声明和定义分离，那么声明和定义处都需要在"()"后面加入const，这点和static修饰符不一样，static修饰符只能在声明的地方使用。

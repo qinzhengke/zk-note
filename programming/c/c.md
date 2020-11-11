@@ -5,6 +5,8 @@ C语言{#c}
 
 \subpage c_macro
 
+\subpage c_time
+
 <hr>
 \section 预编译篇
 
@@ -1325,4 +1327,69 @@ int main()
     cout<<normAnglepp(-30)<<","<<normAnglepp(370)<<endl;
 }
 
+\endcode
+
+<hr>
+\section 指针中的“+”号
+
+指针的加号运算符得到的结果和指针的类型是有关系的，每一次+1，相当于指针偏移sizeof(类型)个字节。
+在memcpy这些操作的时候千万要注意。
+
+\code{.cpp}
+#include <stdint.h>
+#include <stdio.h>
+
+int main()
+{
+    char *p = 0;
+    int16_t *p2 = 0;
+    int32_t *p4 = 0;
+    int64_t *p8 = 0;
+    
+    printf("%p,%p,%p,%p", p+1,p2+1,p4+1,p8+1);  // 运行结果: 0x1,0x2,0x4,0x8 
+}
+
+\endcode
+
+
+<hr>
+\section uin64_overflow 一个uint64_t无法满足需求的实际例子。
+
+使用纳秒来表示从公元0年到公元2000年的时间。
+
+需要表达的时间大致为：2000*365*24*3600*1e9 = 63,072,000,000,000,000,000
+
+而uint64能表达的最大数值为：numeric_limits<uint64_t>::max() = 18,446,744,073,709,551,615
+
+显然，uint64_t无法表达这个数。
+
+所以在使用ns来表示时间的时候，一定要注意溢出，连uint64都不够用。
+
+<hr>
+\section 字面常量整型表达式溢出
+
+即使变量长度没有问题，常量表达式也会溢出，如下代码所示。
+想在想要使用纳秒来表达8个小时的时长，第一种计算方法是错误的，“8”，“3600“以及”1000000000“都是int32_t，
+它们每个都在int32_t的表达范围内，但是乘起来就会超出。因为三个常量都是int32_t类型，所以编译器最终选择输出int32_t类型，最终常量溢出。
+哪怕前面用了uin64_t的变量来接受赋值，但是右边的计算已经溢出了。
+
+第二种方法是正确的，随便在其中一个数字后面加上LL，那么编译器最终会选择LL类型输出，也就是uint64_t，这样计算就不会溢出。
+
+\code{cpp}
+#include <iostream>
+#include <stdint.h>
+
+using namespace std;
+
+int main(){
+    uint64_t x = 8 * 3600 * 1000000000;
+    cout<<"x="<<x<<endl;
+    uint64_t y = 8 * 3600 * 1000000000LL;
+    cout<<"y="<<y<<endl;
+}
+\endcode
+
+\code{shell}
+x=18446744071658864640
+y=28800000000000
 \endcode

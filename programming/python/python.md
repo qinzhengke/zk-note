@@ -135,3 +135,34 @@ x = data[0]
 y = data[1]
 z = data[2]
 ~~~
+
+
+\section 文件名冲突
+
+使用python时，源文件名称不要和第三方库的名称相同，否则会出现冲突现象，python是使用文件名来构建模块。
+例如定义一个numpy.py，那么这个本地的numpy会顶替掉python的numpy。
+
+<hr>
+\section module的导入
+
+想要import相对路径的模块，一种比较简单的方法是在sys.path尾部添加对应的相对路径，如下代码所示，这种修改不是永久的，只在当前执行过程中有效，不用担心修改环境变量。
+
+\code{python}
+import sys
+sys.path.insert(0,"..")
+from a import A
+\endcode
+
+注：关于python模块相对导入的标准方法，挺混乱的，网上各种“教程”，依赖package，依赖运行的地方，非常的不优雅。
+
+\section
+Python不支持构造函数重载。
+
+\section numpy.append和numpy.delete
+
+\code{python}
+a = numpy.array([1])
+a = numpy.append(a, 2)  # 别忘了给a赋值
+a = numpy.delete(a,-1)  # 删除最后一个元素，
+\endcode
+

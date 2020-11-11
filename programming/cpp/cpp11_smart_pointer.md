@@ -164,3 +164,8 @@ int main ()
   return 0;
 }
 \endcode
+
+<hr>
+\section shared_ptr的空指针
+
+使用nullptr最为方便，或者"return {}"也可以。

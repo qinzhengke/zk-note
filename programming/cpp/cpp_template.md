@@ -1,6 +1,7 @@
 C++模板{#cpp_template}
 ====================
 
+\subpage cpp11_common_type
 
 \section 定义模板函数
 

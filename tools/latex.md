@@ -77,9 +77,11 @@ y
 </td></tr> 
 
 <tr><td> 
+\f$ \left . \frac{\partial f} {\partial \boldsymbol{x}} \right \vert  _{{\boldsymbol{x}}_0} \f$
 </td><td>
 </td></tr> 
 
+\verbatim \left . \frac{\partial f} {\partial \boldsymbol{x}} \right \vert  _{{\boldsymbol{x}}_0}  \endverbatim
 </table>
 
 

@@ -63,3 +63,46 @@ spDerived derived = static_pointer_cast <Derived> ( base );
 
 debug方法论，一定要全体打印，不要先入为主地认定某些东西一定正确！
 
+<hr>
+\section 定义函数时命名空间使用
+
+定义函数时，即使一开始使用了using namespace，在函数定义处仍然需要使用命名空间+"::"形式进行修饰。
+实际上“using namespace”只是在使用类型时缺省命名空间，和定义是毫无关系的。
+
+下面的代码会让系统无法区分到底要调用哪一个目标函数。
+
+\code{.cpp}
+#include <stdint.h>
+#include <stdio.h>
+
+namespace n1{
+void func();
+}
+
+void func(){
+    printf("This is func\n");
+}
+
+void n1::func(){
+    printf("This is func in n1\n");
+}
+
+using namespace n1;
+
+int main()
+{
+    func(); // 
+    n1::func();
+}
+
+\endcode
+
+运行结果：
+
+\code{.sh}
+ In function 'int main()':
+20:10: error: call of overloaded 'func()' is ambiguous
+20:10: note: candidates are:
+8:6: note: void func()
+12:6: note: void n1::func()
+\endcode

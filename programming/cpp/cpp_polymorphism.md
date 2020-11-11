@@ -188,3 +188,23 @@ int main()
     d.clone();
 }
 \endcode
+
+<hr>
+\section 基于基类指针获取子类的size？
+
+没有直接的方法，但是可以在基类定义一个虚函数size()，子类实现就好了。
+
+\code{.cpp}
+struct base {
+  virtual size_t size() const =0;
+  virtual ~base() { }
+};
+
+template<typename T> 
+struct intermediate : base {
+  virtual size_t size() const { return sizeof(T); }
+};
+
+struct derived : intermediate<derived> 
+{ };
+\endcode
