@@ -23,3 +23,5 @@ C++常用库{#cpp_libraries}
 
 \subpage cpp_lib_iguana
 
+\subpage cpp_lib_vireo
+

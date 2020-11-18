@@ -28,3 +28,5 @@
 \subpage regex_entry
 
 \subpage valgrind
+
+\subpage sed

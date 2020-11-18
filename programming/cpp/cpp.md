@@ -5,6 +5,8 @@
 
 \subpage cpp_articles
 
+\subpage cpp_class
+
 \subpage cpp_compile_faq
 
 \subpage cpp_constructor

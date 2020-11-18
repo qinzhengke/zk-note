@@ -1,6 +1,107 @@
 C++中的多态{#cpp_polymorphism}
 ============================
 
+<hr>
+\section keyword_override C++中的override关键字有什么作用？
+
+override关键字在派生类中使用，告诉编译器，它所修饰的函数必需重写（override）基类的某个虚函数，否则编译器要报错。
+这样强制有什么用呢？一个很大的作用（唯一的作用？）就是能在编译阶段防止拼写错误导致的重写失败问题，举个例子，如下代码所示，故意拼错派生类的函数名。
+
+\code{cpp}
+#include <iostream>
+using namespace std;
+class Base{
+public:
+    virtual void print(){ cout<<"Base::print()"<<endl;}
+};
+
+class Derived : public Base{
+public:
+    // 注意下面的函数名拼写错误
+#if 0
+    void pirnt(){ cout<<"Derived::print()"<<endl;} // 情况一：编译器不报错，运行异常
+#else
+    void pirnt() override { cout<<"Derived::print()"<<endl;}　// 情况二：编译器报错
+#endif
+};
+
+int main(){
+    Base *p = new Derived();
+    p->print();
+}
+
+\endcode
+
+情况一运行结果：编译器不报错，但是运行出现了错误，没出现我们希望的Derived::print()
+
+\code{shell}
+Base::print()
+\endcode
+
+情况二编译结果：编译器提示没有重写任何函数。
+\code{shell}
+15:10: error: 'void Derived::pirnt()' marked override, but does not override
+\endcode
+
+<b>【小贴士】</b>
+别看重写失败是一个小问题，这有可能让开发者调试半天，善用override会让你减少潜在的调试时间。
+
+<hr>
+\section virtual_deconstructor 多态中为何需要将析构函数设置为virtual类型？
+
+如果不设置析构函数为虚函数，那么当使用基类指针指向派生类对象的方式（多态）来销毁对象时，派生类的析构函数就不会被执行。
+如果派生类的析构函数承担了释放资源的任务，那么这种情况下资源将得不到释放，进而导致内存泄漏。
+
+相关示例代码如下：
+\code{cpp}
+#include <iostream>
+
+using namespace std;
+
+class Base{
+public:
+    Base(){ cout<<"Base()"<<endl; }
+#if 1   
+    virtual ~Base(){ cout<<"~Base()"<<endl; }   // 情况一：正确
+#else
+    ~Base(){ cout<<"~Base()"<<endl; }   // 情况二：错误
+#endif
+};
+
+class Derived : public Base{
+public:
+    Derived(){ cout<<"Derived()"<<endl; }
+    ~Derived() override { cout<<"~Derived()"<<endl; }
+};
+
+int main(){
+    Base *p = new Derived();
+}
+\endcode
+
+情况一运行结果（正确）：
+\code{shell}
+Base()
+Derived()
+~Derived()
+~Base()
+\endcode
+
+
+情况二运行结果（错误）：
+\code{shell}
+Base()
+Derived()
+~Base()
+\endcode
+
+<b>【小贴士】</b>
+基类的析构函数名为~Base()，派生类的析构函数名为~Derived()，虽然它们的名字不同，但是它们确实可以是重写（override）的关系，代码中的“override”也证实了这一点。
+
+<b>【小贴士】</b>
+多态模式下的析构顺序：首先，根据虚函数表指针，找到了派生类的析构函数，并执行之，析构函数返回前最后一件事（比函数内最后一行代码还晚）就是执行基类的析构函数，于是得到了我们想要的结果。
+
+<hr>
 \section 如何优雅地定义没有成员函数的类型为虚类？
 
 \code{.cpp}
@@ -101,7 +202,7 @@ int main()
 \endcode
 
 <hr>
-\section 重写(override)父类的重载(overload)函数
+\section override_overload 重写(override)父类的重载(overload)函数
 
 \code{.cpp}
 // Example program
