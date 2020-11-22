@@ -8,6 +8,8 @@
 
 \subpage python
 
+\subpage rust
+
 \subpage matplotlib
 
 \subpage front_end
