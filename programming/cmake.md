@@ -2,6 +2,13 @@ cmake{#cmake}
 =============
 
 <hr>
+\section 我的CMakeLists.txt模板
+
+\code{shell}
+
+\endcode
+
+<hr>
 \section 添加目录里所有源文件
 
 \code{.cmake}

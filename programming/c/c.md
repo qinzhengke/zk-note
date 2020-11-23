@@ -1393,3 +1393,13 @@ int main(){
 x=18446744071658864640
 y=28800000000000
 \endcode
+
+\section 编译错误：＂can not used when making shared object＂
+完整的报错信息为：
+
+\code{shell}
+relocation R_X86_64_PC32 against symbol `_ZGVZN4pcpp8LoggerPP11getInstanceEvE8instance' can not be used when making a shared object; recompile with -fPIC
+\endcode
+
+这个问题原因一般是动态库链接了静态库导致的，一般来说动态库是不会链接静态库的，因为动态库遵循引用的规范，不会把静态库塞到自身之中。
+如果是引用别人的库，那要改成引用shared库，如果是引用自己的库，那么在add_library中增加“SHARED”修饰。

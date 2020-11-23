@@ -25,4 +25,34 @@ OpenCV读视频那完全不是主业，只是为了方便自身处理以视频�
 注意，一个movie文件包含了视频、音频、字幕等等。
 不能先入为主的认为moive就只包含图像，movie的读取函数就应该直接得到图像。
 
+\section 编译问题
+依赖lsmash库，lsmash库本身configure时需要加入参数“--enable-shared”，如下代码所示
 
+\code{shell}
+cd lsmash
+./configure --enable-shared
+\endcode
+
+否则编译会出现以下问题，
+\code{shell}
+/usr/bin/ld: //usr/local/lib/liblsmash.a(dts.o): relocation R_X86_64_PC32 against symbol `lsmash_remove_dts_reserved_box' can not be used when making a shared object; recompile with -fPIC
+\endcode
+
+【问题】
+
+\code{shell}
+./.libs/libvireo.so: undefined reference to `mp4a_export_AudioSpecificConfig'
+./.libs/libvireo.so: undefined reference to `h264_setup_parser'
+./.libs/libvireo.so: undefined reference to `h264_cleanup_parser'
+./.libs/libvireo.so: undefined reference to `h264_parse_sps'
+\endcode
+
+\section 放弃
+
+真 - 从入门到放弃
+
+vireo和它的依赖lsmash都使用autoconf这些linux平台特有的构建工具，而且高度依赖gcc版本和linux发行版。
+
+想要解决问题2，需要特定的gcc和linux发行版。
+
+跨linux版本都出现问题，更别说跨平台了，放弃。
