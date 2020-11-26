@@ -2,11 +2,11 @@ Python画图库：matplotlib{#matplotlib}
 =======================
 
 \section 如何设置显示范围？
-~~~{python}
+\code{python}
 axes = plt.gca()
 axes.set_xlim([xmin,xmax])
 axes.set_ylim([ymin,ymax])
-~~~
+\endcode
 
 \section 如何打开网格？
 plt.grid()

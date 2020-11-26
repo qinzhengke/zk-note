@@ -1,6 +1,5 @@
-编程中的debug记录{#programming_debug}
+编程debug：吃一堑长一智{#programming_debug}
 ===================================
-
 
 \subpage c_debug_lesson
 

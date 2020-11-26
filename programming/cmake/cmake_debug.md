@@ -1,4 +1,4 @@
-cmake语法debug{#cmake_debug}
+cmake调试问题{#cmake_debug}
 ===========================
 
 <hr>

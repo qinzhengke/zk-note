@@ -1,33 +1,33 @@
-脚本语言：bash{#bash}
+Bash：Linux上的脚本语言{#bash}
 ===========
 
-### 非阻塞运行程序
+\subsection 非阻塞运行程序
 
-```bash
+\code{bash}
 start c:\my.exe
-```
+\endcode
 
-### 运行路径带空格的程序
+\subsection 运行路径带空格的程序
 
 加引号，参数可以放在引号的后面
 
-```bash
+\code{bash}
 "c:\program files\my.exe" <arguments>
-```
+\endcode
 
-###循环
+\subsection循环
 
-```bash
+\code{bash}
 FOR /L %%a IN (1,1,15) DO (
 my.exe
 )
-```
+\endcode
 
-### if表达式
+\subsection if表达式
 注意：1.中括号和括号里的内容一定要用空格隔开
      2.只有if和else if后面需要then，else后面不需要then。
 
-~~~{bash}
+\code{bash}
 if [ $# -gt 0 ] 
 then
 
@@ -42,7 +42,7 @@ then
 
 else
 fi
-~~~
+\endcode
 
 <hr>
 \section 如何把运行结果赋值给变量？

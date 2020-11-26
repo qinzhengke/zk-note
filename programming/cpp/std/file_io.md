@@ -7,7 +7,7 @@ C++文件IO{#cpp_file_io}
 
 首先定义两个结构体A和B，如下代码所示，其中“#pragma”语句是保证数据存储时1字节对齐，编译器一般默认4字节对齐，例如一个结构体按照变量计算得61个字节，那么编译器会在存储这个结构体时补上3个字节，保证4字节对齐。字节对齐虽然能够优化存储空间，但是在读写文件的时候会造成麻烦，特别是读取端代码不知道结构体形式，而只是知道变量列表的时候，读文件顺序会出错。
 
-```c++
+\code{cpp}
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -24,11 +24,11 @@ typedef struct _B
 }B;
 #pragma pack()
 
-```
+\endcode
 
 然后是写文件部分，其实写文件很简单，一般不考虑写的位置和文件尾什么的，下面代码展示了存储两个结构体，分别是A和B，构成一个数据块。通过调整N可以增加数据块的个数，但是目前我们只用一个数据块
 
-```c++
+\code{cpp}
 int write_file_01()
 {
     const int N = 1;
@@ -55,13 +55,13 @@ int write_file_01()
 
     return 1;
 }
-```
+\endcode
 
 读取文件就比较麻烦了，特别是使用不完全读取时，特别是在使用seekg函数时。我们看一下代码，我们一般使用eof()函数来检测是否读取到文件末尾，但是，我们有时候不想读取所有内容，而只是其中一部分。例如数据由Header部分和Data部分组成串联在一起，Header描述了Data部分的内部结构，即”HDHDHDHD......“的形式。我每次只想读取H部分，因为D部分太长了，我只能使用seekg()函数略过。
 
 一开始很自然得想到如下的代码，用read()函数读取H部分，然后用seekg()函数略过D部分，知道走到文件的末尾。然而，这段代码运行的时候其实是无限循环，如图所示！
 
-```c++
+\code{cpp}
 int read_file_01() // 错误的使用方式！
 {
     A aa;
@@ -79,7 +79,7 @@ int read_file_01() // 错误的使用方式！
     in_file.close();
     return 1;
 }
-```
+\endcode
 
 ![](files/read_binary_file_error_01.png)
 
@@ -89,7 +89,7 @@ int read_file_01() // 错误的使用方式！
 
 我们可以这样修改读取函数：
 
-```c++
+\code{cpp}
 int read_file_01_correct()//不太完美的读取方法
 {
     A aa;
@@ -107,7 +107,7 @@ int read_file_01_correct()//不太完美的读取方法
     in_file.close();
     return 1;
 }
-```
+\endcode
 
 
 
@@ -117,7 +117,7 @@ int read_file_01_correct()//不太完美的读取方法
 
 我目前在使用的最稳定可靠的方案是构建一个check函数，这个函数里面执行read命令，查看文件指针是否越界，然后再将因为执行read函数而位移的指针拨会即可，如下代码所示。这种方式需要新建一个函数，而且不是最漂亮的，但是这是我目前认为最可靠的一个方案，毕竟软件首要的指标是可靠！
 
-```c++
+\code{cpp}
 inline bool check_eof(ifstream & file)
 {
     char bit;
@@ -145,7 +145,7 @@ int read_file_01_perfect() // 完美的读取方案
     in_file.close();
     return 1;
 }
-```
+\endcode
 
 运行结果如下图所示，只有一个循环，很完美。
 
@@ -153,7 +153,7 @@ int read_file_01_perfect() // 完美的读取方案
 
 main函数里面的代码由于实验需要进行部分屏蔽。
 
-```c++
+\code{cpp}
 int main(int argc, char *argv[])
 {
     write_file_01();
@@ -163,4 +163,4 @@ int main(int argc, char *argv[])
     //read_file_02();
     return 0;
 }
-```
+\endcode

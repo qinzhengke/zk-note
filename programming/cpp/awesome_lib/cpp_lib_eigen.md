@@ -4,7 +4,7 @@ Eigen：强大的纯头文件线性运算库{#cpp_lib_eigen}
 <hr>
 \section 安装
 
-~~~{.bash}
+\code{bash}
 cd <eigen_dir>
 mdkir build
 cd build
@@ -12,7 +12,7 @@ cmake ..
 sudo make install
 # 没错，中间没有make，因为eigen是纯头文件组成的，不需要预先编译成库。
 # 安装好后，默认的头文件地址在 /usr/local/include/eigen3
-~~~
+\endcode
 
 <hr>
 \section 矩阵的初始化（包括全零阵、单位阵）
@@ -31,7 +31,7 @@ sudo make install
 <hr>
 \section auto获取矩阵失效？
 
-~~~{.cpp}
+\code{cpp}
 // 编译失败
 auto a = Eigen::Matrix<float,9,9>::Zero();
 
@@ -40,7 +40,7 @@ Eigen::Matrix<float,9,9> a = Eigen::Matrix<float,9,9>::Zero();
 
 // 编译成功
 auto a = Eigen::Matrix3f::Zero();
-~~~
+\endcode
 
 \section 传参时MatrixNd到MatrixXd的转换
 

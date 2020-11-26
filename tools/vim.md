@@ -5,12 +5,12 @@ vim笔记{#vim}
 
 场景：想要得到枚举的名字，c++没有反射，只能傻傻的把枚举的名称重写一遍，然后加上双引号。
 
-~~~{cpp}
+\code{cpp}
 enum Fruit{APPLE, ORANGE, PEACH, NUM_FRUIT};
 
 string nameFruit[NUM_FRUIT] = {"APPLE", "ORANGE", "PEACH"};
 
-~~~
+\endcode
 
 这时候给变量名字加上引号，就排上了用场。
 
@@ -25,10 +25,10 @@ string nameFruit[NUM_FRUIT] = {"APPLE", "ORANGE", "PEACH"};
 
 \section vim_tab2space 使用空格代替tab
 在vimrc配置里面设置
-~~~{bash}
+\code{bash}
 set tapstop=4
 set expandtab
-~~~
+\endcode
 
 \section  vim_J 拼接命令`J`
 删除下一行开头的所有空格，然后将下一行剩下的部分拼接到当前行，这在写代码对齐的时候经常用到。
@@ -36,14 +36,14 @@ set expandtab
 
 \section vim_replace 替换
 
-~~~{shell}
+\code{bash}
 # 替换当前行所有cat为dog
 :s/cat/dog/g
 # 替换当前文件所有cat为dog
 :%s/cat/dog/g
 # 替换当前选择的区域所有cat为dog，和替换当前行一样。
 :s/cat/dog/g 
-~~~
+\endcode
 
 \section vim_cap 将小写词替换成大写
 `v a w U`，即选择一个词，然后使用U来替换成大写。

@@ -14,12 +14,12 @@ add_compile_options(-g)   #添加语句
 
 Step 1: shell中设置生成coredump文件。
 
-~~~{.sh}
+\code{bash}
 #设置core大小为无限
 ulimit -c unlimited
 #设置文件大小为无限
 ulimit unlimitedh}
-~~~
+\endcode
 
 以上设置仅本次有效，下次重启需要重新设置。
 
@@ -36,18 +36,18 @@ kernel.core_uses_pid = 0
 
 Step 3: 执行命令进行配置
 
-~~~{.sh}
+\code{bash}
 sysctl -p /etc/sysctl.conf
-~~~
+\endcode
 
 Step 4: 运行coredump的可执行文件，coredump之后，coredump文件保存在/tmp目录，名称形式为core-my_exe
 
 
 Step 5: 使用gdb打开可执行文件和coredump文件
 
-~~~{.sh}
+\code{bash}
 gdb ./my_exe /tmp/core-my_exe
-~~~
+\endcode
 
 Step 6: 在gdb中使用bt(backtrace)命令来追溯问题出现在哪里。
 

@@ -41,7 +41,7 @@ int main(){
 
 情况一运行结果：
 
-\code{shell}
+\code{bash}
 Base()
 Derived()
 ~Derived()
@@ -50,7 +50,7 @@ Derived()
 
 情况二运行结果：
 
-\code{shell}
+\code{bash}
 Base()
 Derived()
 ~Base()

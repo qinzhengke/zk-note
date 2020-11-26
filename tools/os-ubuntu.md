@@ -17,12 +17,12 @@ Ubuntu操作系统{#os_ubuntu}
 步骤1： 新建一个脚本设置为可执行，然后添加以下内容
 \code{.sh}
 #!/bin/bash' 
-### BEGIN INIT INFO' 
+\subsection BEGIN INIT INFO' 
 # Required-Start: $local_fs $network $remote_fs' 
 # Required-Stop: $local_fs $network $remote_fs' 
 # Default-Start:  2 3 4 5' 
 # Default-Stop: 0 1 6' 
-### END INIT INFO' 
+\subsection END INIT INFO' 
 cd somewhere
 ./pm_msft.sh"
 \endcode

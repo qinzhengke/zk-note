@@ -1,4 +1,4 @@
-Rust{#rust}
+Rust：超严格静态类型语言（精神小伙）{#rust}
 ===========
 
 
@@ -17,6 +17,13 @@ rust官网提供了一个在线编译运行rust代码的工具，即playground�
 C++也早有类似的网站，例如cpp.sh
 
 <hr>
+\section rust安全性解决的问题
+
+- Memory leak
+- Double free
+- Data race
+
+<hr>
 \section mut
 
 rust非常强调默认immutable的概念，如果定义了一个mut变量，但是没有去mut它，那么编译器会提出警告，提示没有必要定义mut，如下代码所示：
@@ -30,7 +37,7 @@ fn main(){
 
 编译结果：
 
-\code{shell}
+\code{bash}
    Compiling playground v0.0.1 (/playground)
 warning: variable does not need to be mutable
  --> src/main.rs:2:9
@@ -81,7 +88,7 @@ fn main(){
 
 我们故意在类型溢出后面加入一段无关的语法错误，编译结果首先报出了语法错误，说明编译器是先检查语法错误的，并且发现错误后直接停止了编译。
 
-\code{shell}
+\code{bash}
    Compiling playground v0.0.1 (/playground)
 warning: value assigned to `y` is never read
  --> src/main.rs:5:9
@@ -126,7 +133,7 @@ fn main(){
 
 那么运行结果为：
 
-\code{shell}
+\code{bash}
    Compiling playground v0.0.1 (/playground)
     Finished dev [unoptimized + debuginfo] target(s) in 0.50s
      Running `target/debug/playground`
@@ -148,7 +155,7 @@ fn main(){
 
 编译结果：
 
-\code{shell}
+\code{bash}
    Compiling playground v0.0.1 (/playground)
 error[E0308]: mismatched types
  --> src/main.rs:2:23
@@ -166,3 +173,16 @@ error: could not compile `playground`
 
 To learn more, run the command again with --verbose.
 \endcode
+
+<hr>
+\section ownership三个原则
+
+- Each value in Rust has a variable that's called its owner.
+- There can be only one owner at a time.
+- When the owner goes out of scope, the value will be dropped.
+
+翻译过来就是：
+
+- 在Rust中，每一个“值”都会对应一个“拥有者”
+- 同一时间只能有一个“拥有者”
+- 当“拥有者”离开了可视范围，“值”就会被抛下。

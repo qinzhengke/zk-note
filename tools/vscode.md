@@ -7,7 +7,7 @@
 <hr>
 \subsection 代码片的设置语法
 
-~~~{.json}
+\code{json}
 	// Place your snippets for markdown here. Each snippet is defined under a snippet name and has a prefix, body and 
 	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
 	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
@@ -28,7 +28,7 @@
 		],
 		"description": "inline formula"
   },
-~~~
+\endcode
 
 其实按照前面的注释非常容易看懂，$1和$2是tab跳转位置，代码片出来后，光标会自动跳转到$1位置，然后输入字符，按tab键跳到$2。
 问题是，光标$1和$2的编辑模式很奇怪，仍然处于当前代码片编辑模式下，这种模式下无法嵌套地触发其他代码片。
@@ -57,7 +57,7 @@ $x参数是可以出现相同的，例如好几个$1同时出现，在编辑的�
 3. markdown格式是默认没有打开intellsense功能的，需要手动打开，在“ctrl+p”->“输入>”->“输入language”->“选择markdown”->“edit in settings.json”
 按照如下方式添加：
 
-~~~{.json}
+\code{json}
 {
     "cmake.configureOnOpen": true,
     "C_Cpp.updateChannel": "Insiders",
@@ -66,7 +66,7 @@ $x参数是可以出现相同的，例如好几个$1同时出现，在编辑的�
       "editor.quickSuggestions":true
     }
 }
-~~~
+\endcode
 
 <hr>
 \subsection Latex常用的代码片
@@ -100,7 +100,7 @@ Step 1: File -> Preference -> Settings，搜索“ruler”，选择“Edit in se
 
 Step 2: 按照一下方法进行设置
 
-~~~{.json}
+\code{json}
 {
     "cmake.configureOnOpen": true,
     "C_Cpp.updateChannel": "Insiders",
@@ -110,7 +110,7 @@ Step 2: 按照一下方法进行设置
     },
     "editor.rulers": [80,120] // 设置2个ruler，分别在80列和120列
 }
-~~~
+\endcode
 
 <hr>
 \section vscode_c_cpp C\C++篇
@@ -132,7 +132,7 @@ c_cpp_properties.json文件是vscode关于C\C++配置的核心文件，默认情
 c_cpp_properties.json文件请参考 \ref c_cpp_properties 。
 
 举例：
-```{.json}
+\code{json}
 {
   "configurations": [
     {
@@ -147,22 +147,22 @@ c_cpp_properties.json文件请参考 \ref c_cpp_properties 。
   ],
   "version": 4
 }
-```
+\endcode
 
 <hr>
 \subsection 在vscode中单步调试
 
 Step 1: 在CMakeLists.txt中添加以下debug设置
 
-~~~{.cmake}
+\code{cmake}
 set(DEFAULT_BUILD_TYPE "Debug")
 set(CMAKE_CXX_FLAGS_DEBUG "{CMAKE_CXX_FLAGS} -o0 -ggbd")
 add_compile_options(-g)
-~~~
+\endcode
 
 Step 2: 在.vscode目录中按照如下设置
 
-~~~{.json}
+\code{json}
 {
     "version": "0.2.0",
     "configurations": [
@@ -207,7 +207,7 @@ Step 2: 在.vscode目录中按照如下设置
         },
     ]
 }
-~~~
+\endcode
 
 其中，program设置为目标可执行文件。
 
@@ -264,7 +264,7 @@ step 1: 菜单 File -> Preference -> settings -> Extensions -> C/C++ -> Include 
 
 step 2: 按照如下方式添加include path。
 
-~~~{.json}
+\code{json}
 {
     "cmake.configureOnOpen": true,
     "C_Cpp.updateChannel": "Insiders",
@@ -274,6 +274,6 @@ step 2: 按照如下方式添加include path。
     },
     "C_Cpp.default.includePath": ["/usr/local/include/eigen3"]  // 添加include path
 }
-~~~
+\endcode
 
 注意：由于这个设置是针对于vscode的，对于任何工程，这个路径都会自动添加。

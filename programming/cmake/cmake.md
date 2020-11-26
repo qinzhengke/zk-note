@@ -1,4 +1,4 @@
-cmake{#cmake}
+cmake：C和C++的跨平台构建工具{#cmake}
 =============
 
 <hr>
@@ -101,9 +101,10 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 其次，我们知道gcc -lm是加math库，但是cmake怎么加都不对。
 最后，cmake对于加math库有独特的表达式。。。
 
-\code{cmake}
+code{cmake}
 target_link_libraries(exe_name, m)
 \endcode
+
 没错就是“m”，表示抽象的变量。
 
 <hr>

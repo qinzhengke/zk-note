@@ -33,9 +33,10 @@ int main(int argc, char* argv[]) {
 <hr>
 \section system_work_dir system()函数工作路径？
 system（）函数即使调用了其他路径的可执行文件，可执行文件也相当于在当前路径下运行，举个例子，在~/目录下运行a.exe，a.exe里有一句话是
-```{.cpp}
+
+\code{cpp}
 system("f/b.exe");
-```
+\endcode
 b.exe在代码里写这一句生成"c.txt"文件。
 那么这个c.txt到第一会在哪里生成呢？是在“~/”，还是“~/f/”？
 答案是“~/”，也就是a.exe调用的地方，这里才是工作路径，所以程序里面写着在当前路径生成某个文件时，并不是指可执行文件所在的路径，而是工作路径，只不过没有嵌套调用可执行文件时，一般工作路径就是可执行文件的路径而已。
@@ -44,42 +45,42 @@ b.exe在代码里写这一句生成"c.txt"文件。
 \section 设置工作路径
 紧接上一个问题，那么如何改变exe运行时候的工作路径呢？
 Linux环境下
-~~~{.cpp}
+\code{cpp}
 #include <unistd.h>
 ...
 chdir(working_dir)
 ...
-~~~
+\endcode
 其中，unistd表示unix环境下的标准接口，所以在windows下是用不了的。
 
 Windows环境下
-~~~{.cpp}
+\code{cpp}
 #inlcude <direct.h>
 
 ...
 _chdir(working_dir)
 ...
-~~~
+\endcode
 
 <hr>
 \section typo_sizeof 初级错误：sizeof()的用法
 
 如下代码所示，虽然问题很初级，但是有时头晕的时候还是会犯！
 
-~~~{c}
+\code{c}
 bin_file.wirte((char*）imgCT.data, sizeof(imgIn.cols*imgIn.rows); //错误
 bin_file.wirte((char*）imgCT.data, imgIn.cols*imgIn.rows*sizeof(char)；//正确
-~~~
+\endcode
 
 <hr>
 \section 初级错误：移位操作符
 
 C语言中的移位符号不代表赋值，只有用等号赋值之后，变量才会改变。
 
-```c
+\code{c}
 a>>1; // 不赋值
 a = a>>1; // 赋值
-```
+\endcode
 
 <hr>
 \section 隐藏致命：函数内部malloc或者new
@@ -91,7 +92,7 @@ a = a>>1; // 赋值
 
 用C语言写histogram函数时，一定要注意max-min后面要加1！例如以下代码
 
-~~~{c}
+\code{c}
 *hist = (unsigned long) malloc(bins*sizeof(unsigned long));
 memset(*hist, 0, bins*sizeof(unsigned long)
 int r,c;
@@ -104,7 +105,7 @@ for(r=0;r<img_height;r+=)
     （*hist）[loc] ++ ;
   }
 }
-~~~
+\endcode
 
 这段代码运行时没有出exception，运行结果也是正确的，但是free时却出错了，当时一万个想不通，直到后来发现少了一个加1。
 如果少了加1，举个例子，max=255，min=0，当pixel=255时，loc=bins，这时候就会访问越界！是的访问越界时候没有任何提示！
@@ -126,7 +127,7 @@ debug时间，2017-09-25 20:00-22：00
 加上后缀"d"之后，终于可以运行了！或者将运行方式改成release，同样也可以运行！
 这个bug在之前的imread函数是没有问题的，这进一步搞混淆了！
 
-```cpp
+\code{cpp}
 void convert_bin_to_png(string in_path, string out_path)
 {
   ifstream f;
@@ -141,7 +142,7 @@ void convert_bin_to_png(string in_path, string out_path)
   imwrite(out_path, save); // 问题就出现在这一行
   delete img;
 }
-```
+\endcode
 
 **教训：** lib库的引用一定要**遵循规范**！debug版本的代码要引用debug版本的lib，release版本的代码要引用release版本的库。
 举一反三，x64的编译方式用x64的库，x86的编译方式用x86的库，vc08，vc10，vc12的库最好也一致！
@@ -152,7 +153,7 @@ void convert_bin_to_png(string in_path, string out_path)
 2017-09-26, debug时间，10分钟。
 
 下面一段代码将float图像转换成color_map形式，在处理每个通道的数据时，地址没有写对，W和c忘记乘上通道数了。
-```cpp
+\code{cpp}
 int cvt2color(float *img, uint32_t W, uint32_t H, uint8_t **img_out)
 {
     const uint32_t N = 511;
@@ -183,7 +184,7 @@ int cvt2color(float *img, uint32_t W, uint32_t H, uint8_t **img_out)
 
     return 0;
 }
-```
+\endcode
 
 **教训：**处理多通道图像一定要注意寻址和通道的关系。
 
@@ -279,12 +280,12 @@ bmp标准强行要求图像宽度4字节对齐，所以一定要非4整数倍宽
 \section ifstream eof函数
 用ifstream的eof来判断是否到达文件结尾是有坑的，即使到达了文件结尾，eof也不会马上为true，必须再读一次数据，eof才会返回true。
 比较简洁的判断文件是否到结尾的方式是
-~~~{cpp}
+\code{cpp}
 ifstream ifs;
 while(ifs.peek())
 {
 }
-~~~
+\endcode
 
 <hr>
 \section 引用不能重新改变对象。

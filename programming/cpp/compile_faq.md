@@ -88,7 +88,7 @@ qtcreator的方法是在pro文件中设置 DEFINES -= UNICODE。
 
 
 或者将wstring转换成string
-```cpp
+\code{cpp}
 // c++11
 #include <locale> 
 #include <codecvt>
@@ -101,7 +101,7 @@ std::wstring_convert<convert_type, wchar_t> converter;
 
 //use converter (.to_bytes: wstr->str, .from_bytes: str->wstr)
 std::string converted_str = converter.to_bytes( string_to_convert );
-```
+\endcode
 
 对应的tinydir_open，要使用wchar_t作为输入，如果输入常量字符串，可以这样写L"abcde"。
 codecvt头文件在gcc5才引入，如果使用gcc4，是无法通过编译的。
@@ -132,7 +132,7 @@ header only写法一定要注意头文件中定义函数的实现的时候，一
 \section 临时变量无法引用
 c和c++中存在所谓的临时变量，想到的就三种：1.运算表达式，2.类型转换，3.函数返回值。
 这三种临时变量传入以非常量引用为形参的函数时，是非法的，例如：
-~~~{cpp}
+\code{cpp}
 void func_add(int a, int b, int& c)
 {
     c = a+b;
@@ -143,7 +143,7 @@ int main()
     float z;
     fun_add(x,y,(int)z); //编译报错
 }
-~~~
+\endcode
 临时变量无法作为非常量引用的原因是很显然的，作为非常量引用，用户肯定是希望改动这个输入参数，然而实际上真正发生改动的是临时变量。
 如果编译不报错，那么可能会给使用者造成很大的误解，使用者很可能要debug很久才能发现这个问题。于是编译器就负责的直接给出编译错误。
 
@@ -159,20 +159,20 @@ int main()
 1.指针错误的使用了“.”来访问成员。
 2.C99中使用designated initializer时，有成员没有逗号，在git解决冲突的时候常常遇到这个问题。
 
-```
+\endcode
 struct A{int a, int b};
 A x = {
  a = 10 // 解冲突时忘记了逗号，
  b = 20,
-```
+\endcode
 
 <hr>
 \section const_issue passing ... as 'this' argument ...  discards qualifiers
 
 问题：问题的全称是
-~~~{.bash}
+\code{bash}
 error: passing ‘const Base’ as ‘this’ argument of ‘virtual void Base::test()’ discards qualifiers [-fpermissive]
-~~~
+\endcode
 
 问题的原因是函数传入的const类型的对象a，但是函数内部调用了a的非const类型成员函数，有可能会导致类内部成员被修改，编译器不允许。
 
@@ -180,13 +180,13 @@ error: passing ‘const Base’ as ‘this’ argument of ‘virtual void Base::
 
 1. 如果成员函数没有修改任何对象变量，则可以用const修饰成员函数，例如
 
-~~~{.cpp}
+\code{cpp}
 class A{
     void a() const{ 
         // Do something
     }
 }
-~~~
+\endcode
 
 2. 如果成员函数确实修改了对象变量，那么成员函数不能定义为const类型，则在传入a的时候，就不能用const修饰，因为你确实要修改这个对象。
 

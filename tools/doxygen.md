@@ -30,11 +30,11 @@ sudo apt-get install texlive-latex-extra
 
 3. doxygen 使用 \\htmlonly 和 \\endhtmlonly来包裹嵌入代码。
 
-~~~{.dox}
+code{dox}
 \\htmlonly
 <iframe src="https://player.bilibili.com/player.html?aid=97804448&bvid=BV1fE411w7ac&cid=166959951&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 \\endhtmlonly
-~~~
+\endcode
 
 \section ref_excel 引用excel表格
 前言：markdown表格不支持合并单元格操作，表达能力有限，我们需要表达能力更强的html表格。
@@ -78,9 +78,9 @@ MathJax.Hub.Config({
 
 step 2: 在doxygen配置文件中引用该js文件，如下所示：
 
-~~~{.bash}
+\code{bash}
 MATHJAX_CODEFILE = ./latex_support.js
-~~~
+\endcode
 
 然后就可以愉快的使用带编号的公式。
 
@@ -129,19 +129,19 @@ dfrac明显尺寸要还原得更好一些，如下图所示。
 
 step 1: 安装texbib工具
 
-~~~
+\endcode
 sudo apt-get install texlive-bibtex-extra
-~~~
+\endcode
 
 step 2: 在doxygen配置文件中添加要显示的bib文件
 
-~~~
+\endcode
 CITE_BIB_FILES         = cv/cv.bib
-~~~
+\endcode
 
 step 3: 在bib文件中放置参考文件引用代码，引用代码可以从各种文献搜索引擎找到，例如谷歌学术。
 
-~~~
+\endcode
 // cv/cv.lib
 
 @inproceedings{rosten2006machine,
@@ -152,7 +152,7 @@ step 3: 在bib文件中放置参考文件引用代码，引用代码可以从各
   year={2006},
   organization={Springer}
 }
-~~~
+\endcode
 
 step 4: 在doxygen文档处使用 \\cite 进行引用。
 

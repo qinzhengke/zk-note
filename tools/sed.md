@@ -9,6 +9,6 @@ sed（stream editor）是所谓流式文本编辑器，是一个命令行工具�
 
 实现如下命令所示，其中“-i”表示inplace改动，也就是直接在目标文件中进行原地修改，不拷贝。
 “s/target//g”中的s代表寻找特定的单词，这里就是“target”，然后替换成另一个单词，这里替换为空，也就是“//”，最后的“g”表示在整个文件中搜索。
-\code{shell}
+\code{bash}
 sed -i abc.txt "s/target//g"
 \endcode

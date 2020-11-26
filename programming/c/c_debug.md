@@ -1,4 +1,4 @@
-C语言Debug教训{#c_debug_lesson}
+C语言调试问题{#c_debug_lesson}
 ======================
 
 <hr>

@@ -4,7 +4,7 @@ evpp：奇虎360大神的网络库{#cpp_lib_evpp}
 <hr>
 \subsection evpp_callback evpp库如何在设置回调函数时输入用户参数？
 
-### 问题：
+\subsection 问题：
 我们都知道可以对数据接收事件设置回调函数，当数据来临的时候自动触发。
 在面向对象编程的代码中，通常是在类的成员函数里进行设置回调函数，同样，我们也希望能够在回调函数中能够处理对象中的数据。
 然而，回调函数的参数形式是库定好的，并且是库自行调用，我们用户是无法传入参数的。
@@ -18,7 +18,7 @@ evpp：奇虎360大神的网络库{#cpp_lib_evpp}
 
 然而，evpp设计上非常的C++11，没有使用C语言的这种方式，没有给用户留下user_data，那么我们要如何在回调函数中传入变量呢？
 
-### 解决方法：
+\subsection 解决方法：
 
 这里要引出C++11非常厉害的一个特性：std::bind，详细内容参考 \ref std_bind 。
 
@@ -30,7 +30,7 @@ std::bind是对函数的一种封装，它的厉害之处在于可以更改参�
 
 下面用代码实例进行解释
 
-~~~{.cpp}
+\code{cpp}
 class A{
     void init(){
         a = 10;
@@ -54,7 +54,7 @@ class A{
     int a;
     evpp::udp::Server s;
 }
-~~~
+\endcode
 
 bind特别的神奇，它可以无视函数传参规则，强行将N个参数的函数传入1～N-1个参数的函数形式，理论上可以解决任何callback传参问题。
 库的设计者也不需要预留user_data给用户，非常的简便。
@@ -70,11 +70,11 @@ bind特别的神奇，它可以无视函数传参规则，强行将N个参数的
 
 回答：使用createUDPSocket()函数，
 
-~~~{.cpp}
+\code{cpp}
 evpp_socket_t fd = udp::sock::createUDPSocket(3030); // source port
 struct sockaddr_in sin;
 sin.sin_family = AF_INET;
 sin.sin_addr.s_addr = htonl(0x7f000001);    // 127.0.0.1
 sin.sin_port = htons(8080);    // Destination port
 evpp::udp::SendMessage(fd, (struct sockaddr *)&sin, buffer, buffer_size);
-~~~
+\endcode

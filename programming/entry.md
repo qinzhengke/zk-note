@@ -1,16 +1,20 @@
-编程{#programming}
+编程（Programming）{#programming}
 ==================
 
+<hr>
+\section 目录
 
 \subpage c
 
 \subpage cpp
 
+\subpage cmake
+
+\subpage qt
+
 \subpage python
 
 \subpage rust
-
-\subpage matplotlib
 
 \subpage front_end
 
@@ -20,14 +24,6 @@
 
 \subpage ros
 
-\subpage cmake
-
-\subpage android_make
-
 \subpage awesome_projects
-
-\subpage soft_engineering
-
-\subpage coredump
 
 \subpage programming_debug

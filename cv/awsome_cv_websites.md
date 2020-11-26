@@ -43,13 +43,13 @@ Liulina 603
 
 这篇博文介绍了双目匹配方法的原理，包括SAD匹配，BM算法、SGBM算法以及GC算法，有图有代码，很好理解，虽然很Navie。
 
-### 一些paper
+\subsection 一些paper
 
 - GCPR 2014年的一篇文章，提供了一个带有非常精准的grouth truth的数据集，使用结构光系统实现，效果非常惊艳，被收录在Middlebury中。
 
 > High-Resolution Stereo Datasets with Subpixel-Accurate Ground Truth.
 
-### 一些基础名词
+\subsection 一些基础名词
 
 **homologous**：同源的，例如左右两图中的两个点是同源的，表示它们对应的三维空间点是同一个。
 

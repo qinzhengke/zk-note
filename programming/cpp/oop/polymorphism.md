@@ -34,12 +34,12 @@ int main(){
 
 情况一运行结果：编译器不报错，但是运行出现了错误，没出现我们希望的Derived::print()
 
-\code{shell}
+\code{bash}
 Base::print()
 \endcode
 
 情况二编译结果：编译器提示没有重写任何函数。
-\code{shell}
+\code{bash}
 15:10: error: 'void Derived::pirnt()' marked override, but does not override
 \endcode
 
@@ -80,7 +80,7 @@ int main(){
 \endcode
 
 情况一运行结果（正确）：
-\code{shell}
+\code{bash}
 Base()
 Derived()
 ~Derived()
@@ -89,7 +89,7 @@ Derived()
 
 
 情况二运行结果（错误）：
-\code{shell}
+\code{bash}
 Base()
 Derived()
 ~Base()

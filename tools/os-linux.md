@@ -12,24 +12,24 @@
 那么如何运行程序，并且不阻塞终端呢？
 解法：
 
-~~~{.sh}
+\code{bash}
 gitk &
-~~~
+\endcode
 
 <hr>
 \subsection 如何查看目录和文件占用磁盘大小？
 
-~~~{.sh}
+\code{bash}
 du -h -d 1 ./
-~~~
+\endcode
 
 du表示disk usage，-h参数表示使用人类可读的单位，即KB,MB,GB为单位，如果不设置这个参数，得到的数字很奇怪，也不是以byte为单位的。-d表示递归的深度，如果只看当前目录，选择1，后面./就是目录位置。
 
 这样的方式只会显示文件夹的大小，如果要显示文件的大小，用下面这个命令。
 
-~~~{.sh}
+\code{bash}
 du -h -d 1 ./*
-~~~
+\endcode
 
 <hr>
 \sbusection 如何拷贝符号链接文件本身？
@@ -68,15 +68,15 @@ $ ls -d $PWD/*
 <hr>
 \subsection 如何查看文件的后面n行？
 
-~~~{.sh}
+\code{bash}
 tail -n 5 ./filename.txt
-~~~
+\endcode
 
 \subsection  如何循环执行某个命令？
 
-~~~{.sh} 
+\code{bash} 
 while : ; do tail -n 5 ./filename.txt; sleep 1; done;
-~~~
+\endcode
 
 \subsection  ln -s 命令无效？
 1. 使用ln -s命令，一定要输入目标文件的绝对路径，而不是相对路径！
@@ -84,20 +84,20 @@ while : ; do tail -n 5 ./filename.txt; sleep 1; done;
 
 \subsection  find命令
 怎么查找名称带有“[”和“]”的文件？
-```sh
+\code{bash}
 find . -name "\[xxx\]"
-```
+\endcode
 find工具认为中括号有特定含义，即寻找从哪个字母到哪个字母开始的文件，如果确实要使用中括号，就应该使用转义字符。
 
 \subsection  find + rm 命令
 使用find + rm 命令可以轻松删除特定文件，而且先find一遍，可以看看是否会误删其他文件，确认没问题之后再使用rm，即安全也高效。
 
-~~~{.sh}
+\code{bash}
 #第一遍先看看会删除哪些文件
 find . -name xxx
 #确认没问题后，第二遍删除
 find . -name xxx | xargs rm
-~~~
+\endcode
 
 <hr> 压缩文件夹与解压文件
 
@@ -119,16 +119,16 @@ tar -xf myfile.tar.gz
 \subsection 几种Linux发送网络包的命令
 
 UDP包：
-~~~{.bash}
+\code{bash}
 echo "This is my data" > /dev/udp/127.0.0.1/1053
 \# 其中127.0.0.1就是IP地址，1053就是端口
-~~~
+\endcode
 
 http包
-~~~{.bash}
+\code{bash}
 curl "http://127.0.0.1:9009/echo" -d "Hello, world"
 \# 其中127.0.0.1是IP地址，9090是端口
-~~~
+\endcode
 
 
 <hr>
@@ -146,14 +146,14 @@ Linux操作系统下三种配置环境变量的方法　　
 
 (2)在profile文件末尾加入：
 
-```
+\endcode
 JAVA_HOME=/usr/share/jdk1.5.0_05
 PATH=$JAVA_HOME/bin:$PATH
 CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export JAVA_HOME
 export PATH
 export CLASSPATH
-```
+\endcode
 
 (3)重新登录
 
@@ -177,14 +177,14 @@ f. 大小写必须严格区分。
 
 (2)在.bashrc文件末尾加入：　　
 
-```
+\endcode
 set JAVA_HOME=/usr/share/jdk1.5.0_05
 export JAVA_HOME
 set PATH=$JAVA_HOME/bin:$PATH
 export PATH
 set CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export CLASSPATH
-```
+\endcode
 
 (3)重新登录
 
@@ -194,16 +194,16 @@ export CLASSPATH
 
 只需在shell终端执行下列命令：
 
-```
+\endcode
 export JAVA_HOME=/usr/share/jdk1.5.0_05
 export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar 
-```
+\endcode
 
 \subsection  查看滚动的log文件
-```.sh
+\code{bash}
 tail -f xxx.log
-```
+\endcode
 参数“-f”表示“follow”，即当文件有更新的时候，追加打印更新的内容，这样一来，看log文件就和命令运行程序一样了。
 
 \subsection  busybox
@@ -215,11 +215,11 @@ script中的source命令是无效的！
 有点奇怪，有些说法是calling bash不受callee bash的影响。
 所以想要source ~/.bashrc可以这样
 
-```.sh
+\code{bash}
 # Add something to ~/.bashrc
 echo MY_VARIABLE > ~/.bashrc
 exec bash
-```
+\endcode
 \subsection # /bin/sh&M bad interpreter
 直接原因是第一行结尾字符有问题，一般的源头是bash的脚本文件在Windows被重新编辑过，Windows和Linux下的换行是不同的字符表达的，回到Linux时就可能出错。
 
@@ -230,20 +230,20 @@ exec bash
 2.自动化脚本，无法执行交互。
 那有没有办法解决这个问题呢？其实是可以的，使用Linux自带的feature：.netrc文件，文件在`~`目录下
 下面就是.netrc文件的内容示例。
-~~~{.sh}
+\code{bash}
 machine github.com login qinzhengke password xxxxx
 machine 192.168.0.5 login qinzhengke password xxxx
-~~~
+\endcode
 
 \subsection 磁盘挂载问题
 磁盘开机挂载问题，Linux开机后，除了“/”目录和swap，其他的分区是不会自动挂载的，就像如果开机后第一次点击原Windows下的D盘，那么打开的时间会稍微久一些，而且文档管理的图标上会有一个小三角（Ubuntu）表示已经挂载。
 我将log和stuffs分别做了快捷链接，但是由于这两个文件处于我的Work分区，开机没有挂载，所以开机后直接在terminal里输入快捷链接，还不能打开log和sutffs文件，所以现在必须试试开机挂载了。打开etc/fstab这个文件
-```
+\endcode
 sudo vim /etc/fstab
-```
+\endcode
 里面的内容是这样的
 
-```
+\endcode
 # /etc/fstab: static file system information. 
 # 
 # Use 'blkid' to print the universally unique identifier for a 
@@ -256,7 +256,7 @@ UUID=1b23043a-a6bb-4d7d-abfa-bb82ffb347b5 /               ext4    errors=remount
 # swap was on /dev/sda6 during installation 
 UUID=229a823a-3daf-4349-9b3a-df52073a5eee none            swap    sw              0       0 
 /dev/sda5       /media/Work/    auto    default 0       0 
-```
+\endcode
 
 
 有两种方法可以标识硬盘，一种是使用/dev/sdax序号，但是这种序号不太可靠，硬盘多次插拔，这个序号可能不太一样。
@@ -270,12 +270,12 @@ UUID=229a823a-3daf-4349-9b3a-df52073a5eee none            swap    sw            
 Data/就是165GB的分区，即原来Windows的D盘
 下面说一下为什么是dev/sda5，使用fdisk -l命令
 
-```
+\endcode
 sudo fdisk -l
-```
+\endcode
 注意使用sudo ，否则毛都看不到。可以得到所有的磁盘设备，结果如下：
 
-```
+\endcode
 Disk /dev/sda: 250.1 GB, 250059350016 bytes 
 255 heads, 63 sectors/track, 30401 cylinders, total 488397168 sectors 
 Units = sectors of 1 * 512 = 512 bytes 
@@ -289,7 +289,7 @@ Disk identifier: 0x27982797
 /dev/sda5        94570908   416900612   161164852+   7  HPFS/NTFS/exFAT 
 /dev/sda6       416900676   423650114     3374719+  82  Linux swap / Solaris 
 /dev/sda7       423651328   488396799    32372736   83  Linux 
-```
+\endcode
 
 结果罗列了所有的磁盘分区，我不太清楚Start和End还有Blocks是什么意思，我感觉第一个盘是没用的小盘，第二个是原Windows下的C盘，第三个就是原来的D盘。
 如果不手动挂载，等到在GNome里打开分区的时候，系统会挂载在一个奇葩的路径上面
@@ -310,9 +310,9 @@ Gnome中无法通过delete将NTFS磁盘中的文件移动到回收站，只能�
 解决方法：
 在/etc/fstab文件中加入uid=1000，例如：
 
-```
+\endcode
 /dev/sda5   /home/zrinker/Work/ ntfs uid=1000,default 0 0 
-```
+\endcode
 
 注意，uid=1000是和default在通过逗号放在一起的，中间不能有空格，因为它们组成了一个参数，uid就是第一个用户的ID，一般是1000，如果不是第一个用户，则通过echo $UID来获取uid，修改完后重新启动即可。
 
@@ -376,11 +376,11 @@ Python的集成开发环境，支持调试，可以算是最好的。
 \subsection Ubuntu下安装Shadowsocks
 通过PPA源安装，仅支持Ubuntu 14.04或更高版本。
 
-```
+\endcode
 sudo add-apt-repository ppa:hzwhuang/ss-qt5
 sudo apt-get update
 sudo apt-get install shadowsocks-qt5
-```
+\endcode
 
 \subsection Ubuntu下安装Qt
 从官网上下载.run文件之后，使用chmod u+x xxx.run命令来将文件变成可执行文件，然后再使用./xxx.run来运行安装程序。
@@ -416,30 +416,30 @@ WPS Office 所需字体：wingding.ttf、webdings.ttf、symbol.ttf、WINGDNG3.TT
 
 - 第二步：新建字体存放目录 windows-font
 
-~~~
+\endcode
 sudo mkdir /usr/share/fonts/truetype/windows-font
-~~~
+\endcode
 
 - 第三步：拷贝字体到wiondow-font目录下
 
-```	
+\endcode	
 sudo cp /home/php-note/123/* /usr/share/fonts/truetype/windows-font
-```
+\endcode
 
 - 第四步：修改权限，并更新字体缓存
 
-```	
+\endcode	
 sudo chmod -R 777  /usr/share/fonts/truetype/windows-font
 cd /usr/share/fonts/truetype/windows-font
 sudo mkfontscale
 sudo mkfontdir
 sudo fc-cache -fv
-```
+\endcode
 
 - 第五步：重启下系统吧！
-```	
+\endcode	
 sudo reboot
-```
+\endcode
 
 <hr>
 
@@ -469,9 +469,9 @@ apt-get是Debian系列操作系统的软件安装工具，这个工具可以连�
 <hr>
 \subsection flameshot-Ubuntu下一个超强截图工具
 安装
-~~~{.sh}
+\code{bash}
 sudo apt-get install flameshot
-~~~
+\endcode
 
 使用：
 1. windows键，输入keyboard，进入键盘设置

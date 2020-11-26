@@ -1,170 +1,33 @@
-C语言{#c}
-========
-
-\subpage c_debug_lesson
-
-\subpage c_macro
-
-\subpage c_time
-
-<hr>
-\section 预编译篇
-
-<hr>
-\subsection sharp_in_macro 宏定义中的\#
-
-\# （stringizing）是字符串化操作符。其作用是：将宏定义中的传入参数名转换成用一对双引号括起来参数名字符串。
-其只能用于有传入参数的宏定义中，且必须置于宏定义体中的参数名前。
-
-如：
-
-~~~{cpp}
-#define PRINT(instr) printf("the input string is:/t%s/n",#instr)
-#define CONVERT(instr) #instr
-PRINT(abc)；  // 在编译时将会展开成：printf("the input string is:/t%s/n","abc");
-string str=CONVERT(abc)； // 将会展成：string str="abc"；
-~~~
-
-注意其对空格的处理
-
-1.忽略传入参数名前面和后面的空格。
-
-   如：str=FUNC1(   abc )； 将会被扩展成 str="abc"；
-
-b.当传入参数名间存在空格时，编译器将会自动连接各个子字符串，用每个子字符串中只以一个空格连接，忽略其中多余一个的空格。
-
-   如：str=exapme( abc    def); 将会被扩展成 str="abc def"；
-
- 
-
-<hr>
-\subsection sharp_in_macro 宏定义中的\#\#
-\#\# （token-pasting）符号连接操作符
-
-宏定义中：参数名，即为形参，如#define sum(a,b) (a+b)；中a和b均为某一参数的代表符号，即形式参数。
-
-而##的作用则是将宏定义的多个形参成一个实际参数名。
-
-如：
-
-~~~{cpp}
-#define NUM(n) num##n
-int num9=9;
-int num=NUM(9); 将会扩展成 int num=num9;
-~~~
-
-注意：
-
-1.当用##连接形参时，##前后的空格可有可无。
-
-如：#define NUM(n) num ## n 相当于 #define NUM(n) num##n
-
-2.连接后的实际参数名，必须为实际存在的参数名或是编译器已知的宏定义
+C语言编译常见问题{#c_compile_faq}
+==============================
 
 <hr>
 \section 编译篇
 
 <hr>
-\subsection 如何将可变长度参数传入printf?
-前言：函数A接收可变长参数，有的时候我们希望把可变长的参数直接传入函数A内部的sprintf和printf，
-即我既想把输出保存起来，也想同时打印到屏幕，该如何操作呢？
+\subsection gcc不识别_Bool以及bool类型
+_Bool以及其封装bool，是C99才引入的，如果编译器不识别，有可能是C99选项没有打开，打开C99的方法根据构建系统而不同，需要搜索。
 
-方法：如下代码所示，vfprintf也可以改成vsprintf或者vsnprintf。
-
-~~~{cpp}
-void Error(const char* format, ...)
-{
-    va_list argptr;
-    va_start(argptr, format);
-    vfprintf(stderr, format, argptr);
-    va_end(argptr);
-}
-~~~
-
-<hr>
-\subsection \_Bool变量
-将在线代码分离成离线代码的时候，发现有些文件里面定义了_Bool类型，而gcc编译器居然不识别。
-Google后发现，_Bool类型是C语言的布尔类型，从C99才开始引入的。
-C99以前的C语言都是用int或者枚举的野路子来表示布尔型。。。
-我们平时用的bool都是C++的东西。。。
-也就是说如果在 extern "C"中间使用bool，是不被支持的，除非引用了头文件stdbool.h
+【参考】\ref c99_bool
 
 <hr>
 \subsection 将指针赋值给uint32_t
 很多32位平台的程序喜欢使将指针赋值给整数，这样就不需要二级指针，例如
 
-```cpp
+\code{cpp}
 int func(uint32_t *addr)
 {
   void * data = malloc (1000);
   *addr = (uint32_t) data;
 }
-```
+\endcode
 如果需要在函数里面开内存，输出内存地址，那么要么使用二级指针，要么用这种转地址的方式。
 但是，这种方式其实并不好，在64位系统中，指针的大小可能是64位的，这样赋值就会出错。
 仍然像想用这种方式的话，使用intptr_t类型，兼容32和64位，在C99中支持，在<stdint.h>中定义。
 
 <hr>
-\subsection designated_initializer designated initializer
-C语言中结构体在C99中的一种新的初始化语法，叫做designated initializer，即指定初始化，之前我一直找不到正式的名称，我一直称之为点变量初始化。。。
-
-```cpp
-MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
-```
-```cpp
-type struct
-{
-  int a1;
-  float a2;
-}A;
-typedef struct
-{
-  A sa;
-  int b1;
-  float b2;
-}B;
-B bs[2] = 
-{
-  {
-    {
-      a1 = 0,
-      a2 = 0.0,
-    }
-    b1 = 0,
-    b2 = 0.0,
-  },
-  {
-    {
-      a1 = 1,
-      a2 = 1.0,
-    }
-    b1 = 1,
-    b2 = 1.0,
-  }
-}
-```
-这个东西与编译器无关，是C99的标准，gcc想用的话必须开启选项 -std=c99
-
-**注意，这是C语言的语法，不是C++的语法，至少c++11还没有包含，在C++代码中不要混用！**
-如果使用qtcreator构建工程，那么默认使用g++编译，然而如果designated initializer语句是在cpp文件里，g++是不支持的，不管CXX_FLAG 是不是加了c++11，或者C_FLAG 加了99，或者加入extern "C"，都不行， extern "C"只是指示c++编译器把函数编成C语言可识别的符号表，并不支持这种赋值语法。
-
-但是我发现了一种方法，就是强行改cpp后缀为c，这样g++就会调用gcc来编译c文件。
-
-<hr>
-\subsection 代码区分不同操作系统
-```cpp
-#ifdef __linux__ 
-    //linux code goes here
-#elif _WIN32
-    // windows code goes here
-#else
-    cout<<"OS not supported!"<<endl;
-#endif
-```
-
-<hr>
 \subsection printf_red 如何打印红色字符串？
-```cpp
+\code{cpp}
 #include<stdarg.h>
 ...
 void printf_red(const char *cmd, ...)  
@@ -176,16 +39,16 @@ void printf_red(const char *cmd, ...)
     va_end(args);       //结束可变参数的获取  
     printf("\x1B[0m")   // 回到默认设置
 }  
-```
+\endcode
 
 <hr>
 \subsection printf 中的uint64整数
 使用printf过程中，一定要写对%字符串，之前遇到过一个问题，使用%d来打印一个int64的数是错误的，例如下列代码
 
-```cpp
+\code{cpp}
 uint64_t a = 1000;
 printf("%d\n",a); // 错误
-```
+\endcode
 实际上，%u，%ld，%lu都不对，在曾经一个ARM平台编译器上，正确的结果是%llu，因为在该平台上，sizeof(long)=sizeof(int)=4，而uint64_t真正的类型是long long，在不同平台时，要注意类型字节数可能不一样。
 
 <hr>
@@ -193,12 +56,12 @@ printf("%d\n",a); // 错误
 好可怕，给char类型变量赋值一个负数，会得到错误的结果，而且编译器不会报错或者警告
 只有使用==判别时才提出警告。
 
-```cp
+\code{cpp}
 char a = -1;
 printf("%d\n",a );  //打印出 255
 if(a == -10)
   printf("error") // 编译报错
-```
+\endcode
 
 <hr>
 \subsection extern 声明
@@ -220,7 +83,7 @@ if(a == -10)
 如果这个symbol在源文件里：
 - 看看这个源文件有没有被加到工程中。
 - symbol在源文件中，并且已经添加到了工程，还会报这个错？看看是不是调用了.c文件，记得用EXTERN C封装，即在c文件函数声明的地方使用
-```cpp
+\code{cpp}
 #ifdef __cplusplus__
 extern "C"{
 #endif
@@ -228,7 +91,7 @@ int my_c_function();
 #ifdef __cplusplus__
 }
 #endif
-```
+\endcode
 - 都是cpp文件或者c文件，或者已经用EXTERN C封装了，还会出错？看看是不是不同源文件字符编码的问题。
 - 以上条件都满足，但在qtcreator中刚添加的函数还是报这个错？那就试着显式地qmake一下，然后再rebuild。
 
@@ -264,21 +127,21 @@ C语言头文件不管是放在工程内部还是工程外部都可以include，
 \subsection utf-8文件中的行结尾'\r'
 很蛋疼+1，读utf-8文件的时候，行结尾都是以'\r'结束，
 当文件内容是另一个文件的路径的时候，例如
-```
+\endcode
 /mnt/cc/随便
-```
+\endcode
 其实这一行读出来是这样的
-```
+\endcode
 '/','m',','t','/','c','c','/','随,'便',\r
-```
+\endcode
 我一般喜欢在文件路径后面加上'/'，方便后面读取。
 但是如果在\r后面加上'/'就会搞错。。
 
 <hr>
 \subsection qtcreator中开启gcc的c99支持
-```
+\endcode
 QMAKE_CFLAGS += -std=c99
-```
+\endcode
 
 <hr>
 \section 库函数篇
@@ -290,13 +153,13 @@ QMAKE_CFLAGS += -std=c99
 解决方法：一般来说我们需要拿到一个很小的数，如果分母的绝对值小于这个数，就认为分母为零。
 最适合的方法是使用<float.h>提供的FLT_EPSILON。
 
-~~~{.c}
+\code{c}
 #include <float.h>
 float a = 0;
 if(fabs(a)<FLT_EPSILON){
   // return error.
 }
-~~~
+\endcode
 
 
 <hr>
@@ -311,7 +174,7 @@ A = {{x0\*x0, x0, 1},{x1\*x1, x1, 1},{x2\*x2, x2, 1}}
 \subsection 下采样拷贝时间
 下采样拷贝虽然点数少，但是需要多次拷贝操作，那么这种方式和全拷贝速度差异如何呢？
 
-```cpp
+\code{cpp}
 uint32_t W=640, H=480, WH=W*H;
 FILE *f = fopen("img","rb");
 uint8_t* buf = malloc(WH);
@@ -331,7 +194,7 @@ for(uint32_t r=0; r<Hd; r++)
     img_d[r*Wd+c] = buf[r*sd*W+c*sd];
 t = cv::getTickCount()-t;
 cout<<t/cv::getTickFrequency()<<endl;
-```
+\endcode
 PC上运行的结果，t1是全拷贝的时间，t2是下采样拷贝的时间，可以看到在debug版本中，2倍采样和3倍采样时间都要长于全采样，直到4倍采样开始时间才小于全采样，这是因为下采样需要设计循环，依次赋值，全拷贝肯定在汇编层面做了优化的。
 有意思的是在Release版本中，2倍采样的时间就小于全拷贝，这就说明debug版本对于循环有着更深的影响，下采样最大运行时间相差了接近6倍。
 
@@ -362,7 +225,7 @@ ARM
 我们自然而然地想到+0.5，例如第二行代码所示，但是这样仍然是有问题的，就是在使用负数的时候。
 例如输入-0.6，那么照理说-0.6更接近-1，然而-0.6+0.5=-0.1会截取成0，没有错(int)(-0.1)=0，在VS下是这样的。
 
-```cpp
+\code{cpp}
 #define Q168_FROM_FLOAT(x) ( (int16_t)((x)*256.0) ) // 丢失精度
 #define Q168_FROM_FLOAT(x) ( (int16_t)((x)*256.0+0.5) ) // 负数不准
 #define Q168_FROM_FLOAT(x) ( (int16_t)((x)>=0?(x)*256.0+0.5:(x)*256.0-0.5) ) //完美
@@ -370,7 +233,7 @@ ARM
 // 测试
 printf("%d,%d\n", Q168_FROM_FLOAT(0.35), Q168_FROM_FLOAT(-0.35))
 //结果为 9和-9，正确！
-```
+\endcode
 
 <hr>
 \section 代码规范篇
@@ -388,22 +251,23 @@ printf("%d,%d\n", Q168_FROM_FLOAT(0.35), Q168_FROM_FLOAT(-0.35))
 \subsection C语言算法中的数学参数放在哪里？
 程序运行过程中始终不变的数学常量称为参数，做算法的代码会有特别多的参数，要怎么放置这些参数呢？
 1. 直接在调用的地方用数字常量表示，例如
-```cpp
+\code{cpp}
 x = 0.01 *y;
-```
+\endcode
 这种方式被称为magic number, 不太好。
 第一，不好理解，如果只有一个number，还勉强可以注释，如果一行代码有多个number，就真的不好注释了。
 第二，如果这个参数在很多地方用到，参数变动的时候，需要多处修改，非常容易有漏网之鱼。
 
 2.直接用宏来define数字，在调用的地方使用宏。
-```cpp
+\code{cpp}
 #define SLAM_PARA_XXXX 0.01
-```
+\endcode
 这种方式比直接用数字要好，define单个数字是没问题的，但是在定义数组型参数的时候就不太方便了，例如
-```cpp
+
+\code{cpp}
 float para_xxx[2][3] = {{1.0000, 2.0000, 3.0000},
                         {4.0000, 5.0000, 6.0000}};
-```
+\endcode
 一个很勉强的方式就是把宏定义成花括号里的内容，然后就在调用的地方新建一个变量=宏，但是这样很怪。。。
 而且如果这个参数表很大的话，例如10x10的静态查找表，每次调用的地方新建变量并赋值一次会有很多额外消耗。
 
@@ -417,7 +281,7 @@ float para_xxx[2][3] = {{1.0000, 2.0000, 3.0000},
 <hr>
 \subsection 彩色规范打印
 
-```c
+\code{c}
 #indef PRINT_ERROR
 #define PRINT_ERROR(...)    \
   do{                       \
@@ -439,7 +303,7 @@ float para_xxx[2][3] = {{1.0000, 2.0000, 3.0000},
   while(0)
 #endif
 
-```
+\endcode
 
 <hr>
 \subsection 头文件多次包含于只展开一次矛盾？
@@ -453,7 +317,7 @@ float para_xxx[2][3] = {{1.0000, 2.0000, 3.0000},
 宏定义有时候不一定会在c文件中起作用，如下面的例子所示。
 main.c依赖a.h和a.c，而a.h又依赖b.h，所以我们自然而然的认为在main.c里包含a.h之前加入某一个宏，它能够在a.h和b.h都生效。
 在头文件中，这是没有问题的，但是对于b.c文件，就不管用了（实际工作碰到的例子），因为b.h和b.c在编译的时候他们并不依赖其他模块，所以有可能b模块比main编译的时刻还要早（编译成obj文件），另外，如果仅仅是修改了宏，a.h和a.c的内容不会改变，那么a.o根本就不会重新发生编译。
-~~~.c
+\code{c}
 // main.c
 #define TURN_OFF_DEVIL
 #include <a.h>
@@ -470,20 +334,20 @@ static int i_am_devel_1;
 #ifndef TURN_OFF_DEVIL
 int i_am_devel2;
 #endif
-~~~
+\endcode
 解决方法，使用编译工具的宏定义工具，例如cmake的
-~~~.cmake
+\code{c}make
 target_compile_definitions(my_exe PRIVATE USE_SOMTHING=1)
-~~~
+\endcode
 
 <hr>
 \subsection 万不得已修改第三方代码怎么注释？
 这种情况通常出现在两个第三方库之间有命名冲突，例如都存在某一些数学函数。
 注释方法：
-~~~.c
+\code{c}
 // Hacked by somebody
 // End of Hacking
-~~~
+\endcode
 用“hack”这个词非常好，既能够表达出这是对原有模块的破坏，一眼就能看出hack了那些地方，原来是什么代码，另外也很容易搜索。
 
 <hr>
@@ -498,7 +362,7 @@ target_compile_definitions(my_exe PRIVATE USE_SOMTHING=1)
 
 <hr>
 \subsection 获取变量的名字
-```c
+\code{c}
 #include <stdio.h>
 
 #define PRINTER(name) printer(#name, (name))
@@ -519,11 +383,11 @@ int main (int argc, char* argv[]) {
 
 name: foo   value: 0
 name: bar   value: 1
-```
+\endcode
 
 <hr>
 \subsection 函数指针常量怎么定义？
-```c
+\code{c}
 // normal pointer to function
 int (*func)(int);
 
@@ -538,18 +402,18 @@ void const *(*func)(int);
 
 // triple bonus: const pointer to function returning pointer to const.
 void const *(*const func)(int) = func.
-```
+\endcode
 
 <hr>
 \subsection const也不是完美的常量？
 C99中，全局变量和静态变量初始化必须使用常量，而且这个常量只能是字面上的常量，例如“1，0xff”以及枚举。
 const修饰的常量是二等公民，不能用于初始化，坑了我很久。
 例如
-```c
+\code{c}
 // C99
 const int a =10;
 int b = a; // 错误，const变量也不能用于全局变量初始化。
-```
+\endcode
 
 <hr>
 \subsection C语言调用C++函数的正确姿势
@@ -564,7 +428,7 @@ int b = a; // 错误，const变量也不能用于全局变量初始化。
 这说明，extern "C"的包裹，虽然只是针对声明进行的，但是它会实际影响到定义部分，会让定义部分使用C的方式生成函数符号名。
 那最后留一个疑问，如果extern "C"包裹的C++函数有重载，那么会发生什么呢？
 
-```
+\endcode
 //C++头文件 cppExample.h
 #ifndef CPP_EXAMPLE_H
 #define CPP_EXAMPLE_H
@@ -586,12 +450,12 @@ int main( int argc, char* argv[] )
 　add( 2, 3 );
 　return 0;
 }
-```
+\endcode
 
 <hr>
 \subsection 函数指针作为函数传参
 
-```c
+\code{c}
 typedef void (*callback_function)(void); // type for conciseness
 
 callback_function disconnectFunc; // variable to store function pointer type
@@ -606,21 +470,21 @@ void D::disconnected()
     disconnectFunc(); // call
     connected = false;
 }
-```
+\endcode
 
 <hr>
 \subsection sizeof用于静态数组
 sizeof变量如果用在静态数组，那么是可以得到静态数组的总长度的，
-```c
+\code{c}
 double array[10];
 sizeof(array); // 8*10 = 80
-```
+\endcode
 
 <hr>
 \subsection 下采样拷贝时间
 下采样拷贝虽然点数少，但是需要多次拷贝操作，那么这种方式和全拷贝速度差异如何呢？
 
-```cpp
+\code{cpp}
 uint32_t W=640, H=480, WH=W*H;
 FILE *f = fopen("img","rb");
 uint8_t* buf = malloc(WH);
@@ -640,7 +504,7 @@ for(uint32_t r=0; r<Hd; r++)
     img_d[r*Wd+c] = buf[r*sd*W+c*sd];
 t = cv::getTickCount()-t;
 cout<<t/cv::getTickFrequency()<<endl;
-```
+\endcode
 
 PC上运行的结果，t1是全拷贝的时间，t2是下采样拷贝的时间，可以看到在debug版本中，2倍采样和3倍采样时间都要长于全采样，直到4倍采样开始时间才小于全采样，这是因为下采样需要设计循环，依次赋值，全拷贝肯定在汇编层面做了优化的。
 有意思的是在Release版本中，2倍采样的时间就小于全拷贝，这就说明debug版本对于循环有着更深的影响，下采样最大运行时间相差了接近6倍。
@@ -674,7 +538,7 @@ ARM
 这里的bin格式是我自己定义的，bin表示单通道，bin3表示3通道，通常是BGR。
 代码中转换单通道的函数没有填写，这里只填写了3通道的。
 
-```cpp
+\code{cpp}
 #include <iostream>
 #include <fstream>
 #include <opencv2/core/core.hpp>
@@ -723,16 +587,16 @@ int main(char argc, char **argv)
     return 0;
 }
 
-```
+\endcode
 接下来就是编写bat文件，调用exe、传入参数并且调用图片浏览工具。
 其中%1就是传入的参数，对，没错，就是双击的文件的路径，不要怀疑，微软爸爸已经给你做好了！
 给bin文件和bin3文件选择默认的打开方式，设置成bat文件，对，就是右键选择默认程序！
 ImageGlass是一个网上下载的轻量级的浏览工具。
 
-```shell
+\code{bash}
 bin_viewer.exe %1 out.bmp
 "C:\Program Files\ImageGlass\ImageGlass.exe" out.bmp
-```
+\endcode
 
 <hr>
 \subsection 遇到unresolved external symbol怎么办？
@@ -766,7 +630,7 @@ C语言头文件不管是放在工程内部还是工程外部都可以include，
 我们自然而然地想到+0.5，例如第二行代码所示，但是这样仍然是有问题的，就是在使用负数的时候。
 例如输入-0.6，那么照理说-0.6更接近-1，然而-0.6+0.5=-0.1会截取成0，没有错(int)(-0.1)=0，在VS下是这样的。
 
-```cpp
+\code{cpp}
 #define Q168_FROM_FLOAT(x) ( (int16_t)((x)*256.0) ) // 丢失精度
 #define Q168_FROM_FLOAT(x) ( (int16_t)((x)*256.0+0.5) ) // 负数不准
 #define Q168_FROM_FLOAT(x) ( (int16_t)((x)>=0?(x)*256.0+0.5:(x)*256.0-0.5) ) //完美
@@ -774,16 +638,16 @@ C语言头文件不管是放在工程内部还是工程外部都可以include，
 // 测试
 printf("%d,%d\n", Q168_FROM_FLOAT(0.35), Q168_FROM_FLOAT(-0.35))
 //结果为 9和-9，正确！
-```
+\endcode
 
 <hr>
 \subsection printf 中的uint64整数
 使用printf过程中，一定要写对%字符串，之前遇到过一个问题，使用%d来打印一个int64的数是错误的，例如下列代码
 
-```cpp
+\code{cpp}
 uint64_t a = 1000;
 printf("%d\n",a); // 错误
-```
+\endcode
 
 实际上，%u，%ld，%lu都不对，在曾经一个ARM平台编译器上，正确的结果是%llu，因为在该平台上，sizeof(long)=sizeof(int)=4，而uint64_t真正的类型是long long，在不同平台时，要注意类型字节数可能不一样。
 
@@ -799,33 +663,33 @@ printf("%d\n",a); // 错误
 好可怕，给char类型变量赋值一个负数，会得到错误的结果，而且编译器不会报错或者警告
 只有使用==判别时才提出警告。
 
-```cp
+\code{c}
 char a = -1;
 printf("%d\n",a );  //打印出 255
 if(a == -10)
   printf("error") // 编译报错
-```
+\endcode
 
 <hr>
 \subsection C语言算法中的数学参数放在哪里？
 程序运行过程中始终不变的数学常量称为参数，做算法的代码会有特别多的参数，要怎么放置这些参数呢？
 1. 直接在调用的地方用数字常量表示，例如
-```cpp
+\code{cpp}
 x = 0.01 *y;
-```
+\endcode
 这种方式被称为magic number, 不太好。
 第一，不好理解，如果只有一个number，还勉强可以注释，如果一行代码有多个number，就真的不好注释了。
 第二，如果这个参数在很多地方用到，参数变动的时候，需要多处修改，非常容易有漏网之鱼。
 
 2.直接用宏来define数字，在调用的地方使用宏。
-```cpp
+\code{cpp}
 #define SLAM_PARA_XXXX 0.01
-```
+\endcode
 这种方式比直接用数字要好，define单个数字是没问题的，但是在定义数组型参数的时候就不太方便了，例如
-```cpp
+\code{cpp}
 float para_xxx[2][3] = {{1.0000, 2.0000, 3.0000},
                         {4.0000, 5.0000, 6.0000}};
-```
+\endcode
 一个很勉强的方式就是把宏定义成花括号里的内容，然后就在调用的地方新建一个变量=宏，但是这样很怪。。。
 而且如果这个参数表很大的话，例如10x10的静态查找表，每次调用的地方新建变量并赋值一次会有很多额外消耗。
 
@@ -880,13 +744,13 @@ C99以前的C语言都是用int或者枚举的野路子来表示布尔型。。�
 \subsection 将指针赋值给uint32_t
 很多32位平台的程序喜欢使将指针赋值给整数，这样就不需要二级指针，例如
 
-```cpp
+\code{cpp}
 int func(uint32_t *addr)
 {
   void * data = malloc (1000);
   *addr = (uint32_t) data;
 }
-```
+\endcode
 如果需要在函数里面开内存，输出内存地址，那么要么使用二级指针，要么用这种转地址的方式。
 但是，这种方式其实并不好，在64位系统中，指针的大小可能是64位的，这样赋值就会出错。
 仍然像想用这种方式的话，使用intptr_t类型，兼容32和64位，在C99中支持，在<stdint.h>中定义。
@@ -895,9 +759,9 @@ int func(uint32_t *addr)
 \subsection designated initializer
 C语言中结构体在C99中的一种新的初始化语法，叫做designated initializer，即指定初始化，之前我一直找不到正式的名称，我一直称之为点变量初始化。。。
 
-```cpp
+\code{cpp}
 MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
-```
+\endcode
 这个东西与编译器无关，是C99的标准，gcc想用的话必须开启选项 -std=c99
 
 如果使用qtcreator构建工程，那么默认使用g++编译，然而如果designated initializer语句是在cpp文件里，g++是不支持的，不管CXX_FLAG 是不是加了c++11，或者C_FLAG 加了99，或者加入extern "C"，都不行， extern "C"只是指示c++编译器把函数编成C语言可识别的符号表，并不支持这种赋值语法。
@@ -906,7 +770,7 @@ MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
 
 <hr>
 \subsection代码区分不同操作系统
-```cpp
+\code{cpp}
 #ifdef __linux__ 
     //linux code goes here
 #elif _WIN32
@@ -914,7 +778,7 @@ MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
 #else
     cout<<"OS not supported!"<<endl;
 #endif
-```
+\endcode
 
 <hr>
 \subsection utf-8文件的bom字节
@@ -925,25 +789,25 @@ MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
 \subsection utf-8文件中的行结尾'\r'
 很蛋疼+1，读utf-8文件的时候，行结尾都是以'\r'结束，
 当文件内容是另一个文件的路径的时候，例如
-```
+\endcode
 /mnt/cc/随便
-```
+\endcode
 其实这一行读出来是这样的
-```
+\endcode
 '/','m',','t','/','c','c','/','随,'便',\r
-```
+\endcode
 我一般喜欢在文件路径后面加上'/'，方便后面读取。
 但是如果在\r后面加上'/'就会搞错。。
 
 <hr>
 \subsection qtcreator中开启gcc的c99支持
-```
+\endcode
 QMAKE_CFLAGS += -std=c99
-```
+\endcode
 
 <hr>
 \subsection printf 如何输出红色字符串？
-```cpp
+\code{cpp}
 #include<stdarg.h>
 ...
 void printf_red(const char *cmd, ...)  
@@ -955,13 +819,13 @@ void printf_red(const char *cmd, ...)
     va_end(args);       //结束可变参数的获取  
     printf("\x1B[0m")   // 回到默认设置
 }  
-```
+\endcode
 
 
 <hr>
 \subsection 规范打印
 
-```c
+\code{c}
 #indef PRINT_ERROR
 #define PRINT_ERROR(...)    \
   do{                       \
@@ -984,7 +848,7 @@ void printf_red(const char *cmd, ...)
 #endif
     
 
-```
+\endcode
 
 <hr>
 \subsection 重复定义
@@ -997,7 +861,7 @@ void printf_red(const char *cmd, ...)
 
 <hr>
 \subsection 二维数组的传参和“引用”
-~~~{.cpp}
+\code{cpp}
 void func_a(int a[][10])
 {
 ...
@@ -1013,7 +877,7 @@ void main()
   int a[5][10];
   int (*b)[10] = a;
 }
-~~~
+\endcode
 注意：第二种方式中的`*b`必须使用括号括起来，否则就变成了一维的数组指针了。
 
 <hr>
@@ -1024,7 +888,7 @@ void main()
 \subsection 使用enum代替整数的好处
 防止数组访问溢出
 假设在函数func里操作一个size为N的数组，函数传入需要操作的index，那么在没有前置判断溢出的情况下，需要加入判断是否溢出的语句。
-~~~{c}
+\code{c}
 int a[10]
 int func(int x)
 {
@@ -1034,7 +898,7 @@ int func(int x)
   }
   printf("%d",a[x]);
 }
-~~~
+\endcode
 如果数组的size不大，而且具有明确的含义，例如某种过程处理通道的个数，可以考虑使用枚举来代替。
 使用枚举的好处是，枚举变量一定不会超出定义域的范围，在编译阶段就决定了不会产生数组的越界。
 
@@ -1042,10 +906,10 @@ int func(int x)
 \subsection `static const char *` 定义但未使用
 定义全局的`static const char*`字符串会提示变量定义但未使用。
 原因是未解之谜，可以考虑换种方法。
-~~~{c}
+\code{c}
 static const char * a = "abcdef"; //有问题
 static cosnt char a[] = "abcdef"; //OK
-~~~
+\endcode
 
 <hr>
 \subsection 运算符优先级cheatsheet
@@ -1279,7 +1143,7 @@ static cosnt char a[] = "abcdef"; //OK
 
 <hr>
 \subsection 怎样printf size_t类型才不会报warning
-~~~{C}
+\code{c}
 // C89
 size_t foo;
 ...
@@ -1289,7 +1153,7 @@ printf("foo = %lu\n", (unsigned long) foo);
 size_t foo;
 ...
 printf("foo = %zu\n", foo);
-~~~
+\endcode
 
 <hr>
 \section 判断数字是否是nan
@@ -1389,7 +1253,7 @@ int main(){
 }
 \endcode
 
-\code{shell}
+\code{bash}
 x=18446744071658864640
 y=28800000000000
 \endcode
@@ -1397,7 +1261,7 @@ y=28800000000000
 \section 编译错误：＂can not used when making shared object＂
 完整的报错信息为：
 
-\code{shell}
+\code{bash}
 relocation R_X86_64_PC32 against symbol `_ZGVZN4pcpp8LoggerPP11getInstanceEvE8instance' can not be used when making a shared object; recompile with -fPIC
 \endcode
 

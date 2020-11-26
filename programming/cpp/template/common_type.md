@@ -34,7 +34,7 @@ int main()
 \endcode
 
 输出：
-\code{shell}
+\code{bash}
 i1i2: 3
 i1d2: 4.5
 d1i2: 4.3

@@ -29,7 +29,7 @@ C++面试题{#cpp_questions}
 
 注意，右值引用本身是左值，是可以取地址的。
 
-~~~{cpp}
+\code{cpp}
 
 // 语句结束后，func()临时变量会被销毁。
 int a = func();
@@ -38,9 +38,9 @@ int a = func();
 int &&b = func();
 
 int &&c = 1;
-~~~
+\endcode
 
-~~~{cpp}
+\code{cpp}
 struct A
 {
     A(){}
@@ -64,7 +64,7 @@ int main() {
 
     return 0;
 }
-~~~
+\endcode
 
 上面的代码中，A的构造函数实际上被执行了两次，第一次在GetA()里，第二次是在A a=GetA()处。
 
