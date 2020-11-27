@@ -59,3 +59,35 @@ Derived()
 【小贴士】情况二告诉我们，派生类的析构函数有的时候不会被调用，如果有一些资源要在派生类析构时释放，那么在这种情况下，资源无法释放，导致内存泄露。
 正确的使用方法是将析构函数设置为虚函数，这样即使是多态方式调用，析构函数也会被正确调用，参见\ref virtual_deconstructor
 
+<hr>
+\section 引用作为类的成员变量
+
+引用是可以作为类的成员变量的，注意在构造函数的初始化列表里初始化要绑定的变量即可，注意const修饰符。
+
+【例】如下代码所示：
+
+\code{cpp}
+#include <iostream>
+using namespace std;
+class A{
+public:
+   A(const int& x) : x_(x) {}
+   void print() { cout << x_ << endl; }
+   const int& x_;
+};
+
+int main(int argc, char* argv[]){
+   int x = 5;
+   A a(x);
+   a.print();
+   x = 6;
+   a.print();
+}
+\endcode
+
+运行结果为：
+
+\code{bash}
+5
+6
+\endcode

@@ -27,3 +27,5 @@
 \subpage awesome_projects
 
 \subpage programming_debug
+
+\subpage utf8

@@ -258,3 +258,13 @@ int main()
 \endcode
 
 这里顺便提一下，如果成员函数声明和定义分离，那么声明和定义处都需要在"()"后面加入const，这点和static修饰符不一样，static修饰符只能在声明的地方使用。
+
+<hr>
+\subsection unresolved_external_symbol unresolved external symbol？
+如果这个symbol在源文件里：
+- 看看这个源文件有没有被加到工程中。
+- symbol在源文件中，并且已经添加到了工程，还会报这个错？
+- 是否使用了看看是不是调用了.c文件，记得用EXTERN C封装，即在c文件函数声明的地方使用
+- 都是cpp文件或者c文件，或者已经用EXTERN C封装了，还会出错？看看是不是不同源文件字符编码的问题。
+- 库已经添加到工程，但是仍然报这个错？那就将库的版本和当前编译器版本保持一致，包括平台（x86或者x64）和版本（vc08，vc10，vc12，vc14）以及是否调试（debug和release）。
+- 以上条件都满足，但在qtcreator中刚添加的函数还是报这个错？那就试着显式地qmake一下，然后再rebuild。

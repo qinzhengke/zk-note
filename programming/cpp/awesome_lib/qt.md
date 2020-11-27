@@ -343,3 +343,17 @@ Categories=GTK;GNOME;Utility;
 appimagetool-x86_64.AppImage build/ #build目录就是我的可执行文件的目录，打包前把乱七八糟的中间文件删除掉，否则AppImage体积很大。
 \endcode
 6.愉快地使用生成出来的AppImage吧。
+
+<hr>
+\section qtcreator中开启gcc的c99支持
+\endcode
+QMAKE_CFLAGS += -std=c99
+\endcode
+
+<hr>
+\subsection 工程内外的头文件区别？
+C语言头文件不管是放在工程内部还是工程外部都可以include，那么这两种方式有什么区别呢？
+目前发现的区别有一点，就是工程内部的头文件内部再include别的头文件的时候可以享用工程文件已经添加的路径。
+举个例子，a.h是工程部内的，b.h是工程外部的，main.cpp里面把这两个头文件都include了，工程pro（qtcreator）文件里包含了opencv的库目录。
+那么打开a.h时输入“include <opencv.....”，此时creator会自动补全，但是在b.h中输入则没有任何反应，这就是目前发现的一个区别。
+但是我估计实际编译的时候应该没有问题，这只是IDE的识别问题而已。

@@ -216,3 +216,9 @@ C可能是一个很底层的模块，例如基础组件规范化打印．
 
 <hr>
 \section 静态库
+
+<hr>
+\section IDE能编，terminal却找不到头文件？
+明明头文件的路径已经添加，并且在**QtCreator**里能够跟踪到该头文件，但是在**terminal** make的时候仍然找不到头文件？
+有一个原因：CMakeList.txt用了环境变量$ENV{}，并且QtCreator设置了这个环境变量，但是bash里面并没有设置！
+反过来，能编译，但是QtCreator老是找不到头文件，或者在QtCreator内部构建失败。

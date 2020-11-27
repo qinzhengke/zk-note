@@ -5,6 +5,7 @@ C语言的预处理器{#c_preprocessor}
 \section sharp_in_macro 宏定义中的\#
 
 “\#”（stringizing）是字符串化操作符。其作用是：将宏定义中的传入参数名转换成用一对双引号括起来参数名字符串。
+
 其只能用于有传入参数的宏定义中，且必须置于宏定义体中的参数名前。
 
 如：
@@ -84,3 +85,34 @@ int main(){
     cout<<"OS not supported!"<<endl;
 #endif
 \endcode
+
+<hr>
+\section 宏在c文件中的作用域
+
+宏定义有时候不一定会在c文件中起作用，如下面的例子所示。
+main.c依赖a.h和a.c，而a.h又依赖b.h，所以我们自然而然的认为在main.c里包含a.h之前加入某一个宏，它能够在a.h和b.h都生效。
+在头文件中，这是没有问题的，但是对于b.c文件，就不管用了（实际工作碰到的例子），因为b.h和b.c在编译的时候他们并不依赖其他模块，所以有可能b模块比main编译的时刻还要早（编译成obj文件），另外，如果仅仅是修改了宏，a.h和a.c的内容不会改变，那么a.o根本就不会重新发生编译。
+
+\code{cpp}
+// main.c
+#define TURN_OFF_DEVIL
+#include <a.h>
+
+// a.h
+#include <b.h>
+#ifndef TUNN_OFF_DEVIL
+static int i_am_devel_1;
+#endif
+
+// b.h
+// b.c
+#include <b.h>
+#ifndef TURN_OFF_DEVIL
+int i_am_devel2;
+#endif
+\endcode
+解决方法，使用编译工具的宏定义工具，例如cmake的
+\code{c}make
+target_compile_definitions(my_exe PRIVATE USE_SOMTHING=1)
+\endcode
+

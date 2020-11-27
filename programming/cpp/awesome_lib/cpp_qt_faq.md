@@ -11,3 +11,9 @@ debug时间，2017-09-25 22:20-22:30
 加入之后记得qmake+rebuild一下，仅仅重新编译有时候不会更新的。
 
 **教训：**使用qtcreator构建工程时一定要清楚常用的几个参数的含义以及应用，pro文件并不是啥都不用写就能正确配置的。
+
+<hr>
+\section qtcreator中开启gcc的c99支持
+\endcode
+QMAKE_CFLAGS += -std=c99
+\endcode
