@@ -235,74 +235,6 @@ machine github.com login qinzhengke password xxxxx
 machine 192.168.0.5 login qinzhengke password xxxx
 \endcode
 
-\subsection 磁盘挂载问题
-磁盘开机挂载问题，Linux开机后，除了“/”目录和swap，其他的分区是不会自动挂载的，就像如果开机后第一次点击原Windows下的D盘，那么打开的时间会稍微久一些，而且文档管理的图标上会有一个小三角（Ubuntu）表示已经挂载。
-我将log和stuffs分别做了快捷链接，但是由于这两个文件处于我的Work分区，开机没有挂载，所以开机后直接在terminal里输入快捷链接，还不能打开log和sutffs文件，所以现在必须试试开机挂载了。打开etc/fstab这个文件
-\endcode
-sudo vim /etc/fstab
-\endcode
-里面的内容是这样的
-
-\endcode
-# /etc/fstab: static file system information. 
-# 
-# Use 'blkid' to print the universally unique identifier for a 
-# device; this may be used with UUID= as a more robust way to name devices 
-# that works even if disks are added and removed. See fstab(5). 
-# 
-# <file system> <mount point>   <type>  <options>       <dump>  <pass> 
-# / was on /dev/sda7 during installation 
-UUID=1b23043a-a6bb-4d7d-abfa-bb82ffb347b5 /               ext4    errors=remount-ro 0       1 
-# swap was on /dev/sda6 during installation 
-UUID=229a823a-3daf-4349-9b3a-df52073a5eee none            swap    sw              0       0 
-/dev/sda5       /media/Work/    auto    default 0       0 
-\endcode
-
-
-有两种方法可以标识硬盘，一种是使用/dev/sdax序号，但是这种序号不太可靠，硬盘多次插拔，这个序号可能不太一样。
-另外一种方法是使用UUID，UUID和硬件相关，能保证不会出错。
-
-方法一：
-内容有点折叠，不过看最后一行就可以了，首先/dev/sda5是我的Work分区（也就是原Windows下的D盘），为什么是/dev/sda5这个等会再说。/media/Work是我的挂载目录，这个目录一开始可以有，可以没有，如果一开始没有这个目录，那么系统会新建。下来就是default也即是类型，linux根目录肯定是ext4/5，swap空间则是swap类型，Work分区是NTFS类型的，照理说应该这样写，但是写default也可以。剩下的两个亮没有仔细研究过，貌似和check有关系，写成0就没问题了。不知道能不能直接挂载在/home/zrinker下面。事实证明是可以挂载在/home下面的哈，看图
-
-![](files/ubuntu文件管理器.png "Ubuntu文件管理器")
-
-Data/就是165GB的分区，即原来Windows的D盘
-下面说一下为什么是dev/sda5，使用fdisk -l命令
-
-\endcode
-sudo fdisk -l
-\endcode
-注意使用sudo ，否则毛都看不到。可以得到所有的磁盘设备，结果如下：
-
-\endcode
-Disk /dev/sda: 250.1 GB, 250059350016 bytes 
-255 heads, 63 sectors/track, 30401 cylinders, total 488397168 sectors 
-Units = sectors of 1 * 512 = 512 bytes 
-Sector size (logical/physical): 512 bytes / 512 bytes 
-I/O size (minimum/optimal): 512 bytes / 512 bytes 
-Disk identifier: 0x27982797 
-
-   Device Boot      Start         End      Blocks   Id  System 
-/dev/sda1   *          63    94570844    47285391    7  HPFS/NTFS/exFAT 
-/dev/sda2        94570906   488396799   196912947    f  W95 Ext'd (LBA) 
-/dev/sda5        94570908   416900612   161164852+   7  HPFS/NTFS/exFAT 
-/dev/sda6       416900676   423650114     3374719+  82  Linux swap / Solaris 
-/dev/sda7       423651328   488396799    32372736   83  Linux 
-\endcode
-
-结果罗列了所有的磁盘分区，我不太清楚Start和End还有Blocks是什么意思，我感觉第一个盘是没用的小盘，第二个是原Windows下的C盘，第三个就是原来的D盘。
-如果不手动挂载，等到在GNome里打开分区的时候，系统会挂载在一个奇葩的路径上面
-
-![](files/自动挂载效果.png "自动挂载效果")
-
-方法二：UUID的获取方法
-1. 打开gparted
-2. 右上角下拉框选择磁盘
-3. 在磁盘右键选择`information`，就能看到UUID了。
-
-
-<hr>
 
 \subsection 无法delete到回收站
 无法通过delete将NTFS磁盘中的文件移动到回收站
@@ -310,7 +242,7 @@ Gnome中无法通过delete将NTFS磁盘中的文件移动到回收站，只能�
 解决方法：
 在/etc/fstab文件中加入uid=1000，例如：
 
-\endcode
+\code
 /dev/sda5   /home/zrinker/Work/ ntfs uid=1000,default 0 0 
 \endcode
 
@@ -376,7 +308,7 @@ Python的集成开发环境，支持调试，可以算是最好的。
 \subsection Ubuntu下安装Shadowsocks
 通过PPA源安装，仅支持Ubuntu 14.04或更高版本。
 
-\endcode
+\code
 sudo add-apt-repository ppa:hzwhuang/ss-qt5
 sudo apt-get update
 sudo apt-get install shadowsocks-qt5
@@ -416,19 +348,19 @@ WPS Office 所需字体：wingding.ttf、webdings.ttf、symbol.ttf、WINGDNG3.TT
 
 - 第二步：新建字体存放目录 windows-font
 
-\endcode
+\code
 sudo mkdir /usr/share/fonts/truetype/windows-font
 \endcode
 
 - 第三步：拷贝字体到wiondow-font目录下
 
-\endcode	
+\code	
 sudo cp /home/php-note/123/* /usr/share/fonts/truetype/windows-font
 \endcode
 
 - 第四步：修改权限，并更新字体缓存
 
-\endcode	
+\code	
 sudo chmod -R 777  /usr/share/fonts/truetype/windows-font
 cd /usr/share/fonts/truetype/windows-font
 sudo mkfontscale
@@ -437,7 +369,7 @@ sudo fc-cache -fv
 \endcode
 
 - 第五步：重启下系统吧！
-\endcode	
+\code	
 sudo reboot
 \endcode
 

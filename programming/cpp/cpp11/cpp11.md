@@ -11,5 +11,7 @@ C++11{#cpp11}
 
 \subpage cpp11_chrono
 
+\subpage cpp11_constexpr
+
 \subpage cpp11_others
 

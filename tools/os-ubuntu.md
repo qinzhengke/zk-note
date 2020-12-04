@@ -31,3 +31,31 @@ cd somewhere
 
 步骤2：拷贝脚本到`/etc/init.d`目录下
 
+
+\subsection 磁盘开机自动挂
+磁盘开机挂载问题，Linux开机后，除了“/”目录和swap，其他的分区是不会自动挂载的，就像如果开机后第一次点击原Windows下的D盘，那么打开的时间会稍微久一些，而且文档管理的图标上会有一个小三角（Ubuntu）表示已经挂载。
+我将log和stuffs分别做了快捷链接，但是由于这两个文件处于我的Work分区，开机没有挂载，所以开机后直接在terminal里输入快捷链接，还不能打开log和sutffs文件，所以现在必须试试开机挂载了。打开etc/fstab这个文件
+
+Step 1: 查看磁盘的UUID
+
+方法一：Ubuntu下使用“Disks”工具，Windows键+“disks”，可以查看某个磁盘的UUID
+
+方法二：使用gparted查看磁盘UUID
+
+Step 2: 编辑fstab文件
+
+\code
+sudo vim /etc/fstab
+\endcode
+
+在最后一行加入如下配置：
+
+\code
+UUID=xxxxxxx       /media/Work/    auto    defaults 0       2
+\endcode
+
+【注意】“defaults”值不要拼错了，有“s”，最后一个参数要填“2”，表示普通分区，并非Linux启动分区，这两设置不对，有可能无法开机。
+
+【注意】如果错误设置无法开，不用惊慌，只要在Ubuntu启动界面，进入recovery模式，然后进入root模式，使用vim编辑/etc/fstab文件即可。
+
+<hr>
