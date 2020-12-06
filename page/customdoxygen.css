@@ -12,7 +12,7 @@ h1.groupheader {
 
 .title {
 	font: 400 14px/28px Roboto,sans-serif;
-	font-size: 150%;
+	font-size: 100%;
 	font-weight: bold;
 	margin: 10px 2px;
 }
@@ -1136,7 +1136,7 @@ dl.section dd {
 
 #projectname
 {
-	font: 300% Tahoma, Arial,sans-serif;
+	font: 150% Tahoma, Arial,sans-serif;
 	margin: 0px;
 	padding: 2px 0px;
 }
@@ -1473,3 +1473,27 @@ tr.heading h2 {
   }
 }
 
+/** The codes before this line are automatically generated, and after are added by qzk **/
+
+.title {
+	font-size: 300%;
+}
+
+h1 {
+	line-height: 180%;
+	font-size: 150%;
+	color: rgb(54,77,124);
+	background-color: rgb(193,205,228);
+	box-shadow: 10px 5px 5px #505050;
+	padding-left: 5px;
+	border-radius: 5px;
+}
+
+.doxtable{
+	border: #99dd99;
+	background-color: #99dd99;
+	color: #004422;
+	box-shadow: 10px 5px 5px #505050;
+	padding-left: 5px;
+	border-radius: 2px;
+}

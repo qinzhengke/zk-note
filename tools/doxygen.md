@@ -165,3 +165,13 @@ step 4: 在doxygen文档处使用 \\cite 进行引用。
 ![](./figures/doxygen_cite_bib_01.png)
 
 ![](./figures/doxygen_cite_bib_02.png)
+
+\section 灵活使用自定义css文件调整细节
+
+使用“doxygen -w”来生成默认的css模板，然后在Doxyfile中配置“HTML_EXTRA_STYLE_SHEET”参数指定刚才生成的css文件。
+
+然后就可以愉快的修改里面的内容了。
+
+\subsection 调整title的尺寸
+
+在css文件中搜索“projectname”，调整里面的font的比例就可以了，默认是300%，贼大。

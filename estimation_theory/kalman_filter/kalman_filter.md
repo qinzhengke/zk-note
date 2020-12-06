@@ -1,7 +1,6 @@
 卡尔曼滤波(Kalman Filter){#kalman_filter}
 ========================
 
-<hr>
 \section kf_problem_setup 问题建立（problem_setup)
 
 市面上存在很多对卡尔曼滤波不同的符号表达，有点混乱，我们在这里参考文献《State Estimation for Robotics》 \cite barfoot2017state 的写法。
@@ -30,7 +29,6 @@
 
 观测噪声： \f$ \boldsymbol{n}_k \in \mathbb{R}^M \sim \mathcal{N}(\boldsymbol{0}, \boldsymbol{R}_k) \f$
 
-<hr>
 \section kf_usage 用法
 
 首先建立预测模型，它包含两部分，第一部分是运动方程，也就是待估计的状态转移方程，第二部分是协方差矩阵的转移方程。
@@ -73,7 +71,6 @@
 </center>
 
 
-<hr>
 \section kf_origin 推导：最大化后验概率
 
 思路：根据贝叶斯规则展开后验概率，可以得到后验概率关于似然和先验的表达。
@@ -90,3 +87,5 @@
 \f$ P(\boldsymbol{x}_{k-1}, \boldsymbol{v}_k) \f$ 则恰好对应着运动方程，也是高斯分布。
 
 两个高斯分布相乘，仍然是高斯分布，列出两边的公式，对比两边的指数部分，求左侧后验的期望和方差在右边的表达式，即可求得 \f$ \hat{\boldsymbol{P}}_k \f$ 关于 \f$ \check{\boldsymbol{P}}_k \f$ 的表达式，以及 \f$ \hat{\boldsymbol{x}_k} \f$ 关于 \f$ \check{\boldsymbol{x}}_k \f$ 的表达式。
+
+> 这是一个引用。
