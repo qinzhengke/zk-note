@@ -1497,3 +1497,15 @@ h1 {
 	padding-left: 5px;
 	border-radius: 2px;
 }
+
+p{
+	font-size: 135%;
+}
+
+ul{
+	font-size: 150%;
+}
+
+.formulaDsp{
+	font-size: 150%;
+}

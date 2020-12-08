@@ -1,6 +1,8 @@
 C++11{#cpp11}
 =============
 
+\subpage cpp11_initializer
+
 \subpage cpp11_lambda
 
 \subpage cpp11_bind
