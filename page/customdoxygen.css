@@ -1489,6 +1489,16 @@ h1 {
 	border-radius: 5px;
 }
 
+h2 {
+	line-height: 50%;
+	font-size: 110%;
+	color: rgb(54,77,124);
+	background-color: rgb(240,240,255);
+	/* box-shadow: 10px 5px 5px #505050; */
+	padding-left: 5px;
+	/* border-radius: 5px; */
+}
+
 .doxtable{
 	border: #99dd99;
 	background-color: #99dd99;
@@ -1499,11 +1509,11 @@ h1 {
 }
 
 p{
-	font-size: 135%;
+	font-size: 100%;
 }
 
 ul{
-	font-size: 150%;
+	font-size: 100%;
 }
 
 .formulaDsp{
