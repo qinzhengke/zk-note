@@ -19,6 +19,8 @@
 
 \subpage doxygen
 
+\subpage mathjax
+
 \subpage libre_office
 
 \subpage useful_tools
