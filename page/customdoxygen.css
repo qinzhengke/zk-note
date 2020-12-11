@@ -1484,7 +1484,7 @@ h1 {
 	font-size: 150%;
 	color: rgb(54,77,124);
 	background-color: rgb(193,205,228);
-	box-shadow: 10px 5px 5px #505050;
+	box-shadow: 5px 5px 5px #505050;
 	padding-left: 5px;
 	border-radius: 5px;
 }
@@ -1503,7 +1503,7 @@ h2 {
 	border: #99dd99;
 	background-color: #99dd99;
 	color: #004422;
-	box-shadow: 10px 5px 5px #505050;
+	box-shadow: 2px 2px 5px #505050;
 	padding-left: 5px;
 	border-radius: 2px;
 }
@@ -1518,4 +1518,10 @@ ul{
 
 .formulaDsp{
 	font-size: 150%;
+}
+
+.fragment{
+	box-shadow: 2px 2px 5px #505050;
+	padding-left: 2px;
+	border-radius: 2px;
 }
