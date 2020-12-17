@@ -3,7 +3,7 @@ C语言中的宏{#c_macro}
 
 
 
-<hr>
+
 \section 获取宏的参数个数
 
 \code{.cpp}

@@ -44,14 +44,14 @@ else
 fi
 \endcode
 
-<hr>
+
 \section 如何把运行结果赋值给变量？
 
 \code{.bash}
 var = $(ls | grep aaa)
 \endcode
 
-<hr>
+
 \section bash_var $()和${}的区别
 
 $()里面必需接命令，不能接受变量

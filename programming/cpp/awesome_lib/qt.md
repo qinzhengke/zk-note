@@ -344,13 +344,13 @@ appimagetool-x86_64.AppImage build/ #build目录就是我的可执行文件的�
 \endcode
 6.愉快地使用生成出来的AppImage吧。
 
-<hr>
+
 \section qtcreator中开启gcc的c99支持
 \endcode
 QMAKE_CFLAGS += -std=c99
 \endcode
 
-<hr>
+
 \subsection 工程内外的头文件区别？
 C语言头文件不管是放在工程内部还是工程外部都可以include，那么这两种方式有什么区别呢？
 目前发现的区别有一点，就是工程内部的头文件内部再include别的头文件的时候可以享用工程文件已经添加的路径。

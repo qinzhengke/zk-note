@@ -39,3 +39,7 @@ photometric consistency
 \subpage vins
 
 \subpage orb_slam
+
+\subpage msckf
+
+\subpage msckf_ext_reading

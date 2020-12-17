@@ -42,6 +42,13 @@ vscode中的markdown相关的代码片{#vscode_markdown_snippet}
 		],
 		"description": "new line formula"
 	},
+	"bold b": {
+		"prefix": "bb",
+		"body": [
+			"\\boldsymbol{b}",
+		],
+		"description": "boldsymbol{w}"
+	},
 	"boldsymbol w": {
 		"prefix": "bw",
 		"body": [
@@ -64,7 +71,7 @@ vscode中的markdown相关的代码片{#vscode_markdown_snippet}
 		"description": "boldsymbol{y}"
 	},
 	"boldsymbol A": {
-		"prefix": "ba",
+		"prefix": "bba",
 		"body": [
 			"\\boldsymbol{A}",
 		],

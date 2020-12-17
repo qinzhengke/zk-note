@@ -1,12 +1,12 @@
 C++11中的多线程{#cpp11_thread}
 ============================
 
-<hr>
+
 \section std::thread::join
 
 注意join会阻塞当前进程的运行，直到join的参数函数结束，如果不想阻塞，需要使用detach()函数。
 
-<hr>
+
 \section std::mutex
 
 std::mutex是c++11自带的互斥锁，
@@ -19,7 +19,7 @@ mtx.unlock();
 \endcode
 
 
-<hr>
+
 \section std::mutex::try_lock
 
 \code{.cpp}
@@ -77,7 +77,7 @@ int main()
 }
 \endcode
 
-<hr>
+
 \section std::lock_guard
 
 \code{.cpp}
@@ -113,7 +113,7 @@ int main()
 }
 \endcode
 
-<hr>
+
 \section init阶段和start阶段
 
 通常来说多线程模块会有init、start、run几种阶段，尽量分清楚这几个阶段的任务不要混淆，对于多线程编程，能很大概率避免一些线程启动混乱带来的程序崩溃问题。

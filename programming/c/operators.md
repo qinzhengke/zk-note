@@ -3,7 +3,7 @@ C语言中的运算符{#c_operators}
 
 \section 运算符优先级表格
 
-<hr>
+
 \subsection 运算符优先级cheatsheet
 
 \htmlonly

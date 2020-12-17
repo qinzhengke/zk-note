@@ -1,7 +1,7 @@
 视频库Vireo{#cpp_lib_vireo}
 ==========================
 
-<hr>
+
 \section 介绍
 
 Vireo是Twitter团队开发维护的一个轻量级的、通用的视频处理库，基于C++11提供API接口。

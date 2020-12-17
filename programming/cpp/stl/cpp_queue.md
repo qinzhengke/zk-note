@@ -1,7 +1,7 @@
 std::queue{#cpp_queue}
 ======================
 
-<hr>
+
 \section std::queue不支持clear()操作
 
 这很奇怪，原因待调查，清空队列的几种方式是

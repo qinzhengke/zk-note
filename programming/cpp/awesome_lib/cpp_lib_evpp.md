@@ -1,7 +1,7 @@
 evpp：奇虎360大神的网络库{#cpp_lib_evpp}
 =================================
 
-<hr>
+
 \subsection evpp_callback evpp库如何在设置回调函数时输入用户参数？
 
 \subsection 问题：

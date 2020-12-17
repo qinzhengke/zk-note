@@ -1,10 +1,10 @@
 Docker：开源容器工具{#docker}
 ==========================
 
-<hr>
+
 \section 基于Docker的开发
 
-<hr>
+
 \subsection Docker容器和宿主机之间共享文件
 
 有些比较依赖环境的库会以docker镜像的形式提供给开发者，例如GPU版本的Tensorflow，这意味这我们必须要其对应的容器中进行开发。

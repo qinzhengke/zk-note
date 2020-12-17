@@ -20,6 +20,8 @@
 
 \subpage kalman_filter
 
+\subpage biased_kmf
+
 \subpage ekf_entry
 
 \subpage ukf_entry

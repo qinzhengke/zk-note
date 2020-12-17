@@ -3,10 +3,10 @@
 
 这个页面主要记录一些Linux操作系统的知识
 
-<hr>
+
 \section 综合篇
 
-<hr>
+
 \subsection 如何非阻塞运行gui程序？
 问题：如果直接在终端运行某个gui程序，终端会阻塞直到gui关闭，例如运行gitk。
 那么如何运行程序，并且不阻塞终端呢？
@@ -16,7 +16,7 @@
 gitk &
 \endcode
 
-<hr>
+
 \subsection 如何查看目录和文件占用磁盘大小？
 
 \code{bash}
@@ -31,7 +31,7 @@ du表示disk usage，-h参数表示使用人类可读的单位，即KB,MB,GB为�
 du -h -d 1 ./*
 \endcode
 
-<hr>
+
 \sbusection 如何拷贝符号链接文件本身？
 
 如果使用cp工具来拷贝符号链接(symbolic link)，那么最终拷贝的是符号链接指向的文件，有的时候我们只想拷贝符号链接文件本身。
@@ -42,7 +42,7 @@ du -h -d 1 ./*
 
 很简单：cp -P
 
-<hr>
+
 \subsection 如何查看哪些端口号被监听？
 
 基于网络socket通信的时候，一个端口只能被一个应用程序监听，（实际上，端口的内在定义就是应用程序的标识）。
@@ -56,7 +56,7 @@ du -h -d 1 ./*
 sudo lsof -i -P -n | grep LISTEN
 \endcode
 
-<hr>
+
 \subsection ls工具如何显示文件的全路径？
 
 众所周知，ls工具会输出文件列表，但是有的时候我们想要的是文件的全路径，如何实现呢？
@@ -65,7 +65,7 @@ sudo lsof -i -P -n | grep LISTEN
 $ ls -d $PWD/*
 \endcode
 
-<hr>
+
 \subsection 如何查看文件的后面n行？
 
 \code{bash}
@@ -99,7 +99,7 @@ find . -name xxx
 find . -name xxx | xargs rm
 \endcode
 
-<hr> 压缩文件夹与解压文件
+ 压缩文件夹与解压文件
 
 打包并压缩一个文件夹：
 
@@ -115,7 +115,7 @@ tar -xf myfile.tar.gz
 
 如果压缩的时候是一个文件夹压缩的，那么解压出来的也是一个文件夹。
 
-<hr>
+
 \subsection 几种Linux发送网络包的命令
 
 UDP包：
@@ -131,7 +131,7 @@ curl "http://127.0.0.1:9009/echo" -d "Hello, world"
 \endcode
 
 
-<hr>
+
 \subsection Linux上环境变量的配置
 
 Linux操作系统下三种配置环境变量的方法　　 
@@ -248,7 +248,7 @@ Gnome中无法通过delete将NTFS磁盘中的文件移动到回收站，只能�
 
 注意，uid=1000是和default在通过逗号放在一起的，中间不能有空格，因为它们组成了一个参数，uid就是第一个用户的ID，一般是1000，如果不是第一个用户，则通过echo $UID来获取uid，修改完后重新启动即可。
 
-<hr>
+
 
 \subsection Ubuntu中的apt-get命令
 apt-get是Debian系列操作系统的软件安装工具，这个工具可以连接网络已有的软件库，下载并安装所有的开源软件包，下面记录常用的命令和选项。
@@ -257,25 +257,25 @@ apt-get是Debian系列操作系统的软件安装工具，这个工具可以连�
 3. 下好的软件包放在/var/cache/apt/archives里，而正在下载的软件包放在 /var/cache/apt/archives/partial。
 4. 使用apt-get clean可以清空上面两个文件夹。
 
-<hr>
+
 
 \subsection Ubuntu自带的任务管理器
 Monitor，只要在super键后输入monitor就可以查找得到了。 
 
-<hr>
+
 \subsection 修改Linux的root密码
 登录root账户后，使用passwd root命令来更改密码
 
-<hr>
+
 
 \subsection ssh完整登录命令（账户、主机、端口都有）
 ssh root@104.224.156.77 -p 27217
 
-<hr>
+
 
 \section 软件篇
 
-<hr>
+
 
 \subsection 常用软件列表
 - Sogou Pinyin
@@ -304,7 +304,7 @@ Python的集成开发环境，支持调试，可以算是最好的。
 类似于Photoshop的图片处理软件，用于图像分析和修改，很实用的工具。
 
 
-<hr>
+
 \subsection Ubuntu下安装Shadowsocks
 通过PPA源安装，仅支持Ubuntu 14.04或更高版本。
 
@@ -319,7 +319,7 @@ sudo apt-get install shadowsocks-qt5
 
 ![](files/安装Qt.png "安装Qt")
 
-<hr>
+
 
 \subsection Linux上软件源码编译通用方法
 首先需要配置make文件所需要的平台相关变量，例如有什么其他依赖的库？这些库的路径是什么？
@@ -331,7 +331,7 @@ sudo apt-get install shadowsocks-qt5
 
 卸载库：以GSL为例，只要在源码目录运行sudo make uninstall即可。
 
-<hr>
+
 
 \subsection 给Ubuntu系统安装宋体字体
 
@@ -373,7 +373,7 @@ sudo fc-cache -fv
 sudo reboot
 \endcode
 
-<hr>
+
 
 \subsection 中文输入法安装
 Gnome 3.10下的中文输入法：
@@ -389,7 +389,7 @@ Gnome 3.10下的中文输入法：
 
 4. 注销后重新登录即可，另外Gnome里默认的切换输入法的快捷键是super+space而不是ctrl+space。
 
-<hr>
+
 \subsection Ubuntu中的Apt-get命令
 
 apt-get是Debian系列操作系统的软件安装工具，这个工具可以连接网络已有的软件库，下载并安装所有的开源软件包，下面记录常用的命令和选项。
@@ -398,7 +398,7 @@ apt-get是Debian系列操作系统的软件安装工具，这个工具可以连�
 3. 下好的软件包放在/var/cache/apt/archives里，而正在下载的软件包放在 /var/cache/apt/archives/partial。
 4. 使用apt-get clean可以清空上面两个文件夹。
 
-<hr>
+
 \subsection flameshot-Ubuntu下一个超强截图工具
 安装
 \code{bash}
@@ -410,7 +410,7 @@ sudo apt-get install flameshot
 2. 将print(print screen)键解绑，然后添加新的print键快捷操作“flameshot gui”
 3. 按print键，享受截图、涂鸦、注释的快感吧。
 
-<hr>
+
 \section 搜狗输入法切换全角半角以及中英标点符号
 
 在linux上，一般输入法会默认全角，打出来的英文字符很大，而且不是普通的英文字符，无法被匹配到，这时候需要切换为半角，不太懂全角的意义是什么。
@@ -420,7 +420,7 @@ sudo apt-get install flameshot
 切换中英标点符号方法：ctrl+.
 
 
-<hr>
+
 \section 启用ssh服务
 
 前言：为了安全，一般桌面版的linux操作系统是默认不安装ssh服务的，如果要基于ssh连接到某台桌面linux电脑，需要手动设置。
@@ -437,14 +437,14 @@ sudo systemctl status ssh
 sudo ufw allow ssh
 \endcode
 
-<hr>
+
 \section 使用scp发送文件
 
 \code{.sh}
 scp my_file username@192.168.1.101:~/Downloads
 \endcode
 
-<hr>
+
 \section 根据进程的名称来kill
 
 前言：kill命令没有根据进程的名字来杀死进程的方法，需要自行写几句脚本根据进程名称找出PID，然后在杀死，具体方法如下所示。

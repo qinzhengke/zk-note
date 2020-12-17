@@ -57,7 +57,7 @@ LD_LIBRARY_PATH=$(pwd)/lib ./my_exe
 后记：
 这方法的“笨”在于需要重复查找缺失的so文件，并且只能串行查找，稍微花点时间。
 
-<hr>
+
 \section 方法二：聪明一点的方法
 
 Step 1: 使用ldd工具查出所有需要的so文件
@@ -77,7 +77,7 @@ libattr.so.1 => /lib/x86_64-linux-gnu/libattr.so.1 (0x00007ff0502c9000)
 
 Step2: 剩下的步骤和上一节方法一致。
 
-<hr>
+
 \section 方法三：更聪明的办法
 
 通过sed工具，可以过滤出我们想要的文件名列表。

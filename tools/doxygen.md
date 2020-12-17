@@ -50,7 +50,7 @@ step 3: 使用文本文件打开html网页，复制<table></table>部分。
 
 step 4：复制到doxygen源文件，注意：一定要使用\\htmlonly 和 \\endhtmlonly包裹，否则显示会出现错乱。
 
-<hr>
+
 \section numbered_eq 带编号的公式
 Doxygen使用了MathJax来渲染公式，实际上Doxygen设置编号也就是MathJax设置编号。
 
@@ -84,7 +84,7 @@ MATHJAX_CODEFILE = ./latex_support.js
 
 然后就可以愉快的使用带编号的公式。
 
-<hr>
+
 \section ref_eq 引用公式
 
 \verbatim
@@ -97,12 +97,12 @@ MATHJAX_CODEFILE = ./latex_support.js
 
 注意是引用处使用双反斜杠。
 
-<hr>
+
 \section raw_format 原始格式输出
 
 使用 \\verbatim 和 \\endverbatim包裹。
 
-<hr>
+
 \section majax_issue github page上MaJax公式没有正确渲染
 
 明明离线版本Majax公式能够正常渲染，但是传到github page上就不行了？
@@ -110,7 +110,7 @@ MATHJAX_CODEFILE = ./latex_support.js
 
 解决办法很简单，只要把CDN地址中的“http”改成“https”即可。
 
-<hr>
+
 \section boldsymbol_vs_mathbf boldsymbol和mathbf的区别。
 
 boldsymbol和mathbf都是latex中粗体的语法，但是boldsymbol明显要比textbf好看很多，如下图所示
@@ -118,13 +118,13 @@ boldsymbol和mathbf都是latex中粗体的语法，但是boldsymbol明显要比t
 ![](./figures/boldsymbol_vs_mathbf.png)
 </center>
 
-<hr>
+
 \section dfrac_vs_frac dfrac vs frac
 
 dfrac明显尺寸要还原得更好一些，如下图所示。
 ![](./figures/dfrac_vs_frac.png)
 
-<hr>
+
 \section 生成参考文献
 
 step 1: 安装texbib工具

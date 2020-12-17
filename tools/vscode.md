@@ -1,10 +1,10 @@
 强大的代码编辑器：Visual Studio Code{#vscode}
 ==========================
 
-<hr>
+
 \section 基础篇
 
-<hr>
+
 \subsection 代码片的设置语法
 
 \code{json}
@@ -47,7 +47,7 @@ $x参数是可以出现相同的，例如好几个$1同时出现，在编辑的�
 
 然而我们通常要在光标处触发其他代码片，这就需要使用到$0，它表示，光标最终的位置，即如果没有$x，代码片自动输出时就退出了代码片模式，自然就可以触发其他的代码片。
 
-<hr>
+
 \subsection markdown代码片
 
 1. “File”->“Preference”->“User snippets”，然后在下拉列表中选择“markdown.json”
@@ -68,17 +68,17 @@ $x参数是可以出现相同的，例如好几个$1同时出现，在编辑的�
 }
 \endcode
 
-<hr>
+
 \subsection Latex常用的代码片
 
 参见 \subpage vscode_markdown_snippet
 
-<hr>
+
 \subsection vscode如何对变量进行一改全改？
 
 按F2，输入新的名称，然后在下方点击打钩图标即可。
 
-<hr>
+
 \subsection vscode中如何设置前后跳转？
 
 问题：在代码浏览过程中，个人比较习惯使用QtCreator的方式进行跳转，即Alt+右为向前跳转，Alt+左为向后跳转。
@@ -89,7 +89,7 @@ vscode默认跳转方式为ctrl+alt+‘-’，这种组合对于非常常用的�
 step 1: File -> Preference -> Keyboard Shortcuts
 step 2: 搜索“Forward”找到向前跳转的设置， 搜索“Backward“找到向后跳转的设置，按照提示设置即可。
 
-<hr>
+
 \subsection vscode_rulek 如何设置ruler?
 
 问题：编写代码的时候，ruler也就是右侧的竖线，ruler可以提醒我们一行代码是否太长，需要拆行。
@@ -112,10 +112,10 @@ Step 2: 按照一下方法进行设置
 }
 \endcode
 
-<hr>
+
 \section vscode_c_cpp C\C++篇
 
-<hr>
+
 \subsection c_cpp_properties c_cpp_properties.json
 
 c_cpp_properties.json文件是vscode关于C\C++配置的核心文件，默认情况下是不会生成的，可以使用下面两种方法生成：
@@ -125,7 +125,7 @@ c_cpp_properties.json文件是vscode关于C\C++配置的核心文件，默认情
 
 这两种方式生成的c_cpp_properties文件放在.vscode目录下。
 
-<hr>
+
 \subsection 如何添加宏定义？
 在'c_cpp_properties.json'文件中的"configurations"项目下的"defines"插入宏定义即可。
 
@@ -149,7 +149,7 @@ c_cpp_properties.json文件请参考 \ref c_cpp_properties 。
 }
 \endcode
 
-<hr>
+
 \subsection 在vscode中单步调试
 
 Step 1: 在CMakeLists.txt中添加以下debug设置
@@ -213,14 +213,14 @@ Step 2: 在.vscode目录中按照如下设置
 
 Step 3: 按F5进行调试，F10单步（跳过函数），F11单步（跳入函数）。
 
-<hr>
+
 \subsection vscode单步调试会先自动跳到末尾
 
 如题，vscode单步调试的时候，不知为何会自动先跳到末尾，这时候不要惆怅，只需要再按一次F5，程序就会自动运行下去，并且可以正常的调试。
 
 很奇怪，原因还未知道。
 
-<hr>
+
 \subsection 如何使用clang-format进行代码格式化？
 
 步骤1：`File`->`Preference`->`Settings`->搜索“format”，选择“Editor:Format On Save”。
@@ -228,7 +228,7 @@ Step 3: 按F5进行调试，F10单步（跳过函数），F11单步（跳入函�
 步骤2：同样在`Settings`界面，搜索“C_Cpp”，在“C_Cpp:Clang_format_style”下方的编辑框中填入“file”，即使用工作空间的“.clang-format”文件作为style，工作空间就是vscode打开的目录，例如打开目录的时候使用“code .”，那么工作空间就是“.”，记住不是.vscode目录！
 
 
-<hr>
+
 \subsection vscode如何给当前project添加包含路径？
 
 在c_cpp_properties.json中按照如下方法添加。
@@ -253,7 +253,7 @@ c_cpp_properties.json相关信息可以在 \ref c_cpp_properties 找到。
 }
 \endcode
 
-<hr>
+
 \subsection vscode如何在系统级别添加包含路径？
 
 问题：一些库安装后的头文件路径不是最标准的/usr/include，例如Eigen的安装头文件路径为/usr/local/include/eigen3，然而vscode默认不会搜索这个路径，导致vscode无法正确解析这些头文件。

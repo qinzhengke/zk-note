@@ -5,14 +5,12 @@
 
 “突破性格局限！”
 
-<hr>
 \section work_1 工作2：DJI Mavic air、Mavic 2、 Mavic air 2 双目避障开发。
 
 \htmlonly
 <iframe src="https://player.bilibili.com/player.html?aid=32639123&bvid=BV1VW411S7o5&cid=57114943&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:640px; height:460px"> </iframe>
 \endhtmlonly
 
-<hr>
 \section work_2 工作1：光学元件高精度视觉定位与引导
 
 \htmlonly
@@ -29,7 +27,6 @@
 </table>
 \endhtmlonly
 
-<hr>
 \section 经历
 
 2017.7~2020.6: 感知算法工程师, DJI
@@ -43,5 +40,5 @@ CV, Robotics
 
 <b>联系方式：</b> qinzhengke@qq.com
 
-<hr>
+
 转到\ref zk_note

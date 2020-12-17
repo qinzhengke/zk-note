@@ -44,7 +44,7 @@ int main () {
 
 使用dynamic_pointer_cast进行指针转换即可，但是要注意有一个小坑，参见 \ref dynamic_poiner_cast_debug 。
 
-<hr>
+
 \section dynamic_pointer_cast
 
 dynamic_pointer_cast可以把shared_ptr进行类型转换，并且保持引用计数+1，好像同一种类型一样。
@@ -86,14 +86,14 @@ int main () {
 }
 \end
 
-<hr>
+
 \section 关于shared_ptr用于函数形参的思考
 
 shared_ptr作为形参，当实参也是shared_ptr时，使用值传递是没有问题的，传参过程中，引用计数会+1，函数结束后，引用计数-1，没什么毛病。
 
 但是shared_ptr作为形参，同时实参是普通指针时，这样传递，就会导致函数结束时内存被释放。
 
-<hr>
+
 \section issue_undefine_typeinfo Undefined Reference to Typeinfo
 
 在项目中遇到了这样一个问题：C++文件编译都OK，但链接的时候报错：undefined reference to `typeinfo for xxx’。typeinfo是C++中的RTTI(RunTime Type Identification)机制中记录类型信息用的，dynamic_cast和typeid操作符会使用这些信息。
@@ -118,7 +118,7 @@ public:
 
 我遇到的问题类似,现在的项目中需要开启RTTI,链接的外部库是no-RTTI编译的,在现在的工程中重载外部库的带虚函数的类,连接的时候报错.原文说的dirty hack，是对单个文件加编译选项-fno-rtti 。因为我用的外部库是可以开启RTTI的,我用RTTI重新编译一次后,现在的工程不报错啦。
 
-<hr>
+
 \section shared_ptr不能指向this指针
 
 如下代码所示，本身对象b在main()函数结束之后自动析构，同时析构过程会把成员变量中的sp_this指向的对象（也就是自己）先行析构，所以最终会导致析构了两次。
@@ -165,7 +165,7 @@ int main ()
 }
 \endcode
 
-<hr>
+
 \section shared_ptr的空指针
 
 使用nullptr最为方便，或者"return {}"也可以。

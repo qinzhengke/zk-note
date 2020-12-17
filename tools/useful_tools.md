@@ -45,7 +45,7 @@ ffmpeg -i input.jpg -vf scale=320:-1 output_320.png
 \endcode
 其中，-1表示高度根据宽度和长宽比自动计算。
 
-<hr>
+
 \section flameshot flameshot:超强的Ubuntu截图工具
 
 支持窗口截图，并且添加各种涂鸦。
@@ -61,7 +61,7 @@ ffmpeg -i input.jpg -vf scale=320:-1 output_320.png
 3. 点击下方的加号，在弹出来的对话框中，名字随便填，命令填“flameshot gui”，然后快捷键按下print即可。 
 
 
-<hr>
+
 \section tar_example tar工具使用示例
 
 1. 解压文件： tar -zxvf file.tar.gz
@@ -76,7 +76,7 @@ ffmpeg -i input.jpg -vf scale=320:-1 output_320.png
 
 最后文件会被解压到file目录。
 
-<hr>
+
 \section ssr ubuntu下的录屏工具 simple screen recorder
 
 \code{.sh}

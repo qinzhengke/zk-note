@@ -9,21 +9,21 @@ Rust：超严格静态类型语言（精神小伙）{#rust}
 - 在线版本，https://doc.rust-lang.org/book/title-page.html
 - 离线版本，rustup docs --book
 
-<hr>
+
 \section playground
 
 rust官网提供了一个在线编译运行rust代码的工具，即playground，可以不用下载rust到本地，直接在网页端运行rust代码，网站地址为：https://play.rust-lang.org/。
 对于一些小的代码验证，特别的有用。
 C++也早有类似的网站，例如cpp.sh
 
-<hr>
+
 \section rust安全性解决的问题
 
 - Memory leak
 - Double free
 - Data race
 
-<hr>
+
 \section mut
 
 rust非常强调默认immutable的概念，如果定义了一个mut变量，但是没有去mut它，那么编译器会提出警告，提示没有必要定义mut，如下代码所示：
@@ -55,7 +55,7 @@ warning: 1 warning emitted
      Running `target/debug/playground`
 \endcode
 
-<hr>
+
 \section showdow
 
 rust中的变量可以中途被“替换”，例如本来变量a是一个i32，但是可以重写a为String，这种特性叫做“shadow”。
@@ -70,7 +70,7 @@ shadowu有一个小问题，和C++中的override一样，如果出现了拼写�
 
 不知道rust的shadow有没有类似C++的override关键字。
 
-<hr>
+
 \section 编译期间的溢出检查
 
 rust编译器很强，能够在编译期间检查出是否存在类型溢出，有意思的是，这种检查是在语法检查之后进行的，如下代码所示
@@ -141,7 +141,7 @@ thread 'main' panicked at 'attempt to add with overflow', src/main.rs:3:9
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 \endcode
 
-<hr>
+
 \section 整型字面量无法给浮点变量赋值
 
 rust的类型检查真的是非常严格，整型的字面常量都无法给浮点变量赋值，如下代码所示：
@@ -174,7 +174,7 @@ error: could not compile `playground`
 To learn more, run the command again with --verbose.
 \endcode
 
-<hr>
+
 \section ownership三个原则
 
 - Each value in Rust has a variable that's called its owner.

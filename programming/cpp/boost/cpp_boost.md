@@ -2,14 +2,14 @@
 =====================================
 
 
-<hr>
+
 \section 安装方法
 
 \code{.sh}
 sudo apt install libboost-all-dev
 \endcode
 
-<hr>
+
 \section cmake中的使用方法
 
 \code{.cmake}

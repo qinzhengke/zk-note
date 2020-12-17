@@ -1,7 +1,7 @@
 C语言的预处理器{#c_preprocessor}
 =============================
 
-<hr>
+
 \section sharp_in_macro 宏定义中的\#
 
 “\#”（stringizing）是字符串化操作符。其作用是：将宏定义中的传入参数名转换成用一对双引号括起来参数名字符串。
@@ -43,7 +43,7 @@ str=abc
 
    如：str=exapme( abc    def); 将会被扩展成 str="abc def"；
 
-<hr>
+
 \section double_sharp 宏定义中的\#\#
 
 “\#\#”的名称是（token-pasting）符号连接操作符，其作用是将两个宏字符串拼接在一起。
@@ -73,7 +73,7 @@ int main(){
 2.连接后的实际参数名，必须为实际存在的参数名或是编译器已知的宏定义。
 
 
-<hr>
+
 \section 检测当前操作系统
 
 \code{cpp}
@@ -86,7 +86,7 @@ int main(){
 #endif
 \endcode
 
-<hr>
+
 \section 宏在c文件中的作用域
 
 宏定义有时候不一定会在c文件中起作用，如下面的例子所示。

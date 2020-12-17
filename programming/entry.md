@@ -1,7 +1,7 @@
 编程（Programming）{#programming}
 ==================
 
-<hr>
+
 \section 目录
 
 \subpage c

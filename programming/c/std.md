@@ -1,7 +1,7 @@
 C语言标准库{#c_std}
 =================
 
-<hr>
+
 \section 标准库的实现版本
 
 C语言标准库也只是一群大佬定义的一种标准，并没有要求谁或者限制谁来实现，自然和编译器一样，也会有许多的版本。
@@ -14,10 +14,10 @@ C语言标准库也只是一群大佬定义的一种标准，并没有要求谁�
 - Bionic：谷歌为Android操作系统开发的标准库。
 
 
-<hr>
+
 \section stdio stdio.h
 
-<hr>
+
 \subsection printf 中的uint64整数
 使用printf过程中，一定要写对%字符串，之前遇到过一个问题，使用%d来打印一个int64的数是错误的，例如下列代码
 
@@ -28,7 +28,7 @@ printf("%d\n",a); // 错误
 
 实际上，%u，%ld，%lu都不对，在曾经一个ARM平台编译器上，正确的结果是%llu，因为在该平台上，sizeof(long)=sizeof(int)=4，而uint64_t真正的类型是long long，在不同平台时，要注意类型字节数可能不一样。
 
-<hr>
+
 \subsection 怎样printf size_t类型才不会报warning
 \code{c}
 // C89
@@ -44,7 +44,7 @@ printf("foo = %zu\n", foo);
 
 
 
-<hr>
+
 \subsection 彩色规范打印
 
 \code{c}
@@ -97,7 +97,7 @@ FLT_EPSILON=0.00000011920928955078
 DBL_EPSILON=0.00000000000000022204
 \endcode
 
-<hr>
+
 \section 判断数字是否是nan
 
 isnan()函数。

@@ -1,7 +1,7 @@
 从百度Apollo项目看算法软件架构{#cpp_apollo_arch}
 ============================================
 
-<hr>
+
 \section 一个增加算法模块的实例
 
 https://github.com/ApolloAuto/apollo/blob/master/docs/howto/how_to_add_a_new_predictor_in_prediction_module.md

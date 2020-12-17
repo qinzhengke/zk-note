@@ -1,10 +1,10 @@
 C语言构建常见问题{#c_compile_faq}
 ==============================
 
-<hr>
+
 \section 编译常见问题
 
-<hr>
+
 \subsection c_redeclaration 重复声明
 
 具体报错形式：
@@ -17,13 +17,13 @@ error: redeclaration of 'xxx'
 
 - 确保头文件加入#ifdef #define #endif，保证内容只定义一次。
 
-<hr>
+
 \subsection gcc不识别_Bool以及bool类型
 _Bool以及其封装bool，是C99才引入的，如果编译器不识别，有可能是C99选项没有打开，打开C99的方法根据构建系统而不同，需要搜索。
 
 【参考】\ref c99_bool
 
-<hr>
+
 \subsection 加入static修饰符才能提示“unused”
 
 很奇怪，如果不加static修饰符，编译器是不会提示“unused”的警告的，原因是未解之谜。
@@ -33,11 +33,11 @@ static const char * a = "abcdef"; // 警告
 static const char a[] = "abcdef"; //OK
 \endcode
 
-<hr>
+
 \subsection no_rule_make_target No rules to make target
 这个提示表示编译模块时时找不到源代码，检查一下C和C++文件是否在构建脚本中添加进去了。
 
-<hr>
+
 \subsection c_include_opencv core.hpp header must be compiled as c++
 在c文件中include Opencv的hpp头文件就会出现这个问题，因为编译c文件时是使用C编译器编译的，而.c文件是不认识.hpp文件的，实现的方式就是c编译器并未定义__cplusplus宏。按照道理说c文件不应该包含h文件，最好把c文件改成cpp文件。如果硬是不改，在VisualStudio中可以设置compile as c++。在别的环境就不知道怎么搞了。
 
@@ -47,7 +47,7 @@ static const char a[] = "abcdef"; //OK
 
 \section 常见链接问题
 
-<hr>
+
 \subsection c_mul_def multiple definition?
 
 注意，链接时的重复定义和编译时的重复声明不同，清楚的区分能够让我们更快速的定位问题。
@@ -62,7 +62,7 @@ static const char a[] = "abcdef"; //OK
 
 【注意】在头文件中定义变量是不科学的做法，哪怕加入了static防止重复定义，每一个包含了该头文件的源文件生成的obj都会包含该变量，增加了编译时间，并且浪费内存。
 
-<hr>
+
 \subsection unresolved_external_symbol unresolved external symbol？
 
 常见的排查步骤：
@@ -73,7 +73,7 @@ static const char a[] = "abcdef"; //OK
 - 确保包含变量的二进制库的版本和当前编译器版本匹配，包括平台（x86或者x64）、版本（vc08，vc10，vc12，vc14）以及是否调试（debug和release）。
 - 如果使用了QtCreator，尝试着显式地qmake一下，然后再rebuild。
 
-<hr>
+
 \subsection 动态库链接静态库报错
 
 完整的报错信息为：

@@ -57,13 +57,13 @@ spDerived derived = static_pointer_cast < spDerived > ( base );
 spDerived derived = static_pointer_cast <Derived> ( base );
 \endcode
 
-<hr>
+
 \section　初始化的重要性
 一个未初始化的变量，可能导致算法的不正确，要debug很久。
 
 debug方法论，一定要全体打印，不要先入为主地认定某些东西一定正确！
 
-<hr>
+
 \section 定义函数时命名空间使用
 
 定义函数时，即使一开始使用了using namespace，在函数定义处仍然需要使用命名空间+"::"形式进行修饰。

@@ -22,7 +22,7 @@ sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavform
 
 安装完这些依赖，然后重新编译安装opencv，再编译应用程序，就没有问题了。
 
-<hr>
+
 \section VideoWriter无法打开文件
 
 VideoWriter无法打开文件，一些常规原因：

@@ -1,7 +1,7 @@
 C++11中的std::function和std::bind{#cpp11_bind}
 ============================================
 
-<hr>
+
 \section std_function std::function是什么？
 
 大部分网上的文章只讲了作用，但是没讲std::function存在的意义，作用其实很容易理解，无非是把函数调用封装了，最关键是能直接调用为什么要“多此一举”，再封装一次呢？
@@ -55,7 +55,7 @@ int main(int argc, char** argv)
 }
 \endcode
 
-<hr>
+
 \section std_bind std::bind是什么，有何意义？
 
 网上有一篇文章讲解得很好，链接：https://www.jianshu.com/p/e396c1aab4b0
@@ -157,7 +157,7 @@ bool Label::multilineTextWrapByChar()
 }
 \endcode
 
-<hr>
+
 \section std_placeholder std::placeholder
 
 我们知道std::bind会把一个函数转换成另外一个函数，并且形参的个数可能会改变，所以需要所谓的“占位符”去表示新函数中，编号为_i的参数在旧函数那个地方传入。
@@ -187,7 +187,7 @@ function(function,a,b,Y,c,X);
 
 placeholder本身是命名空间，占位符实际上是“_1”，“_2”，“_3”等等。
 
-<hr>
+
 \section std::bind传入引用
 
 普通的&传入引用是无效的，结果仍然是复制传递，必须使用std::ref(a)进行另一种引用，才能真正的引用传递，具体原理还没仔细了解。

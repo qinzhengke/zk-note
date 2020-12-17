@@ -1,7 +1,7 @@
 Eigen：强大的纯头文件线性运算库{#cpp_lib_eigen}
 ==============================
 
-<hr>
+
 \section 安装
 
 \code{bash}
@@ -14,21 +14,21 @@ sudo make install
 # 安装好后，默认的头文件地址在 /usr/local/include/eigen3
 \endcode
 
-<hr>
+
 \section 矩阵的初始化（包括全零阵、单位阵）
 
 
-<hr>
+
 \section 获取子矩阵
 
 参见： https://eigen.tuxfamily.org/dox/group__TutorialBlockOperations.html
 
-<hr>
+
 \section Matrix和C数组之间的转换
 
 参见： https://eigen.tuxfamily.org/dox/group__TutorialMapClass.html
 
-<hr>
+
 \section auto获取矩阵失效？
 
 \code{cpp}
@@ -57,7 +57,7 @@ Matrix
 func(x);    // x传入之后自动cast，变成右值。
 \endcode
 
-<hr>
+
 \section 四元数与欧拉角的转换
 
 \code{.cpp}
@@ -70,7 +70,7 @@ Quaternionf q = AngleAxisf(yaw, Vector3f::UnitZ())
 auto euler = q.toRotationMatrix().eulerAngles(2, 1, 0);
 \endcode
 
-<hr>
+
 \section Eigen中四元数到欧拉角的一个一定要注意的问题
 
 使用这种方式计算的欧拉角的三个角度的范围是[0,pi], [-pi,pi], [-pi,pi]。
@@ -107,7 +107,7 @@ cout<<q.w()<<","<<q.x()<<","<<q.y()<<","<<q.z()<<endl;
 0.707388,0,0,0.706825
 \endcode
 
-<hr>
+
 \section eigen中各种旋转表达之间的转换
 
 代码来自 https://blog.csdn.net/weicao1990/article/details/86148828

@@ -124,7 +124,7 @@ git cherry-pick -m 1 <commit_id>
 git config --global rerere.enabled true
 \endcode
 
-<hr>
+
 \section 如何删除submodule
 
 有的时候不知为何搞错了配置，需要删掉submodule然后再重新添加，然而git中删除submodule没有很简单，而是需要一下五步操作。

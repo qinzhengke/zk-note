@@ -1,7 +1,7 @@
 Qt相关常见问题{#cpp_qt_faq}
 ========================
 
-<hr>
+
 \section 使用Creator创建的控制台程序无任何输出？
 debug时间，2017-09-25 22:20-22:30
 
@@ -12,7 +12,7 @@ debug时间，2017-09-25 22:20-22:30
 
 **教训：**使用qtcreator构建工程时一定要清楚常用的几个参数的含义以及应用，pro文件并不是啥都不用写就能正确配置的。
 
-<hr>
+
 \section qtcreator中开启gcc的c99支持
 \endcode
 QMAKE_CFLAGS += -std=c99

@@ -1,7 +1,7 @@
 Exception vs Error code {#exception_vs_error_code}
 =================================================
 
-<hr>
+
 \section exception优势的地方
 
 【来源】StackOverflow的提问：“Conventions for exceptions or error codes”
@@ -86,7 +86,7 @@ int a = get();
 
 这个话题的结果也很明显，大家更偏向于构造函数，比较契合OOP的精神。
 
-<hr>
+
 \section exception不好的地方
 
 也有人说出了exception不好的地方：
@@ -107,7 +107,7 @@ int a = get();
 
 4. 一些嵌入式项目的exception实现起来不是实时的，甚至工具链都不支持，说白了是高级feature，一旦哪一天代码库想要用到嵌入式设备，几乎是不可能的。
 
-<hr>
+
 \section 其他扩展阅读
 
 - C++标准对于exception的FAQ： https://isocpp.org/wiki/faq/exceptions

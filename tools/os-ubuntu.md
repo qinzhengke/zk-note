@@ -9,7 +9,7 @@ Ubuntu操作系统{#os_ubuntu}
 
 2. 在相同的程序但是不同的窗口之间切换：Windows+'`'
 
-<hr>
+
 \section 设置自启动
 
 本方法只对ubuntu18.04以及以上的版本。
@@ -58,4 +58,3 @@ UUID=xxxxxxx       /media/Work/    auto    defaults 0       2
 
 【注意】如果错误设置无法开，不用惊慌，只要在Ubuntu启动界面，进入recovery模式，然后进入root模式，使用vim编辑/etc/fstab文件即可。
 
-<hr>

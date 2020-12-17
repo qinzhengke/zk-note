@@ -1,7 +1,7 @@
 C语言调试问题{#c_debug_lesson}
 ======================
 
-<hr>
+
 \section printf打印64位整型
 
 不要使用"%d"或者"%u"，这会使得printf只输出变量的低位。
@@ -10,7 +10,7 @@ C语言调试问题{#c_debug_lesson}
 
 别看这错误很小，但是可能让你很长一段时间以为自己的数据来源错了。
 
-<hr>
+
 \section 函数对象（指针）作为实参的的时候一定要其形参是否正确。
 
 libevent库中的evtimer_set宏接收3个参数，如下所示，第一个参数是struct event 对象，第2个参数是回调函数，第三个是万能参数。
@@ -31,7 +31,7 @@ void (*)(evutil_socket_t, short, void *)
 
 要多多使用函数对象，或者函数指针。
 
-<hr>
+
 \section 头文件循环引用
 
 如果存在头文件循环引用，A.h用了类型B.h的B，而B也用了A.h的类型A，那么将会导致的问题：有一个类型将会未定义。
@@ -66,7 +66,7 @@ struct B{int b;}
 A getA();
 \endcode
 
-<hr>
+
 \section 操作符优先级导致的bug
 
 \code{.cpp}

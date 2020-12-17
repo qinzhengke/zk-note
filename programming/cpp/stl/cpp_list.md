@@ -1,7 +1,7 @@
 std::list{#cpp_list}
 ======================
 
-<hr>
+
 \section list容器的倒序访问
 
 \code{.cpp}
@@ -30,7 +30,7 @@ int main ()
 mylist backwards:5 4 3 2 1 
 \endcode
 
-<hr>
+
 \section list容器为空时的迭代结束条件
 容器为空时，begin()==end()，rbegin()==rend()，所以不需要先判断是不是空，直接用rbegin()!=rend()来结束循环是没问题的，
 这能够节省一些不必要的检查代码。
@@ -60,7 +60,7 @@ int main ()
 mylist backwards:
 \endcode
 
-<hr>
+
 \section list容器insert示例
 
 \code{.cpp}
@@ -100,7 +100,7 @@ int main ()
 }
 \endcode
 
-<hr>
+
 \section revserse_iterator的base()函数
 
 \code{.cpp}
@@ -127,7 +127,7 @@ int main () {
 }
 \endcode
 
-<hr>
+
 \section 向空的list插入元素
 \code{.cpp}
 // inserting into a list

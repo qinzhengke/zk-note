@@ -6,7 +6,7 @@ chrono是C++11引入的一个关于时间的标准库。
 
 一个常规的具体应用为计算模块运行耗时，在chrono出现之前，开发者使用第三方库来完成该功能，例如opencv的计时模块。
 
-<hr>
+
 \section 认识clock
 
 \subsection steady_clock
@@ -71,7 +71,7 @@ Time to fill and iterate a vector of 1000000   ints : 0.004200451 s
 Time to fill and iterate a vector of 100000000 ints : 0.260108972 s
 \endcode
 
-<hr>
+
 \section std_duration std::duration
 
 \code{cpp}
@@ -87,7 +87,7 @@ duration表示一个时间间隔（time interval），它由一个抽象的类�
 
 注意，std::ratio是分数，可以表达小于1的数，例如Period选择std::ratio<1,1000>，刚才的例子就变成了10ms。
 
-<hr>
+
 \section time_point
 
 \code{cpp}
