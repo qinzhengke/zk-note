@@ -5,7 +5,27 @@ cmake：C和C++的跨平台构建工具{#cmake}
 \section 我的CMakeLists.txt模板
 
 \code{bash}
+cmake_minimum_required(VERSION 3.10)
 
+project(ha_util_example)
+
+\# vscode与cmake配合时设置gdb调试，默认Debug模式，只有在cmake时加入“-DCMAKE_BUILD_TYPE=Release”参数时才编译Release版本。
+if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
+message("=> cmake ${PROJECT_NAME} in Debug mode")
+set(DEFAULT_BUILD_TYPE "Debug")
+set(CMAKE_CXX_FLAGS_DEBUG "{CMAKE_CXX_FLAGS} -o0 -ggbd")
+add_compile_options(-g)
+endif()
+
+include_directories(../include)
+
+add_executable(report
+    example_report.cc
+)
+
+target_link_libraries(report
+    libha_util
+)
 \endcode
 
 
