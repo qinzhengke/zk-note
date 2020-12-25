@@ -1,6 +1,19 @@
 C++文件IO{#cpp_file_io}
 ======================
 
+\section cpp_fstream_transistion fstream的传参
+
+如果以值传递的方式传递fstream对象，编译器会报错，这是因为fstream没有拷贝构造函数，无法对其进行复制。
+是不是有点熟悉？这就是传说中的单例模式么？
+
+可以使用引用的方式传递fstream。
+
+\section cpp_bind_fstream fstream在std::bind中的传递。
+
+如果根据 \ref cpp_fstream_transistion 进行操作，对于普通函数，是没问题的，但是对于std::bind，又报错了（C++真是太“博大精深”了）。
+
+
+
 \section cpp_binary_file C++中的二进制文件读取
 
 这一小节研究一下c++对二进制文件读写的用法。

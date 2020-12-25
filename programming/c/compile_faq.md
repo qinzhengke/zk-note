@@ -85,3 +85,26 @@ relocation R_X86_64_PC32 against symbol `_ZGVZN4pcpp8LoggerPP11getInstanceEvE8in
 这个问题原因一般是动态库链接了静态库导致的，一般来说动态库是不会链接静态库的，因为动态库遵循引用的规范，不会把静态库塞到自身之中。
 如果是引用别人的库，那要改成引用shared库，如果是引用自己的库，那么在add_library中增加“SHARED”修饰。
 
+\subsection cpp_issue_pthread undefined reference to symbol 'pthread_create@@GLIBC_2.2.5'
+
+使用pthread库，需要编译配置中显示设置。
+
+\code{cmake}
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+
+\endcode
+
+
+\subsection cpp_issue_dso_missing DSO missing from command line
+
+链接过程中，试图通过中间静态库链接进行传递，对于版本<2.2的ld，是可以的，但是对于>=2.2版本的ld，就是不行的。
+
+什么是链接传递，举下面的例子：
+
+1. 一个shared libA，定义了foo()函数
+2. 一个静态库libB，显示链接了libA，
+3. 另一个可执行文件binC，显示地链接libB
+
+那么问：可执行文件binC能否调用foo()函数。
+
+
