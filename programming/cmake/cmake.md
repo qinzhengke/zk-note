@@ -48,6 +48,10 @@ add_executable(helloworld ${helloworld_SRC})
 target_compile_features(my_exe PRIVATE cxx_std_11)
 \endcode
 
+下面这篇文章详细说明了现代写法的细节。
+
+ https://ukabuer.me/blog/more-modern-cmake
+
 方法二（3.11以前，不推荐）：
 \code{cmake}
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -60,6 +64,15 @@ target_link_libraries(exe /usr/local/lib/xxx.so)
 \# 一般情况下使用make install安装的库都文件都放在/usr/local/lib目录。
 \endcode
 
+
+\section find_package引用Eigen3
+
+Eigen3安装的时候，Eigen3Config.cmake文件实际上已经拷贝到系统中，但是该目录无法被cmake的find_package语句感知。
+所以如果想要通过find_package来引用Eigen3，则仍然需要拷贝cmake文件，如下所示
+
+    Eigen3安装（源码安装）后的目录：/usr/local/share/eigen3/cmake/Eigen3Config.cmake
+
+    find_package默认目录：/usr/lib/cmake 或者 /usr/lib/local/cmake
 
 \section  链接OpenCV的库
 \code{cmake}
