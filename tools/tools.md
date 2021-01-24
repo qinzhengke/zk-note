@@ -36,3 +36,5 @@
 \subpage valgrind
 
 \subpage sed
+
+\subpage vmware
