@@ -42,6 +42,21 @@ Eigen::Matrix<float,9,9> a = Eigen::Matrix<float,9,9>::Zero();
 auto a = Eigen::Matrix3f::Zero();
 \endcode
 
+\section AngleAxis用于初始化注意事项
+
+\code{cpp}
+    // 编译错误
+    Matrix3d rot = AngleAxisd(0, Vector3d::UnitZ()) *
+        AngleAxisd(0, Vector3d::UnitY()) *
+        AngleAxisd(0, Vector3d::UnitX());
+
+    // 编译成功
+    Matrix3d rot;
+    rot = AngleAxisd(param.view_euler[2], Vector3d::UnitZ()) *
+        AngleAxisd(param.view_euler[1], Vector3d::UnitY()) *
+        AngleAxisd(param.view_euler[0], Vector3d::UnitX());
+\endcode
+
 \section 传参时MatrixNd到MatrixXd的转换
 
 函数传参时，MatrixNd要转换成MatrixXd，（N表示具体的数字，例如3），编译器会自动转换，但是转换得到的是一个右值，是一个临时变量。
@@ -261,5 +276,21 @@ int main(int argc, char **argv)
     cout << "yaw(z) pitch(y) roll(x) = " << eulerAngle4.transpose() << endl;
  
     return 0;
+}
+\endcode
+
+\section eigen_issue_01  编译报错： no type named Return Type
+
+带有模板的报错通常都是一大堆输出刷屏，很难从报错的字面上看出问题是什么，这个问题的原因则是两个矩阵操作时，类型不一样。
+比如一个float型，一个是double型。
+
+\section block_with_template Mat::block()与模板类的组合使用方法
+
+对模板类Mat对象调用block()方法，会直接报错，需要一些独特的调用方法，比较少见。
+
+\code{cpp}
+void Pack::applyTransform(Eigen::Matrix<T,4,4> mat){
+    Matrix<T,3,3> R = mat.template block<3,3>(0,0);
+    Matrix<T,3,1> t = mat.template block<3,1>(0,3);
 }
 \endcode

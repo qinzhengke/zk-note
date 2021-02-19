@@ -42,6 +42,36 @@ int main() {
 
 【注意】const修饰函数体是C++才有的特性，这里只讨论C语言的内容，不要给搞混了。
 
+\subsection const_member_fucntion_return_ref const函数不能返回引用
+
+如题，const函数不能返回引用，因为这样的行为会给予用户代码修改内部变量的机会，同样不符合const的原则。
+下面的代码展示了这样错误的案例，编译器会报错。
+
+\code{cpp}
+
+struct A{
+    int data[1];
+    int & x() const{
+        return data[0];
+    }
+};
+
+int main()
+{
+    A a;
+    a.x() = 2;
+    printf("%d\n", a.x(0));
+}
+
+\endcode
+
+编译器报错如下所示：
+\code{bash}
+ In member function 'int& A::x() const':
+8:22: error: invalid initialization of reference of type 'int&' from expression of type 'const int'
+\endcode
+
+所以，const修饰函数，影响仅仅是承诺函数体不修改成员变量是不够的，还有不能返回成员变量的引用。
 
 
 \subsection const常量和字面常量（Literal）的区别

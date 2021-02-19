@@ -166,3 +166,21 @@ a = numpy.append(a, 2)  # 别忘了给a赋值
 a = numpy.delete(a,-1)  # 删除最后一个元素，
 \endcode
 
+\section 一个坑点
+
+遇到一个python的坑点，当变量名拼写错误时，解释器并没有提示未定义变量，而是直接抛出错误。
+搞了半天不知道为啥调用len()也能抛出错误，后来才这是拼写错误造成的，（“fields”错误地拼写成了“fileds”）。
+未定义的变量直接使用，解释器不提示未定义，直接抛出没有任何信息的错误，这就不靠谱。
+但是在playground下实验，解释器是能提示未定义变量的，有点搞不懂。
+
+\code{python}
+
+### Use this space to try out ideas and free code ###
+fields = ["a", "b", "c"]
+
+try:
+  if(len(fileds) == 3):
+      print("len=3")
+except IOError:
+    print("error")
+\endcode

@@ -277,3 +277,27 @@ step 2: 按照如下方式添加include path。
 \endcode
 
 注意：由于这个设置是针对于vscode的，对于任何工程，这个路径都会自动添加。
+
+\subsection python调试设置
+
+\code{json}
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Evaluate",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "args":["01"],
+            "cwd": "${fileDirname}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
+\endcode
+
+指定python版本：键入“ctrl+p” -> 输入“> Python: select intepreter”，然后选择期望的版本，3.6或者2.7。

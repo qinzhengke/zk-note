@@ -113,3 +113,8 @@ Duartion可以选择对应的数值类型和周期。
 
 要说明的就是duaration要定义个Rep来表示数值的类型，示例中使用了double。
 
+
+\section chrono_numeric_literal chrono中的数值字面量（numeric literal）
+
+也就是“auto a=100ms，b=200ms”这种写法。
+TODO：进一步研究。
