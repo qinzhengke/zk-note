@@ -17,3 +17,4 @@ C++11{#cpp11}
 
 \subpage cpp11_others
 
+\subpage cpp11_std_ref
