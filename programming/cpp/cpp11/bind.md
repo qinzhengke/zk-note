@@ -188,6 +188,6 @@ function(function,a,b,Y,c,X);
 placeholder本身是命名空间，占位符实际上是“_1”，“_2”，“_3”等等。
 
 
-\section std::bind传入引用
+\section std_bind_ref 【坑点】std::bind传入引用“&”失效
 
-普通的&传入引用是无效的，结果仍然是复制传递，必须使用std::ref(a)进行另一种引用，才能真正的引用传递，具体原理还没仔细了解。
+普通的&传入引用是无效的，结果仍然是复制传递，必须使用std::ref(a)进行另一种引用，才能真正的引用传递，具体原理还没仔细了解，参见： \ref cpp11_std_ref

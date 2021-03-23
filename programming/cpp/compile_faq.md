@@ -372,3 +372,14 @@ target_link_library(exe
 \code{cpp}
 #include <boost/thread.hpp>
 \endcode
+
+
+\section error_jump_to_case_label Error: Jump to case label.
+
+报错提示：
+
+\code{bash}
+Error: Jump to case label, crosses initialization of xxx
+\endcode
+
+原因，不同的case之间定义相同名称的变量。

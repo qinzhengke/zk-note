@@ -1,33 +1,5 @@
-cmake：C和C++的跨平台构建工具{#cmake}
+其他问题{#cmake_others}
 =================================
-
-
-\section cmake_template 我的CMakeLists.txt模板
-
-\code{cmake}
-cmake_minimum_required(VERSION 3.10)
-
-project(ha_util_example)
-
-# vscode与cmake配合时设置gdb调试，默认Debug模式，只有在cmake时加入“-DCMAKE_BUILD_TYPE=Release”参数时才编译Release版本。
-if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
-message("=> cmake ${PROJECT_NAME} in Debug mode")
-set(DEFAULT_BUILD_TYPE "Debug")
-set(CMAKE_CXX_FLAGS_DEBUG "{CMAKE_CXX_FLAGS} -o0 -ggbd")
-add_compile_options(-g)
-endif()
-
-include_directories(../include)
-
-add_executable(report
-    example_report.cc
-)
-
-target_link_libraries(report
-    libha_util
-)
-\endcode
-
 
 \section 添加目录里所有源文件
 
@@ -246,6 +218,36 @@ C可能是一个很底层的模块，例如基础组件规范化打印．
 +endif()
 \endcode
 
+\section 依赖option
+
+通过option我们可以进行选择编译，但是比起最基本的单个option，我们也会需要复杂一点的操作，例如BUILD_ALL选项和BUILD_A选项，两者只有有一个开，就编译A模块。
+
+然而，选项是无法进行or操作的，cmake这蛋疼的设计。。。
+
+\code{cmake}
+
+option(BUILD_ALL OFF)
+option(BUILD_A OFF)
+
+if(BUILD_ALL or BUILD_A)    #cmake不认这样的语句
+...
+endif()
+
+\endcode
+
+为此，cmake提供了另一种解决方案，依赖option
+
+\code{cpp}
+include(CmakeDependentOption)   # 一定要加入，否则cmake不识别，官网的文档还没提到这点，不得不说cmake官方文档真的不友好。
+option(BUILD_ALL OFF)
+option(BUILD_A OFF)
+cmake_dependent_option(BUILD_A_FINAL "Some description text" OFF "NOT BUILD_ALL; NOT BUILD_A" ON)
+if(BUILD_A_FINAL)
+endif()
+\endcode
+
+含义是，如果BUILD_ALL是OFF，BUILD_A也是OFF，那么BUILD_A_FINAL才是OFF，也就是说BUILD_A_FINAL = BUILD_ALL or BUILD_A
+这种特殊写法很绕，而且看起来很像是临时补丁，特别的丑陋，对比rust家庭的cargo，完全不一样。
 
 
 \section 静态库

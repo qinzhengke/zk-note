@@ -301,3 +301,8 @@ step 2: 按照如下方式添加include path。
 \endcode
 
 指定python版本：键入“ctrl+p” -> 输入“> Python: select intepreter”，然后选择期望的版本，3.6或者2.7。
+
+
+\subsection vscode_create_c_cpp_prop 如何生成c_cpp_properties.json文件？
+
+ctrl+shift+P，输入“C/C++:Edit configurations”，一般来说输入前面几个字符vscode就会自动弹出目标了。

@@ -365,3 +365,10 @@ C语言头文件不管是放在工程内部还是工程外部都可以include，
 举个例子，a.h是工程部内的，b.h是工程外部的，main.cpp里面把这两个头文件都include了，工程pro（qtcreator）文件里包含了opencv的库目录。
 那么打开a.h时输入“include <opencv.....”，此时creator会自动补全，但是在b.h中输入则没有任何反应，这就是目前发现的一个区别。
 但是我估计实际编译的时候应该没有问题，这只是IDE的识别问题而已。
+
+
+\subsection QObject的多重继承？
+
+很遗憾，在Qt中，一个类是无法从多个基于QObject的类派生的，moc源文件编译会报错。
+
+> 参考：If you are using multiple inheritance, moc assumes that the first inherited class is a subclass of QObject. Also, be sure that only the first inherited class is a QObject.

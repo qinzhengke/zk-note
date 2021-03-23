@@ -55,3 +55,41 @@ B deconst
 A deconst
 A deconst
 \endcode
+
+\section 构造函数的参数隐式转换为对象
+
+C++原来一直可以将构造函数的参数直接隐式转换成对象，如下代码所示，C++98就行。
+
+\code{cpp}
+// Example program
+#include <iostream>
+#include <string>
+
+struct A{
+    A(int x) : x_(x){ }
+    int x_;
+};
+
+void func(A a){
+    printf("%d\n", a.x_);
+}
+
+int main(){
+    func(5);
+    A a2 = 6;
+    func(a2);
+}
+
+\endcode
+
+运行结果：
+
+\code
+5
+6
+\endcode
+
+乍一看挺神奇的，从没有这么写过。
+如果不了解这种特性，那么有的时候出现问题可能一下子反应不过来。
+
+举个例子
