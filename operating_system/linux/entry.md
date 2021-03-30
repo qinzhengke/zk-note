@@ -1,4 +1,4 @@
-操作系统：Linux{#os-linux}
+Linux{#os_linux}
 =====================
 
 这个页面主要记录一些Linux操作系统的知识

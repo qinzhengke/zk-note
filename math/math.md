@@ -1,4 +1,4 @@
-数学基础{#math}
+数学基础（Mathematics Fundamental）{#math}
 =============
 
 \subpage math_fundarmental

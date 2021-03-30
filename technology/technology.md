@@ -1,4 +1,4 @@
-技术{#technology}
+其他技术（Other Technologies）{#other_technologies}
 =================
 
 @subpage rfid

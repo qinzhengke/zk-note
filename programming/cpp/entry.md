@@ -37,6 +37,8 @@ C++：青出于蓝，我斑愿称之为最强！{#cpp}
 
 \subpage cpp_debug
 
+\subpage cpp_symbol
+
 \subpage sparse_matrix
 
 \subpage cpp_questions

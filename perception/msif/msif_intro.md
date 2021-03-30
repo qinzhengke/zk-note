@@ -1,4 +1,4 @@
-多传感器信息融合（MSIF）{#msif_intro}
+多传感器信息融合（Multiple Sensor Information Fusion）{#msif_intro}
 =================================
 
 

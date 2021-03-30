@@ -3,11 +3,13 @@
 
 \subpage math
 
-\subpage algorithm
-
-\subpage cv
+\subpage ds_algorithm
 
 \subpage estimation_theory_entry
+
+\subpage computer_vision
+
+\subpage point_cloud
 
 \subpage msif_intro
 
@@ -15,10 +17,14 @@
 
 \subpage programming
 
-\subpage technology
+\subpage operating_system
+
+\subpage block_chain
+
+\subpage astronomy_entry
+
+\subpage other_technologies
 
 \subpage tools
 
 \subpage online_tools
-
-\subpage astronomy_entry

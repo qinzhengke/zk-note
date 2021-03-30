@@ -26,3 +26,13 @@ If you want to write multiple messages to a single file or stream, it is up to y
 基于protobuf的streaming类型文件的相关设计有一个专门的词汇来描述：“length-delimiting messages”，或者“delimited streaming format”
 
 > https://medium.com/@seb.nyberg/length-delimited-protobuf-streams-a39ebc4a4565
+
+\section 如何在cmake中自动执行protoc生成pb.h和pb.cc
+
+\code{bash}
+INCLUDE(FindProtobuf)
+FIND_PACKAGE(Protobuf REQUIRED)
+INCLUDE_DIRECTORIES(${PROTOBUF_INCLUDE_DIR})
+PROTOBUF_GENERATE_CPP(PROTO_SRC PROTO_HEADER message.proto)
+ADD_LIBRARY(proto ${PROTO_HEADER} ${PROTO_SRC})
+\endcode

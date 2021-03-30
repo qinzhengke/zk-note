@@ -44,3 +44,5 @@ int main(){
 {1,2.1,}
 \endcode
 
+
+\section list_init_narrow List Initialization 

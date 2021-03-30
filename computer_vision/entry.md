@@ -1,4 +1,4 @@
-计算机视觉(CV){#cv}
+计算机视觉（Computer Vision）{#computer_vision}
 =================
 
 \subpage feature_entry

@@ -147,4 +147,39 @@ int main(void){
 
 \section 模板类的继承
 
+带有模板的派生类无法直接访问带有模板的基类成员变量！
+
+\code{cpp}
+// Example program
+#include <iostream>
+#include <string>
+
+template<typename T>
+struct Base{
+    T x = 0;
+};
+
+template<typename T>
+struct Derived : public Base<T>{
+    Derived(){
+        std::cout<<x<<std::endl;
+    }
+};
+
+int main()
+{
+    Derived a;
+}
+
+\endcode
+
+编译结果如下：
+\code{bash}
+In constructor 'Derived<T>::Derived()':
+13:20: error: 'x' was not declared in this scope
+ In function 'int main()':
+19:13: error: missing template arguments before 'a'
+ 
+\endcode
+
 \section 模板类的常见误区

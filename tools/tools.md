@@ -1,19 +1,9 @@
-工具{#tools}
+工具笔记（Tools Note）{#tools}
 ===========
 
 \subpage tool_list
 
-\subpage os-linux
-
-\subpage os_ubuntu
-
-\subpage docker
-
 \subpage gnome
-
-\subpage os-lubuntu
-
-\subpage os-windows
 
 \subpage git
 
@@ -37,4 +27,4 @@
 
 \subpage sed
 
-\subpage vmware
+\subpage google_sheets

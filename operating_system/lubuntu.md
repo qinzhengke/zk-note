@@ -1,4 +1,4 @@
-Lubuntu{#os-lubuntu}
+Lubuntu{#os_lubuntu}
 ===========================
 
 \subsection 安装Lubuntu注意事项
