@@ -58,3 +58,18 @@ UUID=xxxxxxx       /media/Work/    auto    defaults 0       2
 
 【注意】如果错误设置无法开，不用惊慌，只要在Ubuntu启动界面，进入recovery模式，然后进入root模式，使用vim编辑/etc/fstab文件即可。
 
+
+\section ubuntu_issue_stuck ubuntu18.04卡在登录界面，鼠标动不了
+
+又遇到一个坑点，重启后卡在登录界面，鼠标和键盘没有响应，界面本身是没有卡死的，因为界面上的时间会发生变化。
+
+网上的一个解决方法，也不知道原理，不想探究了。
+
+1. 先回到操作系统选择界面，选择recovery模式登录
+2. recovery模式默认不开网络，需要在recovery界面选择“enable network”
+3. 选择“root”，进入系统。
+4. 输入以下命令
+
+```
+sudo apt install xserver-xorg-input-all
+```

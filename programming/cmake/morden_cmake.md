@@ -1,10 +1,21 @@
-其他问题{#cmake_others}
+现代cmake{#cmake_others}
 =================================
+
+cmake是一个历史悠久的工具，一直在反复迭代，很多特性已经被丢弃，甚至认为是不好的。
+cmake近几年也在倡导更优雅的使用方式，即诞生了“现代cmake”，所以我们在使用cmake的时候，同一个目的往往有多种实现方法，每种方法多多少少有些不用，非常地混乱。
+所以选择现代cmake使用方法成为了必要，一些非现代写法，就不再记录，以免带来记忆负担。
+
+下面这篇文章详细说明了现代写法的细节。
+https://ukabuer.me/blog/more-modern-cmake
+
+\section 现代cmake的版本
+
+至少是3.12开始。
 
 \section 添加目录里所有源文件
 
 \code{.cmake}
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.12)
 file(GLOB helloworld_SRC
     "*.h"
     "*.cpp"
@@ -15,22 +26,40 @@ add_executable(helloworld ${helloworld_SRC})
 
 \section cmake_cpp11 C++11标准的引用
 
-方法一（3.11之后，现代写法，推荐）：
 \code{cmake}
 target_compile_features(my_exe PRIVATE cxx_std_11)
 \endcode
 
-下面这篇文章详细说明了现代写法的细节。
-
- https://ukabuer.me/blog/more-modern-cmake
-
-方法二（3.11以前，不推荐）：
-\code{cmake}
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-\endcode
-
 
 \section 库文件的一般基本引用方法
+
+步骤1：使用find_package()
+来查找相应的库。find_package依赖find.cmake或者config.cmake文件。
+一般来说，如果库的作者也使用cmake来构建，那么一般make install的时候，config.cmake文件会被拷贝到
+/usr/lib/cmake，或者/usr/local/lib/cmake，装在哪里取决于INSTALL时候的PREFIX参数。
+
+如果库的作者没有提供config.cmake文件，则可以找第三方的Config.cmake文件，如果实在还是没有，可以自己编写。
+
+步骤2：target_link_libraries()
+链接的时候，需要找到依赖库的target名称，这个名称是一个坑点，它可能和库的名字不太一样，并且网上没有看到教我们如何找到target名称的资料，一般的教程上来就是授人以鱼，下次遇到别的库，还得再次搜索。
+
+举个例子，引用ZeroMQ库，链接配置如下所示：
+
+```
+target_link_libraries(my_lib PRIVATE libzmq)
+```
+
+这个“libzmq”到底是怎么来的？以后引用别的库的时候应该如何查找？
+
+这个“libzmq”是在ZeroMQTargets.cmake中定义的，如果将Targets.cmake中的target名改名成xxx，那么我们的target_link_libraries()填入xxx时，同样能够链接成功，请自行实验。
+
+\subsection 不好的方法
+
+下面是最直白的引用方法，直接提供so文件的路径，但是这种写法很差，设想一下，当同事尝试编译我们的代码时，so文件的路径未必和我们的环境相同。
+此时，使用者只能修改CMakeLists.txt文件。当同事在我们的基础上修改了代码，提交commit时，面对CMakeLists.txt中的so文件路径。
+他面临两种选择：一是保留他的设置，把改动推到主干，这时候我们使用他更新后的代码就会出问题。二是他手动撤回他的本地改动，这样做很繁琐，当提交次数多的时候会带来负担，并且很容易忘记。
+不论哪种选择，都不是最好的方法。
+
 \code{cmake}
 target_link_libraries(exe /usr/local/lib/xxx.so)
 \# 一般情况下使用make install安装的库都文件都放在/usr/local/lib目录。
@@ -154,7 +183,13 @@ target_compile_features(opt_demo PRIVATE cxx_std_11)
 \endcode
 
 
-\section cmake_config_find config文件和find文件。
+\section cmake_find_package config文件和find文件。
+
+CMake 对 Config file 的命名是有规定的，对于find_package(ABC)这样一条命令，CMake 只会去寻找ABCConfig.cmake或是abc-config.cmake。
+CMake 默认寻找的路径和平台有关，在 Linux 下寻找路径包括/usr/lib/cmake以及/usr/lib/local/cmake，在这两个路径下可以发现大量的 Config File，一般在安装某个库时，其自带的 Config file 会被放到这里来。
+
+注意，Config.cmake文件不能直接放在这些目录下，而是必须新建子目录，否则cmake无法识别，例如最终这样放置“/usr/lib/cmake/MyLib/MyLibConfig.cmake”
+这点很坑，网上找不到说明，cmake官方文档太乱，找不到有用信息。
 
 这里引用网络博客的一段话：
 > Config file看似十分美好，由开发者编写CMake脚本，使用者只要能找到Config file即可获取到库的usage requirement。 但现实是，并不是所有的开发者都使用CMake，很多库并没有提供供CMake使用的Config file，但此时我们还可以使用Find file。

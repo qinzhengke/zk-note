@@ -7,6 +7,8 @@
 
 \subpage estimation_theory_entry
 
+\subpage data_association
+
 \subpage computer_vision
 
 \subpage point_cloud
