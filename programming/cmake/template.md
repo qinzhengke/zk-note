@@ -2,7 +2,11 @@ CMakeLists.txt模板{#cmake_template}
 ==================================
 
 
-\code{cmake}
+\hmtlonly
+<script src="highlight/highlight.pack.js"></script>
+<link rel="stylesheet" href="highlight/styles/default.css">
+<script>hljs.highlightAll();</script>
+<pre><code class="CMake">
 
 # 现代cmake版本
 cmake_minimum_required(VERSION 3.12)
@@ -63,4 +67,5 @@ target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
 set_target_properties(${PROJECT_NAME} PROPERTIES
     VERSION ${FULL_VERSION})
 
-\endcode
+</code></pre>
+\endhtmlonly

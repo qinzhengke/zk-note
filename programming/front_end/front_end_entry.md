@@ -16,3 +16,5 @@ Web前端：UI的开发趋势{#front_end}
 \subpage js_debug
 
 \subpage browser_udp
+
+\subpage js_highlight

@@ -16,6 +16,8 @@ then
         cp -r figures build/html/
         echo "[zk] Copying MathJax ..."
         cp -r ./3rd-party/MathJax-2.7.8 ./build/html/
+        echo "[zk] Copying code highlighter ..."
+        cp -r ./3rd-party/highlight ./build/html/
     fi
 
     if [ $1 == '--release' ]
