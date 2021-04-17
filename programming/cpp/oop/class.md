@@ -1,6 +1,62 @@
 C++中的类和对象{#cpp_class}
 ========================
 
+\section cpp_class_static_member 类中的静态成员变量的定义
+
+\code{cpp}
+#include <cstdio>
+
+class A{
+    public:
+    A(){}
+    static int count;
+};
+int A::count = 0;
+
+int main(void){
+    A a;
+    printf("%d\n",a.count);
+    return 0;
+}
+\endcode
+
+\section base_member_in_constructor 派生类构造函数中不能调用基类成员函数
+
+\code{cpp}
+
+// Example program
+#include <iostream>
+#include <string>
+
+class Base{
+    void print(){
+        printf("Base::print()\n");
+    }
+};
+
+class Derived{
+public:
+    Derived(){
+        print();
+    }
+};
+
+int main()
+{
+    Derived a;
+}
+
+\endcode
+
+运行结果：
+
+\code
+ In constructor 'Derived::Derived()':
+14:15: error: 'print' was not declared in this scope
+\endcode
+
+
+
 \section 基类和派生类的构造与析构函数执行顺序是什么？
 
 情况一：在普通情况，即非多态方式销毁对象下，

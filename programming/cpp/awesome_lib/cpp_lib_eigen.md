@@ -29,7 +29,9 @@ sudo make install
 参见： https://eigen.tuxfamily.org/dox/group__TutorialMapClass.html
 
 
-\section auto获取矩阵失效？
+\section eigen_auto 使用auto定义Eigen相关的变量得到右值？
+
+使用auto定义Eigen相关的变量时候，有时候会得到右值，这些右值无法被赋值，但是使用类型来定义就成了左值。
 
 \code{cpp}
 // 编译失败
@@ -40,6 +42,17 @@ Eigen::Matrix<float,9,9> a = Eigen::Matrix<float,9,9>::Zero();
 
 // 编译成功
 auto a = Eigen::Matrix3f::Zero();
+\endcode
+
+再例如，
+
+\code{cpp}
+    auto mat1 = Eigen::Matrix<T,4,4>::Identity();
+    // 下面语句报错：lvalue_operand error: lvalue required as left operand of assignment
+    mat1(0,3) = 1;
+
+    Eigen::Matrix<T,4,4> mat2 = Eigen::Matrix<T,4,4>::Identity();
+    mat2(0,3) = 1; // 编译通过
 \endcode
 
 \section AngleAxis用于初始化注意事项

@@ -1493,7 +1493,7 @@ h1 {
 	box-shadow: 5px 5px 5px #505050;
 	padding-left: 5px;
 	border-radius: 5px;
-	counter-reset: h2counter;
+	counter-reset: h2;
 	margin-top: 30px;
 }
 

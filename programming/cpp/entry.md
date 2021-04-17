@@ -9,6 +9,8 @@ C++：青出于蓝，我斑愿称之为最强！{#cpp}
 - cpp.sh：一个很界面很简单，看起来很“官方”的playground，好用，但是存在偶尔阻塞不响应的问题。
 - wandbox.org：另一个很不错的playground，从UI看起来像是日本团队开发的。
 
+\subpage cpp_build_errors
+
 \subpage cpp_qualifier
 
 \subpage cpp_oop

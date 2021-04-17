@@ -1,6 +1,27 @@
 C++文件IO{#cpp_file_io}
 ======================
 
+\section 使用stream来输出浮点数值
+
+默认只输出前6位有效数字，在数值较大且精度要求较高的场景，会出现问题，要记住。
+
+\code{cpp}
+#include <cstdio>
+#include <iostream>
+int main(){
+    double x = 12345678.1234;
+    printf("printf(x)=%f\n", x);
+    std::cout<<"cout(x)"<<x<<std::endl;
+}
+\endcode
+
+运行结果：
+
+```
+printf(x)=12345678.123400
+cout(x)1.23457e+07
+```
+
 \section cpp_fstream_transistion fstream的传参
 
 如果以值传递的方式传递fstream对象，编译器会报错，这是因为fstream没有拷贝构造函数，无法对其进行复制。

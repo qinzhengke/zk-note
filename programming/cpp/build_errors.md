@@ -1,0 +1,245 @@
+C++构建报错合集{#cpp_build_errors}
+================================
+
+\section 编译篇
+
+\subsection no_rule_to_make No rule to make xxx.cpp 或者 xxx.so
+
+- 如果提示无法make cpp源文件，那么一般情况是找不到在CMakeLists.txt中列出的文件，检查一下路径和文件名即可。
+- 如果提示无法make xxx.so文件，特别是找不到第三方库，例如/usr/lib/xxx.so之类的，一般都是cmake缓存出现了问题，清空cmake缓存（删除CMakeCache.txt,CMakeFiles,MakeFile,cmake_install.cmake这几个文件）。
+
+\subsection discards_qualifiers passing ‘const xxx’ as ‘this’ argument discards qualifiers
+
+首先确认一点，什么是“qualifiers”？
+注意，通常来说，使用英文来表达的对象，含义都很明确
+“qualifiers”表示类型的修饰符，它目前只包含这三种：
+
+- const，也就是我们常说的常量修饰符
+- volatile，用的比较少，表示修饰的变量在后面随时会改变，强制编译器使用变量地址数据，否则编译器会自行根据代码情况进行优化，例如基于寄存器缓存。具体使用场景自行探索。
+- mutable，用的也比较少，根据cppreference的定义，用mutable定义的成员变量，那么它是可以改变的，即使其container是const的！似乎破坏了const的法则，具体使用场景自行探索。
+
+所以说，如果错误提示出现了“qualifiers”相关的内容，那么一定就上述几个修饰符的问题。第二个和第三个修饰符很少用，那么一般情况下，都是const的问题。
+“discards qualifiers”表示丢弃了修饰符，咋一看不太懂，实际上它表达的是在函数传递的过程中修饰符被丢弃了，或者函数内部出现了矛盾现象。
+
+举个最常见的例子，下面代码展示了一个案例，试图定义一个二维向量类，通过x()和y()访问具体分量，注意这些接口是可以修改成员变量的，因为返回的是引用。
+但是在企图通过add()函数将两者相加时，传入的是const的父对象，这时一个const对象调用一个可以修改对象成员变量的成员函数，即x()和y()，就是矛盾，最终导致报错。
+
+\code{cpp}
+#include <cstdio>
+struct Vec{
+    int data[2];
+    int & x(){
+        return data[0];
+    }
+    int & y(){
+        return data[1];
+    }
+};
+
+Vec add(const Vec& a, const Vec&b){
+    Vec s;
+    s.x() = a.x() + b.x();  // a和b是const的，但是x()和y()接口是可以修改成员变量的。
+    s.y() = a.y() + b.y();
+    return s;
+}
+
+int main()
+{
+    Vec a,b,c;
+    a.x() = 1;
+    a.y() = 2;
+    b.x() = 3;
+    b.y() = 4;
+    c = add(a,b);
+    
+    printf("a+b=(%d,%d)\n", c.x(),c.y());
+}
+
+\endcode
+
+编译报错：
+\code
+ In function 'Vec add(const Vec&, const Vec&)':
+14:17: error: passing 'const Vec' as 'this' argument of 'int& Vec::x()' discards qualifiers [-fpermissive]
+14:25: error: passing 'const Vec' as 'this' argument of 'int& Vec::x()' discards qualifiers [-fpermissive]
+15:17: error: passing 'const Vec' as 'this' argument of 'int& Vec::y()' discards qualifiers [-fpermissive]
+15:25: error: passing 'const Vec' as 'this' argument of 'int& Vec::y()' discards qualifiers [-fpermissive]
+\endcode
+
+实际上，线性代数代码库Eigen存在同样的“问题”，如果传入一个const修饰的Vector，那么调用x()或者其他类似接口时，同样会报这个错误。
+产生这个“问题”的原因是我们试图通过一个接口既能读数据，又能写数据，并且还想传入的父对象是const修饰的，其中写数据和const父对象产生了矛盾。
+
+解决的方法可以和Eigen一样，不要使用const修饰父对象，或者关于变量的读和写接口分开，例如getX()，setX()等等。
+对于向量的设计这个案例，我选择和Eigen一样，毕竟x()和y()这种分量在数学表达中要大量重复使用，getX()和setX()这些接口，明显太啰嗦。
+
+\subsection memcpy_overflow will always overflow destination buffer.
+
+gcc编译memcpy的时候，如果目标地址是一个固定大小的静态的数组，那么编译器会检查copy的size是否会超过这块静态数组的大小，超出了就会报出错误，不得不说编译器做得非常不错。
+
+\subsection ref_deleted_func Attempting to refer a deleted function 
+
+这里的deleted表示构造函数被delete掉了。
+
+这个问题常常出现在使用std::fstream时，fstream类的构造函数只允许传入引用而不允许拷贝。
+如果将ifstream或者ofstream对象作为参数传入函数，那么传入时，一定要使用引用方式，否则就会报出这个错误。
+这个报错没那么直接，编译器不会是说没有用传入，而是在函数调用的时候说调用的函数是被删除过的。
+
+\subsection template_c_linkage Template with C linkage
+
+extern C 封装起来的代码包含C++的template特性。
+
+\subsection request_for_member request for member xxx in something not a structure or union
+
+本身的含义是使用“.xxx”表达式时，“.”前面的的内容不是一个结构体或者联合。
+具体可能出现的场景：
+
+1.指针错误的使用了“.”来访问成员。
+2.C99中使用designated initializer时，有成员没有逗号，在git解决冲突的时候常常遇到这个问题。
+
+\endcode
+struct A{int a, int b};
+A x = {
+ a = 10 // 解冲突时忘记了逗号，
+ b = 20,
+\endcode
+
+\subsection extra_qualification extra qualification
+
+qualification是指双冒号符“::”，而“extra qualification”则一般出现在类中函数定义的时候重复用“类名::函数名”进行时声明。
+
+\subsection error_jump_to_case_label Error: Jump to case label.
+
+报错提示：
+
+\code{bash}
+Error: Jump to case label, crosses initialization of xxx
+\endcode
+
+原因，不同的case之间定义相同名称的变量。
+
+\subsection cpp_comp_issue_01 error: new types may not be defined in a return type
+
+结构体、联合体定义的时候结尾忘记加“;”就会出现该报错。
+
+\subsection undefined_vtable undefined reference to `vtable for xxx'
+
+字面上的意思是找不到虚函数表，可能的原因是：
+
+1. 带有虚函数的基类的析构函数没有设置为virtual，原因参见 \ref virtual_desctructor 。
+
+
+\subsection does_not_name_type 'xxx' does not name a type
+
+表示没有该符号类型没有定义，一般来原因有可能是
+
+1. 名称拼写错误
+2. 头文件未包含
+3. 命名空间不正确
+
+\subsection expect_class_name error: expected class-name before ‘{’ token
+
+字面意思是在“{”字符前面的必须是一个类名称，一般来说原因有可能是
+
+1. 名称拼写错误
+2. 头文件未包含
+3. 命名空间不正确
+
+\subsection invalid_new_abstract error: invalid new-expression of abstract class type ‘xxx’
+
+
+\subsection invalid_operand error: invalid operands of types ‘<unresolved overloaded function type>’ and ‘int’ to binary ‘operator<’
+
+可能的原因是：
+
+1. 调用Eigen库中的带模板的Matrix<T,x,x>::block，解决方法参见： \ref block_with_template 。
+
+
+\subsection non_class_type error: request for member ‘x’ in ‘yyy’, which is of non-class type ‘zzz’
+
+
+
+\subsection lvalue_operand error: lvalue required as left operand of assignment
+
+字面含义是等号的左边必须是左值，不能是右值，一般很明显的右值（例如常量，返回值）我们是会避免的，但是有时候就不是很明显。
+
+1. Eigen中使用auto定义变量，发现得到的变量竟然是右值，而使用类名定义，得到的才是左值，具体参见 \ref eigen_auto
+
+
+\subsection no_declar error: ‘setX’ was not declared in this scope, and no declarations were found by argument-dependent lookup at the point of instantiation [-fpermissive]
+
+字面含义是没有声明对应的符号。
+
+1. 派生类构造函数调用基类的成员函数，参考 \ref  base_member_in_constructor
+
+
+
+
+
+\section 链接篇
+
+\subsection cpp_undefined_reference undefined reference to `xxx'
+
+报错的字面含义是链接时找不到对应的符号，符号有可能是变量或者函数，其原因有以下可能。
+
+1. 被调用的符号声明了，但是没有定义，或者出现拼写错误导致声明和定义名称不相同。
+2. 对于类的static成员，需要在class体外部显示定义，参考 \ref cpp_class_static_member 
+
+\subsection unresolved_symbol error LNK2019: unresolved external symbol "xxx"
+
+和undefined reference是一样的，只不过是换成了VC编译器的提示。这里说一个使用VC编译器会触发该报错的原因：
+
+在VS下，函数明明存在为什么还是报出unresolved symbol错误?可能是字符集问题！
+特别是将不同操作系统下的文件进行混用的时候！通通，通通，通通改成多字节字符。
+
+在VS环境下，下如果是main.cpp、a.h和a.c这种组合一定会出问题，可以试一试。
+注意，这里a.c是C语言写的，用于板子上的程序，不能有c++的特性，但是main.cpp可以，因为会用到第三方库进行显示，例如用Opencv读取、显示和保存图片。
+解决方法，在project property的C++/Advanced中，Complie as一项从default改成as c++。
+在QtCreator下也是一样的，需要设置编译方式为C++
+
+另外，这个问题怎么google？一查unresolved symbol全都是确实没有添加函数定义的。
+
+回答：搜索关键词：function do exist unresolved symbol
+
+\subsection cpp_multiple_def multiple definition of `xxx'
+
+报错的字面含义是出现了多个相同的符号，明明只定义了1处变量，但是为何多个obj文件会重复定义？
+
+1. 确实出现了同名的函数或者变量的定义。
+2. 确认没有同名符号，但是变量或者函数定义在了h文件中，并且没有使用static修饰，编译多个源文件，这些源文件把头文件包含后，出现了多重定义的错误。
+
+\subsection pthread_dso_missing libpthread.so.0: error adding symbols: DSO missing from command line
+
+在target_link_library中添加pthread即可
+
+\code{bash}
+target_link_library(exe
+    pthread
+    )
+\endcode
+
+\subsection thread_not_member_boost error 'thread' is not a member of 'boost'
+
+CMakeLists.txt中添加
+
+\code{bash}
+
+target_link_library(exe
+        boost_thread
+    )
+
+\endcode
+
+源代码中添加
+
+\code{cpp}
+#include <boost/thread.hpp>
+\endcode
+
+
+
+
+
+\section 运行篇
+
+\subsection bad_alloc terminate called after throwing an instance of 'std::bad_alloc'
+
