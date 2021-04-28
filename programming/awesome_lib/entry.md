@@ -1,4 +1,4 @@
-C++常用库{#cpp_awesome_lib}
+常用代码库{#awesome_lib}
 ========================
 
 \subpage cpp_boost
@@ -26,3 +26,5 @@ C++常用库{#cpp_awesome_lib}
 \subpage cpp_lib_vtk
 
 \subpage cpp_lib_date
+
+\subpage pcl

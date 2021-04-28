@@ -6,6 +6,18 @@ Linux{#os_linux}
 
 \section 综合篇
 
+\subsection 文件权限
+
+参考下图：
+![](./figures/../../../figures/file-llls22.jpg)
+
+补充：对于文件来说，“x”表示是否可执行，但是对于文件夹来说，“x”代表是否可以进入。如果发现了“cd”到某个目录失败提示无权限，那就是这个原因。
+
+\subsection ls输出的绿色背景文件是什么意思？
+
+![](./figures/../../../figures/linux_ls_green.png)
+
+表示除了owner和group之外，其他人员也拥有写的权限，是不合理的，保持其他人仅可读是多用户共享文件的合理设置。
 
 \subsection 如何非阻塞运行gui程序？
 问题：如果直接在终端运行某个gui程序，终端会阻塞直到gui关闭，例如运行gitk。

@@ -164,12 +164,42 @@ Error: Jump to case label, crosses initialization of xxx
 
 1. Eigen中使用auto定义变量，发现得到的变量竟然是右值，而使用类名定义，得到的才是左值，具体参见 \ref eigen_auto
 
+\subsection lvalue_bind cannot bind non-const lvalue reference of type ‘int&’ to an rvalue of type ‘int’
+
+试图将非常量左值引用绑定右值，显然是错误的，如下代码所示。稍微白话解释一下，“bind A to B”中的“A”是引用，“B”才是变量。
+
+\code{cpp}
+#include <cstdio>
+void func_add(int a, int b, int& c) {
+    c = a+b;
+}
+int main() {
+    int x=1,y=2;
+    float z;
+    func_add(x,y,(int)z); //编译报错
+}
+\endcode
+
+c和c++中存在所谓的临时变量，想到的就三种：1.运算表达式，2.类型转换，3.函数返回值。
+这三种临时变量传入以非常量引用为形参的函数时，是非法的，例如：
+
+临时变量无法作为非常量引用的原因是很显然的，作为非常量引用，用户肯定是希望改动这个输入参数，然而实际上真正发生改动的是临时变量。
+如果编译不报错，那么可能会给使用者造成很大的误解，使用者很可能要debug很久才能发现这个问题。于是编译器就负责的直接给出编译错误。
+
+实际使用的一个案例就是，使用指针的引用作为形参，通常我们想通过一个函数修改指针的指向，可以使用二级指针，也可以使用指针的引用，既然c++提倡使用引用作为输出，我这里也使用指针的引用作为输出。
+使用指针的引用有一个问题就是，通常我们传入指针的时候需要做类型转换，而类型转换就是上文说道的第二种临时变量，编译器会报错。正确的使用方法就是调用时提前把指针手动转换好，再传入函数。
+
+
 
 \subsection no_declar error: ‘setX’ was not declared in this scope, and no declarations were found by argument-dependent lookup at the point of instantiation [-fpermissive]
 
 字面含义是没有声明对应的符号。
 
 1. 派生类构造函数调用基类的成员函数，参考 \ref  base_member_in_constructor
+
+\subsection cap_non_var capture of non-variable <name>
+
+1. 试图用错误的方法捕获类成员变量，例如“[成员变量]”或者“[&成员变量]”，应该使用“[=]”来（可修改地）捕获成员变量，使用“[=m]”来（不可修改地）捕获成员变量。
 
 
 
@@ -235,6 +265,26 @@ target_link_library(exe
 #include <boost/thread.hpp>
 \endcode
 
+\subsection undefined_static undefined reference to `类名::count'
+
+static类成员变量在类中只是进行了声明，没有定义，而普通成员变量在生成定义对像的时候进行了定义。
+所以类成员变量需要而外定义。
+
+\code{.cpp}
+#include <cstdio>
+class A{
+    public:
+    A(){}
+    static int count;
+};
+
+int A::count = 0;   //必须在外面进行定义，否则编译器会提示未定义
+
+int main(void){
+    A a;
+    printf("%d\n",a.count);
+}
+\endcode
 
 
 

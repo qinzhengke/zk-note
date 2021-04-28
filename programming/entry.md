@@ -1,9 +1,6 @@
 编程（Programming）{#programming}
 ==================
 
-
-\section 目录
-
 \subpage c
 
 \subpage cpp
@@ -25,6 +22,8 @@
 \subpage ros
 
 \subpage awesome_projects
+
+\subpage awesome_lib
 
 \subpage programming_debug
 

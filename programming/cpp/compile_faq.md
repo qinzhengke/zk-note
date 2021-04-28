@@ -1,101 +1,6 @@
 C++构建常见问题{#cpp_compile_faq}
 ================================
 
-\section discards_qualifiers passing ‘const xxx’ as ‘this’ argument discards qualifiers
-
-首先确认一点，什么是“qualifiers”？
-注意，通常来说，使用英文来表达的对象，含义都很明确
-“qualifiers”表示类型的修饰符，它目前只包含这三种：
-
-
-- const，也就是我们常说的常量修饰符
-- volatile，用的比较少，表示修饰的变量在后面随时会改变，强制编译器使用变量地址数据，否则编译器会自行根据代码情况进行优化，例如基于寄存器缓存。具体使用场景自行探索。
-- mutable，用的也比较少，根据cppreference的定义，用mutable定义的成员变量，那么它是可以改变的，即使其container是const的！似乎破坏了const的法则，具体使用场景自行探索。
-
-所以说，如果错误提示出现了“qualifiers”相关的内容，那么一定就上述几个修饰符的问题。第二个和第三个修饰符很少用，那么一般情况下，都是const的问题。
-“discards qualifiers”表示丢弃了修饰符，咋一看不太懂，实际上它表达的是在函数传递的过程中修饰符被丢弃了，或者函数内部出现了矛盾现象。
-
-举个最常见的例子，下面代码展示了一个案例，试图定义一个二维向量类，通过x()和y()访问具体分量，注意这些接口是可以修改成员变量的，因为返回的是引用。
-但是在企图通过add()函数将两者相加时，传入的是const的父对象，这时一个const对象调用一个可以修改对象成员变量的成员函数，即x()和y()，就是矛盾，最终导致报错。
-
-
-\code{cpp}
-#include <cstdio>
-struct Vec{
-    int data[2];
-    int & x(){
-        return data[0];
-    }
-    int & y(){
-        return data[1];
-    }
-};
-
-Vec add(const Vec& a, const Vec&b){
-    Vec s;
-    s.x() = a.x() + b.x();  // a和b是const的，但是x()和y()接口是可以修改成员变量的。
-    s.y() = a.y() + b.y();
-    return s;
-}
-
-int main()
-{
-    Vec a,b,c;
-    a.x() = 1;
-    a.y() = 2;
-    b.x() = 3;
-    b.y() = 4;
-    c = add(a,b);
-    
-    printf("a+b=(%d,%d)\n", c.x(),c.y());
-}
-
-\endcode
-
-编译报错：
-\code
- In function 'Vec add(const Vec&, const Vec&)':
-14:17: error: passing 'const Vec' as 'this' argument of 'int& Vec::x()' discards qualifiers [-fpermissive]
-14:25: error: passing 'const Vec' as 'this' argument of 'int& Vec::x()' discards qualifiers [-fpermissive]
-15:17: error: passing 'const Vec' as 'this' argument of 'int& Vec::y()' discards qualifiers [-fpermissive]
-15:25: error: passing 'const Vec' as 'this' argument of 'int& Vec::y()' discards qualifiers [-fpermissive]
-\endcode
-
-实际上，线性代数代码库Eigen存在同样的“问题”，如果传入一个const修饰的Vector，那么调用x()或者其他类似接口时，同样会报这个错误。
-产生这个“问题”的原因是我们试图通过一个接口既能读数据，又能写数据，并且还想传入的父对象是const修饰的，其中写数据和const父对象产生了矛盾。
-
-解决的方法可以和Eigen一样，不要使用const修饰父对象，或者关于变量的读和写接口分开，例如getX()，setX()等等。
-对于向量的设计这个案例，我选择和Eigen一样，毕竟x()和y()这种分量在数学表达中要大量重复使用，getX()和setX()这些接口，明显太啰嗦。
-
-
-\section no_rule_to_make No rule to make xxx.cpp 或者 xxx.so
-
-- 如果提示无法make cpp源文件，那么一般情况是找不到在CMakeLists.txt中列出的文件，检查一下路径和文件名即可。
-- 如果提示无法make xxx.so文件，特别是找不到第三方库，例如/usr/lib/xxx.so之类的，一般都是cmake缓存出现了问题，清空cmake缓存（删除CMakeCache.txt,CMakeFiles,MakeFile,cmake_install.cmake这几个文件）。
-
- \section static相关问题
-
-\subsection static类成员变量未定义
-
-static类成员变量在类中只是进行了声明，没有定义，而普通成员变量在生成定义对像的时候进行了定义。
-所以类成员变量需要而外定义。
-
-\code{.cpp}
-class A{
-    public:
-    A(){}
-    static int count;
-}
-
-int A::count = 0;   //必须在外面进行定义，否则编译器会提示未定义
-\endcode
-
-
-\section 链接的时候重复定义
-明明只定义了1处变量，但是为何多个obj文件会重复定义？
-可能1：变量定义在了h文件中，并且没有使用static修饰，
-
-
 \section 系统limit文件报错？
 有的时候系统源文件报错会让人摸不着头脑，开发者根本不知道哪里出错。这里列举一个遇到的问题。
 
@@ -127,13 +32,6 @@ int A::count = 0;   //必须在外面进行定义，否则编译器会提示未�
  c++中，枚举变量进行++操作会出现编译错误！
  然而C语言中，枚举变量++是允许的！
  C++已经不兼容C了？
- 
-
- \section const对象不能调用非const方法？
-
-报错：passing 'const Type' as 'this' argument discard qulifiers
- 如果const对象调用了非const成员函数，就会报这个错误，
- const对象只能调用const方法，const修饰的成员函数会保证不会修改成员变量，所以const对象才能因此保证不被修改。
  
 
  \section _Bool类型不能用？

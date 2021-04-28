@@ -27,8 +27,6 @@ C++：青出于蓝，我斑愿称之为最强！{#cpp}
 
 \subpage cpp_idioms
 
-\subpage cpp_awesome_lib
-
 \subpage cpp_compile_faq
 
 \subpage cpp_mix_with_c
