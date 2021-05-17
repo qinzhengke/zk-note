@@ -156,3 +156,32 @@ C   0*      24      86
 \section 对于MxN问题怎么办？
 
 很简单，只要对维度小的行或列进行増广，增广成NxN或者MxM阶方阵即可，増广的元素内容全部填上极大值。
+
+\section SciPy中的实现
+
+在SciPy的实现中，匈牙利算法又被称为线性求和分配。
+
+方法名称：scipy.optimize.linear_sum_assignment
+
+调用语法：scipy.optimize.linear_sum_assignment(cost_matrix, maximize=False)
+
+调用示例
+
+\htmlonly
+<script src="highlight/highlight.pack.js"></script>
+<link rel="stylesheet" href="highlight/styles/github.css">
+<script>hljs.highlightall();</script>
+<pre><code class="python">
+>>> cost = np.array([[4, 1, 3], [2, 0, 5], [3, 2, 2]])
+>>> from scipy.optimize import linear_sum_assignment
+>>> row_ind, col_ind = linear_sum_assignment(cost)
+>>> col_ind
+>>> array([1, 0, 2])
+>>> cost[row_ind, col_ind].sum()
+>>> 5
+</code></pre>
+\endhtmlonly
+
+
+
+参考：https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html

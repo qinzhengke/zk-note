@@ -12,3 +12,5 @@ Python：人生苦短，我用Pyhton！{#python}
 \subpage python_exception
 
 \subpage python_reflection
+
+\subpage python_questions

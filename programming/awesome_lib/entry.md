@@ -28,3 +28,11 @@
 \subpage cpp_lib_date
 
 \subpage pcl
+
+\subpage numpy
+
+\subpage numba
+
+\subpage filterpy
+
+\subpage lda

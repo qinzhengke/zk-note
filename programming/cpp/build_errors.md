@@ -201,7 +201,25 @@ c和c++中存在所谓的临时变量，想到的就三种：1.运算表达式�
 
 1. 试图用错误的方法捕获类成员变量，例如“[成员变量]”或者“[&成员变量]”，应该使用“[=]”来（可修改地）捕获成员变量，使用“[=m]”来（不可修改地）捕获成员变量。
 
+\subsection cpp_comp_issue_01 error: new types may not be defined in a return type
 
+结构体、联合体定义的时候结尾忘记加“;”就会出现该报错，这里不得不吐槽GCC，这种报错提示，真的无法联想到正确原因，什么叫“新类型不能定义在返回类型中？”，这提示等于没给。
+
+\subsection extra_qualification extra qualification
+
+qualification是指双冒号符“::”，而“extra qualification”则一般出现在类中函数定义的时候重复用“类名::函数名”进行时声明，如下代码所示：
+
+\code{cpp}
+struct A{
+    A::func(){
+
+    }
+};
+\endcode
+
+
+
+`
 
 
 
@@ -209,24 +227,25 @@ c和c++中存在所谓的临时变量，想到的就三种：1.运算表达式�
 
 \subsection cpp_undefined_reference undefined reference to `xxx'
 
-报错的字面含义是链接时找不到对应的符号，符号有可能是变量或者函数，其原因有以下可能。
+报错的字面含义是链接时找不到对应的符号，符号有可能是变量或者函数，有以下可能的原因：
 
 1. 被调用的符号声明了，但是没有定义，或者出现拼写错误导致声明和定义名称不相同。
 2. 对于类的static成员，需要在class体外部显示定义，参考 \ref cpp_class_static_member 
+3. 调用库文件版本不正确，一般来说，如果只安装了一个版本的库，那么其头文件和库文件是正确匹配的。但是当安装多个版本的库时，有可能出现包含A版本的头文件，却链接B版本的库文件，而B的库没有A版本对应的实现。编译过程是没问题的，编译只需要头文件，但是链接的时候就会发现没有相应的定义，所以链接的时候就会报错。
 
 \subsection unresolved_symbol error LNK2019: unresolved external symbol "xxx"
 
-和undefined reference是一样的，只不过是换成了VC编译器的提示。这里说一个使用VC编译器会触发该报错的原因：
+这个问题和上面的“undefined reference”是一样的，只不过是换成了VC编译器的提示，有以下可能的原因：
 
-在VS下，函数明明存在为什么还是报出unresolved symbol错误?可能是字符集问题！
-特别是将不同操作系统下的文件进行混用的时候！通通，通通，通通改成多字节字符。
+1. 相关源文件有没有被加到工程中。
+2. C模块调用C++模块时，没有使用“EXTERN C”封装。
+3. 一些开发环境（例如QtCreator）的字符编码不正确。
+4. Windows下，调用预编译好的库时，平台、版本、模式不对应，平台包括x86和x64，版本包括vc08、vc10、vc12、vc14，模式包括debug、release。
+5. 开发中途改变了库的版本，编译缓存文件没更新，试着显式地删除编译文件，重新构建。
+6. VisualStudio开发环境，字符集没有设置成多字节字符。
+7. VisualStudio开发环境，C和C++混合编译，需要在“project property的C++/Advanced”，将“Complie as”选项从“default”改成“as c++”。
 
-在VS环境下，下如果是main.cpp、a.h和a.c这种组合一定会出问题，可以试一试。
-注意，这里a.c是C语言写的，用于板子上的程序，不能有c++的特性，但是main.cpp可以，因为会用到第三方库进行显示，例如用Opencv读取、显示和保存图片。
-解决方法，在project property的C++/Advanced中，Complie as一项从default改成as c++。
-在QtCreator下也是一样的，需要设置编译方式为C++
-
-另外，这个问题怎么google？一查unresolved symbol全都是确实没有添加函数定义的。
+另外，这个问题怎么google？一查unresolved symbol全都是因为原因1，无法直接查到正确信息。
 
 回答：搜索关键词：function do exist unresolved symbol
 
@@ -286,6 +305,36 @@ int main(void){
 }
 \endcode
 
+\subsection thread_not_member_boost error 'thread' is not a member of 'boost'
+
+如果仍然使用boost提供的thread库，那么有可能呢遇到这个问题，一般来说是cmake配置不正确。
+
+CMakeLists.txt中添加
+
+\code{bash}
+
+target_link_library(exe
+        boost_thread
+    )
+
+\endcode
+
+源代码中添加
+
+\code{cpp}
+#include <boost/thread.hpp>
+\endcode
+
+
+\subsection boost_fs_dso_missing  libboost_system.so.1.xx.0: error adding symbols: DSO missing from command line
+
+缺少filesystem对应的库文件，在CMakeLists.txt中添加
+
+```
+target_link_libraries(my_target
+    boost_system
+)
+```
 
 
 

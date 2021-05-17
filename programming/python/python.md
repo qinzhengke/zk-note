@@ -184,3 +184,22 @@ try:
 except IOError:
     print("error")
 \endcode
+
+\section list_tuple_array list、tuple、np.array的区别
+
+是可以修改的，可以添加或者删除，
+
+```
+>>> type([1,2,3])
+<class 'list'>
+```
+
+tuple和list相似，但是是不可变的，使用圆括号来表达tuple。
+
+```
+>>> type((1,2,3))
+<class 'tuple'>
+```
+
+
+np.array并非python内置类型，而是numpy代码库提供的类型，中的元素数据类型必须是相同的，这点和list不一样

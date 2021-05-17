@@ -8,16 +8,17 @@ Point Cloud Library（PCL）{#pcl}
 
 编译PCL的时候，其依赖项必须指定特定版本，太旧或者太新都会导致编译报错。显然PCL代码兼容性不是很好。
 
-可用的PCL与VTK版本组合：
+可用的PCL、VTK、boost版本组合：
 
 - PCL v1.8.1 + VTK v7.1.1 + boost 1.64
 
-失败的PCL与VTK版本组合：
+失败的组合：
 
+- PCL v1.8.1 + boost 1.75，random_generator_pure类构造函数不匹配。
 - PCL v1.8.1 + VTK v8.2，缺少vtkMapper::ImmediateModeRenderingOn()方法。
 - PCL v1.9 + VTK v9.0.1，ContextRenderingOpenGL not found。
 
-\subsection pcl_context_render 1.11编译出现ContextRenderingOpenGL not found
+\subsection pcl_context_render 1.11版本编译出现ContextRenderingOpenGL not found
 
 v1.11不能依赖太新的VTK，截止此笔记写下的时间，VTK有两大最新版本，9.0和8.2，其中9.0对接口做了较多改动，PCL1.11并未兼容，建议仍然使用VTK8.2。
 
