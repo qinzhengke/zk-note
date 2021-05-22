@@ -11,6 +11,8 @@
 
 \subpage computer_vision
 
+\subpage mot
+
 \subpage point_cloud
 
 \subpage msif_intro

@@ -790,7 +790,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ./math ./programming ./tools ./technology ./computer_vision ./ds_algorithm ./perception ./machine_learning ./estimation_theory ./astronomy main_page.md note_main_page.md ./slam ./point_cloud ./block_chain ./operating_system ./data_association
+INPUT                  = ./math ./programming ./tools ./technology ./computer_vision ./ds_algorithm ./perception ./machine_learning ./estimation_theory ./astronomy main_page.md note_main_page.md ./slam ./point_cloud ./block_chain ./operating_system ./data_association ./mot
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

@@ -1,9 +1,20 @@
-覃政科的文件柜{#mainpage}
+Resume{#mainpage}
 ======================
 
-“覃”念"qin"，第二声。
+覃政科
 
-“突破性格局限！”
+\section 经历
+
+2017.7~2020.6: 感知算法工程师, DJI
+
+2012.9~2017.7: PhD, 中国科学院自动化研究所
+
+2008.9~2012.7: 学士, 华中科技大学
+
+<b> 兴趣：</b>
+CV, Robotics
+
+<b>联系方式：</b> qinzhengke@qq.com
 
 \section work_1 工作2：DJI Mavic air、Mavic 2、 Mavic air 2 双目避障开发。
 
@@ -27,18 +38,6 @@
 </table>
 \endhtmlonly
 
-\section 经历
-
-2017.7~2020.6: 感知算法工程师, DJI
-
-2012.9~2017.7: PhD, 中国科学院自动化研究所
-
-2008.9~2012.7: 学士, 华中科技大学
-
-<b> 兴趣：</b>
-CV, Robotics
-
-<b>联系方式：</b> qinzhengke@qq.com
 
 
 转到\ref zk_note
