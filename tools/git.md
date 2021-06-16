@@ -138,3 +138,13 @@ Step 3: git rm --cached path_to_submodule
 Step 4: rm -rf path_to_submodule
 
 Step 5: rm -rf .git/modules/path_to_submodule.
+
+\section git配置代理
+
+前言：有的时候github网络抽风连不上，需要proxy进行稳定连接，设置方式如下：
+
+```
+git config --global http.proxy 192.168.1.5:2802
+```
+
+IP地址和端口号就是对应的代理服务机器和端口，至于proxy服务器怎么搭建，就不在这里说了。

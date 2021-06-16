@@ -34,3 +34,14 @@ CMake Error at Rendering/OpenGL/CMakeLists.txt:304 (message):
 ```
 sudo apt install libxt-dev
 ```
+
+\subsection render_context Could not find the VTK package with the following required components: RenderingContextOpenGL2
+
+前言：在运行vtk examples时出现这个问题，原因时example貌似使用的8.9版本的vtk，而我们安装的是最新的9.1。
+
+解决方法：移除CMakeLists.txt中，find_package中的vtkRenderingContextOpenGL2依赖，因为新版本9.1已经没有这个东西了。
+
+```
+#   vtkRenderingContextOpenGL2
+
+```
