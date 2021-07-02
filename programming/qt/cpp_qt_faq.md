@@ -17,3 +17,6 @@ debug时间，2017-09-25 22:20-22:30
 \endcode
 QMAKE_CFLAGS += -std=c99
 \endcode
+
+\section qt_xcb_issue Ubuntu18.04下解决Qt出现qt.qpa.plugin:Could not load the Qt platform plugin “xcb“问题
+https://blog.csdn.net/LOVEmy134611/article/details/107212845

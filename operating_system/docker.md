@@ -17,3 +17,17 @@ docker run -it -v /home/haha/下载:/share microsoft/dotnet:latest /bin/bash
 \endcode
 
 上述代码把宿主机的“/home/haha/下载”目录挂载到docker中的“/share”目录。
+
+\subsection docker里的开发工具
+
+通过apt安装：
+
+```
+apt install vim git tig autoconf automake libtool build-essential libfontconfig gdb
+```
+
+libfontconfig，cmake-gui的依赖。
+
+通过其他方式安装。
+
+cmake

@@ -28,3 +28,5 @@
 \subpage sed
 
 \subpage google_sheets
+
+\subpage google_chrome

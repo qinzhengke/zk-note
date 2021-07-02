@@ -5,3 +5,4 @@ C++的标准库{#cpp_std}
 
 \subpage cpp_file_io
 
+\subpage cpp_regex

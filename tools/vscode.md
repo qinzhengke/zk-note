@@ -171,7 +171,9 @@ Step 2: 在.vscode目录中按照如下设置
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "environment": [],
+            "environment": [
+                {"name":"LD_LIBRARY_PATH", "value":"/usr/local/lib"}
+            ],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
@@ -312,3 +314,11 @@ step 2: 按照如下方式添加include path。
 \subsection vscode_create_c_cpp_prop 如何生成c_cpp_properties.json文件？
 
 ctrl+shift+P，输入“C/C++:Edit configurations”，一般来说输入前面几个字符vscode就会自动弹出目标了。
+
+\subsection include_error_detected #include errors detected. Please update your includePath. 
+
+IntelliSense features for this translation unit (/path/to/project/file.cpp) will be provided by the Tag Parser.
+
+当存在多个版本的代码时，vscode无法抉择，需要用户指定特定的版本，点击灯泡图标并且选择合适版本即可。
+
+![](./figures/vscode_include_error.png)

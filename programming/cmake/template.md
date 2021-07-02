@@ -24,10 +24,10 @@ set(FULL_VERSION "${MAJOR_VER}.${MINOR_VER}.${PATCH_VER}")
 
 # 设置默认版本为debug
 if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
-message("=> cmake ${PROJECT_NAME} in Debug mode")
-add_compile_options(-O0 -g -ggdb)
+    message("[${PROJECT_NAME}]: cmake in Debug mode")
+    add_compile_options(-O0 -g -ggdb)
 else()
-message("=> cmake ${PROJECT_NAME} in Release mode")
+    message("[${PROJECT_NAME}] in Release mode")
 endif()
 
 # 构建example开关

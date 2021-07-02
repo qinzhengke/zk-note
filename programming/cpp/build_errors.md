@@ -8,6 +8,13 @@ C++构建报错合集{#cpp_build_errors}
 - 如果提示无法make cpp源文件，那么一般情况是找不到在CMakeLists.txt中列出的文件，检查一下路径和文件名即可。
 - 如果提示无法make xxx.so文件，特别是找不到第三方库，例如/usr/lib/xxx.so之类的，一般都是cmake缓存出现了问题，清空cmake缓存（删除CMakeCache.txt,CMakeFiles,MakeFile,cmake_install.cmake这几个文件）。
 
+\subsection no_matching_function error: no matching function for call to xxx
+
+字面意思是找不到匹配的函数（声明），可能的原因有
+
+- 明显的函数调用方式出错，例如参数类型和数量不匹配
+- 一种不太明显的调用出错，函数形参只接受const引用，但是调用出提供了右值，例如new出来的，后者函数返回值。
+
 \subsection discards_qualifiers passing ‘const xxx’ as ‘this’ argument discards qualifiers
 
 首先确认一点，什么是“qualifiers”？
@@ -217,9 +224,138 @@ struct A{
 };
 \endcode
 
+\subsection cannot_dynamic_cast cannot dynamic_cast xxx source type is not polymorphic
 
+类型不是polymorphic，即类并非是多态的，一般来说问题是没有把基类定义成虚类。
 
-`
+\code{cpp}
+struct A {};
+
+struct B : A {};
+
+int main()
+{
+    A* a = new B();
+
+    B* b = dynamic_cast<B*>(a);
+}
+\endcode
+
+解决办法很简单，给基类加一个虚的析构函数即可。
+
+\subsection  this_not_captured error: ‘this’ was not captured for this lambda function
+
+在类成员函数中使用lamda表达式，而lambda表达式中包含类内的其他成员函数，就需要先捕获this指针。
+
+\code{cpp}
+
+#include <cstdio>
+
+struct A{
+    void funcA(){
+        auto lambda = [this]{   // 捕获this指针，获取调用成员函数能力
+            funcB();
+        };
+        lambda();
+    }
+    void funcB(){
+        printf("funcB()\n");
+    }
+};
+
+int main()
+{
+    A a;
+    a.funcA();
+}
+\endcode
+
+\subsection use_deleted_function use of deleted function ‘ha::driveable::ViewPort::ViewPort(ha::driveable::ViewPort&&)’
+
+使用右值作为实参，那么系统会优先调用移动构造函数。但是如果移动构造函数被删除了，那么就会出现这个错误。
+
+第一种是显式删除，如下代码所示，一般人都能看出来。
+
+\code{cpp}
+#include <cstdio>
+#include <vector>
+#include <array>
+using namespace std;
+
+struct A{
+    A(array<int,3> x){
+        printf("%d\n",x[0]);
+    }
+    A(A &&) = delete;   // use of deleted function
+};
+
+int main()
+{
+    vector<A> as;
+    as.push_back(A({0,1,2}));
+}
+\endcode
+
+但是除了显式删除，造成困扰的更多是隐式的删除，参见 \ref move_constructor。
+
+如下示例，虽然A本身没有把移动构造函数给delete掉，但是它的非静态成员B，把移动构造函数给delete了，所以A也是无法被移动构造的。
+通常来说，B有可能是别人代码提供的类，不能修改。
+
+解决方法是，显示定义拷贝构造函数，因为常量引用是万能引用，可以接受右值作为输入。
+\code{cpp}
+#include <cstdio>
+#include <vector>
+#include <array>
+using namespace std;
+
+struct B{
+    B(){}
+    B(B&&) = delete;
+};
+
+struct A{
+    B b;
+    A(array<int,3> x){
+        printf("%d\n",x[0]);
+    }
+
+    A(const A& a){} // 加入拷贝构造函数就可以了。
+};
+
+\subsection cpp_incomplete_type has incomplete type and cannot be defined
+
+另一种报错形式：
+```
+invalid use of incomplete type ‘xxx’
+```
+
+incomplete type是指只声明，但是没有具体定义的类，在C++中，可以先声明一个类但是不具体定义，其指针是完全可以使用的。
+但是一旦设计到指针的解引用操作，就必须知道类型的具体定义，否则会提示incomplete type。
+
+int main()
+{
+    vector<A> as;   // 不报错
+    as.push_back(A({0,1,2}));   //报错
+}
+
+\endcode
+
+#include <cstdio>
+
+class A;
+
+int main()
+{
+    A *a;   
+    A b;
+}
+
+class A{
+    void func(){
+        printf("func()\n");
+    }
+};
+
 
 
 
@@ -336,6 +472,18 @@ target_link_libraries(my_target
 )
 ```
 
+
+\subsection dso_missing DSO missing from command line
+
+完整错误提示
+
+\code
+/usr/bin/ld: xxx/xxx.cc.o: undefined reference to symbol '_ZN5boost6system15system_categoryEv'
+//usr/lib/x86_64-linux-gnu/libboost_system.so.1.65.1: error adding symbols: DSO missing from command line
+collect2: error: ld returned 1 exit status
+\endcode
+
+解决方法参见：\ref boost_filesystem
 
 
 \section 运行篇

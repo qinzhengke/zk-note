@@ -28,6 +28,9 @@ Linux{#os_linux}
 gitk &
 \endcode
 
+\subsection 开机自启动
+
+
 
 \subsection 如何查看目录和文件占用磁盘大小？
 
@@ -287,8 +290,6 @@ ssh root@104.224.156.77 -p 27217
 
 \section 软件篇
 
-
-
 \subsection 常用软件列表
 - Sogou Pinyin
 第一步当然是安装一个合适的中文输入法了。作为国内比较良心作品，sogou拼音相当不错。
@@ -385,8 +386,6 @@ sudo fc-cache -fv
 sudo reboot
 \endcode
 
-
-
 \subsection 中文输入法安装
 Gnome 3.10下的中文输入法：
 	Linux下的输入法不同于Windows，Linux的输入法分为：输入法框架+输入法两个部分，首先我们需要安装好输入法框架，然后在基于不同的框架安装不同的输入法。
@@ -420,7 +419,7 @@ sudo apt-get install flameshot
 使用：
 1. windows键，输入keyboard，进入键盘设置
 2. 将print(print screen)键解绑，然后添加新的print键快捷操作“flameshot gui”
-3. 按print键，享受截图、涂鸦、注释的快感吧。
+3. 按print键，即可截图。
 
 
 \section 搜狗输入法切换全角半角以及中英标点符号
@@ -477,3 +476,29 @@ fi
 (2) `grep -o` 表示把所有匹配出来的结果列出来，列出时每一个match的内容会占一行。
 
 (3) `head -1` 表示取第一行的内容。
+
+\subsection 磁盘开机自动挂
+磁盘开机挂载问题，Linux开机后，除了“/”目录和swap，其他的分区是不会自动挂载的，就像如果开机后第一次点击原Windows下的D盘，那么打开的时间会稍微久一些，而且文档管理的图标上会有一个小三角（Ubuntu）表示已经挂载。
+我将log和stuffs分别做了快捷链接，但是由于这两个文件处于我的Work分区，开机没有挂载，所以开机后直接在terminal里输入快捷链接，还不能打开log和sutffs文件，所以现在必须试试开机挂载了。打开etc/fstab这个文件
+
+Step 1: 查看磁盘的UUID
+
+方法一：Ubuntu下使用“Disks”工具，Windows键+“disks”，可以查看某个磁盘的UUID
+
+方法二：使用gparted查看磁盘UUID
+
+Step 2: 编辑fstab文件
+
+\code
+sudo vim /etc/fstab
+\endcode
+
+在最后一行加入如下配置：
+
+\code
+UUID=xxxxxxx       /media/Work/    auto    defaults 0       2
+\endcode
+
+【注意】“defaults”值不要拼错了，有“s”，最后一个参数要填“2”，表示普通分区，并非Linux启动分区，这两设置不对，有可能无法开机。
+
+【注意】如果错误设置无法开，不用惊慌，只要在Ubuntu启动界面，进入recovery模式，然后进入root模式，使用vim编辑/etc/fstab文件即可。
