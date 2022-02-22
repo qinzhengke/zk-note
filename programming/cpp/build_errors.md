@@ -1,14 +1,16 @@
-C++构建报错合集{#cpp_build_errors}
+C++构建报错合集
 ================================
+#cpp-build-errors
 
-\section 编译篇
+## 编译篇
 
-\subsection no_rule_to_make No rule to make xxx.cpp 或者 xxx.so
+### No rule to make xxx.cpp 或者 xxx.so
+
 
 - 如果提示无法make cpp源文件，那么一般情况是找不到在CMakeLists.txt中列出的文件，检查一下路径和文件名即可。
 - 如果提示无法make xxx.so文件，特别是找不到第三方库，例如/usr/lib/xxx.so之类的，一般都是cmake缓存出现了问题，清空cmake缓存（删除CMakeCache.txt,CMakeFiles,MakeFile,cmake_install.cmake这几个文件）。
 
-\subsection discards_qualifiers passing ‘const xxx’ as ‘this’ argument discards qualifiers
+### passing ‘const xxx’ as ‘this’ argument discards qualifiers
 
 首先确认一点，什么是“qualifiers”？
 注意，通常来说，使用英文来表达的对象，含义都很明确
@@ -24,7 +26,7 @@ C++构建报错合集{#cpp_build_errors}
 举个最常见的例子，下面代码展示了一个案例，试图定义一个二维向量类，通过x()和y()访问具体分量，注意这些接口是可以修改成员变量的，因为返回的是引用。
 但是在企图通过add()函数将两者相加时，传入的是const的父对象，这时一个const对象调用一个可以修改对象成员变量的成员函数，即x()和y()，就是矛盾，最终导致报错。
 
-\code{cpp}
+```cpp
 #include <cstdio>
 struct Vec{
     int data[2];
@@ -54,17 +56,17 @@ int main()
     
     printf("a+b=(%d,%d)\n", c.x(),c.y());
 }
-
-\endcode
+```
 
 编译报错：
-\code
+
+```
  In function 'Vec add(const Vec&, const Vec&)':
 14:17: error: passing 'const Vec' as 'this' argument of 'int& Vec::x()' discards qualifiers [-fpermissive]
 14:25: error: passing 'const Vec' as 'this' argument of 'int& Vec::x()' discards qualifiers [-fpermissive]
 15:17: error: passing 'const Vec' as 'this' argument of 'int& Vec::y()' discards qualifiers [-fpermissive]
 15:25: error: passing 'const Vec' as 'this' argument of 'int& Vec::y()' discards qualifiers [-fpermissive]
-\endcode
+```
 
 实际上，线性代数代码库Eigen存在同样的“问题”，如果传入一个const修饰的Vector，那么调用x()或者其他类似接口时，同样会报这个错误。
 产生这个“问题”的原因是我们试图通过一个接口既能读数据，又能写数据，并且还想传入的父对象是const修饰的，其中写数据和const父对象产生了矛盾。
@@ -72,11 +74,11 @@ int main()
 解决的方法可以和Eigen一样，不要使用const修饰父对象，或者关于变量的读和写接口分开，例如getX()，setX()等等。
 对于向量的设计这个案例，我选择和Eigen一样，毕竟x()和y()这种分量在数学表达中要大量重复使用，getX()和setX()这些接口，明显太啰嗦。
 
-\subsection memcpy_overflow will always overflow destination buffer.
+### will always overflow destination buffer.
 
 gcc编译memcpy的时候，如果目标地址是一个固定大小的静态的数组，那么编译器会检查copy的size是否会超过这块静态数组的大小，超出了就会报出错误，不得不说编译器做得非常不错。
 
-\subsection ref_deleted_func Attempting to refer a deleted function 
+### ref_deleted_func Attempting to refer a deleted function 
 
 这里的deleted表示构造函数被delete掉了。
 
@@ -84,11 +86,11 @@ gcc编译memcpy的时候，如果目标地址是一个固定大小的静态的�
 如果将ifstream或者ofstream对象作为参数传入函数，那么传入时，一定要使用引用方式，否则就会报出这个错误。
 这个报错没那么直接，编译器不会是说没有用传入，而是在函数调用的时候说调用的函数是被删除过的。
 
-\subsection template_c_linkage Template with C linkage
+### template_c_linkage Template with C linkage
 
 extern C 封装起来的代码包含C++的template特性。
 
-\subsection request_for_member request for member xxx in something not a structure or union
+### request_for_member request for member xxx in something not a structure or union
 
 本身的含义是使用“.xxx”表达式时，“.”前面的的内容不是一个结构体或者联合。
 具体可能出现的场景：
@@ -96,14 +98,14 @@ extern C 封装起来的代码包含C++的template特性。
 1.指针错误的使用了“.”来访问成员。
 2.C99中使用designated initializer时，有成员没有逗号，在git解决冲突的时候常常遇到这个问题。
 
-\endcode
+```cpp
 struct A{int a, int b};
 A x = {
  a = 10 // 解冲突时忘记了逗号，
  b = 20,
-\endcode
+```
 
-\subsection extra_qualification extra qualification
+### extra qualification
 
 qualification是指双冒号符“::”，而“extra qualification”则一般出现在类中函数定义的时候重复用“类名::函数名”进行时声明。
 

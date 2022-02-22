@@ -1,18 +1,49 @@
-# zk-note 一个基于Doxygen的Web笔记本
+学习笔记
+=======
 
-## 依赖
+# 目录
 
-- sudo apt-get install doxygen graphviz
+- [ABC](#abc)
 
-## 构建html文件
+* [数学笔记](#math)
+* [编程笔记](#programming)
+* [算法笔记](#algorithm)
+* [工具笔记](#tool)
+* [读万卷书](https://github.com/qinzhengke/zk-note/blob/markdown/awesome_ebooks.md)
+* [兴趣](#hobby)
+* [关于我](#https://github.com/qinzhengke/zk-note/blob/markdown/resume.md)
 
-\code{bash}
-\# 第一次构建，需要加上--all参数，--all有以下操作：
-\# 1. 拷贝MathJax文件夹，拷贝MathJax非常耗费时间，不建议每次都拷贝
-./build.sh --all
 
-\# 如果已经使用build.sh --all构建过，后面只需要build.sh即可
-./build.sh
-\endcode
+### 数学
 
-输出文档入口在/build/html/index.html
+# 算法
+
+# 编程
+
+# 工具
+
+# 兴趣
+
+# ABC
+
+[C++构建报错合集](cpp-build-errors)
+
+[C++构建报错合集2](https://github.com/qinzhengke/zk-note/blob/markdown/programming/cpp/build_errors.md)
+
+
+
+# LaTex公式支持
+
+方法一：
+```
+![](http://latex.codecogs.com/svg.image?\\frac{1}{1+sin(x)})
+```
+
+![](http://latex.codecogs.com/svg.image?\\frac{1}{1+sin(x)})
+
+方法二：
+```
+![](https://math.now.sh?from=\\frac{1}{1+sin(x)})
+```
+
+![](https://math.now.sh?from=\\frac{1}{1+sin(x)})
