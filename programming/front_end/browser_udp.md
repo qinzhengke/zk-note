@@ -79,6 +79,6 @@ that's all, thank you very much.
 
 从作者的多次尝试可以看出里面的心路历程。
 
-\section 浏览器不能发送udp包的原因
+# 浏览器不能发送udp包的原因
 
 这篇文章给出了原因：https://gafferongames.com/post/why_cant_i_send_udp_packets_from_a_browser/

@@ -1,32 +1,30 @@
 编程（Programming）{#programming}
 ==================
 
-\subpage c
+- [c](https://github.com/qinzhengke/zk-note/blob/master/programming/c/entry.md)
 
-\subpage cpp
+- [cpp](https://github.com/qinzhengke/zk-note/blob/master/programming/cpp/entry.md)
 
-\subpage cmake
+- [cmake](https://github.com/qinzhengke/zk-note/blob/master/programming/cmake/entry.md)
 
-\subpage qt
+- [qt]
 
-\subpage python
+- [python]
 
-\subpage rust
+- [rust]
 
-\subpage front_end
+- [front_end]
 
-\subpage bash
+- [bash]
 
-\subpage bat
+- [bat]
 
-\subpage ros
+- [ros]
 
-\subpage awesome_projects
+- [awesome_projects]
 
-\subpage awesome_lib
+- [awesome_lib]
 
-\subpage programming_debug
+- [utf8]
 
-\subpage utf8
-
-\subpage protobuf
+- [protobuf]

@@ -8,11 +8,11 @@ cmake近几年也在倡导更优雅的使用方式，即诞生了“现代cmake�
 下面这篇文章详细说明了现代写法的细节。
 https://ukabuer.me/blog/more-modern-cmake
 
-\section 现代cmake的版本
+# 现代cmake的版本
 
 至少是3.12开始。
 
-\section 添加目录里所有源文件
+# 添加目录里所有源文件
 
 \code{.cmake}
 cmake_minimum_required(VERSION 3.12)
@@ -24,14 +24,14 @@ add_executable(helloworld ${helloworld_SRC})
 \endcode
 
 
-\section cmake_cpp11 C++11标准的引用
+# cmake_cpp11 C++11标准的引用
 
 \code{cmake}
 target_compile_features(my_exe PRIVATE cxx_std_11)
 \endcode
 
 
-\section 库文件的一般基本引用方法
+# 库文件的一般基本引用方法
 
 步骤1：使用find_package()
 来查找相应的库。find_package依赖find.cmake或者config.cmake文件。
@@ -53,7 +53,7 @@ target_link_libraries(my_lib PRIVATE libzmq)
 
 这个“libzmq”是在ZeroMQTargets.cmake中定义的，如果将Targets.cmake中的target名改名成xxx，那么我们的target_link_libraries()填入xxx时，同样能够链接成功，请自行实验。
 
-\subsection 不好的方法
+## 不好的方法
 
 下面是最直白的引用方法，直接提供so文件的路径，但是这种写法很差，设想一下，当同事尝试编译我们的代码时，so文件的路径未必和我们的环境相同。
 此时，使用者只能修改CMakeLists.txt文件。当同事在我们的基础上修改了代码，提交commit时，面对CMakeLists.txt中的so文件路径。
@@ -66,7 +66,7 @@ target_link_libraries(exe /usr/local/lib/xxx.so)
 \endcode
 
 
-\section find_package引用Eigen3
+# find_package引用Eigen3
 
 Eigen3安装的时候，Eigen3Config.cmake文件实际上已经拷贝到系统中，但是该目录无法被cmake的find_package语句感知。
 所以如果想要通过find_package来引用Eigen3，则仍然需要拷贝cmake文件，如下所示
@@ -75,13 +75,13 @@ Eigen3安装的时候，Eigen3Config.cmake文件实际上已经拷贝到系统�
 
     find_package默认目录：/usr/lib/cmake 或者 /usr/lib/local/cmake
 
-\section  链接OpenCV的库
+#  链接OpenCV的库
 \code{cmake}
 target_link_libraroes(exe ${OpenCV_LIBS})
 \endcode
 
 
-\section cmake_qt  引用Qt库
+# cmake_qt  引用Qt库
 在引用带Qt编译的OpenCV的时候，需要告诉cmake工具Qt5Widgets的位置。
 \code{cmake}
 set(CMAKE_PREFIX_PATH /home/zrinker/softs/Qt5.10.1/5.10.1/gcc_64/lib/cmake/Qt5Widgets)
@@ -89,7 +89,7 @@ find_package(Qt5Widgets CONFIG REQUIRED)
 \endcode
 
 
-\section  cmake_static_std_lib 静态链接标准库
+#  cmake_static_std_lib 静态链接标准库
 在Linux下，如果不做静态连接，会发现甚至只依赖标准库的程序换个地方都不能运行。
 下面是静态连接标准库的方法：
 \code{cmake}
@@ -97,7 +97,7 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++")
 \endcode
 
 
-\section cmake_define  添加预定义宏
+# cmake_define  添加预定义宏
 有些代码的使用需要使用者改动或者添加一些宏设置，但是作为用户又不想修改被调用代码，那么怎么在编译环境中加入预定义的宏定义呢？
 
 cmake的答案如下所示
@@ -107,7 +107,7 @@ add_compile_definitions(exe MY_DEF=1)
 \endcode
 
 
-\section cmake_src 添加源文件
+# cmake_src 添加源文件
 aux_source_directories(. a)本来就是追加的形式，不需要额外操作。
 \code{cmake}
 aux_source_directories(. a)
@@ -117,7 +117,7 @@ add_executable(exe_a ${a})
 \endcode
 
 
-\section c99_cpp11 设置C99和C++11
+# c99_cpp11 设置C99和C++11
 cmake中设置了编译选项
 \code{cmake}
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
@@ -130,7 +130,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 这里不得不说git真是神器，让蛛丝马迹无处可藏。
 
 
-\section cmake_math 引用math.h的lib
+# cmake_math 引用math.h的lib
 首先，cmake建的工程，居然math.h的Lib要手动加。。。。
 其次，我们知道gcc -lm是加math库，但是cmake怎么加都不对。
 最后，cmake对于加math库有独特的表达式。。。
@@ -142,7 +142,7 @@ target_link_libraries(exe_name, m)
 没错就是“m”，表示抽象的变量。
 
 
-\section cmake_install 安装
+# cmake_install 安装
 \code{bash}
 \# 安装可执行文件
 set(CMAKE_INSTALL_PREFIX ..)
@@ -162,7 +162,7 @@ install(FILES xxx/config.txt
 注意，如果install函数所在脚本被更高一级的脚本包含，那么CMAKE_INSTALL_PREFIX一定要在最高一级的脚本设置，在install函数所在脚本设置是无效的。
 
 
-\section cmake_python 引用Python
+# cmake_python 引用Python
 
 前言：使用matplotlib for C++时，需要在cmake中引用Python。
 
@@ -183,7 +183,7 @@ target_compile_features(opt_demo PRIVATE cxx_std_11)
 \endcode
 
 
-\section cmake_find_package config文件和find文件。
+# cmake_find_package config文件和find文件。
 
 CMake 对 Config file 的命名是有规定的，对于find_package(ABC)这样一条命令，CMake 只会去寻找ABCConfig.cmake或是abc-config.cmake。
 CMake 默认寻找的路径和平台有关，在 Linux 下寻找路径包括/usr/lib/cmake以及/usr/lib/local/cmake，在这两个路径下可以发现大量的 Config File，一般在安装某个库时，其自带的 Config file 会被放到这里来。
@@ -201,7 +201,7 @@ CMake 默认寻找的路径和平台有关，在 Linux 下寻找路径包括/usr
 参考 https://ukabuer.me/blog/more-modern-cmake
 
 
-\section 额外添加源文件
+# 额外添加源文件
 
 问题：我们都知道add_executalbe可以添加可执行文件目标，同时添加该目标需要的源文件。
 有的时候我们需要add_executalbe语句之后再添加源文件，例如工程A在调试阶段需要编译可视化模块，需要可视化的源文件，但是发布出去就不需要。
@@ -216,7 +216,7 @@ target_sources(my_exe PRIVATE my_src.c)
 \endcode
 
 
-\section target_link_libraries中的相对路径
+# target_link_libraries中的相对路径
 
 在cmake的target_link_libaraies语句中，想要link到某一个库文件，如果直接输入相对路径，那么不管怎么写，cmake都无法找到对应的库文件。
 
@@ -228,7 +228,7 @@ target_link_libraries(my_exe
 \endcode
 
 
-\section 如何在cmake中设置程序版本？
+# 如何在cmake中设置程序版本？
 
 \code{.cmake}
 set_target_properties(my_exe PROPERTIES 
@@ -238,7 +238,7 @@ set_target_properties(my_exe PROPERTIES
 这样编译后的可执行文件或者库文件，都带有版本后缀，例如my_exe-1.0.0，如果是库文件，这是my_lib.so.1.0.0。
 
 
-\section 模块重复编译怎么办？
+# 模块重复编译怎么办？
 假设用A<-B表示模块A依赖模块B，那么假设我们有这种结构：A <- B <- C，　A <- C，cmake构建的时候会提示出现重复的模块．
 
 C可能是一个很底层的模块，例如基础组件规范化打印．
@@ -253,7 +253,7 @@ C可能是一个很底层的模块，例如基础组件规范化打印．
 +endif()
 \endcode
 
-\section 依赖option
+# 依赖option
 
 通过option我们可以进行选择编译，但是比起最基本的单个option，我们也会需要复杂一点的操作，例如BUILD_ALL选项和BUILD_A选项，两者只有有一个开，就编译A模块。
 
@@ -285,10 +285,10 @@ endif()
 这种特殊写法很绕，而且看起来很像是临时补丁，特别的丑陋，对比rust家庭的cargo，完全不一样。
 
 
-\section 静态库
+# 静态库
 
 
-\section IDE能编，terminal却找不到头文件？
+# IDE能编，terminal却找不到头文件？
 明明头文件的路径已经添加，并且在**QtCreator**里能够跟踪到该头文件，但是在**terminal** make的时候仍然找不到头文件？
 有一个原因：CMakeList.txt用了环境变量$ENV{}，并且QtCreator设置了这个环境变量，但是bash里面并没有设置！
 反过来，能编译，但是QtCreator老是找不到头文件，或者在QtCreator内部构建失败。

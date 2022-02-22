@@ -1,18 +1,36 @@
-# zk-note 一个基于Doxygen的Web笔记本
+学习笔记
+=======
 
-## 依赖
+# 目录
 
-- sudo apt-get install doxygen graphviz
+* [数学笔记](https://github.com/qinzhengke/zk-note/blob/master/math/entry.md)
+* [编程笔记](https://github.com/qinzhengke/zk-note/blob/master/programming/entry.md)
+* [算法笔记](https://github.com/qinzhengke/zk-note/blob/master/algorithm/entry.md)
+* [工具笔记](https://github.com/qinzhengke/zk-note/blob/master/tool/entry.md)
+* [读万卷书](https://github.com/qinzhengke/zk-note/blob/master/awesome_ebooks.md)
+* [兴趣](https://github.com/qinzhengke/zk-note/blob/master/hobby/entry.md)
+* [关于我](https://github.com/qinzhengke/zk-note/blob/master/resume.md)
 
-## 构建html文件
+# 快速查询
 
-\code{bash}
-\# 第一次构建，需要加上--all参数，--all有以下操作：
-\# 1. 拷贝MathJax文件夹，拷贝MathJax非常耗费时间，不建议每次都拷贝
-./build.sh --all
+[C++构建报错合集](https://github.com/qinzhengke/zk-note/blob/master/programming/cpp/build_errors.md)
 
-\# 如果已经使用build.sh --all构建过，后面只需要build.sh即可
-./build.sh
-\endcode
 
-输出文档入口在/build/html/index.html
+
+# 本仓库
+
+## GitHub markdown LaTex公式支持
+
+方法一：
+```
+![](http://latex.codecogs.com/svg.image?\\frac{1}{1+sin(x)})
+```
+
+![](http://latex.codecogs.com/svg.image?\\frac{1}{1+sin(x)})
+
+方法二：
+```
+![](https://math.now.sh?from=\\frac{1}{1+sin(x)})
+```
+
+![](https://math.now.sh?from=\\frac{1}{1+sin(x)})

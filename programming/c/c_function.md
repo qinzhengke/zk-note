@@ -1,9 +1,9 @@
 C语言中的函数{#c_function}
 =======================
 
-\section 可变长参数函数
+# 可变长参数函数
 
-\subsection 可变长参数函数的转发
+## 可变长参数函数的转发
 
 前言：函数A接收可变长参数，有的时候我们希望把可变长的参数直接传入函数A内部的sprintf和printf，
 例如我既想把输出保存起来，也想同时打印到屏幕，我姑且称之为“转发”，该如何操作呢？
@@ -29,7 +29,7 @@ int main(){
 \endcode
 
 
-\subsection 函数指针常量怎么定义？
+## 函数指针常量怎么定义？
 \code{c}
 // normal pointer to function
 int (*func)(int);
@@ -48,7 +48,7 @@ void const *(*const func)(int) = func.
 \endcode
 
 
-\subsection 函数指针作为函数传参
+## 函数指针作为函数传参
 
 \code{c}
 typedef void (*callback_function)(void); // type for conciseness
@@ -68,7 +68,7 @@ void D::disconnected()
 \endcode
 
 
-\subsection 二维数组的传参和“引用”
+## 二维数组的传参和“引用”
 \code{cpp}
 void func_a(int a[][10])
 {
@@ -91,10 +91,10 @@ void main()
 【疑问】感觉二维数组的坑很多，函数传参有特殊语法，后期和其他扩展类型协同时也存在问题，例如Eigen::Matrix、JSON的数组等，还是用一维数组比较省事，自行映射理论上耗时也是一致的。
 
 
-\section 函数的返回值
+# 函数的返回值
 
 
-\subsection c_return_array 返回数组
+## c_return_array 返回数组
 
 首先，C语言是不能直接返回数组的，但是可以选择以指针的形式返回数组的首地址。
 

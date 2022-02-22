@@ -3,7 +3,7 @@ C++11中的其他有用特性{#cpp11_others}
 
 
 
-\section using 代替 typedef
+# using 代替 typedef
 
 using代替typedef的好处是可以支持模板。
 
@@ -21,7 +21,7 @@ struct Vector
 \endcode
 
 
-\section 使用constexpr作为类的成员变量
+# 使用constexpr作为类的成员变量
 
 没有什么困难，就是要注意constexpr修饰类成员变量时，类成员变量必须是static的，否则编译器会报错。
 

@@ -2,7 +2,7 @@ Eigen：强大的纯头文件线性运算库{#cpp_lib_eigen}
 ==============================
 
 
-\section 安装
+# 安装
 
 \code{bash}
 cd <eigen_dir>
@@ -15,21 +15,21 @@ sudo make install
 \endcode
 
 
-\section 矩阵的初始化（包括全零阵、单位阵）
+# 矩阵的初始化（包括全零阵、单位阵）
 
 
 
-\section 获取子矩阵
+# 获取子矩阵
 
 参见： https://eigen.tuxfamily.org/dox/group__TutorialBlockOperations.html
 
 
-\section Matrix和C数组之间的转换
+# Matrix和C数组之间的转换
 
 参见： https://eigen.tuxfamily.org/dox/group__TutorialMapClass.html
 
 
-\section eigen_auto 使用auto定义Eigen相关的变量得到右值？
+# eigen_auto 使用auto定义Eigen相关的变量得到右值？
 
 使用auto定义Eigen相关的变量时候，有时候会得到右值，这些右值无法被赋值，但是使用类型来定义就成了左值。
 
@@ -55,7 +55,7 @@ auto a = Eigen::Matrix3f::Zero();
     mat2(0,3) = 1; // 编译通过
 \endcode
 
-\section AngleAxis用于初始化注意事项
+# AngleAxis用于初始化注意事项
 
 \code{cpp}
     // 编译错误
@@ -70,7 +70,7 @@ auto a = Eigen::Matrix3f::Zero();
         AngleAxisd(param.view_euler[0], Vector3d::UnitX());
 \endcode
 
-\section 传参时MatrixNd到MatrixXd的转换
+# 传参时MatrixNd到MatrixXd的转换
 
 函数传参时，MatrixNd要转换成MatrixXd，（N表示具体的数字，例如3），编译器会自动转换，但是转换得到的是一个右值，是一个临时变量。
 如果函数的形参是非常量引用，那么编译器就会报错。
@@ -86,7 +86,7 @@ func(x);    // x传入之后自动cast，变成右值。
 \endcode
 
 
-\section 四元数与欧拉角的转换
+# 四元数与欧拉角的转换
 
 \code{.cpp}
 // 从欧拉角到四元数
@@ -99,7 +99,7 @@ auto euler = q.toRotationMatrix().eulerAngles(2, 1, 0);
 \endcode
 
 
-\section Eigen中四元数到欧拉角的一个一定要注意的问题
+# Eigen中四元数到欧拉角的一个一定要注意的问题
 
 使用这种方式计算的欧拉角的三个角度的范围是[0,pi], [-pi,pi], [-pi,pi]。
 对于我们的XYZ欧拉角，也就是说yaw角的范围是[0,pi]，机器人的运动领域中是不够用的，因为在平面移动的时候，yaw角通常取值范围是[-pi,pi]。
@@ -136,7 +136,7 @@ cout<<q.w()<<","<<q.x()<<","<<q.y()<<","<<q.z()<<endl;
 \endcode
 
 
-\section eigen中各种旋转表达之间的转换
+# eigen中各种旋转表达之间的转换
 
 代码来自 https://blog.csdn.net/weicao1990/article/details/86148828
 
@@ -292,12 +292,12 @@ int main(int argc, char **argv)
 }
 \endcode
 
-\section eigen_issue_01  编译报错： no type named Return Type
+# eigen_issue_01  编译报错： no type named Return Type
 
 带有模板的报错通常都是一大堆输出刷屏，很难从报错的字面上看出问题是什么，这个问题的原因则是两个矩阵操作时，类型不一样。
 比如一个float型，一个是double型。
 
-\section block_with_template Mat::block()与模板类的组合使用方法
+# block_with_template Mat::block()与模板类的组合使用方法
 
 对模板类Mat对象调用block()方法，会直接报错，需要一些独特的调用方法，比较少见。
 

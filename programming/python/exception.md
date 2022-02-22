@@ -1,7 +1,7 @@
 异常（Exception）{#python_exception}
 ==================================
 
-\section 如何打印更多的异常信息
+# 如何打印更多的异常信息
 
 使用try-except语句时，默认没有太多的调试信息，这会给代码的调试带来困难，通常我们只能知道某个函数出错了，但是该函数内容很多，问题无从查起。
 
@@ -47,7 +47,7 @@ Traceback (most recent call last):
 ZeroDivisionError: integer division or modulo by zero
 \endcode
 
-\section try-except块会不会建立新的scope？
+# try-except块会不会建立新的scope？
 
 答案是不会的，try-except块中新建的变量都可以在块外部访问。
 

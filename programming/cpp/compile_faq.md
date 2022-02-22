@@ -1,7 +1,7 @@
 C++构建常见问题{#cpp_compile_faq}
 ================================
 
-\section 系统limit文件报错？
+# 系统limit文件报错？
 有的时候系统源文件报错会让人摸不着头脑，开发者根本不知道哪里出错。这里列举一个遇到的问题。
 
 有可能是定义了和已有库重名函数或者变量，例如有一个案例，不知道谁多此一举，定义了min和max函数，虽然自定义的max函数有ifndef防止重复定义，
@@ -9,7 +9,7 @@ C++构建常见问题{#cpp_compile_faq}
 所以不要随便定义和已有库重名的东西。
 
 
-\section 添加标准头文件就会报错？
+# 添加标准头文件就会报错？
 遇到一个很奇怪的问题，#include一个标准库头文件后，系统的其他模块就会报错，具体来说，我在main.cpp里include<local>，然后编译时，limit文件就会报max函数使用参数给错。
 虽然问题很怪，但是还是找出来了，实际上，这是一个**触发式**问题，加入的代码本身没有问题，例如添加一句include标准库，但是添加进去之后确实出了问题。
 
@@ -17,40 +17,40 @@ C++构建常见问题{#cpp_compile_faq}
  所以以后如果遇到了这种莫名其妙，include标准头文件都能报错的问题，就有可能是它触发了系统里原有的问题！
  
 
- \section namespace语法错误？
+ # namespace语法错误？
  namespace语法很简单，但是为什么会出错呢？
  有一种可能，就是在c文件或者c文件引用的头文件里定义或者使用的namespace，C语言没有明明空间，当然不支持。
  只不过编译器不会提示C文件不能定义namespace，只是会提示语法错误。
  
 
- \section memcpy_overflow memcpy报出 will always overflow destination buffer.
+ # memcpy_overflow memcpy报出 will always overflow destination buffer.
  gcc编译memcpy的时候，如果目标地址是一个固定大小的静态的数组，那么编译器会检查copy的size是否会超过这块静态数组的大小，超出了就会报出错误，不得不说编译器做得非常不错。
 
 
 
- \section enum_plusplus 枚举变量++操作不支持？
+ # enum_plusplus 枚举变量++操作不支持？
  c++中，枚举变量进行++操作会出现编译错误！
  然而C语言中，枚举变量++是允许的！
  C++已经不兼容C了？
  
 
- \section _Bool类型不能用？
+ # _Bool类型不能用？
  \_Bool类型是C99引入的专属于C语言的布尔类型，如果要使用，必须包含stdbool.h头文件。
 
 
-\section c_with_cpp C语言和C++混用的常见问题？
+# c_with_cpp C语言和C++混用的常见问题？
 
 1. c模块依赖包含c++特性的c++模块，这将导致编译不过，产生的问题例如namespace非法，因为C语言根本没有namespace。
 
 2. extern C 封装起来的代码包含C++特性， 这将导致编译不过，产生的报错例如“template with C linkage”。
 
 
-\section ref_deleted_func 编译错误: Attempting to refer a deleted function 
+# ref_deleted_func 编译错误: Attempting to refer a deleted function 
 
 这个问题常常出现在使用std::fstream时，如果将ifstream或者ofstream对象作为参数传入函数，那么传入时，一定要使用引用方式，否则就会报出这个错误。这个报错没那么直接，编译器不会是说没有用传入，而是在函数调用的时候说调用的函数是被删除过的。
 
 
-\section cpp_TCHAR TCHAR问题？
+# cpp_TCHAR TCHAR问题？
 tinydir使用TCHAR作为基本的字符串输入，在Linux下，TCHAR默认是char，但是在Windows下，THCAR默认是wchar_t。
 如果直接使用char\*作为tinydir的输入，就会出错，其实TCHAR由一个宏来控制，就是UNICODE，VS环境和qtcreator环境都能关闭这个宏，关闭之后TCHAR就变成了char，
 VS的方法是项目属性页面设置字符集为多字节，而不是Unicode。
@@ -77,7 +77,7 @@ std::string converted_str = converter.to_bytes( string_to_convert );
 codecvt头文件在gcc5才引入，如果使用gcc4，是无法通过编译的。
 
 
-\section 函数明明存在却报unresolved symbol！
+# 函数明明存在却报unresolved symbol！
 
 在VS下，函数明明存在为什么还是报出unresolved symbol错误?可能是字符集问题！特别是将不同操作系统下的文件进行混用的时候！通通，通通，通通改成多字节字符。
 
@@ -90,16 +90,16 @@ codecvt头文件在gcc5才引入，如果使用gcc4，是无法通过编译的�
 在QtCreator下也是一样的，需要设置编译方式为C++
 
 
-\section 头文件不要定义变量！
+# 头文件不要定义变量！
 头文件不要定义变量，否则当多个c/cpp文件引用同一个头文件的时候，会出现重复定义问题！
 头文件如果一定要定义变量，就在函数里定义，然后通过返回的形式使用。
 
 
-\section 在头文件中定义函数一定要使用inline！
+# 在头文件中定义函数一定要使用inline！
 header only写法一定要注意头文件中定义函数的实现的时候，一定要加入inline修饰符，或者使用类的静态成员来定义实现。
 
 
-\section 临时变量无法引用
+# 临时变量无法引用
 c和c++中存在所谓的临时变量，想到的就三种：1.运算表达式，2.类型转换，3.函数返回值。
 这三种临时变量传入以非常量引用为形参的函数时，是非法的，例如：
 \code{cpp}
@@ -121,7 +121,7 @@ int main()
 
 使用指针的引用有一个问题就是，通常我们传入指针的时候需要做类型转换，而类型转换就是上文说道的第二种临时变量，编译器会报错。正确的使用方法就是调用时提前把指针手动转换好，再传入函数。
 
-\section request_for_member request for member xxx in something not a structure or union
+# request_for_member request for member xxx in something not a structure or union
 
 本身的含义是使用“.xxx”表达式时，“.”前面的的内容不是一个结构体或者联合。
 具体可能出现的场景：
@@ -137,7 +137,7 @@ A x = {
 \endcode
 
 
-\section const_issue passing ... as 'this' argument ...  discards qualifiers
+# const_issue passing ... as 'this' argument ...  discards qualifiers
 
 问题：问题的全称是
 \code{bash}
@@ -161,13 +161,13 @@ class A{
 2. 如果成员函数确实修改了对象变量，那么成员函数不能定义为const类型，则在传入a的时候，就不能用const修饰，因为你确实要修改这个对象。
 
 
-\section 类成员函数声明和定义处同时使用static修饰
+# 类成员函数声明和定义处同时使用static修饰
 
 这样的做法会编译报错，具体原因待了解。
 正确的做法是只在声名处用static修饰。
 
 
-\section 类成员函数声明和定义同时使用默认参数
+# 类成员函数声明和定义同时使用默认参数
 
 这样的做法会导致编译报错，具体原因待了解。
 正确的做法是只在声明处使用默认参数。

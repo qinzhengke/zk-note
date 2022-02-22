@@ -2,7 +2,7 @@ C语言标准库{#c_std}
 =================
 
 
-\section 标准库的实现版本
+# 标准库的实现版本
 
 C语言标准库也只是一群大佬定义的一种标准，并没有要求谁或者限制谁来实现，自然和编译器一样，也会有许多的版本。
 
@@ -15,10 +15,10 @@ C语言标准库也只是一群大佬定义的一种标准，并没有要求谁�
 
 
 
-\section stdio stdio.h
+# stdio stdio.h
 
 
-\subsection printf 中的uint64整数
+## printf 中的uint64整数
 使用printf过程中，一定要写对%字符串，之前遇到过一个问题，使用%d来打印一个int64的数是错误的，例如下列代码
 
 \code{cpp}
@@ -29,7 +29,7 @@ printf("%d\n",a); // 错误
 实际上，%u，%ld，%lu都不对，在曾经一个ARM平台编译器上，正确的结果是%llu，因为在该平台上，sizeof(long)=sizeof(int)=4，而uint64_t真正的类型是long long，在不同平台时，要注意类型字节数可能不一样。
 
 
-\subsection 怎样printf size_t类型才不会报warning
+## 怎样printf size_t类型才不会报warning
 \code{c}
 // C89
 size_t foo;
@@ -45,7 +45,7 @@ printf("foo = %zu\n", foo);
 
 
 
-\subsection 彩色规范打印
+## 彩色规范打印
 
 \code{c}
 #indef PRINT_ERROR
@@ -71,9 +71,9 @@ printf("foo = %zu\n", foo);
 
 \endcode
 
-\section c_float float.h
+# c_float float.h
 
-\subsection FLT_EPSILON宏和DBL_EPSILON 
+## FLT_EPSILON宏和DBL_EPSILON 
 
 问题：做除法的时候，我们知道分母不能为0，那么如何检查呢？ “if(a!=0.0f)”这种小学生的错误就不要犯了。
 
@@ -98,6 +98,6 @@ DBL_EPSILON=0.00000000000000022204
 \endcode
 
 
-\section 判断数字是否是nan
+# 判断数字是否是nan
 
 isnan()函数。

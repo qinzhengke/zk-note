@@ -2,11 +2,11 @@ libevent：经典的异步事件框架库{#cpp_lib_libevent}
 =====================================
 
 
-\section 基于libevent的定时器
+# 基于libevent的定时器
 
 
 
-\section 注意event_dispatch函数的阻塞性
+# 注意event_dispatch函数的阻塞性
 
 如题libevent中的event_dispatch是阻塞的，所以要注意同一个线程，后面就不要放代码了。
 
@@ -17,7 +17,7 @@ printf("afetr\n");  // 不会被打印
 \endcode
 
 
-\section event_add()函数在调用函数结束之后才会开始计时
+# event_add()函数在调用函数结束之后才会开始计时
 
 不能一进函数就设定下一个计时器。
 

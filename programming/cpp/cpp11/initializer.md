@@ -1,7 +1,7 @@
 C++11增加初始化方式{#cpp11_initializer}
 ===================================
 
-\section 花括号初始化列表
+# 花括号初始化列表
 
 花括号初始化列表，英文表达是“brace-enclosed initializer list”，是使用花括号来直接对结构体进行初始化的一种方法，减少代码量的编写。
 
@@ -45,4 +45,4 @@ int main(){
 \endcode
 
 
-\section list_init_narrow List Initialization 
+# list_init_narrow List Initialization 

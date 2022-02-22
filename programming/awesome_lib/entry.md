@@ -1,38 +1,38 @@
 常用代码库{#awesome_lib}
 ========================
 
-\subpage cpp_boost
+- [cpp_boost
 
-\subpage cpp_lib_opencv
+- [cpp_lib_opencv
 
-\subpage cpp_lib_backward
+- [cpp_lib_backward
 
-\subpage cpp_lib_eigen
+- [cpp_lib_eigen
 
-\subpage cpp_lib_evpp
+- [cpp_lib_evpp
 
-\subpage cpp_lib_libevent
+- [cpp_lib_libevent
 
-\subpage cpp_lib_pcapplusplus
+- [cpp_lib_pcapplusplus
 
-\subpage gtest
+- [gtest
 
-\subpage glog-google
+- [glog-google
 
-\subpage cpp_lib_iguana
+- [cpp_lib_iguana
 
-\subpage cpp_lib_vireo
+- [cpp_lib_vireo
 
-\subpage cpp_lib_vtk
+- [cpp_lib_vtk
 
-\subpage cpp_lib_date
+- [cpp_lib_date
 
-\subpage pcl
+- [pcl
 
-\subpage numpy
+- [numpy
 
-\subpage numba
+- [numba
 
-\subpage filterpy
+- [filterpy
 
-\subpage lda
+- [lda

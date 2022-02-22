@@ -2,7 +2,7 @@ C语言性能相关topic{#c_performance}
 ===============================
 
 
-\section Debug版本对performance影响很大
+# Debug版本对performance影响很大
 
 不要使用Debug版本进行performance相关测评。
 
@@ -42,7 +42,7 @@ PC上运行的结果，t1是全拷贝的时间，t2是下采样拷贝的时间�
 
 
 
-\section 下采样拷贝时间
+# 下采样拷贝时间
 下采样拷贝虽然点数少，但是需要多次拷贝操作，那么这种方式和全拷贝速度差异如何呢？
 
 \code{cpp}

@@ -1,7 +1,7 @@
 基于unordered_map的稀疏矩阵的实现{#sparse_matrix}
 ===============================================
 
-\section unordered_map
+# unordered_map
 复习一下基础知识：
 pair是STL提供的二元组合模板，可以把两个数据绑定在一起。
 

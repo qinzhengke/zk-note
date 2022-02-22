@@ -2,22 +2,22 @@ Javascript调试常见问题{#js_debug}
 ===============================
 
 
-\section 如何打印输出？
+# 如何打印输出？
 console.log()，在浏览器调试界面（chrome中按F2），选择console选项卡可以看到日志输出．
 
 
-\section 动态html内容如何查看？
+# 动态html内容如何查看？
 在浏览器调试界面中，选择Elements，上面的内容即为当前的html内容，包括使用javascript动态生成的．
 
 与之相比，Sources标签页展示的只是纯粹的源代码．
 
 
-\section 我的动态html元素为什么没有出现？
+# 我的动态html元素为什么没有出现？
 
 一个常见的原因是js运行出错，导致js退出执行，所以要好好看控制台的输出．
 
 
-\section button的onclick无效？
+# button的onclick无效？
 
 一种原因是写html标的时候，函数没有写上括号．
 
@@ -31,7 +31,7 @@ console.log()，在浏览器调试界面（chrome中按F2），选择console选�
 这就导致开发者认为函数没有问题，往别的方向思考．
 
 
-\section javascript字符串替换
+# javascript字符串替换
 
 如下代码所示，注意，第一个参数不是忘了加引号，确实是没有引号的，特别神奇的写法．
 下面代码的意思是替换所有的换行符号为空．
@@ -42,7 +42,7 @@ console.log()，在浏览器调试界面（chrome中按F2），选择console选�
 \endcode
 
 
-\section 构造对象
+# 构造对象
 
 \code{.js}
 function Persion(name, age){
@@ -58,6 +58,6 @@ var persion1 = new Persion("Bob", 13);
 写惯C++后，有可能会出错．
 
 
-\section 使用$("#id")代替document.getElement
+# 使用$("#id")代替document.getElement
 
 明显$("#id")要简洁很多，但是要注意，原来的value要变成val()
