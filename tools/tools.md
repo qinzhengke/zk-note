@@ -1,30 +1,30 @@
 工具笔记（Tools Note）{#tools}
 ===========
 
-\subpage tool_list
+- [tool_list
 
-\subpage gnome
+- [gnome
 
-\subpage git
+- [git
 
-\subpage doxygen
+- [doxygen
 
-\subpage mathjax
+- [mathjax
 
-\subpage libre_office
+- [libre_office
 
-\subpage useful_tools
+- [useful_tools
 
-\subpage vim
+- [vim
 
-\subpage vscode
+- [vscode
 
-\subpage latex
+- [latex
 
-\subpage regex_entry
+- [regex_entry
 
-\subpage valgrind
+- [valgrind
 
-\subpage sed
+- [sed
 
-\subpage google_sheets
+- [google_sheets

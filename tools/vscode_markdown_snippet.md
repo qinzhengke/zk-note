@@ -20,16 +20,16 @@ vscode中的markdown相关的代码片{#vscode_markdown_snippet}
 	"Inline function": {
 		"prefix": "if",
 		"body": [
-			"\\f$ $0 \\f$"
+			"\$$ $0 \$$"
 		],
 		"description": "inline formula"
 	},
 	"new line function": {
 		"prefix": "nf",
 		"body": [
-			"\\f[",
+			"\$$",
 			"$0",
-			"\\f]"
+			"\$$"
 		],
 		"description": "new line formula"
 	},

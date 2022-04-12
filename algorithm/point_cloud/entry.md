@@ -3,14 +3,14 @@
 
 
 
-\subpage point_cloud_detection
+- [point_cloud_detection
 
-\subpage point_cloud_feature
+- [point_cloud_feature
 
-\subpage point_cloud_filter
+- [point_cloud_filter
 
-\subpage point_cloud_kdtree
+- [point_cloud_kdtree
 
-\subpage point_cloud_registration
+- [point_cloud_registration
 
-\subpage point_cloud_segmentation
+- [point_cloud_segmentation

@@ -1,8 +1,8 @@
 机器学习（Machine Learning）{#ml_entry}
 =================
 
-\subpage ml_intro
+- [ml_intro
 
-\subpage overfitting
+- [overfitting
 
-\subpage regulization
+- [regulization

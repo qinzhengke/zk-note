@@ -1,7 +1,7 @@
 有趣的CV相关的网站{#awsome_cv_websites}
 ====================================
 
-\section cv_forum 论坛
+# cv_forum 论坛
 
 | 名称 | 地址 | 说明 |
 |---|---|---|
@@ -11,7 +11,7 @@
 | Middlebury |（米德尔伯里）学院提供的关于立体视觉的一个网站，提供一些标准双目数据benchmark，以及在线算法评价方法，目前该网站已经记录了一百多种双目匹配方法，并且进行了排序。
 
 
-\section 一些电子图书：
+# 一些电子图书：
 
 - Computer Vision Algorithms and Applications，作者Richard Szeliski
 
@@ -27,13 +27,13 @@
 
 一些数学和算法基础，非常有必要通读一遍。
 
-\section pdf课件
+# pdf课件
 
 > Stereo Vision: Algorithms and Applications 作者：Stefano Mattoccia, University of bologna （博洛尼亚大学，意大利）
 
 长达208页的课件包含了很多Stereo Vision的基础知识。
 
-\section 一些网站
+# 一些网站
 
 http://vision.middlebury.edu/stereo/
 
@@ -43,13 +43,13 @@ Liulina 603
 
 这篇博文介绍了双目匹配方法的原理，包括SAD匹配，BM算法、SGBM算法以及GC算法，有图有代码，很好理解，虽然很Navie。
 
-\subsection 一些paper
+## 一些paper
 
 - GCPR 2014年的一篇文章，提供了一个带有非常精准的grouth truth的数据集，使用结构光系统实现，效果非常惊艳，被收录在Middlebury中。
 
 > High-Resolution Stereo Datasets with Subpixel-Accurate Ground Truth.
 
-\subsection 一些基础名词
+## 一些基础名词
 
 **homologous**：同源的，例如左右两图中的两个点是同源的，表示它们对应的三维空间点是同一个。
 

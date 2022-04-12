@@ -1,16 +1,16 @@
 Python：人生苦短，我用Pyhton！{#python}
 ===========================
 
-\subpage python_syntax
+- [python_syntax
 
-\subpage python_import
+- [python_import
 
-\subpage matplotlib
+- [matplotlib
 
-\subpage python_json
+- [python_json
 
-\subpage python_exception
+- [python_exception
 
-\subpage python_reflection
+- [python_reflection
 
-\subpage python_questions
+- [python_questions

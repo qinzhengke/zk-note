@@ -1,7 +1,7 @@
 反射（reflection）{#python_reflection}
 ====================================
 
-\section 如何遍历类中的成员变量？
+# 如何遍历类中的成员变量？
 
 \code{cpp}
 

@@ -1,15 +1,15 @@
 视觉SLAM简介{#vslam_entry}
 ====================
 
-\subpage vlsam_intro
+- [vlsam_intro
 
 SLAM是“Simultaneous Localization And Mapping”的缩写，VSLAM也就是视觉SLAM。
 
 此页面记录VSLAM相关知识。
 
-\subpage cam_imu_sync
+- [cam_imu_sync
 
-\section 主流vslam框架
+# 主流vslam框架
 
 特征点法
 
@@ -28,7 +28,7 @@ BA vs EKF?
 直接法 vs 特征点法
 特征点法不适合若纹理场景、曲线纹理场景
 
-\section loop_closing Loop closing
+# loop_closing Loop closing
 
 1. 位姿图优化(Pose-graph optimization)
 
@@ -36,10 +36,10 @@ BA vs EKF?
 
 photometric consistency
 
-\subpage vins
+- [vins
 
-\subpage orb_slam
+- [orb_slam
 
-\subpage msckf
+- [msckf
 
-\subpage msckf_ext_reading
+- [msckf_ext_reading

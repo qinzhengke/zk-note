@@ -2,7 +2,7 @@ Coredump分析{#coredump}
 ======================
 
 
-\section 方法
+# 方法
 
 Step 0: CMakeLists.txt加入debug配置
 
@@ -54,7 +54,7 @@ Step 6: 在gdb中使用bt(backtrace)命令来追溯问题出现在哪里。
 TODO qinzhengke :给出实际的案例。
 
 
-\section 问题定位到库文件中
+# 问题定位到库文件中
 
 当coredump出现在库文件中时，如果没有在编译库文件的时候加入debug设置，那么backtrace给出的结果也只能定位到哪个so文件。
 
@@ -67,7 +67,7 @@ add_compile_options(-g)   #添加语句
 \endcode
 
 
-\section coredump的几大主要原因
+# coredump的几大主要原因
 
 1. 数组越界
 

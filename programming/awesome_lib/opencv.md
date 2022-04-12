@@ -4,7 +4,7 @@ OpenCV：经典开源计算机视觉库{#cpp_lib_opencv}
 此页面记录opencv使用过程中遇到的问题。
 
 
-\section Linux离线环境编译opencv
+# Linux离线环境编译opencv
 cmake会在编译opencv时下载ippicv和ffmpeg库，这会导致离线环境编译opencv被卡在下述语句。
 \endcode{bash}
 IPPICV:Download:ippicv_2017u3_lnx_intel64_general_20180518.tgz
@@ -21,14 +21,14 @@ step2:下载对应版本的包，然后打开opencv/3rdparty/ippicv/ippicv.cmake
 \endcode
 
 
-\section 编译contrib库
+# 编译contrib库
 如果要使用contrib库，就需要自己行编译，编译时指定opencv_contrib/modules路径即可
 \code{cmake}
 set(OPENCV_EXTRA_MODULES_PATH ~/opencv_contrib/modules)
 \endcode
 
 
-\section 带Qt编译
+# 带Qt编译
 带Qt编译后，imshow时opencv会调用更高级的一个gui，还是比较方便的。
 step1:在cmake-gui中搜索WITH-QT，勾上，然后重新configure；
 step2:步骤一会弹出错误并且将接下来要设置的几个路径都高亮显示， 大概是Qt5Concurrent_DIR、QtCore_DIR、Qt5Gui_DIR等等，设置到对应cmake路径，这里再举个例子
@@ -38,7 +38,7 @@ step2:步骤一会弹出错误并且将接下来要设置的几个路径都高�
 其他几个路径举一反三即可。
 
 
-\section CV_EXPORT宏
+# CV_EXPORT宏
 
 \code{cpp}
 #if (defined _WIN32 || defined WINCE || defined __CYGWIN__) && defined CVAPI_EXPORTS
@@ -55,7 +55,7 @@ step2:步骤一会弹出错误并且将接下来要设置的几个路径都高�
 > https://www.ibm.com/developerworks/cn/aix/library/au-aix-symbol-visibility/index.html
 
 
-\section 如何填充Mat？
+# 如何填充Mat？
 
 \code{cpp}
 Mat a(100,100,CV_8UC3);

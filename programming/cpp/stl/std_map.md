@@ -2,7 +2,7 @@ std::map{#cpp_map}
 =====================
 
 
-\section 基本使用方法
+# 基本使用方法
 
 \code{.cpp}
 // constructing maps

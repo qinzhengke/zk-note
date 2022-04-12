@@ -7,20 +7,20 @@
 
 思想：在损失函数后面加上系数向量的二范数，约束系数向量的增长。
 
-\section 正则化原理
+# 正则化原理
 假设原始损失函数为：
 
-\f[
+$$
     \boldsymbol{J} = [\boldsymbol{y}_{\theta}(\boldsymbol{x}) - \boldsymbol{y}]^2
-\f]
+$$
 
 那么，正则化之后的损失函数可以是
 
-\f[
+$$
     \boldsymbol{J} = [\boldsymbol{y}_{\boldsymbol{\theta}}(\boldsymbol{x}) - \boldsymbol{y}]^2 + \lambda \boldsymbol{\theta}^T \boldsymbol{\theta}
-\f]
+$$
 
-其中， \f$ \lambda \f$ 是一个需要手调的参数。
+其中， $$ \lambda $$ 是一个需要手调的参数。
 
 为什么正则化可以解决过拟合问题？
 
@@ -32,9 +32,9 @@
 
 那么为什么系数大，函数就不光滑呢？这是因为系数决定这输出对输入的敏感度，如果系数越大，那么只要x一小点，y都能有很大的变化，这实际上就是一种不平滑。
 
-注意，\f$ \boldsymbol{\theta} \f$只考虑自变量 \f$ x \f$的系数参数，bias项不考虑。
+注意，$$ \boldsymbol{\theta} $$只考虑自变量 $$ x $$的系数参数，bias项不考虑。
 
-\subsection L1范数正则化和L2范数正则化
+## L1范数正则化和L2范数正则化
 
 上一节的例子实际上是L2正则化，L1正则化实际上限制的是系数向量的L1范数，也就是绝对之和。
 

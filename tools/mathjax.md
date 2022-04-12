@@ -6,7 +6,7 @@ MathJax是一个提供公式渲染的工具，它的语法和Latex一样，但�
 MathJax的引用方式有两种：在线的CDN访问以及离线版本引用。
 
 
-\section Doxygen的MathJax本地化
+# Doxygen的MathJax本地化
 
 在线的CDN访问并不是很靠谱，有的时候第三方CDN的连接很慢，甚至无法连接，另外，有的时候，我们在无网络的地方本地编辑，也希望能够渲染公式。
 
@@ -70,10 +70,10 @@ doxygen Doxyfile
 echo "[zk] Copying images ..."
 cp -r figures build/html/
 
-if [ $# -gt 0 ]
+if [$# -gt 0 ]
 then 
 
-    if [ $1 == '--all' ]
+    if [$1 == '--all' ]
     then
         echo "[zk] Copying MathJax ..."
         cp -r ./3rd-party/MathJax-2.7.8 ./build/html/

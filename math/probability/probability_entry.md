@@ -1,12 +1,12 @@
 概率论基础{#probability_entry}
 ============================
 
-\subpage probability_moments
+- [probability_moments
 
-\subpage bias_of_estimator
+- [bias_of_estimator
 
-\subpage classic_probabiilty
+- [classic_probabiilty
 
-\subpage bayes_theorem
+- [bayes_theorem
 
-\subpage probability_extend_reading
+- [probability_extend_reading

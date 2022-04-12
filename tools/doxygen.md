@@ -1,28 +1,28 @@
 文档框架：doxygen{#doxygen}
 =========================
 
-\section include和snippet
+# include和snippet
 使用的时候必须在EXMAPLE_PATH里加入源码出现的目录，否则doxygen无法搜索到。
 doxygen会递归搜索在EXAMPLE_PATH的子目录，所以如果有多个目录下的源文件，只要添加一个父目录就行。
 
-\section 生成latex输出
+# 生成latex输出
 http://www.doxygen.nl/manual/output.html
 
-\section make pdf出现 “tuba.sty not found“
+# make pdf出现 “tuba.sty not found“
 sudo apt-get install texlive-latex-extra
 
-\section section_usage section用法
+# section_usage section用法
 
-\\section <name> title
+\# <name> title
 
 其中<name>是名称，类似于编程语言里的规则，不能使用+号，也不能有空格，title就是对应的文本，就是要显示的东西。
 
-\section dox_file dox文件语法
+# dox_file dox文件语法
 
-.dox文件是doxygen特有的文件，默认情况下当做C++语言处理，所以在dox文件中直接定义一些\\section命令是无效的，
-想要使用\\section等特性，还是在.md文件中写吧。
+.dox文件是doxygen特有的文件，默认情况下当做C++语言处理，所以在dox文件中直接定义一些\#命令是无效的，
+想要使用\#等特性，还是在.md文件中写吧。
 
-\section doxygen_bilibili 插入哔哩哔哩视频
+# doxygen_bilibili 插入哔哩哔哩视频
 
 1. 点击视频分享，拷贝嵌入代码
 
@@ -36,7 +36,7 @@ code{dox}
 \\endhtmlonly
 \endcode
 
-\section ref_excel 引用excel表格
+# ref_excel 引用excel表格
 前言：markdown表格不支持合并单元格操作，表达能力有限，我们需要表达能力更强的html表格。
 然而，手打html表格是一种低效操作，有位名人说过：“手打html表格是不可能手打的，这辈子都不可能手打的”。
 
@@ -51,7 +51,7 @@ step 3: 使用文本文件打开html网页，复制<table></table>部分。
 step 4：复制到doxygen源文件，注意：一定要使用\\htmlonly 和 \\endhtmlonly包裹，否则显示会出现错乱。
 
 
-\section numbered_eq 带编号的公式
+# numbered_eq 带编号的公式
 Doxygen使用了MathJax来渲染公式，实际上Doxygen设置编号也就是MathJax设置编号。
 
 step 1: 建立一个js文件，存放MathJax的配置，如下所示：
@@ -85,25 +85,25 @@ MATHJAX_CODEFILE = ./latex_support.js
 然后就可以愉快的使用带编号的公式。
 
 
-\section ref_eq 引用公式
+# ref_eq 引用公式
 
 \verbatim
-    \f[
+    $$
         \label{eq}
         E = mc^2
-    \f]
+    $$
     \\eqref{eq}
 \endverbatim
 
 注意是引用处使用双反斜杠。
 
 
-\section raw_format 原始格式输出
+# raw_format 原始格式输出
 
 使用 \\verbatim 和 \\endverbatim包裹。
 
 
-\section majax_issue github page上MaJax公式没有正确渲染
+# majax_issue github page上MaJax公式没有正确渲染
 
 明明离线版本Majax公式能够正常渲染，但是传到github page上就不行了？
 一个很重要的原因就是Doxyfile里面Majax的CDN地址使用http作为传输协议，github page上应该是禁止了http协议，导致CDN没法正常访问。
@@ -111,7 +111,7 @@ MATHJAX_CODEFILE = ./latex_support.js
 解决办法很简单，只要把CDN地址中的“http”改成“https”即可。
 
 
-\section boldsymbol_vs_mathbf boldsymbol和mathbf的区别。
+# boldsymbol_vs_mathbf boldsymbol和mathbf的区别。
 
 boldsymbol和mathbf都是latex中粗体的语法，但是boldsymbol明显要比textbf好看很多，如下图所示
 <center>
@@ -119,13 +119,13 @@ boldsymbol和mathbf都是latex中粗体的语法，但是boldsymbol明显要比t
 </center>
 
 
-\section dfrac_vs_frac dfrac vs frac
+# dfrac_vs_frac dfrac vs frac
 
 dfrac明显尺寸要还原得更好一些，如下图所示。
 ![](./figures/dfrac_vs_frac.png)
 
 
-\section 生成参考文献
+# 生成参考文献
 
 step 1: 安装texbib工具
 
@@ -166,12 +166,12 @@ step 4: 在doxygen文档处使用 \\cite 进行引用。
 
 ![](./figures/doxygen_cite_bib_02.png)
 
-\section 灵活使用自定义css文件调整细节
+# 灵活使用自定义css文件调整细节
 
 使用“doxygen -w”来生成默认的css模板，然后在Doxyfile中配置“HTML_EXTRA_STYLE_SHEET”参数指定刚才生成的css文件。
 
 然后就可以愉快的修改里面的内容了。
 
-\subsection 调整title的尺寸
+## 调整title的尺寸
 
 在css文件中搜索“projectname”，调整里面的font的比例就可以了，默认是300%，贼大。

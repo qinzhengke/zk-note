@@ -1,58 +1,58 @@
 最大似然估计(Maiximum Likelihood Estimation){#mle}
 ================================================
 
-\section 最大似然估计的定义
+# 最大似然估计的定义
 
-假设随机变量 \f$ \boldsymbol{x} \f$的概率密度函数为 \f$ p(\boldsymbol{x};\boldsymbol{\theta}) \f$，其中 \f$ \boldsymbol{\theta} \f$ 是<b>固定的、未知的</b>参数，例如高斯分布中的 \f$ \boldsymbol{\mu} \f$ 和 \f$ \boldsymbol{\Sigma} \f$ 。
+假设随机变量 $$ \boldsymbol{x} $$的概率密度函数为 $$ p(\boldsymbol{x};\boldsymbol{\theta}) $$，其中 $$ \boldsymbol{\theta} $$ 是<b>固定的、未知的</b>参数，例如高斯分布中的 $$ \boldsymbol{\mu} $$ 和 $$ \boldsymbol{\Sigma} $$ 。
 
-则固定 \f$ \boldsymbol{x} \f$， \f$ p(\boldsymbol{x}; \boldsymbol{\theta}) \f$ 作为参数 \f$ \boldsymbol{\theta} \f$ 的函数，称为<b>似然函数</b>，记为
+则固定 $$ \boldsymbol{x} $$， $$ p(\boldsymbol{x}; \boldsymbol{\theta}) $$ 作为参数 $$ \boldsymbol{\theta} $$ 的函数，称为<b>似然函数</b>，记为
 
-\f[
+$$
 L(\boldsymbol{x};\boldsymbol{\theta}) = p(\boldsymbol{x}; \boldsymbol{\theta}), \quad \theta \in \Theta
-\f]
+$$
 
-其中， \f$ \Theta \f$ 为参数空间。
+其中， $$ \Theta $$ 为参数空间。
 
 并称
 
-\f[
+$$
     \boldsymbol{\theta}^* = \arg \max _{\boldsymbol{\theta} \in \boldsymbol{\Theta}} {L(\boldsymbol{x};\boldsymbol{\theta})}
-\f]
+$$
 
 为最大似然估计。
 
-> 本文用来表示似然函数的符号 \f$ p(\boldsymbol{x}; \boldsymbol{\theta}) \f$来自于《计算机视觉中的数学方法》。
-> 在贝叶斯框架下，往往会使用 \f$ p( \boldsymbol{\theta} | \boldsymbol{x}) \f$ 来表示似然函数，注意两者的区别。
+> 本文用来表示似然函数的符号 $$ p(\boldsymbol{x}; \boldsymbol{\theta}) $$来自于《计算机视觉中的数学方法》。
+> 在贝叶斯框架下，往往会使用 $$ p( \boldsymbol{\theta} | \boldsymbol{x}) $$ 来表示似然函数，注意两者的区别。
 
-\section 应用于独立同分布实验
+# 应用于独立同分布实验
 
 一些文献，例如维基百科和《计算机视觉中的数学方法》，都会在最大似然估计的定义后<b>紧接着</b>推导最大似然估计在独立同分布问题中的求解方法。
 可能看起来会误以为独立同分布是最大似然估计所必须包含的前提条件，然而实际上并不是的，独立同分布抽样问题也只是最大似然估计的一种应用而已。
 
 尽管如此，我们仍然从独立同分布抽样问题来展开最大似然估计，后面再讨论非独立同分布抽样的问题。
 
-假设 \f$ \boldsymbol{x} = (\boldsymbol{y}_1,\boldsymbol{y}_2,...,\boldsymbol{y}_k) \f$ 是一次独立抽样，那么其联合概率密度( \f$ \boldsymbol{Y}_1=\boldsymbol{y}_1, \boldsymbol{Y}_2 = \boldsymbol{y}_2,..., \boldsymbol{Y}_k=\boldsymbol{y}_k的概率密度多少 \f$ )为：
+假设 $$ \boldsymbol{x} = (\boldsymbol{y}_1,\boldsymbol{y}_2,...,\boldsymbol{y}_k) $$ 是一次独立抽样，那么其联合概率密度( $$ \boldsymbol{Y}_1=\boldsymbol{y}_1, \boldsymbol{Y}_2 = \boldsymbol{y}_2,..., \boldsymbol{Y}_k=\boldsymbol{y}_k的概率密度多少 $$ )为：
 
-\f[
+$$
     p(\boldsymbol{x}; \boldsymbol{\theta}) = \prod _{j=1} ^{k} {p_j(\boldsymbol{y}_j); \boldsymbol{\theta}}
-\f]
+$$
 
-既然我们做实验得到了这个 \f$ \boldsymbol{x} \f$这个结果，我们自然认为它发生的概率最大，那么如果把概率密度画出来，那么 \f$ \boldsymbol{x} \f$ 一定是极值点。
+既然我们做实验得到了这个 $$ \boldsymbol{x} $$这个结果，我们自然认为它发生的概率最大，那么如果把概率密度画出来，那么 $$ \boldsymbol{x} $$ 一定是极值点。
 
-那么我们只需要找到合适的 \f$ \boldsymbol{ \theta } \f$，让概率密度函数在 \f$ \boldsymbol{x} \f$ 处的导数为0即可，即
+那么我们只需要找到合适的 $$ \boldsymbol{ \theta } $$，让概率密度函数在 $$ \boldsymbol{x} $$ 处的导数为0即可，即
 
-\f[
+$$
     \frac{\partial p(\boldsymbol{x}; \boldsymbol{\theta})}{\partial \boldsymbol{\theta}} = 0
-\f]
+$$
 
-为了求解方便，我们对 \f$ p(\boldsymbol{x}; \boldsymbol{\theta}) \f$ 取对数，得到对数似然函数
+为了求解方便，我们对 $$ p(\boldsymbol{x}; \boldsymbol{\theta}) $$ 取对数，得到对数似然函数
 
-\f[
+$$
     l(\boldsymbol{x}; \boldsymbol{\theta}) = \log \prod _{j=1} ^{k} p_j(\boldsymbol{y}_j; \boldsymbol{\theta}) 
     = \sum _{j=1} ^{k} \log p_j(\boldsymbol{y}_j; \boldsymbol{\theta})
-\f]
+$$
 
-\section 关于最大似然估计和贝叶斯估计联系和区别的讨论
+# 关于最大似然估计和贝叶斯估计联系和区别的讨论
 
 极大似然估计和贝叶斯估计是两种最常见的估计方法，两者在众多应用学科中都有广泛的应用。
 初学者往往对于两者的区分解释得并不清楚。

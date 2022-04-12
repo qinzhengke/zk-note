@@ -280,7 +280,7 @@ for further suggestions on appropriate behavior.
 ## References
 
 * We heavily borrowed from Mozilla and Ghost -- thank you!
-  * https://github.com/TryGhost/Ghost/blob/master/CONTRIBUTING.md
+  * https://github.com/TryGhost/Ghost/blob/$1/CONTRIBUTING.md
   * https://github.com/mozilla/rust/wiki/Note-development-policy
-* https://github.com/jden/CONTRIBUTING.md/blob/master/CONTRIBUTING.md
+* https://github.com/jden/CONTRIBUTING.md/blob/$1/CONTRIBUTING.md
 * http://blog.discourse.org/2013/03/the-universal-rules-of-civilized-discourse/

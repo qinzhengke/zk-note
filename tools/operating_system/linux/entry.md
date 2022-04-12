@@ -4,22 +4,22 @@ Linux{#os_linux}
 这个页面主要记录一些Linux操作系统的知识
 
 
-\section 综合篇
+# 综合篇
 
-\subsection 文件权限
+## 文件权限
 
 参考下图：
 ![](./figures/../../../figures/file-llls22.jpg)
 
 补充：对于文件来说，“x”表示是否可执行，但是对于文件夹来说，“x”代表是否可以进入。如果发现了“cd”到某个目录失败提示无权限，那就是这个原因。
 
-\subsection ls输出的绿色背景文件是什么意思？
+## ls输出的绿色背景文件是什么意思？
 
 ![](./figures/../../../figures/linux_ls_green.png)
 
 表示除了owner和group之外，其他人员也拥有写的权限，是不合理的，保持其他人仅可读是多用户共享文件的合理设置。
 
-\subsection 如何非阻塞运行gui程序？
+## 如何非阻塞运行gui程序？
 问题：如果直接在终端运行某个gui程序，终端会阻塞直到gui关闭，例如运行gitk。
 那么如何运行程序，并且不阻塞终端呢？
 解法：
@@ -29,7 +29,7 @@ gitk &
 \endcode
 
 
-\subsection 如何查看目录和文件占用磁盘大小？
+## 如何查看目录和文件占用磁盘大小？
 
 \code{bash}
 du -h -d 1 ./
@@ -55,7 +55,7 @@ du -h -d 1 ./*
 很简单：cp -P
 
 
-\subsection 如何查看哪些端口号被监听？
+## 如何查看哪些端口号被监听？
 
 基于网络socket通信的时候，一个端口只能被一个应用程序监听，（实际上，端口的内在定义就是应用程序的标识）。
 
@@ -69,7 +69,7 @@ sudo lsof -i -P -n | grep LISTEN
 \endcode
 
 
-\subsection ls工具如何显示文件的全路径？
+## ls工具如何显示文件的全路径？
 
 众所周知，ls工具会输出文件列表，但是有的时候我们想要的是文件的全路径，如何实现呢？
 
@@ -78,30 +78,30 @@ $ ls -d $PWD/*
 \endcode
 
 
-\subsection 如何查看文件的后面n行？
+## 如何查看文件的后面n行？
 
 \code{bash}
 tail -n 5 ./filename.txt
 \endcode
 
-\subsection  如何循环执行某个命令？
+##  如何循环执行某个命令？
 
 \code{bash} 
 while : ; do tail -n 5 ./filename.txt; sleep 1; done;
 \endcode
 
-\subsection  ln -s 命令无效？
+##  ln -s 命令无效？
 1. 使用ln -s命令，一定要输入目标文件的绝对路径，而不是相对路径！
 2. 如果目标文件在NTFS磁盘上，那么这种连接是无效的！
 
-\subsection  find命令
+##  find命令
 怎么查找名称带有“[”和“]”的文件？
 \code{bash}
 find . -name "\[xxx\]"
 \endcode
 find工具认为中括号有特定含义，即寻找从哪个字母到哪个字母开始的文件，如果确实要使用中括号，就应该使用转义字符。
 
-\subsection  find + rm 命令
+##  find + rm 命令
 使用find + rm 命令可以轻松删除特定文件，而且先find一遍，可以看看是否会误删其他文件，确认没问题之后再使用rm，即安全也高效。
 
 \code{bash}
@@ -128,7 +128,7 @@ tar -xf myfile.tar.gz
 如果压缩的时候是一个文件夹压缩的，那么解压出来的也是一个文件夹。
 
 
-\subsection 几种Linux发送网络包的命令
+## 几种Linux发送网络包的命令
 
 UDP包：
 \code{bash}
@@ -144,7 +144,7 @@ curl "http://127.0.0.1:9009/echo" -d "Hello, world"
 
 
 
-\subsection Linux上环境变量的配置
+## Linux上环境变量的配置
 
 Linux操作系统下三种配置环境变量的方法　　 
 
@@ -212,16 +212,16 @@ export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar 
 \endcode
 
-\subsection  查看滚动的log文件
+##  查看滚动的log文件
 \code{bash}
 tail -f xxx.log
 \endcode
 参数“-f”表示“follow”，即当文件有更新的时候，追加打印更新的内容，这样一来，看log文件就和命令运行程序一样了。
 
-\subsection  busybox
+##  busybox
 这是一个工具的集合，很多比较简陋的嵌入式linux环境无法提供太多的工具，busybox就作为一个工具箱，提供丰富的工具支持，例如上述的tail命令。
 
-\subsection  script中的source
+##  script中的source
 script中的source命令是无效的！
 所以，如果想要在script中source ~/.bashrc，也是无效的。
 有点奇怪，有些说法是calling bash不受callee bash的影响。
@@ -232,10 +232,10 @@ script中的source命令是无效的！
 echo MY_VARIABLE > ~/.bashrc
 exec bash
 \endcode
-\subsection # /bin/sh&M bad interpreter
+## # /bin/sh&M bad interpreter
 直接原因是第一行结尾字符有问题，一般的源头是bash的脚本文件在Windows被重新编辑过，Windows和Linux下的换行是不同的字符表达的，回到Linux时就可能出错。
 
-\subsection # .netrc文件注册网络账户和密码
+## # .netrc文件注册网络账户和密码
 很多web应用需要用户提供账户和密码，如果一开始没有在web端设置好，或者说没有办法在web端设置，例如gerrit上http形式的仓库URL，交互程序一般会阻塞并弹出输入账户和密码的提示。
 这样的交互有2点不好。
 1.有些账户密码很长，还不能够自行设置，没错，说的就是gerrit的anomynous http地址，每次都要从gerrit上复制密码，降低效率。
@@ -248,7 +248,7 @@ machine 192.168.0.5 login qinzhengke password xxxx
 \endcode
 
 
-\subsection 无法delete到回收站
+## 无法delete到回收站
 无法通过delete将NTFS磁盘中的文件移动到回收站
 Gnome中无法通过delete将NTFS磁盘中的文件移动到回收站，只能完全删除？
 解决方法：
@@ -262,7 +262,7 @@ Gnome中无法通过delete将NTFS磁盘中的文件移动到回收站，只能�
 
 
 
-\subsection Ubuntu中的apt-get命令
+## Ubuntu中的apt-get命令
 apt-get是Debian系列操作系统的软件安装工具，这个工具可以连接网络已有的软件库，下载并安装所有的开源软件包，下面记录常用的命令和选项。
 1. install是最常用的，直接下载安装软件包并且下载安装依赖的所有其他软件包。
 2. Install -d 可以用于下载二进制软件包而不安装。
@@ -271,25 +271,25 @@ apt-get是Debian系列操作系统的软件安装工具，这个工具可以连�
 
 
 
-\subsection Ubuntu自带的任务管理器
+## Ubuntu自带的任务管理器
 Monitor，只要在super键后输入monitor就可以查找得到了。 
 
 
-\subsection 修改Linux的root密码
+## 修改Linux的root密码
 登录root账户后，使用passwd root命令来更改密码
 
 
 
-\subsection ssh完整登录命令（账户、主机、端口都有）
+## ssh完整登录命令（账户、主机、端口都有）
 ssh root@104.224.156.77 -p 27217
 
 
 
-\section 软件篇
+# 软件篇
 
 
 
-\subsection 常用软件列表
+## 常用软件列表
 - Sogou Pinyin
 第一步当然是安装一个合适的中文输入法了。作为国内比较良心作品，sogou拼音相当不错。
 
@@ -317,7 +317,7 @@ Python的集成开发环境，支持调试，可以算是最好的。
 
 
 
-\subsection Ubuntu下安装Shadowsocks
+## Ubuntu下安装Shadowsocks
 通过PPA源安装，仅支持Ubuntu 14.04或更高版本。
 
 \code
@@ -326,14 +326,14 @@ sudo apt-get update
 sudo apt-get install shadowsocks-qt5
 \endcode
 
-\subsection Ubuntu下安装Qt
+## Ubuntu下安装Qt
 从官网上下载.run文件之后，使用chmod u+x xxx.run命令来将文件变成可执行文件，然后再使用./xxx.run来运行安装程序。
 
 ![](files/安装Qt.png "安装Qt")
 
 
 
-\subsection Linux上软件源码编译通用方法
+## Linux上软件源码编译通用方法
 首先需要配置make文件所需要的平台相关变量，例如有什么其他依赖的库？这些库的路径是什么？
 例如安装GSL库第一步：“./configure“，configure里包含着安装的目录在哪里，一般命名为install_prefix，Linux下默认安装在/usr/local目录里。
 
@@ -345,7 +345,7 @@ sudo apt-get install shadowsocks-qt5
 
 
 
-\subsection 给Ubuntu系统安装宋体字体
+## 给Ubuntu系统安装宋体字体
 
 Windows平台下，“宋体”、“微软雅黑”、“Courier New(编程字体)”用的比较多，看的也习惯了。那如何在 Ubuntu下也安装这些字体呢？
 
@@ -387,7 +387,7 @@ sudo reboot
 
 
 
-\subsection 中文输入法安装
+## 中文输入法安装
 Gnome 3.10下的中文输入法：
 	Linux下的输入法不同于Windows，Linux的输入法分为：输入法框架+输入法两个部分，首先我们需要安装好输入法框架，然后在基于不同的框架安装不同的输入法。
 	Linux的输入法框架主要有两种：ibus和fcitx，ibus即俗称的小企鹅输入法，是Ubuntu自带的输入法框架，但是网络上普遍认为ibus并不是很好用，很多情况都使用fcitx取代ibus，搜狗输入法就是一个典型的例子，它只支持fcitx框架。
@@ -402,7 +402,7 @@ Gnome 3.10下的中文输入法：
 4. 注销后重新登录即可，另外Gnome里默认的切换输入法的快捷键是super+space而不是ctrl+space。
 
 
-\subsection Ubuntu中的Apt-get命令
+## Ubuntu中的Apt-get命令
 
 apt-get是Debian系列操作系统的软件安装工具，这个工具可以连接网络已有的软件库，下载并安装所有的开源软件包，下面记录常用的命令和选项。
 1. install是最常用的，直接下载安装软件包并且下载安装依赖的所有其他软件包。
@@ -411,7 +411,7 @@ apt-get是Debian系列操作系统的软件安装工具，这个工具可以连�
 4. 使用apt-get clean可以清空上面两个文件夹。
 
 
-\subsection flameshot-Ubuntu下一个超强截图工具
+## flameshot-Ubuntu下一个超强截图工具
 安装
 \code{bash}
 sudo apt-get install flameshot
@@ -423,7 +423,7 @@ sudo apt-get install flameshot
 3. 按print键，享受截图、涂鸦、注释的快感吧。
 
 
-\section 搜狗输入法切换全角半角以及中英标点符号
+# 搜狗输入法切换全角半角以及中英标点符号
 
 在linux上，一般输入法会默认全角，打出来的英文字符很大，而且不是普通的英文字符，无法被匹配到，这时候需要切换为半角，不太懂全角的意义是什么。
 
@@ -433,7 +433,7 @@ sudo apt-get install flameshot
 
 
 
-\section 启用ssh服务
+# 启用ssh服务
 
 前言：为了安全，一般桌面版的linux操作系统是默认不安装ssh服务的，如果要基于ssh连接到某台桌面linux电脑，需要手动设置。
 
@@ -450,20 +450,20 @@ sudo ufw allow ssh
 \endcode
 
 
-\section 使用scp发送文件
+# 使用scp发送文件
 
 \code{.sh}
 scp my_file username@192.168.1.101:~/Downloads
 \endcode
 
 
-\section 根据进程的名称来kill
+# 根据进程的名称来kill
 
 前言：kill命令没有根据进程的名字来杀死进程的方法，需要自行写几句脚本根据进程名称找出PID，然后在杀死，具体方法如下所示。
 
 \code{.sh}
 pid=$(top -n 1 -b | grep -e 'node' | grep -e '[0-9]*' -o | head -1)
-if [ ! -z "$pid" ]
+if [! -z "$pid" ]
 then
 kill $pid
 echo "node stopped"

@@ -1,12 +1,12 @@
 区块链（Block Chain）{#block_chain}
 ================================
 
-\subpage bit_coin
+- [bit_coin
 
-\subpage etherium_network
+- [etherium_network
 
-\subpage polkadot
+- [polkadot
 
-\subpage defi
+- [defi
 
-\subpage nft
+- [nft

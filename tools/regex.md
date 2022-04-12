@@ -2,12 +2,12 @@
 ======================
 
 
-\section 正则表达式的定义
+# 正则表达式的定义
 
 正则表达式（英语：Regular Expression，常简写为regex、regexp或RE），又称正则表示式、正则表示法、规则表达式、常规表示法，是计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列匹配某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些匹配某个模式的文本。
 
 
-\section 正则表达式全集
+# 正则表达式全集
 
 \htmlonly
 <style type="text/css">
@@ -164,7 +164,7 @@ h2{ margin:0; font-weight:normal;}
     </tr>
     <tr>
       <th style="text-align:center;">\s</th>
-      <td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于[ \f\n\r\t\v]。</td>
+      <td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于[\f\n\r\t\v]。</td>
     </tr>
     <tr>
       <th style="text-align:center;">\S</th>

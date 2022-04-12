@@ -1,7 +1,7 @@
 highlight.js：一个代码高亮库{#js_highlight}
 ========================================
 
-\section 前言
+# 前言
 
 这里的代码高亮不是指软件开发时编辑器或者IDE的语法高亮，而是写文档时，把代码显示到html文档中能够高亮阅览。
 
@@ -10,7 +10,7 @@ highlight.js：一个代码高亮库{#js_highlight}
 
 其实能够嵌入Doxygen的要求很低，只要能在hmtl中使用，那么在就可以在Doxygen的\htmlonly宏中使用。
 
-\section 引入highlight.js
+# 引入highlight.js
 
 highlight.js是一个好用的代码高亮工具，地址：https://highlightjs.org/，使用方法，
 

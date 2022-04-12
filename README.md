@@ -3,36 +3,23 @@
 
 # 目录
 
-- [ABC](#abc)
+* [数学笔记](https://github.com/qinzhengke/zk-note/blob/test/math/entry.md)
+* [编程笔记](https://github.com/qinzhengke/zk-note/blob/test/programming/entry.md)
+* [算法笔记](https://github.com/qinzhengke/zk-note/blob/test/algorithm/entry.md)
+* [工具笔记](https://github.com/qinzhengke/zk-note/blob/test/tool/entry.md)
+* [读万卷书](https://github.com/qinzhengke/zk-note/blob/test/awesome_ebooks.md)
+* [兴趣](https://github.com/qinzhengke/zk-note/blob/test/hobby/entry.md)
+* [关于我](https://github.com/qinzhengke/zk-note/blob/test/resume.md)
 
-* [数学笔记](#math)
-* [编程笔记](#programming)
-* [算法笔记](#algorithm)
-* [工具笔记](#tool)
-* [读万卷书](https://github.com/qinzhengke/zk-note/blob/markdown/awesome_ebooks.md)
-* [兴趣](#hobby)
-* [关于我](#https://github.com/qinzhengke/zk-note/blob/markdown/resume.md)
+# 快速查询
 
-
-### 数学
-
-# 算法
-
-# 编程
-
-# 工具
-
-# 兴趣
-
-# ABC
-
-[C++构建报错合集](cpp-build-errors)
-
-[C++构建报错合集2](https://github.com/qinzhengke/zk-note/blob/markdown/programming/cpp/build_errors.md)
+[C++构建报错合集](https://github.com/qinzhengke/zk-note/blob/test/programming/cpp/build_errors.md)
 
 
 
-# LaTex公式支持
+# 本仓库
+
+## GitHub markdown LaTex公式支持
 
 方法一：
 ```

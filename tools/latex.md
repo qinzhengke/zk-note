@@ -3,13 +3,13 @@ LaTex语法笔记{#latex}
 
 <table >
 <tr><td>
-\f$
+$$
     \boldsymbol{A} = 
     \begin{bmatrix}
     a_{11} & a_{12}\\
     a_{21} & a_{22} 
     \end{bmatrix}
-\f$
+$$
 </td><td>
 \verbatim
 \boldsymbol{A} = 
@@ -21,13 +21,13 @@ LaTex语法笔记{#latex}
 </td></tr> 
 
 <tr><td> 
-\f$
+$$
     \begin{aligned}
     y
     & = (x+y)(x-y) \\
     & = x^2-y^2
     \end{aligned}
-\f$
+$$
 </td><td>
 \verbatim
 \begin{aligned}
@@ -39,9 +39,9 @@ y
 </td></tr> 
 
 <tr><td> 
-\f$
+$$
     \mathbb{R} 
-\f$
+$$
 </td><td>
 \verbatim
 \mathbb{R}
@@ -49,9 +49,9 @@ y
 </td></tr> 
 
 <tr><td> 
-\f$
+$$
 \infty
-\f$
+$$
 </td><td>
 \verbatim
 \infty
@@ -59,25 +59,25 @@ y
 </td></tr> 
 
 <tr><td> 
-\f$ \hat{a}, \check{a} \f$
+$$ \hat{a}, \check{a} $$
 </td><td>
 \verbatim \hat{a}, \check{a} \endverbatim
 </td></tr> 
 
 <tr><td> 
-\f$ \mathscr{T}, \mathscr{P} \f$
+$$ \mathscr{T}, \mathscr{P} $$
 </td><td>
 \verbatim \mathscr{T}, \mathscr{P} \endverbatim
 </td></tr> 
 
 <tr><td> 
-\f$ \in \notin \subset \not\subset \supset \not\supset \cap \cup \f$
+$$ \in \notin \subset \not\subset \supset \not\supset \cap \cup $$
 </td><td>
 \verbatim \in \notin \subset \not\subset \supset \note\supset \cap \cup \endverbatim
 </td></tr> 
 
 <tr><td> 
-\f$ \left . \frac{\partial f} {\partial \boldsymbol{x}} \right \vert  _{{\boldsymbol{x}}_0} \f$
+$$ \left . \frac{\partial f} {\partial \boldsymbol{x}} \right \vert  _{{\boldsymbol{x}}_0} $$
 </td><td>
 </td></tr> 
 

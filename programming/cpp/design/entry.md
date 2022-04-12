@@ -2,7 +2,7 @@ C++的一些技巧（Idioms）{#cpp_idioms}
 ==============================
 
 
-\section 简介
+# 简介
 
 【问题】“Idiom”是什么意思？它和“Design Pattern”有什么关系和区别？
 
@@ -18,15 +18,15 @@ C++的一些技巧（Idioms）{#cpp_idioms}
 【来源】StackExchange的提问：“Difference between Idiom and Design Pattern?”
 
 
-\section 目录
+# 目录
 
-\subpage cpp_pimpl
+- [cpp_pimpl
 
-\subpage exception_vs_error_code
+- [exception_vs_error_code
 
-\subpage constructor_vs_initialization
+- [constructor_vs_initialization
 
-\subpage cpp_raii
+- [cpp_raii
 
 
 

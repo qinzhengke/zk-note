@@ -7,9 +7,9 @@ Robust Online Multi-Object Tracking based on Tracklet Confidence and Online Disc
 2. 给出了基于置信度的多目标跟踪问题的数学表达，并且给出多种求解方法。
 3. we also propose a novel online learning method using an incremental linear discriminant analysis for discriminating the appearances of objects.
 
-\section Affinity
+# Affinity
 
-\subsection Appearance
+## Appearance
 
 Appearance Model
 
@@ -33,9 +33,9 @@ Local Association of Tracklets.
 
 Global Association of tracklets.
 
-\subsection Shape
+## Shape
 
-\subsection motion_model Motion Model
+## motion_model Motion Model
 
 Motion affinity，
 

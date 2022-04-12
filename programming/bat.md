@@ -1,7 +1,7 @@
 Bat：Windows上的脚本语言{#bat}
 =================
 
-\subsection 命名空间
+## 命名空间
 bat文件中使用set var=value方式进行变量的定义，但是要注意，bat文件里的变量名和系统变量是共享空间的，例如下面的代码
 
 \code{bash}

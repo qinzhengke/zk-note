@@ -1,10 +1,10 @@
 C语言中的运算符{#c_operators}
 ==========================
 
-\section 运算符优先级表格
+# 运算符优先级表格
 
 
-\subsection 运算符优先级cheatsheet
+## 运算符优先级cheatsheet
 
 \htmlonly
 <table class="wikitable" border="1"> 

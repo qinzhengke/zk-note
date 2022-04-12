@@ -1,14 +1,14 @@
 操作系统（Operating System）{#operating_system}
 ============================================
 
-\subpage os_linux
+- [os_linux
 
-\subpage os_ubuntu
+- [os_ubuntu
 
-\subpage os_lubuntu
+- [os_lubuntu
 
-\subpage os_windows
+- [os_windows
 
-\subpage vmware
+- [vmware
 
-\subpage docker
+- [docker

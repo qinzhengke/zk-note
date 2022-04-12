@@ -1749,7 +1749,7 @@ New languages in this release:
 [Erik Paluka]: https://github.com/paluka
 [Luke Holder]: https://github.com/lukeholder
 [David Mohundro]: https://github.com/drmohundro
-[ps]: https://github.com/OctopusDeploy/Library/blob/master/app/shared/presentation/highlighting/powershell.js
+[ps]: https://github.com/OctopusDeploy/Library/blob/$1/app/shared/presentation/highlighting/powershell.js
 [Christophe de Dinechin]: https://github.com/c3d
 [Taneli Vatanen]: https://github.com/Daiz-
 [Jen Evers-Corvina]: https://github.com/sevvie

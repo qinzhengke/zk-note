@@ -1,6 +1,6 @@
 视觉标定(calibration){#calibration}
 ==================================
 
-\subpage cali_intrinsic
+- [cali_intrinsic
 
-\subpage self_cali
+- [self_cali

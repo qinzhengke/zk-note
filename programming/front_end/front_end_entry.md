@@ -2,7 +2,7 @@ Web前端：UI的开发趋势{#front_end}
 =====================
 
 
-\section 前言
+# 前言
 
 我并非Web前端开发工程师，但是Web前端知识还有挺多的作用，至少有以下几点：
 
@@ -11,10 +11,10 @@ Web前端：UI的开发趋势{#front_end}
 2. 建一个漂亮的个人主页，我使用了Doxygen作为个人主页构建的模板，但是Doxygen的功能并非很丰富，往往需要自己添加一些feature．
 
 
-\section 目录
+# 目录
 
-\subpage js_debug
+- [js_debug
 
-\subpage browser_udp
+- [browser_udp
 
-\subpage js_highlight
+- [js_highlight

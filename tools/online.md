@@ -1,12 +1,12 @@
 在线工具笔记（Online Tools Note）{#online_tools}
 ======================
 
-\section random_org 随机数生成工具
+# random_org 随机数生成工具
 www.random.org
 
 配合Note pad++ 可以将生成的超长行数据折成多行，生成C语言风格随机数组。
 
-\section desmos desmos函数绘制工具
+# desmos desmos函数绘制工具
 
 https://www.desmos.com/calculator
 

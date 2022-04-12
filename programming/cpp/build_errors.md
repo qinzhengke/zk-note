@@ -109,7 +109,7 @@ A x = {
 
 qualification是指双冒号符“::”，而“extra qualification”则一般出现在类中函数定义的时候重复用“类名::函数名”进行时声明。
 
-\subsection error_jump_to_case_label Error: Jump to case label.
+## error_jump_to_case_label Error: Jump to case label.
 
 报错提示：
 
@@ -119,18 +119,18 @@ Error: Jump to case label, crosses initialization of xxx
 
 原因，不同的case之间定义相同名称的变量。
 
-\subsection cpp_comp_issue_01 error: new types may not be defined in a return type
+## cpp_comp_issue_01 error: new types may not be defined in a return type
 
 结构体、联合体定义的时候结尾忘记加“;”就会出现该报错。
 
-\subsection undefined_vtable undefined reference to `vtable for xxx'
+## undefined_vtable undefined reference to `vtable for xxx'
 
 字面上的意思是找不到虚函数表，可能的原因是：
 
 1. 带有虚函数的基类的析构函数没有设置为virtual，原因参见 \ref virtual_desctructor 。
 
 
-\subsection does_not_name_type 'xxx' does not name a type
+## does_not_name_type 'xxx' does not name a type
 
 表示没有该符号类型没有定义，一般来原因有可能是
 
@@ -138,7 +138,7 @@ Error: Jump to case label, crosses initialization of xxx
 2. 头文件未包含
 3. 命名空间不正确
 
-\subsection expect_class_name error: expected class-name before ‘{’ token
+## expect_class_name error: expected class-name before ‘{’ token
 
 字面意思是在“{”字符前面的必须是一个类名称，一般来说原因有可能是
 
@@ -146,27 +146,27 @@ Error: Jump to case label, crosses initialization of xxx
 2. 头文件未包含
 3. 命名空间不正确
 
-\subsection invalid_new_abstract error: invalid new-expression of abstract class type ‘xxx’
+## invalid_new_abstract error: invalid new-expression of abstract class type ‘xxx’
 
 
-\subsection invalid_operand error: invalid operands of types ‘<unresolved overloaded function type>’ and ‘int’ to binary ‘operator<’
+## invalid_operand error: invalid operands of types ‘<unresolved overloaded function type>’ and ‘int’ to binary ‘operator<’
 
 可能的原因是：
 
 1. 调用Eigen库中的带模板的Matrix<T,x,x>::block，解决方法参见： \ref block_with_template 。
 
 
-\subsection non_class_type error: request for member ‘x’ in ‘yyy’, which is of non-class type ‘zzz’
+## non_class_type error: request for member ‘x’ in ‘yyy’, which is of non-class type ‘zzz’
 
 
 
-\subsection lvalue_operand error: lvalue required as left operand of assignment
+## lvalue_operand error: lvalue required as left operand of assignment
 
 字面含义是等号的左边必须是左值，不能是右值，一般很明显的右值（例如常量，返回值）我们是会避免的，但是有时候就不是很明显。
 
 1. Eigen中使用auto定义变量，发现得到的变量竟然是右值，而使用类名定义，得到的才是左值，具体参见 \ref eigen_auto
 
-\subsection lvalue_bind cannot bind non-const lvalue reference of type ‘int&’ to an rvalue of type ‘int’
+## lvalue_bind cannot bind non-const lvalue reference of type ‘int&’ to an rvalue of type ‘int’
 
 试图将非常量左值引用绑定右值，显然是错误的，如下代码所示。稍微白话解释一下，“bind A to B”中的“A”是引用，“B”才是变量。
 
@@ -193,21 +193,21 @@ c和c++中存在所谓的临时变量，想到的就三种：1.运算表达式�
 
 
 
-\subsection no_declar error: ‘setX’ was not declared in this scope, and no declarations were found by argument-dependent lookup at the point of instantiation [-fpermissive]
+## no_declar error: ‘setX’ was not declared in this scope, and no declarations were found by argument-dependent lookup at the point of instantiation [-fpermissive]
 
 字面含义是没有声明对应的符号。
 
 1. 派生类构造函数调用基类的成员函数，参考 \ref  base_member_in_constructor
 
-\subsection cap_non_var capture of non-variable <name>
+## cap_non_var capture of non-variable <name>
 
 1. 试图用错误的方法捕获类成员变量，例如“[成员变量]”或者“[&成员变量]”，应该使用“[=]”来（可修改地）捕获成员变量，使用“[=m]”来（不可修改地）捕获成员变量。
 
-\subsection cpp_comp_issue_01 error: new types may not be defined in a return type
+## cpp_comp_issue_01 error: new types may not be defined in a return type
 
 结构体、联合体定义的时候结尾忘记加“;”就会出现该报错，这里不得不吐槽GCC，这种报错提示，真的无法联想到正确原因，什么叫“新类型不能定义在返回类型中？”，这提示等于没给。
 
-\subsection extra_qualification extra qualification
+## extra_qualification extra qualification
 
 qualification是指双冒号符“::”，而“extra qualification”则一般出现在类中函数定义的时候重复用“类名::函数名”进行时声明，如下代码所示：
 
@@ -225,9 +225,9 @@ struct A{
 
 
 
-\section 链接篇
+# 链接篇
 
-\subsection cpp_undefined_reference undefined reference to `xxx'
+## cpp_undefined_reference undefined reference to `xxx'
 
 报错的字面含义是链接时找不到对应的符号，符号有可能是变量或者函数，有以下可能的原因：
 
@@ -235,7 +235,7 @@ struct A{
 2. 对于类的static成员，需要在class体外部显示定义，参考 \ref cpp_class_static_member 
 3. 调用库文件版本不正确，一般来说，如果只安装了一个版本的库，那么其头文件和库文件是正确匹配的。但是当安装多个版本的库时，有可能出现包含A版本的头文件，却链接B版本的库文件，而B的库没有A版本对应的实现。编译过程是没问题的，编译只需要头文件，但是链接的时候就会发现没有相应的定义，所以链接的时候就会报错。
 
-\subsection unresolved_symbol error LNK2019: unresolved external symbol "xxx"
+## unresolved_symbol error LNK2019: unresolved external symbol "xxx"
 
 这个问题和上面的“undefined reference”是一样的，只不过是换成了VC编译器的提示，有以下可能的原因：
 
@@ -251,14 +251,14 @@ struct A{
 
 回答：搜索关键词：function do exist unresolved symbol
 
-\subsection cpp_multiple_def multiple definition of `xxx'
+## cpp_multiple_def multiple definition of `xxx'
 
 报错的字面含义是出现了多个相同的符号，明明只定义了1处变量，但是为何多个obj文件会重复定义？
 
 1. 确实出现了同名的函数或者变量的定义。
 2. 确认没有同名符号，但是变量或者函数定义在了h文件中，并且没有使用static修饰，编译多个源文件，这些源文件把头文件包含后，出现了多重定义的错误。
 
-\subsection pthread_dso_missing libpthread.so.0: error adding symbols: DSO missing from command line
+## pthread_dso_missing libpthread.so.0: error adding symbols: DSO missing from command line
 
 在target_link_library中添加pthread即可
 
@@ -268,7 +268,7 @@ target_link_library(exe
     )
 \endcode
 
-\subsection thread_not_member_boost error 'thread' is not a member of 'boost'
+## thread_not_member_boost error 'thread' is not a member of 'boost'
 
 CMakeLists.txt中添加
 
@@ -286,7 +286,7 @@ target_link_library(exe
 #include <boost/thread.hpp>
 \endcode
 
-\subsection undefined_static undefined reference to `类名::count'
+## undefined_static undefined reference to `类名::count'
 
 static类成员变量在类中只是进行了声明，没有定义，而普通成员变量在生成定义对像的时候进行了定义。
 所以类成员变量需要而外定义。
@@ -307,7 +307,7 @@ int main(void){
 }
 \endcode
 
-\subsection thread_not_member_boost error 'thread' is not a member of 'boost'
+## thread_not_member_boost error 'thread' is not a member of 'boost'
 
 如果仍然使用boost提供的thread库，那么有可能呢遇到这个问题，一般来说是cmake配置不正确。
 
@@ -328,7 +328,7 @@ target_link_library(exe
 \endcode
 
 
-\subsection boost_fs_dso_missing  libboost_system.so.1.xx.0: error adding symbols: DSO missing from command line
+## boost_fs_dso_missing  libboost_system.so.1.xx.0: error adding symbols: DSO missing from command line
 
 缺少filesystem对应的库文件，在CMakeLists.txt中添加
 
@@ -338,9 +338,57 @@ target_link_libraries(my_target
 )
 ```
 
+## 动态库链接静态库报错
+
+完整的报错信息为：
+
+\code{bash}
+relocation R_X86_64_PC32 against symbol `_ZGVZN4pcpp8LoggerPP11getInstanceEvE8instance' can not be used when making a shared object; recompile with -fPIC
+\endcode
+
+这个问题原因一般是动态库链接了静态库导致的，一般来说动态库是不会链接静态库的，因为动态库遵循引用的规范，不会把静态库塞到自身之中。
+如果是引用别人的库，那要改成引用shared库，如果是引用自己的库，那么在add_library中增加“SHARED”修饰。
+
+## cpp_issue_pthread undefined reference to symbol 'pthread_createhttps://github.com/qinzhengke/zk-note/blob/$1GLIBC_2.2.5'
+
+使用pthread库，需要编译配置中显示设置。
+
+\code{cmake}
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+
+\endcode
 
 
-\section 运行篇
+## cpp_issue_dso_missing DSO missing from command line
 
-\subsection bad_alloc terminate called after throwing an instance of 'std::bad_alloc'
+链接过程中，试图通过中间静态库链接进行传递，对于版本<2.2的ld，是可以的，但是对于>=2.2版本的ld，就是不行的。
+
+什么是链接传递，举下面的例子：
+
+1. 一个shared libA，定义了foo()函数
+2. 一个静态库libB，显示链接了libA，
+3. 另一个可执行文件binC，显示地链接libB
+
+那么问：可执行文件binC能否调用foo()函数。
+
+关于C语言的一些提问{#c_questions}
+=============================
+
+
+# 多个c文件共享一个头文件，这与头文件只展开一次是否矛盾？
+
+写代码的时候发现一个“问题”，我们一般用\#ifdef包裹头文件，保证头文件只展开一次，否则会出现重复定义。
+那么多个c文件包含同一个头文件时，后面的c文件是否就无法获取h文件里的内容了呢？
+当然，通过实际编程经验，我们都知道答案是否定的，但是怎么解释呢？
+
+这个问题提出来说明提问人对于编译-链接过程不够了解。
+
+【回答】不矛盾，头文件仅展开一次是对于一个c文件的编译过程来说的，并不是整个工程的构建，如果一个c文件根据间接多次包含同一个头文件，那么头文件确实只展开一次。
+但是对于另外一个c文件，编译是一个崭新的过程，和上一个编译的c文件就无关了，所以两者并不影响。
+
+
+
+# 运行篇
+
+## bad_alloc terminate called after throwing an instance of 'std::bad_alloc'
 

@@ -1,12 +1,12 @@
 谷歌表格（Google Sheets）{#google_sheets}
 =======================================
 
-\section 使用GOOGLEFINANCE
+# 使用GOOGLEFINANCE
 
-\section 使用CRYPTOFINANCE
+# 使用CRYPTOFINANCE
 
 
-\section 在html中引入谷歌表格
+# 在html中引入谷歌表格
 
 谷歌表格本身自带分享功能，本身可以生成一个iframe链接，插入到目标html文档。
 

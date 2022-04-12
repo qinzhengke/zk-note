@@ -1,7 +1,7 @@
 Windows{#os_windows}
 =======================
 
-\subsection 命令行拷贝文件夹？
+## 命令行拷贝文件夹？
 例如，想要把a目录下的文件夹c拷贝到目录b下，形成b\c这种结构。
 \code{bat}
 xcopy d:\a\c d:\b\c\ /S /E
@@ -18,7 +18,7 @@ cp a/c b/
 \endcode
 记住，第一个参数路径最后也不能有反斜杠，
 
-\subsection 命令行删除文件夹
+## 命令行删除文件夹
 \code{bat}
 rd "e f" /s/q
 \endcode

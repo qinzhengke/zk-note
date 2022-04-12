@@ -1,7 +1,7 @@
 C++中的类和对象{#cpp_class}
 ========================
 
-\section cpp_class_static_member 类中的静态成员变量的定义
+# cpp_class_static_member 类中的静态成员变量的定义
 
 \code{cpp}
 #include <cstdio>
@@ -20,7 +20,7 @@ int main(void){
 }
 \endcode
 
-\section base_member_in_constructor 派生类构造函数中不能调用基类成员函数
+# base_member_in_constructor 派生类构造函数中不能调用基类成员函数
 
 \code{cpp}
 
@@ -57,7 +57,7 @@ int main()
 
 
 
-\section 基类和派生类的构造与析构函数执行顺序是什么？
+# 基类和派生类的构造与析构函数执行顺序是什么？
 
 情况一：在普通情况，即非多态方式销毁对象下，
 
@@ -116,7 +116,7 @@ Derived()
 正确的使用方法是将析构函数设置为虚函数，这样即使是多态方式调用，析构函数也会被正确调用，参见\ref virtual_deconstructor
 
 
-\section 引用作为类的成员变量
+# 引用作为类的成员变量
 
 引用是可以作为类的成员变量的，注意在构造函数的初始化列表里初始化要绑定的变量即可，注意const修饰符。
 
@@ -148,7 +148,7 @@ int main(int argc, char* argv[]){
 6
 \endcode
 
-\section 匿名struct和匿名union
+# 匿名struct和匿名union
 
 很多时候，当我们定义类型时，我们希望拥有多种方式对同一个地址的变量进行引用。
 qq

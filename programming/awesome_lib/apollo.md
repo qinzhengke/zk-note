@@ -2,9 +2,9 @@
 ============================================
 
 
-\section 一个增加算法模块的实例
+# 一个增加算法模块的实例
 
-https://github.com/ApolloAuto/apollo/blob/master/docs/howto/how_to_add_a_new_predictor_in_prediction_module.md
+https://github.com/ApolloAuto/apollo/blob/$1/docs/howto/how_to_add_a_new_predictor_in_prediction_module.md
 
 总结一下，
 
