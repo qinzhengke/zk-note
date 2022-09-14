@@ -1,2 +1,1 @@
-贝叶斯滤波(Bayesian Filter){#bayesian_filter}
-===========================================
+# 贝叶斯滤波（Bayesian Filter）

@@ -1,14 +1,13 @@
-标准库time.h{#c_time}
-====================
+# 标准库time.h
 
-# 几个概念
+## 几个概念
 
 - time_t：time since epoch，是一个抽象的时间，它究竟是怎么存储的，C语言标准并没有对其进行定义。虽然大部分编译器实现都是用一个整型变量存储秒数，从UTC epoch开始。
 - tm：是一个具体表达日历时间的结构体，它包含了年月日时分秒。
 - UNIX time：UNIX系统时间，它的epoch和UTC是相同的，但是并没有考虑闰秒，所以，UNIX时间和UTC时间是不相同的。
 - tm中的“daylight saving time”：也就是夏令时，一种为了节约照明电力专门设计的时间，每年春季时钟拨快1小时，秋季回调1小时。
 
-# tm_make_time tm类型与make_time()函数
+## tm_make_time tm类型与make_time()函数
 
 tm是一个结构体，包含了日历时间所需要的所有分成：年、月、日、时、分、秒
 
@@ -27,7 +26,7 @@ tm是一个结构体，包含了日历时间所需要的所有分成：年、月
 </tbody></table>
 \endhtmlonly
 
-# 日期加上秒数得到新的日期
+## 日期加上秒数得到新的日期
 
 \code{cpp}
 #include <ctime>
@@ -52,7 +51,7 @@ date:120,11,1
 最后，这个日期和时间，实际上是Unix时间，它和UTC共用一个epoch，但是并没有考虑闰秒，而UTC是考虑了闰秒的。
 
 
-# 计算两个日期之间的秒数
+## 计算两个日期之间的秒数
 
 \code{cpp}
 /* time example */

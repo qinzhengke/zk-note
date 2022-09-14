@@ -25,10 +25,6 @@
     * [距离算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/data_association/distance.md)
     * [匈牙利算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/data_association/hungarian_algorithm.md)
 
-* 多目标跟踪
-    * [SORT算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/tracking/sort.md)
-    * [DeepSORT算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/tracking/deep_sort.md)
-
 * 状态估计
     * [卡尔曼滤波   ](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/estimation/kf.md)
     * [扩展卡尔曼滤波](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/estimation/ekf.md)
@@ -36,4 +32,11 @@
     * [粒子滤波     ](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/estimation/particle_filter.md)
     * [最大似然估计  ](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/estimation/mle.md)
 
+* 多目标跟踪
+    * [SORT算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/tracking/sort.md)
+    * [DeepSORT算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/tracking/deep_sort.md)
+
 * 目标融合
+
+
+* [线类目标后端](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/tracking/line_backend.md)

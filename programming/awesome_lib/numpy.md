@@ -1,7 +1,6 @@
-numpy{#numpy}
-=============
+# numpy
 
-# 常用方法
+## 常用方法
 
 ## numpy.concatenate
 

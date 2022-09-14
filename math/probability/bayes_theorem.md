@@ -1,5 +1,4 @@
-贝叶斯定理(Bayes' theorem){#bayes_theorem}
-========================================
+# 贝叶斯定理（Bayes' theorem）
 
 假设 $$ \boldsymbol{x} $$ 和 $$ \boldsymbol{y} $$ 是两个随机变量，那么贝叶斯规则（“Bayes' rule”）表达为：
 

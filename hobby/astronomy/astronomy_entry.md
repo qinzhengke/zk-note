@@ -1,4 +1,3 @@
-天文与航天（Astronomy and Aerospace）{#astronomy_entry}
-==========================
+# 天文与航天（Astronomy and Aerospace）
 
 - [aerospace_probe

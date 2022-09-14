@@ -1,5 +1,4 @@
-CMakeLists.txt模板{#cmake_template}
-==================================
+# CMakeLists.txt模板
 
 ```cmake
 # 现代cmake版本

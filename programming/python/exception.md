@@ -1,5 +1,4 @@
-异常（Exception）{#python_exception}
-==================================
+# 异常（Exception）
 
 # 如何打印更多的异常信息
 

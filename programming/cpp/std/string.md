@@ -1,5 +1,4 @@
-std::string{#cpp_string}
-========================
+# std::string
 
 
 # stringstream中的“<<”和std::to_string的一个区别

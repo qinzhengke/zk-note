@@ -1,5 +1,4 @@
-LaTex语法笔记{#latex}
-===================
+# LaTex语法笔记
 
 <table >
 <tr><td>

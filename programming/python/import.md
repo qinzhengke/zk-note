@@ -1,5 +1,4 @@
-import{#python_import}
-======================
+# import
 
 ## 如何引入其他py文件中的内容？
 

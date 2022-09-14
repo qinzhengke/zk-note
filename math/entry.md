@@ -1,5 +1,4 @@
-数学基础（Mathematics Fundamental）{#math}
-=============
+# 数学基础（Mathematics Fundamental）
 
 - [数学结构](https://github.com/qinzhengke/zk-note/blob/master/math/fundarmental/math_structure.md)
 

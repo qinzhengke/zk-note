@@ -1,5 +1,4 @@
-C++11中的std::function和std::bind{#cpp11_bind}
-============================================
+# C++11中的std::function和std::bind
 
 
 # std_function std::function是什么？

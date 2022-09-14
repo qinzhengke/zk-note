@@ -1,5 +1,4 @@
-Python：人生苦短，我用Pyhton！{#python}
-===========================
+# Python 
 
 - [python_syntax
 

@@ -1,5 +1,4 @@
-vscode中的markdown相关的代码片{#vscode_markdown_snippet}
-=====================================================
+# vscode中的markdown相关的代码片
 
 \verbatim
 //  ~/.config/Code/User/snippets/markdown.json

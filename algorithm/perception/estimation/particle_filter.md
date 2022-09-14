@@ -1,5 +1,4 @@
-粒子滤波(Particle Filter){#particle_filter}
-=========================================
+# 粒子滤波（Particle Filter）
 
 Martin J. Laubach在github上展示了一个基于python实现的粒子滤波的案例，个人认为是最好理解的。
 抛开drawing代码，总共也就200+行，很容易看懂，代码地址：https://github.com/mjl/particle_filter_demo。

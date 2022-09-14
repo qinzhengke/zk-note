@@ -1,4 +1,3 @@
-基本数学概念{#math_fundarmental}
-==============================
+# 基本数学概念
 
 - [math_structure

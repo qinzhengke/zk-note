@@ -1,5 +1,4 @@
-谷歌表格（Google Sheets）{#google_sheets}
-=======================================
+# 谷歌表格（Google Sheets）
 
 # 使用GOOGLEFINANCE
 

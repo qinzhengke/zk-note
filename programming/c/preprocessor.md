@@ -1,6 +1,4 @@
-C语言的预处理器{#c_preprocessor}
-=============================
-
+# C语言的预处理器
 
 # sharp_in_macro 宏定义中的\#
 
@@ -115,12 +113,6 @@ int i_am_devel2;
 \code{c}make
 target_compile_definitions(my_exe PRIVATE USE_SOMTHING=1)
 \endcode
-
-C语言中的宏{#c_macro}
-==================
-
-
-
 
 # 获取宏的参数个数
 

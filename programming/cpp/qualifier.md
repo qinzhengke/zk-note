@@ -1,7 +1,6 @@
-C++中的修饰符(qualifier){#cpp_qualifier}
-=====================================
+# C++中的修饰符（qualifiera）
 
-# extern 关键字
+## extern 关键字
 
 ## 引用另外一个文件的变量或者函数
 

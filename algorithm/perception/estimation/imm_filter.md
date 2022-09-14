@@ -1,3 +1,2 @@
-Interacting Multiple Model (IMM) filter{#imm_filter}
-====================================================
+# Interacting Multiple Model (IMM) filter
 

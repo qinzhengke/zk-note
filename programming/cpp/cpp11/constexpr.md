@@ -1,8 +1,7 @@
-关键字constexpr{#cpp11_constexpr}
-================================
+# 关键字constexpr
 
 
-# 如何在类中声明constexpr常量？
+## 如何在类中声明constexpr常量？
 
 先把正确的写法放上来：
 

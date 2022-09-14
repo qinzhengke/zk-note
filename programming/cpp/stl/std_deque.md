@@ -1,3 +1,2 @@
-std::deque{#cpp_deque}
-=====================
+# std::deque
 

@@ -1,7 +1,6 @@
-C++中的类和对象{#cpp_class}
-========================
+# C++中的类和对象{#cpp_class}
 
-# cpp_class_static_member 类中的静态成员变量的定义
+## cpp_class_static_member 类中的静态成员变量的定义
 
 \code{cpp}
 #include <cstdio>
@@ -20,7 +19,7 @@ int main(void){
 }
 \endcode
 
-# base_member_in_constructor 派生类构造函数中不能调用基类成员函数
+## base_member_in_constructor 派生类构造函数中不能调用基类成员函数
 
 \code{cpp}
 

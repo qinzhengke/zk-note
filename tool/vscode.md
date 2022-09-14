@@ -1,5 +1,4 @@
-强大的代码编辑器：Visual Studio Code{#vscode}
-==========================
+# 强大的代码编辑器：Visual Studio Code
 
 # 各语言通用部分
 ## markdown代码片

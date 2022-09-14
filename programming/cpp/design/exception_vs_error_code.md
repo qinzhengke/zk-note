@@ -1,8 +1,7 @@
-Exception vs Error code {#exception_vs_error_code}
-=================================================
+# Exception vs Error code
 
 
-# exception优势的地方
+## exception优势的地方
 
 【来源】StackOverflow的提问：“Conventions for exceptions or error codes”
 

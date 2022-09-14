@@ -1,5 +1,4 @@
-内参标定{#cali_intrinsic}
-=======================
+# 内参标定
 
 ## calibrateCamera()函数
 

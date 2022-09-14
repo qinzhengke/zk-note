@@ -1,5 +1,4 @@
-文档框架：doxygen{#doxygen}
-=========================
+# 文档框架：doxygen
 
 # include和snippet
 使用的时候必须在EXMAPLE_PATH里加入源码出现的目录，否则doxygen无法搜索到。

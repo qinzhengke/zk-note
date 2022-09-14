@@ -1,5 +1,4 @@
-基于unordered_map的稀疏矩阵的实现{#sparse_matrix}
-===============================================
+# 基于unordered_map的稀疏矩阵的实现
 
 # unordered_map
 复习一下基础知识：

@@ -1,5 +1,4 @@
-JSON{#python_json}
-==================
+# JSON
 
 ## 如何将一个class变为可序列化的（serializable）？
 

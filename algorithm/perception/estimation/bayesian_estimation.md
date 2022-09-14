@@ -1,2 +1,1 @@
-贝叶斯估计(Bayesian Estimation){#bayesian_estimation}
-==============================
+# 贝叶斯估计（Bayesian Estimation）

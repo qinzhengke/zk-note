@@ -1,12 +1,11 @@
-MathJax：公式渲染工具{#mathjax}
-=============================
+# MathJax：公式渲染工具
 
 MathJax是一个提供公式渲染的工具，它的语法和Latex一样，但是不依赖于latex，不需要安装重量级的tex包（例如texlive和texlive-extra）。
 
 MathJax的引用方式有两种：在线的CDN访问以及离线版本引用。
 
 
-# Doxygen的MathJax本地化
+## Doxygen的MathJax本地化
 
 在线的CDN访问并不是很靠谱，有的时候第三方CDN的连接很慢，甚至无法连接，另外，有的时候，我们在无网络的地方本地编辑，也希望能够渲染公式。
 

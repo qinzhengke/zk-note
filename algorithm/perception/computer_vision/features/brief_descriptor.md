@@ -1,5 +1,4 @@
-BRIEF描述子{#brief_descriptor}
-========================
+# BRIEF描述子
 
 # 基本方法
 

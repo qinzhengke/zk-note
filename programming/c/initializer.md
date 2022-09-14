@@ -1,5 +1,4 @@
-初始化
-======
+# 初始化
 
 # designated_initializers  Designated Initializers
 

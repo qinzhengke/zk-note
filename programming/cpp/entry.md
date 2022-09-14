@@ -1,5 +1,4 @@
-学习C++{#cpp}
-=====================
+# 学习C++
 
 - [前言](https://github.com/qinzhengke/zk-note/blob/master/programming/cpp/preface.md)
 

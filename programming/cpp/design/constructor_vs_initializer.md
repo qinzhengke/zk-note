@@ -1,5 +1,4 @@
-构造函数（constructor） vs 初始化函数（initialization）{#constructor_vs_initialization}
-======================================================
+# 构造函数（constructor） vs 初始化函数（initialization）
 
 
 【问题】在实际OOP程序开发过程中，常常遇到的模型就是一个Object到底应该使用构造函数来完成初始化，还是设立额外的构造函数？

@@ -1,5 +1,4 @@
-编程（Programming）{#programming}
-==================
+# 编程（Programming）
 
 - [c](https://github.com/qinzhengke/zk-note/blob/master/programming/c/entry.md)
 

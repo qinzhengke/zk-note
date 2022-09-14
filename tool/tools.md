@@ -1,5 +1,4 @@
-工具笔记（Tools Note）{#tools}
-===========
+# 工具笔记（Tools Note）
 
 - [tool_list
 

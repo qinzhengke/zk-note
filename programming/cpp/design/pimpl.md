@@ -1,5 +1,4 @@
-技巧：Pointer to Implementation{#cpp_pimpl}
-=========================================
+# 技巧：Pointer to Implementation
 
 Pointer to Implementation (PImpl) 是一种设计技巧(idiom)，使用这种模式，在开发库的过程中，我们可以去掉头文件中的私有变量和执行依赖，仅保留接口。
 

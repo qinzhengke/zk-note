@@ -1,5 +1,4 @@
-版本管理工具：git{#git}
-=========
+# 版本管理工具：git
 
 ## permission too open
 

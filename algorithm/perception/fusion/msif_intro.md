@@ -1,8 +1,7 @@
-多传感器信息融合（Multiple Sensor Information Fusion）{#msif_intro}
-=================================
+# 多传感器信息融合（Multiple Sensor Information Fusion）
 
 
-# 一些有用的网站
+## 一些有用的网站
 
 - Matlab多传感器融合介绍
 
@@ -12,6 +11,6 @@ https://www.youtube.com/watch?v=6qV3YjFppuc
 
 
 
-# imm_filter 
+## imm_filter 
 
 - [imm_filter

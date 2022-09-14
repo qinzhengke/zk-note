@@ -1,5 +1,4 @@
-计算机视觉（Computer Vision）{#computer_vision}
-=================
+# 计算机视觉（Computer Vision）
 
 - [feature_entry
 

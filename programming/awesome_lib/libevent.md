@@ -1,5 +1,4 @@
-libevent：经典的异步事件框架库{#cpp_lib_libevent}
-=====================================
+# libevent：经典的异步事件框架库
 
 
 # 基于libevent的定时器

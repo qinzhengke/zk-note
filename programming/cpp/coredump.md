@@ -1,5 +1,4 @@
-Coredump分析{#coredump}
-======================
+# Coredump分析
 
 
 # 方法

@@ -1,13 +1,11 @@
-C++11中的多线程{#cpp11_thread}
-============================
+# C++11中的多线程
 
-
-# std::thread::join
+## std::thread::join
 
 注意join会阻塞当前进程的运行，直到join的参数函数结束，如果不想阻塞，需要使用detach()函数。
 
 
-# std::mutex
+## std::mutex
 
 std::mutex是c++11自带的互斥锁，
 
@@ -18,9 +16,7 @@ mtx.lock();
 mtx.unlock();
 \endcode
 
-
-
-# std::mutex::try_lock
+## std::mutex::try_lock
 
 \code{.cpp}
 #include <chrono>

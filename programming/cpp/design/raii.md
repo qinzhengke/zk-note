@@ -1,5 +1,4 @@
-RAII：资源获取即初始化{#cpp_raii}
-=============================
+# RAII：资源获取即初始化
 
 全称是：Resource Acqusition Is Initialization
 

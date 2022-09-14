@@ -1,5 +1,4 @@
-Linear Disciminative Analysis（LDA）{#lda}
-==================================
+# Linear Disciminative Analysis（LDA）
 
 一种特征降维方法，降维的loss函数是最大化当前类别的seperation，
 

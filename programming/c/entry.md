@@ -1,5 +1,4 @@
-C语言：经典老牌计算机编程语言{#c}
-========================
+# C语言：经典老牌计算机编程语言
 
 - [预编译器](https://github.com/qinzhengke/zk-note/blob//programming/c/preprocessor.md)
 - [内置类型](https://github.com/qinzhengke/zk-note/blob//programming/c/types.md)

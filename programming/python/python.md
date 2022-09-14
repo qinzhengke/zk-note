@@ -1,10 +1,9 @@
+# Python的语法{#python_syntax}
 
-Python的语法{#python_syntax}
-==========================
 此页面记录一些有用的标准python语法。
 
 
-# for循环中同时使用序号和值
+## for循环中同时使用序号和值
 一般情况下，for循环支持使用序号（像c++一样）或者使用值来遍历数组，但是如果需要同时用值和序号的时候有没有优雅的表达呢？答案是有的，使用enumerate语句。
 
 \code{python}
@@ -13,10 +12,10 @@ for i,x in enumerate(x):
 	print(i, x)
 \endcode
 
-# 数组和常数相加
+## 数组和常数相加
 使用Python内置数组是做不到的，会报错，但是转换成np.array之后就可以了。
 
-# 生成等差数列
+## 生成等差数列
 \endcode
 #方法一：给定起点、终点和差
 numpy.arange(0, 1, 0.001) # [0,1)区间，以0.01为步长

@@ -1,2 +1,1 @@
-波卡（Polkadot）{#polkadot}
-=========================
+# 波卡（Polkadot）

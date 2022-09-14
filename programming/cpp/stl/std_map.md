@@ -1,8 +1,6 @@
-std::map{#cpp_map}
-=====================
+# std::map
 
-
-# 基本使用方法
+## 基本使用方法
 
 \code{.cpp}
 // constructing maps

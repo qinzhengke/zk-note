@@ -1,5 +1,4 @@
-扩展卡尔曼滤波(Extended Kalman Filter){#ekf_entry}
-===============================================
+# 扩展卡尔曼滤波(Extended Kalman Filter)
 
 
 # 前言

@@ -1,5 +1,4 @@
-std::common_type{#cpp11_common_type}
-====================================
+# std::common_type
 
 \code{cpp}
 template< class... T >

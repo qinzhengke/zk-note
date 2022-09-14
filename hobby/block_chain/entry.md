@@ -1,5 +1,4 @@
-区块链（Block Chain）{#block_chain}
-================================
+# 区块链（Block Chain）
 
 - [bit_coin
 

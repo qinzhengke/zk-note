@@ -1,15 +1,14 @@
-Protobuf{#protobuf}
-===================
+# Protobuf
 
-# 常见问题
+## 常见问题
 
-## multi_proto_input 如何输入多个proto文件？
+### multi_proto_input 如何输入多个proto文件？
 
 \code
 protoc --cpp_out=../../protoc --proto_path=./ *.proto
 \endcode
 
-## 如何读写将基于protobuf描述的streaming文件？
+### 如何读写将基于protobuf描述的streaming文件？
 
 protobuf本身没有定义数据的边界，如果想要把多块protobuf数据存到同一个文件，则用户必须自行定义一种文件格式，描述每一个protobuf数据的起点和长度。
 
@@ -27,7 +26,7 @@ If you want to write multiple messages to a single file or stream, it is up to y
 
 > https://medium.com/@seb.nyberg/length-delimited-protobuf-streams-a39ebc4a4565
 
-# 如何在cmake中自动执行protoc生成pb.h和pb.cc
+## 如何在cmake中自动执行protoc生成pb.h和pb.cc
 
 \code{bash}
 INCLUDE(FindProtobuf)

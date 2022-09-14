@@ -1,5 +1,4 @@
-C语言性能相关topic{#c_performance}
-===============================
+# C语言性能相关topic
 
 
 # Debug版本对performance影响很大

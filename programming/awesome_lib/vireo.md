@@ -1,8 +1,7 @@
-视频库Vireo{#cpp_lib_vireo}
-==========================
+# 视频库Vireo
 
 
-# 介绍
+## 介绍
 
 Vireo是Twitter团队开发维护的一个轻量级的、通用的视频处理库，基于C++11提供API接口。
 
@@ -19,13 +18,13 @@ OpenCV读视频那完全不是主业，只是为了方便自身处理以视频�
 视频格式支持是较少的，而且不支持音频等。
 并且OpenCV还是太重了，用起来不够短小精悍。
 
-# 基本概念
+## 基本概念
 
 <b>demuxing</b> demuxing是demultiplexing的缩写，是指把包含多部分的视频给读取出来。
 注意，一个movie文件包含了视频、音频、字幕等等。
 不能先入为主的认为moive就只包含图像，movie的读取函数就应该直接得到图像。
 
-# 编译问题
+## 编译问题
 依赖lsmash库，lsmash库本身configure时需要加入参数“--enable-shared”，如下代码所示
 
 \code{bash}
@@ -47,7 +46,7 @@ cd lsmash
 ./.libs/libvireo.so: undefined reference to `h264_parse_sps'
 \endcode
 
-# 放弃
+## 放弃
 
 真 - 从入门到放弃
 

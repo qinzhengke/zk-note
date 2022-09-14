@@ -1,8 +1,6 @@
-Eigen：强大的纯头文件线性运算库{#cpp_lib_eigen}
-==============================
+# Eigen：强大的纯头文件线性运算库
 
-
-# 安装
+## 安装
 
 \code{bash}
 cd <eigen_dir>
@@ -15,11 +13,11 @@ sudo make install
 \endcode
 
 
-# 矩阵的初始化（包括全零阵、单位阵）
+## 矩阵的初始化（包括全零阵、单位阵）
 
 
 
-# 获取子矩阵
+## 获取子矩阵
 
 参见： https://eigen.tuxfamily.org/dox/group__TutorialBlockOperations.html
 

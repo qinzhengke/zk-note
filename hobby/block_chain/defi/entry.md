@@ -1,2 +1,1 @@
-去中心化金融（Decentralized Finance, DeFi）{#defi}
-===============================================
+# 去中心化金融（Decentralized Finance, DeFi）

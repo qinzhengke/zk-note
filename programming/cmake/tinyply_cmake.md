@@ -1,5 +1,4 @@
-以tinyply为例讲解现代cmake用法
-========
+# 以tinyply为例讲解现代cmake用法
 
 tinyply是一个用于读取PLY点云文件的开源代码库，使用的是现代风格的cmake语法，本身规模较小，很适合学习。
 

@@ -1,5 +1,4 @@
-VTK：3D可视化库{#cpp_lib_vtk}
-===================
+# VTK：3D可视化库
 
 # vtk_useful_example 一个有用的第三方Example网站
 

@@ -1,5 +1,4 @@
-视觉标定(calibration){#calibration}
-==================================
+# 视觉标定（calibration）
 
 - [cali_intrinsic
 

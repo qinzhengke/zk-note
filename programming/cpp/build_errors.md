@@ -1,6 +1,4 @@
-C++构建报错合集
-================================
-#cpp-build-errors
+# C++构建报错合集
 
 ## 编译篇
 
@@ -371,11 +369,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 那么问：可执行文件binC能否调用foo()函数。
 
-关于C语言的一些提问{#c_questions}
-=============================
-
-
-# 多个c文件共享一个头文件，这与头文件只展开一次是否矛盾？
+## 多个c文件共享一个头文件，这与头文件只展开一次是否矛盾？
 
 写代码的时候发现一个“问题”，我们一般用\#ifdef包裹头文件，保证头文件只展开一次，否则会出现重复定义。
 那么多个c文件包含同一个头文件时，后面的c文件是否就无法获取h文件里的内容了呢？
@@ -388,7 +382,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 
 
-# 运行篇
+## 运行篇
 
 ## bad_alloc terminate called after throwing an instance of 'std::bad_alloc'
 
