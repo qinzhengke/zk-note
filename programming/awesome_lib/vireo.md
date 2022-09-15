@@ -27,24 +27,24 @@ OpenCV读视频那完全不是主业，只是为了方便自身处理以视频�
 ## 编译问题
 依赖lsmash库，lsmash库本身configure时需要加入参数“--enable-shared”，如下代码所示
 
-\code{bash}
+```bash
 cd lsmash
 ./configure --enable-shared
-\endcode
+```
 
 否则编译会出现以下问题，
-\code{bash}
+```bash
 /usr/bin/ld: //usr/local/lib/liblsmash.a(dts.o): relocation R_X86_64_PC32 against symbol `lsmash_remove_dts_reserved_box' can not be used when making a shared object; recompile with -fPIC
-\endcode
+```
 
 【问题】
 
-\code{bash}
+```bash
 ./.libs/libvireo.so: undefined reference to `mp4a_export_AudioSpecificConfig'
 ./.libs/libvireo.so: undefined reference to `h264_setup_parser'
 ./.libs/libvireo.so: undefined reference to `h264_cleanup_parser'
 ./.libs/libvireo.so: undefined reference to `h264_parse_sps'
-\endcode
+```
 
 ## 放弃
 

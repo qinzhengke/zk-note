@@ -1,12 +1,12 @@
 # Symbol（符号）
 
-# 什么是符号？
+## 什么是符号？
 
 Symbol（符号）是C、C++语言编译后的二进制文件中的入口，包含目标o文件，静态库a文件，以及共享库so文件。
 
 
 
-# 为什么要了解符号？
+## 为什么要了解符号？
 
 在应用构建的link阶段、或者so文件动态加载的阶段，（例如插件框架动态加载so文件、python加载so文件）。
 
@@ -17,14 +17,14 @@ Symbol（符号）是C、C++语言编译后的二进制文件中的入口，包�
 
 所以了解symbol相关的知识能够让我们避开或者更快的解决这些问题。
 
-# 用什么工具查看符号？
+## 用什么工具查看符号？
 
 ```
 nm --help target.so
 nm --extern-only --dynamic target.so
 ```
 
-# 一个空的cc文件对应的symbol
+## 一个空的cc文件对应的symbol
 
 ```
 nm target.so
@@ -56,13 +56,13 @@ nm target.so
 
 ``` 
 
-# 类成员函数的实现和声明放到一起
+## 类成员函数的实现和声明放到一起
 
 当类成员函数的实现和声明放到一起的时候，也就是放在class内部，如果没有其他模块调用该成员函数，那么该成员函数的symbol是不会在so文件中出现的。
 
 如下例子所示，funA的定义放在了class内部，so文件中不会出现funA，而会出现funB。
 
-\code{cpp}
+```cpp
 class Mylib{
 public:
     // 若无调用，该构造函数不会在so文件中出现
@@ -80,11 +80,11 @@ public:
 void Mylib::funB(int x){
     printf("%d\n", x);
 }
-\endcode
+```
 
 nm结果如下所示，
 
-\code{bash}
+```bash
 0000000000201028 B __bss_start
 0000000000201028 b completed.7698
                  w __cxa_finalizehttps://github.com/qinzhengke/zk-note/blob/$1GLIBC_2.2.5
@@ -110,4 +110,4 @@ nm结果如下所示，
 0000000000201028 d __TMC_END__
 000000000000062a T _ZN5Mylib4funBEi
 
-\endcode
+```

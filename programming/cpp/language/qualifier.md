@@ -11,7 +11,7 @@
 
 导出C语言模式的函数名，保证C语言编译出来的obj能够识别函数。
 
-\code{cpp}
+```cpp
 #ifdef __cplusplus__
 extern "C"{
 #endif
@@ -19,4 +19,4 @@ int my_c_function();
 #ifdef __cplusplus__
 }
 #endif
-\endcode
+```

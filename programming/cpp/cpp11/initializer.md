@@ -10,7 +10,7 @@
 
 具体实例如下代码所示。
 
-\code{cpp}
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -33,15 +33,13 @@ int main(){
     // print({1,"three"});  // 编译错误，
 }
 
-\endcode
+```
 
 运行结果：
 
-\code{bash}
+```bash
 {1,2.1,three}
 {2,4.2,six}
 {1,2.1,}
-\endcode
+```
 
-
-# list_init_narrow List Initialization 

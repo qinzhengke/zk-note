@@ -1,13 +1,13 @@
 # C语言性能相关topic
 
 
-# Debug版本对performance影响很大
+## Debug版本对performance影响很大
 
 不要使用Debug版本进行performance相关测评。
 
 这里使用图像下采样做了一个实验，Debug版本和Relase版本相比，慢了不止一点。
 
-\code{cpp}
+```cpp
 uint32_t W=640, H=480, WH=W*H;
 FILE *f = fopen("img","rb");
 uint8_t* buf = malloc(WH);
@@ -27,7 +27,7 @@ for(uint32_t r=0; r<Hd; r++)
     img_d[r*Wd+c] = buf[r*sd*W+c*sd];
 t = cv::getTickCount()-t;
 cout<<t/cv::getTickFrequency()<<endl;
-\endcode
+```
 PC上运行的结果，t1是全拷贝的时间，t2是下采样拷贝的时间，可以看到在debug版本中，2倍采样和3倍采样时间都要长于全采样，直到4倍采样开始时间才小于全采样，这是因为下采样需要设计循环，依次赋值，全拷贝肯定在汇编层面做了优化的。
 有意思的是在Release版本中，2倍采样的时间就小于全拷贝，这就说明debug版本对于循环有着更深的影响，下采样最大运行时间相差了接近6倍。
 
@@ -41,10 +41,10 @@ PC上运行的结果，t1是全拷贝的时间，t2是下采样拷贝的时间�
 
 
 
-# 下采样拷贝时间
+## 下采样拷贝时间
 下采样拷贝虽然点数少，但是需要多次拷贝操作，那么这种方式和全拷贝速度差异如何呢？
 
-\code{cpp}
+```cpp
 uint32_t W=640, H=480, WH=W*H;
 FILE *f = fopen("img","rb");
 uint8_t* buf = malloc(WH);
@@ -64,7 +64,7 @@ for(uint32_t r=0; r<Hd; r++)
     img_d[r*Wd+c] = buf[r*sd*W+c*sd];
 t = cv::getTickCount()-t;
 cout<<t/cv::getTickFrequency()<<endl;
-\endcode
+```
 
 PC平台结果：
 

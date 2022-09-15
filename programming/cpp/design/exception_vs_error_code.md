@@ -11,7 +11,7 @@
 
 原因一：exception让代码更加的简洁（clean）
 
-\code{cpp}
+```cpp
 
 // Status code 版本
 STATUS DoSomething(int a, int b)
@@ -40,7 +40,7 @@ void DoSomething(int a, int b)
     DoThing1(a);
     DoThing2(b);
 }
-\endcode
+```
 
 原因二：更多的错误信息
 
@@ -64,7 +64,7 @@ void DoSomething(int a, int b)
 返回值被错误码占用之后，我们只能使用形参作为载体。显然返回值相比形参更能体现“这是一个输出”的情况。
 C++11增加的tuple实现了“多个返回值”这个feature，这显然说明大家更喜欢在返回值上下功夫。
 
-\code{cpp}
+```cpp
 
 // status code
 int get(int&a);
@@ -75,7 +75,7 @@ int st = get(a);
 int get();
 int a = get();
 
-\endcode
+```
 
 原因四：有些函数无法定义返回值
 

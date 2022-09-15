@@ -12,23 +12,19 @@ C语言标准库也只是一群大佬定义的一种标准，并没有要求谁�
 - Bionic：谷歌为Android操作系统开发的标准库。
 
 
-
-## stdio stdio.h
-
-
 ## printf 中的uint64整数
 使用printf过程中，一定要写对%字符串，之前遇到过一个问题，使用%d来打印一个int64的数是错误的，例如下列代码
 
-\code{cpp}
+```cpp
 uint64_t a = 1000;
 printf("%d\n",a); // 错误
-\endcode
+```
 
 实际上，%u，%ld，%lu都不对，在曾经一个ARM平台编译器上，正确的结果是%llu，因为在该平台上，sizeof(long)=sizeof(int)=4，而uint64_t真正的类型是long long，在不同平台时，要注意类型字节数可能不一样。
 
 
 ## 怎样printf size_t类型才不会报warning
-\code{c}
+```cpp
 // C89
 size_t foo;
 ...
@@ -38,14 +34,11 @@ printf("foo = %lu\n", (unsigned long) foo);
 size_t foo;
 ...
 printf("foo = %zu\n", foo);
-\endcode
-
-
-
+```
 
 ## 彩色规范打印
 
-\code{c}
+```cpp
 #indef PRINT_ERROR
 #define PRINT_ERROR(...)    \
   do{                       \
@@ -67,9 +60,7 @@ printf("foo = %zu\n", foo);
   while(0)
 #endif
 
-\endcode
-
-# c_float float.h
+```
 
 ## FLT_EPSILON宏和DBL_EPSILON 
 
@@ -78,7 +69,7 @@ printf("foo = %zu\n", foo);
 解决方法：一般来说我们需要拿到一个很小的数，如果分母的绝对值小于这个数，就认为分母为零。
 最适合的方法是使用<float.h>提供的FLT_EPSILON和DBL_EPSILON。
 
-\code{cpp}
+```cpp
 #include <stdio.h>
 #include <float.h>
 
@@ -86,16 +77,16 @@ int main(int argc, char* argv[]){
     printf("FLT_EPSILON=%.20f\n", FLT_EPSILON);
     printf("DBL_EPSILON=%.20f\n", DBL_EPSILON);
 }
-\endcode
+```
 
 运行结果为：
 
-\code{bash}
+```bash
 FLT_EPSILON=0.00000011920928955078
 DBL_EPSILON=0.00000000000000022204
-\endcode
+```
 
 
-# 判断数字是否是nan
+## 判断数字是否是nan
 
 isnan()函数。

@@ -8,9 +8,6 @@ chrono是C++11引入的一个关于时间的标准库。
 > 注意，在C++20标准以前，chrono不提供日期相关的接口，所以想要用chrono来计算和年月日相关的需求，是做不到的。
 > 我自己在这里就被卡了很久，如果想要找和日期相关的操作，去看C语言的time.h，或者C++的开源库：date，或者看C++20。
 
-
-# 认识clock
-
 ## steady_clock
 
 steady_clock表示时间单调递增的时钟，这个时钟是不会倒退的，不存在重置这种操作，每一个tick的时间长度也是相等的。
@@ -38,7 +35,7 @@ C++11并未定义最小周期是多少，并且该时钟是steady还是system也
 
 下面提供了一个案例，基于steady_clock和now()函数来估计代码运行耗时。
 
-\code{cpp}
+```cpp
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -62,26 +59,26 @@ int main()
                   << size << " ints : " << diff.count() << " s\n";
     }
 }
-\endcode
+```
 
 运行结果：
-\code{bash}
+```bash
 Time to fill and iterate a vector of 1         ints : 0.000067375 s
 Time to fill and iterate a vector of 100       ints : 0.000000688 s
 Time to fill and iterate a vector of 10000     ints : 0.000044553 s
 Time to fill and iterate a vector of 1000000   ints : 0.004200451 s
 Time to fill and iterate a vector of 100000000 ints : 0.260108972 s
-\endcode
+```
 
 
-# std_duration std::duration
+## std::duration
 
-\code{cpp}
+```cpp
 template<
     class Rep,
     class Period = std::ratio<1>
 > class duration;
-\endcode
+```
 
 duration表示一个时间间隔（time interval），它由一个抽象的类型Rep来表达tick的数值，以及一个std::ratio类型Period来表达一个tick的周期。
 
@@ -90,14 +87,14 @@ duration表示一个时间间隔（time interval），它由一个抽象的类�
 注意，std::ratio是分数，可以表达小于1的数，例如Period选择std::ratio<1,1000>，刚才的例子就变成了10ms。
 
 
-# time_point
+## time_point
 
-\code{cpp}
+```cpp
 template<
     class Clock,
     class Duration = typename Clock::duration
 > class time_point;
-\endcode
+```
 
 有了时钟（clock）和时间间隔（duaration），我们就可以表示一个时间点了，也就是std::time_point。
 
@@ -113,7 +110,7 @@ Duartion可以选择对应的数值类型和周期。
 要说明的就是duaration要定义个Rep来表示数值的类型，示例中使用了double。
 
 
-# chrono_numeric_literal chrono中的数值字面量（numeric literal）
+## chrono中的数值字面量（numeric literal）
 
 也就是“auto a=100ms，b=200ms”这种写法。
 TODO：进一步研究。

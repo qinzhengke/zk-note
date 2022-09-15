@@ -23,24 +23,24 @@
 那么如何运行程序，并且不阻塞终端呢？
 解法：
 
-\code{bash}
+```bash
 gitk &
-\endcode
+```
 
 
 ## 如何查看目录和文件占用磁盘大小？
 
-\code{bash}
+```bash
 du -h -d 1 ./
-\endcode
+```
 
 du表示disk usage，-h参数表示使用人类可读的单位，即KB,MB,GB为单位，如果不设置这个参数，得到的数字很奇怪，也不是以byte为单位的。-d表示递归的深度，如果只看当前目录，选择1，后面./就是目录位置。
 
 这样的方式只会显示文件夹的大小，如果要显示文件的大小，用下面这个命令。
 
-\code{bash}
+```bash
 du -h -d 1 ./*
-\endcode
+```
 
 
 \sbusection 如何拷贝符号链接文件本身？
@@ -63,31 +63,31 @@ du -h -d 1 ./*
 我们通常会想查看当前端口被那个应用程序监听，如何实现呢？
 
 一种方式如下所示：
-\code{.sh}
+```bash
 sudo lsof -i -P -n | grep LISTEN
-\endcode
+```
 
 
 ## ls工具如何显示文件的全路径？
 
 众所周知，ls工具会输出文件列表，但是有的时候我们想要的是文件的全路径，如何实现呢？
 
-\code{.sh}
+```bash
 $ ls -d $PWD/*
-\endcode
+```
 
 
 ## 如何查看文件的后面n行？
 
-\code{bash}
+```bash
 tail -n 5 ./filename.txt
-\endcode
+```
 
 ##  如何循环执行某个命令？
 
-\code{bash} 
+```bash 
 while : ; do tail -n 5 ./filename.txt; sleep 1; done;
-\endcode
+```
 
 ##  ln -s 命令无效？
 1. 使用ln -s命令，一定要输入目标文件的绝对路径，而不是相对路径！
@@ -95,34 +95,34 @@ while : ; do tail -n 5 ./filename.txt; sleep 1; done;
 
 ##  find命令
 怎么查找名称带有“[”和“]”的文件？
-\code{bash}
+```bash
 find . -name "\[xxx\]"
-\endcode
+```
 find工具认为中括号有特定含义，即寻找从哪个字母到哪个字母开始的文件，如果确实要使用中括号，就应该使用转义字符。
 
 ##  find + rm 命令
 使用find + rm 命令可以轻松删除特定文件，而且先find一遍，可以看看是否会误删其他文件，确认没问题之后再使用rm，即安全也高效。
 
-\code{bash}
+```bash
 #第一遍先看看会删除哪些文件
 find . -name xxx
 #确认没问题后，第二遍删除
 find . -name xxx | xargs rm
-\endcode
+```
 
  压缩文件夹与解压文件
 
 打包并压缩一个文件夹：
 
-\code{.sh}
+```bash
 tar -zcf ${folder}.tar.gz ${folder}
-\endcode{.sh}
+```bash
 
 解压一个tar.gz压缩包到当前目录：
 
-\code{.sh}
+```bash
 tar -xf myfile.tar.gz
-\endcode
+```
 
 如果压缩的时候是一个文件夹压缩的，那么解压出来的也是一个文件夹。
 
@@ -130,16 +130,16 @@ tar -xf myfile.tar.gz
 ## 几种Linux发送网络包的命令
 
 UDP包：
-\code{bash}
+```bash
 echo "This is my data" > /dev/udp/127.0.0.1/1053
 \# 其中127.0.0.1就是IP地址，1053就是端口
-\endcode
+```
 
 http包
-\code{bash}
+```bash
 curl "http://127.0.0.1:9009/echo" -d "Hello, world"
 \# 其中127.0.0.1是IP地址，9090是端口
-\endcode
+```
 
 
 
@@ -157,14 +157,14 @@ Linux操作系统下三种配置环境变量的方法　　
 
 (2)在profile文件末尾加入：
 
-\endcode
+```
 JAVA_HOME=/usr/share/jdk1.5.0_05
 PATH=$JAVA_HOME/bin:$PATH
 CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export JAVA_HOME
 export PATH
 export CLASSPATH
-\endcode
+```
 
 (3)重新登录
 
@@ -188,14 +188,14 @@ f. 大小写必须严格区分。
 
 (2)在.bashrc文件末尾加入：　　
 
-\endcode
+```
 set JAVA_HOME=/usr/share/jdk1.5.0_05
 export JAVA_HOME
 set PATH=$JAVA_HOME/bin:$PATH
 export PATH
 set CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export CLASSPATH
-\endcode
+```
 
 (3)重新登录
 
@@ -205,16 +205,16 @@ export CLASSPATH
 
 只需在shell终端执行下列命令：
 
-\endcode
+```
 export JAVA_HOME=/usr/share/jdk1.5.0_05
 export PATH=$JAVA_HOME/bin:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar 
-\endcode
+```
 
 ##  查看滚动的log文件
-\code{bash}
+```bash
 tail -f xxx.log
-\endcode
+```
 参数“-f”表示“follow”，即当文件有更新的时候，追加打印更新的内容，这样一来，看log文件就和命令运行程序一样了。
 
 ##  busybox
@@ -226,11 +226,11 @@ script中的source命令是无效的！
 有点奇怪，有些说法是calling bash不受callee bash的影响。
 所以想要source ~/.bashrc可以这样
 
-\code{bash}
+```bash
 # Add something to ~/.bashrc
 echo MY_VARIABLE > ~/.bashrc
 exec bash
-\endcode
+```
 ## # /bin/sh&M bad interpreter
 直接原因是第一行结尾字符有问题，一般的源头是bash的脚本文件在Windows被重新编辑过，Windows和Linux下的换行是不同的字符表达的，回到Linux时就可能出错。
 
@@ -241,10 +241,10 @@ exec bash
 2.自动化脚本，无法执行交互。
 那有没有办法解决这个问题呢？其实是可以的，使用Linux自带的feature：.netrc文件，文件在`~`目录下
 下面就是.netrc文件的内容示例。
-\code{bash}
+```bash
 machine github.com login qinzhengke password xxxxx
 machine 192.168.0.5 login qinzhengke password xxxx
-\endcode
+```
 
 
 ## 无法delete到回收站
@@ -253,9 +253,9 @@ Gnome中无法通过delete将NTFS磁盘中的文件移动到回收站，只能�
 解决方法：
 在/etc/fstab文件中加入uid=1000，例如：
 
-\code
+```
 /dev/sda5   /home/zrinker/Work/ ntfs uid=1000,default 0 0 
-\endcode
+```
 
 注意，uid=1000是和default在通过逗号放在一起的，中间不能有空格，因为它们组成了一个参数，uid就是第一个用户的ID，一般是1000，如果不是第一个用户，则通过echo $UID来获取uid，修改完后重新启动即可。
 
@@ -319,11 +319,11 @@ Python的集成开发环境，支持调试，可以算是最好的。
 ## Ubuntu下安装Shadowsocks
 通过PPA源安装，仅支持Ubuntu 14.04或更高版本。
 
-\code
+```
 sudo add-apt-repository ppa:hzwhuang/ss-qt5
 sudo apt-get update
 sudo apt-get install shadowsocks-qt5
-\endcode
+```
 
 ## Ubuntu下安装Qt
 从官网上下载.run文件之后，使用chmod u+x xxx.run命令来将文件变成可执行文件，然后再使用./xxx.run来运行安装程序。
@@ -359,30 +359,30 @@ WPS Office 所需字体：wingding.ttf、webdings.ttf、symbol.ttf、WINGDNG3.TT
 
 - 第二步：新建字体存放目录 windows-font
 
-\code
+```
 sudo mkdir /usr/share/fonts/truetype/windows-font
-\endcode
+```
 
 - 第三步：拷贝字体到wiondow-font目录下
 
-\code	
+```	
 sudo cp /home/php-note/123/* /usr/share/fonts/truetype/windows-font
-\endcode
+```
 
 - 第四步：修改权限，并更新字体缓存
 
-\code	
+```	
 sudo chmod -R 777  /usr/share/fonts/truetype/windows-font
 cd /usr/share/fonts/truetype/windows-font
 sudo mkfontscale
 sudo mkfontdir
 sudo fc-cache -fv
-\endcode
+```
 
 - 第五步：重启下系统吧！
-\code	
+```	
 sudo reboot
-\endcode
+```
 
 
 
@@ -412,9 +412,9 @@ apt-get是Debian系列操作系统的软件安装工具，这个工具可以连�
 
 ## flameshot-Ubuntu下一个超强截图工具
 安装
-\code{bash}
+```bash
 sudo apt-get install flameshot
-\endcode
+```
 
 使用：
 1. windows键，输入keyboard，进入键盘设置
@@ -438,7 +438,7 @@ sudo apt-get install flameshot
 
 方法：
 
-\code{.sh}
+```bash
 sudo apt update
 # 安装ssh-server
 sudo apt install openssh-server
@@ -446,28 +446,28 @@ sudo apt install openssh-server
 sudo systemctl status ssh
 # 设置防火墙白名单，否则无法连接
 sudo ufw allow ssh
-\endcode
+```
 
 
 # 使用scp发送文件
 
-\code{.sh}
+```bash
 scp my_file username@192.168.1.101:~/Downloads
-\endcode
+```
 
 
 # 根据进程的名称来kill
 
 前言：kill命令没有根据进程的名字来杀死进程的方法，需要自行写几句脚本根据进程名称找出PID，然后在杀死，具体方法如下所示。
 
-\code{.sh}
+```bash
 pid=$(top -n 1 -b | grep -e 'node' | grep -e '[0-9]*' -o | head -1)
 if [! -z "$pid" ]
 then
 kill $pid
 echo "node stopped"
 fi
-\endcode
+```
 
 其中：
 

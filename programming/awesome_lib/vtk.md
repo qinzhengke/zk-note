@@ -1,13 +1,13 @@
 # VTK：3D可视化库
 
-# vtk_useful_example 一个有用的第三方Example网站
+## vtk_useful_example 一个有用的第三方Example网站
 
 https://kitware.github.io/vtk-examples/site/
 
 这个网站上有非常多的示例代码，非常推荐，学习vtk一定要过一遍。
 
 
-# vtk_useless_example 无用的Example
+## vtk_useless_example 无用的Example
 
 VTK的Example没什么用处，甚至存在误导，不要参考。
 
@@ -17,10 +17,7 @@ VTK源码下存在Example目录，但是即使给cmake加上“-DVTK_BUILD_EXAMP
 (2)Example的CMakeLists.txt存在大量注释掉的Example
 (3)Example的相关cmake配置存在不用的接口，主要是8.x版本的接口，已经和9.x版本不适配。例如：只有调用但是没有定义的vtk_module_config（当时还找了半天定义）。
 
-
-# vtk_trouble_shooting Trouble Shooting
-
-## vtk_x11_not_found X11_Xt_LIB could not be found.
+## X11_Xt_LIB could not be found.
 
 完整的问题：
 ```
@@ -34,7 +31,7 @@ CMake Error at Rendering/OpenGL/CMakeLists.txt:304 (message):
 sudo apt install libxt-dev
 ```
 
-## render_context Could not find the VTK package with the following required components: RenderingContextOpenGL2
+## Could not find the VTK package with the following required components: RenderingContextOpenGL2
 
 前言：在运行vtk examples时出现这个问题，原因时example貌似使用的8.9版本的vtk，而我们安装的是最新的9.1。
 

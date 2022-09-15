@@ -14,7 +14,7 @@
 本方法只对ubuntu18.04以及以上的版本。
 
 步骤1： 新建一个脚本设置为可执行，然后添加以下内容
-\code{.sh}
+```bash
 #!/bin/bash' 
 ## BEGIN INIT INFO' 
 # Required-Start: $local_fs $network $remote_fs' 
@@ -24,7 +24,7 @@
 ## END INIT INFO' 
 cd somewhere
 ./pm_msft.sh"
-\endcode
+```
 
 注意，其中注释部分是不能少的，cd到somewhere目录后，这个目录就是workding directory，直接运行该目录下的程序即可，和我们在终端操作是一样的。
 
@@ -43,15 +43,15 @@ Step 1: 查看磁盘的UUID
 
 Step 2: 编辑fstab文件
 
-\code
+```
 sudo vim /etc/fstab
-\endcode
+```
 
 在最后一行加入如下配置：
 
-\code
+```
 UUID=xxxxxxx       /media/Work/    auto    defaults 0       2
-\endcode
+```
 
 【注意】“defaults”值不要拼错了，有“s”，最后一个参数要填“2”，表示普通分区，并非Linux启动分区，这两设置不对，有可能无法开机。
 

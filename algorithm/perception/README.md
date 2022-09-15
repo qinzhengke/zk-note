@@ -21,8 +21,8 @@
     * [NDT](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/alignment/ndt.md)
 
 * 数据关联
-    * [IOU算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/data_association/iou.md)
-    * [距离算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/data_association/distance.md)
+    * [IOU算法  ](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/data_association/iou.md)
+    * [距离算法  ](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/data_association/distance.md)
     * [匈牙利算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/data_association/hungarian_algorithm.md)
 
 * 状态估计
@@ -33,7 +33,7 @@
     * [最大似然估计  ](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/estimation/mle.md)
 
 * 多目标跟踪
-    * [SORT算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/tracking/sort.md)
+    * [SORT算法    ](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/tracking/sort.md)
     * [DeepSORT算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/tracking/deep_sort.md)
 
 * 目标融合

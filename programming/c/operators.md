@@ -5,7 +5,6 @@
 
 ## 运算符优先级cheatsheet
 
-\htmlonly
 <table class="wikitable" border="1"> 
 
 <tbody><tr>
@@ -217,5 +216,3 @@
 </td>
 <td> 从左到右
 </td></tr></tbody></table>
-
-\endhtmlonly

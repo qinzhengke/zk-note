@@ -5,7 +5,7 @@
 
 先把正确的写法放上来：
 
-\code{cpp}
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -19,13 +19,13 @@ int main(){
     A a;
     cout<<"a.x="<<a.x<<",sizeof(A)="<<sizeof(A)<<endl;
 }
-\endcode
+```
 
 运行结果：
 
-\code{bash}
+```bash
 a.x=10,sizeof(A)=1
-\endcode
+```
 
 有三点需要注意，三者缺一不可：
 

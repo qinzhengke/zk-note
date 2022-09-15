@@ -40,11 +40,11 @@ Step 2: Doxyfile配置
 
 在Doxyfile中进行mathjax的相关配置：
 
-\code
+```
 USE_MATHJAX            = YES
 MATHJAX_FORMAT         = HTML-CSS
 MATHJAX_RELPATH        = ./MathJax-2.7.8
-\endcode
+```
 
 首先自然是打开MathJax总开关，然后设置MathJax的输出格式，再配置MathJax的路径。
 
@@ -57,7 +57,7 @@ Step 3: 拷贝MathJax文件夹
 
 结合Doxygen的构建，我们可以使用单独的脚本来实现doxygen的文档构建、图片拷贝以及MathJax的拷贝，如下代码所示：
 
-\code{bash}
+```bash
 
 #!/bin/bash
 
@@ -86,4 +86,4 @@ rm -rf ../qinzhengke.github.io/*
 cp -r build/html/* ../qinzhengke.github.io/
 
 echo "[zk] All done!"
-\endcode
+```

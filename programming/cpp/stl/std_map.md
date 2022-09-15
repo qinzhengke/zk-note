@@ -2,7 +2,7 @@
 
 ## 基本使用方法
 
-\code{.cpp}
+```cpp
 // constructing maps
 #include <iostream>
 #include <map>
@@ -34,4 +34,4 @@ int main ()
 
   return 0;
 }
-\endcode
+```

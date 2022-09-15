@@ -1,16 +1,13 @@
-# C语言构建常见问题
-
-
-# 编译常见问题
+# C语言编译报错速查
 
 
 ## c_redeclaration 重复声明
 
 具体报错形式：
 
-\code{bash}
+```bash
 error: redeclaration of 'xxx'
-\endcode
+```
 
 常见排查步骤：
 
@@ -27,27 +24,20 @@ _Bool以及其封装bool，是C99才引入的，如果编译器不识别，有�
 
 很奇怪，如果不加static修饰符，编译器是不会提示“unused”的警告的，原因是未解之谜。
 
-\code{c}
+```cpp
 static const char * a = "abcdef"; // 警告
 static const char a[] = "abcdef"; //OK
-\endcode
+```
 
 
-## no_rule_make_target No rules to make target
+## No rules to make target
 这个提示表示编译模块时时找不到源代码，检查一下C和C++文件是否在构建脚本中添加进去了。
 
 
-## c_include_opencv core.hpp header must be compiled as c++
+## core.hpp header must be compiled as c++
 在c文件中include Opencv的hpp头文件就会出现这个问题，因为编译c文件时是使用C编译器编译的，而.c文件是不认识.hpp文件的，实现的方式就是c编译器并未定义__cplusplus宏。按照道理说c文件不应该包含h文件，最好把c文件改成cpp文件。如果硬是不改，在VisualStudio中可以设置compile as c++。在别的环境就不知道怎么搞了。
 
-\htmlonly
-<hr style="height:20px;border-width:0;color:gray;background-color:gray">
-\endhtmlonly
-
-# 常见链接问题
-
-
-## c_mul_def multiple definition?
+## multiple definition?
 
 注意，链接时的重复定义和编译时的重复声明不同，清楚的区分能够让我们更快速的定位问题。
 
@@ -62,7 +52,7 @@ static const char a[] = "abcdef"; //OK
 【注意】在头文件中定义变量是不科学的做法，哪怕加入了static防止重复定义，每一个包含了该头文件的源文件生成的obj都会包含该变量，增加了编译时间，并且浪费内存。
 
 
-## unresolved_external_symbol unresolved external symbol？
+## unresolved external symbol？
 
 常见的排查步骤：
 

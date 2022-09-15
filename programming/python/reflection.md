@@ -2,7 +2,7 @@
 
 ## 如何遍历类中的成员变量？
 
-\code{cpp}
+```cpp
 
 class A:
     def __init__(self):
@@ -14,4 +14,4 @@ a = A()
 
 for name, value in vars(a).items():
     print('attr, name:%s, type:%s, value:%s' % (name,type(value),value))
-\endcode
+```

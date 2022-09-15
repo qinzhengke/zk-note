@@ -29,7 +29,7 @@ std::bind是对函数的一种封装，它的厉害之处在于可以更改参�
 
 下面用代码实例进行解释
 
-\code{cpp}
+```cpp
 class A{
     void init(){
         a = 10;
@@ -53,7 +53,7 @@ class A{
     int a;
     evpp::udp::Server s;
 }
-\endcode
+```
 
 bind特别的神奇，它可以无视函数传参规则，强行将N个参数的函数传入1～N-1个参数的函数形式，理论上可以解决任何callback传参问题。
 库的设计者也不需要预留user_data给用户，非常的简便。
@@ -69,11 +69,11 @@ bind特别的神奇，它可以无视函数传参规则，强行将N个参数的
 
 回答：使用createUDPSocket()函数，
 
-\code{cpp}
+```cpp
 evpp_socket_t fd = udp::sock::createUDPSocket(3030); // source port
 struct sockaddr_in sin;
 sin.sin_family = AF_INET;
 sin.sin_addr.s_addr = htonl(0x7f000001);    // 127.0.0.1
 sin.sin_port = htons(8080);    // Destination port
 evpp::udp::SendMessage(fd, (struct sockaddr *)&sin, buffer, buffer_size);
-\endcode
+```

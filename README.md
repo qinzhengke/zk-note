@@ -1,9 +1,16 @@
-# 学习笔记
+# 笔记
 
 ## 目录
 
-* [数学笔记](https://github.com/qinzhengke/zk-note/blob/master/math/entry.md)
-* [编程笔记](https://github.com/qinzhengke/zk-note/blob/master/programming/entry.md)
+* [数学](https://github.com/qinzhengke/zk-note/blob/master/math/entry.md)
+* 编程
+    * [C       ](https://github.com/qinzhengke/zk-note/blob/master/programming/c/README.md)
+    * [C++     ](https://github.com/qinzhengke/zk-note/blob/master/programming/cpp/README.md)
+    * [cmake   ](https://github.com/qinzhengke/zk-note/blob/master/programming/cmake/README.md)
+    * [Python  ](https://github.com/qinzhengke/zk-note/blob/master/programming/python/README.md)
+    * [rust    ](https://github.com/qinzhengke/zk-note/blob/master/programming/rust/README.md)
+    * [前端     ](https://github.com/qinzhengke/zk-note/blob/master/programming/front_end/README.md)
+    * [优秀开源库](https://github.com/qinzhengke/zk-note/blob/master/programming/awesome_lib/README.md)
 * 算法
   * [通用算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/general/README.md)
   * [感知算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/README.md)

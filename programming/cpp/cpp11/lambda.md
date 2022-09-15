@@ -14,7 +14,7 @@
 
 其次，在实例化的时候，lambda表达式的传参直接用auto即可，不需要再写一遍类型，（前面的模板函数实例化时已经写了）。
 
-\code{cpp}
+```cpp
 
 template<typename T, typename F>
 lib_func(std::vector<T> t, F usr_func){
@@ -29,4 +29,4 @@ vector<tuple_t> v;
 
 lib_func<tuple_t>(v, [](auto x){printf("%d,",x.a);});
 
-\endcode
+```

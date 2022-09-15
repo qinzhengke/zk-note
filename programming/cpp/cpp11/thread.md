@@ -9,16 +9,16 @@
 
 std::mutex是c++11自带的互斥锁，
 
-\code{.cpp}
+```cpp
 std::mutex mtx;
 mtx.lock();
 // do somthing
 mtx.unlock();
-\endcode
+```
 
 ## std::mutex::try_lock
 
-\code{.cpp}
+```cpp
 #include <chrono>
 #include <mutex>
 #include <thread>
@@ -71,12 +71,12 @@ int main()
     thread_1.join();
     thread_2.join();
 }
-\endcode
+```
 
 
-# std::lock_guard
+## std::lock_guard
 
-\code{.cpp}
+```cpp
 #include <thread>
 #include <mutex>
 #include <iostream>
@@ -107,10 +107,10 @@ int main()
  
     std::cout << "main: " << g_i << '\n';
 }
-\endcode
+```
 
 
-# init阶段和start阶段
+## init阶段和start阶段
 
 通常来说多线程模块会有init、start、run几种阶段，尽量分清楚这几个阶段的任务不要混淆，对于多线程编程，能很大概率避免一些线程启动混乱带来的程序崩溃问题。
 
