@@ -1,13 +1,13 @@
 # 初始化
 
-# designated_initializers  Designated Initializers
+## Designated Initializers
 
 C语言中结构体在C99中的一种新的初始化语法，叫做designated initializer，即指定初始化，之前我一直找不到正式的名称，我一直称之为点变量初始化。。。
 
-\code{cpp}
+```cpp
 MY_TYPE a = { .flag = true, .value = 123, .stuff = 0.456 };
-\endcode
-\code{cpp}
+```
+```cpp
 type struct
 {
   int a1;
@@ -38,7 +38,7 @@ B bs[2] =
     b2 = 1.0,
   }
 }
-\endcode
+```
 这个东西与编译器无关，是C99的标准，gcc想用的话必须开启选项 -std=c99
 
 【注意】Designated Initializers是C语言的语法，不是C++的语法，至少C++17还没有包含，在C++代码中不要混用！

@@ -1,11 +1,11 @@
 # Python画图库：matplotlib
 
 ## 如何设置显示范围？
-\code{python}
+```{python}
 axes = plt.gca()
 axes.set_xlim([xmin,xmax])
 axes.set_ylim([ymin,ymax])
-\endcode
+```
 
 ## 如何打开网格？
 plt.grid()

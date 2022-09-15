@@ -18,15 +18,15 @@ LibreOffice是一款开源、免费，而且非常好用的Office软件，配合
 有时候公司电脑安全软件抽风，总是会对C盘做一些还原操作，会触发LibreOffice的某个bug，打开TexMath编辑器，会报错并且弹出VBA调试。
 报错内容是，怎么办呢？
 
-\endcode
+```
 BASIC runtime error - "exception occured", Type: com.sun.star.container.NoSuchElementException.
-\endcode
+```
 
 回答：删除下面的文件夹然后重新安装TexMath。
 
-\endcode
+```
 C:\Users\Paul\AppData\Roaming\libreoffice
-\endcode
+```
 
 ## Draw工具如何以圆心为基准点画圆弧？
 

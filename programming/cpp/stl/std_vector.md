@@ -12,7 +12,7 @@
 而不是运行多次，这里的逻辑千万不要理解错了。
 
 如下代码所示，运行结果并不是“0,1,2...”，而是全0。
-\code{cpp}
+```cpp
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -29,7 +29,7 @@ int main()
         cout<<xx<<endl;
     }
 }
-\endcode
+```
 
 运行结果：
 

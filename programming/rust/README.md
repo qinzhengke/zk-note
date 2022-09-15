@@ -1,7 +1,7 @@
 # Rust：超严格静态类型语言
 
 
-# 文档
+## 文档
 
 书籍：The Rust Programming Language，官方学习资料，必看。
 来源：
@@ -9,34 +9,34 @@
 - 离线版本，rustup docs --book
 
 
-# playground
+## playground
 
 rust官网提供了一个在线编译运行rust代码的工具，即playground，可以不用下载rust到本地，直接在网页端运行rust代码，网站地址为：https://play.rust-lang.org/。
 对于一些小的代码验证，特别的有用。
 C++也早有类似的网站，例如cpp.sh
 
 
-# rust安全性解决的问题
+## rust安全性解决的问题
 
 - Memory leak
 - Double free
 - Data race
 
 
-# mut
+## mut
 
 rust非常强调默认immutable的概念，如果定义了一个mut变量，但是没有去mut它，那么编译器会提出警告，提示没有必要定义mut，如下代码所示：
 
-\code{rust}
+```{rust}
 fn main(){
     let mut x = 10;
     println!("x = {}", x);
 }
-\endcode
+```
 
 编译结果：
 
-\code{bash}
+```bash
    Compiling playground v0.0.1 (/playground)
 warning: variable does not need to be mutable
  --> src/main.rs:2:9
@@ -52,10 +52,10 @@ warning: 1 warning emitted
 
     Finished dev [unoptimized + debuginfo] target(s) in 0.51s
      Running `target/debug/playground`
-\endcode
+```
 
 
-# showdow
+## showdow
 
 rust中的变量可以中途被“替换”，例如本来变量a是一个i32，但是可以重写a为String，这种特性叫做“shadow”。
 
@@ -70,11 +70,11 @@ shadowu有一个小问题，和C++中的override一样，如果出现了拼写�
 不知道rust的shadow有没有类似C++的override关键字。
 
 
-# 编译期间的溢出检查
+## 编译期间的溢出检查
 
 rust编译器很强，能够在编译期间检查出是否存在类型溢出，有意思的是，这种检查是在语法检查之后进行的，如下代码所示
 
-\code{rust}
+```{rust}
 fn main(){
     let mut x: u8 = 255;
     x = x+1;    // 类型溢出
@@ -83,11 +83,11 @@ fn main(){
     y = 11;     // 一处语法错误
     println!("y={}",y);
 }
-\endcode
+```
 
 我们故意在类型溢出后面加入一段无关的语法错误，编译结果首先报出了语法错误，说明编译器是先检查语法错误的，并且发现错误后直接停止了编译。
 
-\code{bash}
+```bash
    Compiling playground v0.0.1 (/playground)
 warning: value assigned to `y` is never read
  --> src/main.rs:5:9
@@ -115,11 +115,11 @@ For more information about this error, try `rustc --explain E0384`.
 error: could not compile `playground`
 
 To learn more, run the command again with --verbose.
-\endcode
+```
 
 如果我们把语法错误代码注释掉，如下所示：
 
-\code{rust}
+```{rust}
 fn main(){
     let mut x: u8 = 255;
     x = x+1;
@@ -128,33 +128,33 @@ fn main(){
     // y = 11;
     // println!("y={}",y);
 }
-\endcode
+```
 
 那么运行结果为：
 
-\code{bash}
+```bash
    Compiling playground v0.0.1 (/playground)
     Finished dev [unoptimized + debuginfo] target(s) in 0.50s
      Running `target/debug/playground`
 thread 'main' panicked at 'attempt to add with overflow', src/main.rs:3:9
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-\endcode
+```
 
 
-# 整型字面量无法给浮点变量赋值
+## 整型字面量无法给浮点变量赋值
 
 rust的类型检查真的是非常严格，整型的字面常量都无法给浮点变量赋值，如下代码所示：
 
-\code{rust}
+```{rust}
 fn main(){
     let x: [f32;5] = [1,2,3,4,5];
     println!("x={:?}", x);
 }
-\endcode
+```
 
 编译结果：
 
-\code{bash}
+```bash
    Compiling playground v0.0.1 (/playground)
 error[E0308]: mismatched types
  --> src/main.rs:2:23
@@ -171,10 +171,10 @@ For more information about this error, try `rustc --explain E0308`.
 error: could not compile `playground`
 
 To learn more, run the command again with --verbose.
-\endcode
+```
 
 
-# ownership三个原则
+## ownership三个原则
 
 - Each value in Rust has a variable that's called its owner.
 - There can be only one owner at a time.

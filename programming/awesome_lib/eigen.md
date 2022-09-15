@@ -2,7 +2,7 @@
 
 ## 安装
 
-\code{bash}
+```bash
 cd <eigen_dir>
 mdkir build
 cd build
@@ -10,7 +10,7 @@ cmake ..
 sudo make install
 # 没错，中间没有make，因为eigen是纯头文件组成的，不需要预先编译成库。
 # 安装好后，默认的头文件地址在 /usr/local/include/eigen3
-\endcode
+```
 
 
 ## 矩阵的初始化（包括全零阵、单位阵）
@@ -22,16 +22,16 @@ sudo make install
 参见： https://eigen.tuxfamily.org/dox/group__TutorialBlockOperations.html
 
 
-# Matrix和C数组之间的转换
+## Matrix和C数组之间的转换
 
 参见： https://eigen.tuxfamily.org/dox/group__TutorialMapClass.html
 
 
-# eigen_auto 使用auto定义Eigen相关的变量得到右值？
+## eigen_auto 使用auto定义Eigen相关的变量得到右值？
 
 使用auto定义Eigen相关的变量时候，有时候会得到右值，这些右值无法被赋值，但是使用类型来定义就成了左值。
 
-\code{cpp}
+```cpp
 // 编译失败
 auto a = Eigen::Matrix<float,9,9>::Zero();
 
@@ -40,22 +40,22 @@ Eigen::Matrix<float,9,9> a = Eigen::Matrix<float,9,9>::Zero();
 
 // 编译成功
 auto a = Eigen::Matrix3f::Zero();
-\endcode
+```
 
 再例如，
 
-\code{cpp}
+```cpp
     auto mat1 = Eigen::Matrix<T,4,4>::Identity();
     // 下面语句报错：lvalue_operand error: lvalue required as left operand of assignment
     mat1(0,3) = 1;
 
     Eigen::Matrix<T,4,4> mat2 = Eigen::Matrix<T,4,4>::Identity();
     mat2(0,3) = 1; // 编译通过
-\endcode
+```
 
-# AngleAxis用于初始化注意事项
+## AngleAxis用于初始化注意事项
 
-\code{cpp}
+```cpp
     // 编译错误
     Matrix3d rot = AngleAxisd(0, Vector3d::UnitZ()) *
         AngleAxisd(0, Vector3d::UnitY()) *
@@ -66,14 +66,14 @@ auto a = Eigen::Matrix3f::Zero();
     rot = AngleAxisd(param.view_euler[2], Vector3d::UnitZ()) *
         AngleAxisd(param.view_euler[1], Vector3d::UnitY()) *
         AngleAxisd(param.view_euler[0], Vector3d::UnitX());
-\endcode
+```
 
-# 传参时MatrixNd到MatrixXd的转换
+## 传参时MatrixNd到MatrixXd的转换
 
 函数传参时，MatrixNd要转换成MatrixXd，（N表示具体的数字，例如3），编译器会自动转换，但是转换得到的是一个右值，是一个临时变量。
 如果函数的形参是非常量引用，那么编译器就会报错。
 
-\code{.cpp}
+```cpp
 void func(MatrixXd &a){
 
 }
@@ -81,12 +81,12 @@ void func(MatrixXd &a){
 Matrix3d x;
 Matrix
 func(x);    // x传入之后自动cast，变成右值。
-\endcode
+```
 
 
-# 四元数与欧拉角的转换
+## 四元数与欧拉角的转换
 
-\code{.cpp}
+```cpp
 // 从欧拉角到四元数
 Quaternionf q = AngleAxisf(yaw, Vector3f::UnitZ())
     * AngleAxisf(pitch, Vector3f::UnitY())
@@ -94,15 +94,15 @@ Quaternionf q = AngleAxisf(yaw, Vector3f::UnitZ())
 
 // 从四元数到欧拉角
 auto euler = q.toRotationMatrix().eulerAngles(2, 1, 0);
-\endcode
+```
 
 
-# Eigen中四元数到欧拉角的一个一定要注意的问题
+## Eigen中四元数到欧拉角的一个一定要注意的问题
 
 使用这种方式计算的欧拉角的三个角度的范围是[0,pi], [-pi,pi], [-pi,pi]。
 对于我们的XYZ欧拉角，也就是说yaw角的范围是[0,pi]，机器人的运动领域中是不够用的，因为在平面移动的时候，yaw角通常取值范围是[-pi,pi]。
 
-\code{.cpp}
+```cpp
 Vector3d euler(Quaterniond q){
     return q.toRotationMatrix().eulerAngles(2,1,0);
 }
@@ -124,21 +124,21 @@ Vector3d e(1.57,0,0);
 auto q = getQ(e);
 cout<<q.w()<<","<<q.x()<<","<<q.y()<<","<<q.z()<<endl;
 
-\endcode
+```
 
 输出结果：
-\code
+```
 1.57049
 1.5711  // 错误结果 这里应该是 -1.57才对
 0.707388,0,0,0.706825
-\endcode
+```
 
 
-# eigen中各种旋转表达之间的转换
+## eigen中各种旋转表达之间的转换
 
 代码来自 https://blog.csdn.net/weicao1990/article/details/86148828
 
-\code{.cpp}
+```cpp
 #include <iostream>
  
 #include <Eigen/Core>
@@ -288,20 +288,20 @@ int main(int argc, char **argv)
  
     return 0;
 }
-\endcode
+```
 
-# eigen_issue_01  编译报错： no type named Return Type
+##  编译报错： no type named Return Type
 
 带有模板的报错通常都是一大堆输出刷屏，很难从报错的字面上看出问题是什么，这个问题的原因则是两个矩阵操作时，类型不一样。
 比如一个float型，一个是double型。
 
-# block_with_template Mat::block()与模板类的组合使用方法
+## Mat::block()与模板类的组合使用方法
 
 对模板类Mat对象调用block()方法，会直接报错，需要一些独特的调用方法，比较少见。
 
-\code{cpp}
+```cpp
 void Pack::applyTransform(Eigen::Matrix<T,4,4> mat){
     Matrix<T,3,3> R = mat.template block<3,3>(0,0);
     Matrix<T,3,1> t = mat.template block<3,1>(0,3);
 }
-\endcode
+```

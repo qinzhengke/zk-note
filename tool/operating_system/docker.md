@@ -11,9 +11,9 @@
 
 容器和宿主机之间共享文件的方式很简单，只需要在启动的时候挂载宿主目录，即使用“-v”选项。
 
-\code{bash}
+```bash
 docker run -it -v /home/haha/下载:/share microsoft/dotnet:latest /bin/bash
-\endcode
+```
 
 上述代码把宿主机的“/home/haha/下载”目录挂载到docker中的“/share”目录。
 

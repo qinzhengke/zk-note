@@ -10,7 +10,7 @@ C++单例的实现五花八门，其中基于c++11最安全、方便的形式是
 
 注意只有在c++11中才能这样做，因为c++11中的静态变量初始化才是线程安全的，c++11以前的版本不保证。
 
-\code{.cpp}
+```cpp
 #include <iostream>
 
 class Singleton {
@@ -38,4 +38,4 @@ int main() {
 
   return 0;
 }
-\endcode
+```

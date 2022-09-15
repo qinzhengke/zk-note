@@ -14,9 +14,9 @@ QtCreator可以直接打开cmake工程，但是如果这个工程是以ros框架
 
 
 $ROS_PACKAGE_PATH也会回到/opt/ros/kinetic/share，这时候需要手动添加工作目录作为寻包路径。
-\code{bash}
+```bash
 export ROS_PACKAGE_PATH=/home/user/projects/catkin_ws:${ROS_PACKAGE_PATH}
-\endcode
+```
 
 根本原因：
 打开terminal后先source了devel目录下的setup.sh，然后source系统目录的setup.sh。
@@ -33,16 +33,16 @@ build目录选择catkin_ws/build
 
 
 ## Clock skew detected. Your build may be incomplete.
-\code{bash}
+```bash
 caktin_make clean
 catkin_make
-\endcode
+```
 
 ## 断点调试
 就像使用cmake一样使用catkin_make，
-\code{bash}
+```bash
 catkin_make -DCMAKE_BUILD_TYPE=Debug
-\endcode
+```
 
 ## ros_issue_launch ros launch额外传参
 如果使用ros launch启动节点，launch会额外在最后传入两个参数，所以main函数的argc会+2，在ros::init之后额外的两个参数会被剔除，argc会回归原值。

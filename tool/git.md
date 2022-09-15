@@ -2,24 +2,24 @@
 
 ## permission too open
 
-\code{bash}
+```bash
 chmod 700 ./private_key_file
-\endcode
+```
 
 ## Change commit editor
-\code{bash}
+```bash
 git config --global core.editor "vim"
-\endcode
+```
 
 ## 设置本地分支track远程分支
-\code{bash}
+```bash
 # checkout local branch
 git checkout my_branch
 # setup the tracked remote branch.
 git branch --set-upstream-to=origin/my_branch
 #或者
 git branch -u origin/my_branch
-\endcode
+```
 
 ## git加载私钥
 
@@ -29,15 +29,15 @@ ssh不会自动找到私钥，即使将私钥放在~/.ssh文件夹下，私钥�
 
 使用ssh-add命令添加，
 
-\code{bash}
+```bash
 ssh-add ~/.ssh/zk_rsa
-\endcode
+```
 
 如果出现了cannot connect to agent 提示，则执行**ssh-agent bash命令**，即
 
-\code{bash}
+```bash
 ssh-agent bash
-\endcode
+```
 
 ## fetch和pull的区别
 
@@ -47,10 +47,10 @@ fetch命令只是获取远程代码，并不会直接影响到本地代码，自
 
 突然有一天，发现自己要用的某个源文件中被修改了！想查看到底是谁修改的，但是手动浏览太慢了，特别是主干提交非常多的情况。使用gitk命令可以直接查看某个文件的修改历史。gitk是一个gui形式的git浏览工具，貌似是和git同时提供的，很强大。
 
-\code{bash}
+```bash
 # syntax: gitk -- <file_name>
 gitk -- /some_directory/my_interest.c
-\endcode
+```
 
 ## git报错：remote rejected *** change *** closed
 
@@ -73,9 +73,9 @@ git push origin --delete tmp/xxx
 尝试使用`git clean -d -f`
 
 ## reset 某一个文件到某个commit
-\code{bash}
+```bash
 git checkout HEAD -- my-file.txt
-\endcode
+```
 
 ## repo sync
 repo sync是不会删除已有的git的，即如果把repo的manifest.xml里面有某个git给删除掉后，运行reposync，该git还是会存在的。
@@ -83,9 +83,9 @@ repo sync会生成git但是不会删除git，这就会导致来回切repo的时�
 
 ## cherry-pick一个merge commit
 merge类型的commit是无法直接被cherry-pick的，因为它有两个父节点。cherry-pick的时候需要特殊处理
-\code{bash}
+```bash
 git cherry-pick XXX -m 1
-\endcode
+```
 这里的数字“1”需要使用者指定，通过git log可以看到merge commit的两个父节点的commit id，两个父节点的顺序就和-m参数后面跟的顺序是一样的。
 
 ## 使用rebase进行分支合并
@@ -100,9 +100,9 @@ git cherry-pick XXX -m 1
 
 ## cherry-pick a merge commit
 通常来说我们无法直接cherry-pick一个merge commit，因为merge commit包含两个parent commits。git无法确定到底使用哪一个commit作为parent commit，除非你告诉它。
-\code{bash}
+```bash
 git cherry-pick -m 1 <commit_id>
-\endcode
+```
 默认情况下，1是merge分支，即主干，2是被merge的分支，即topic分支。
 
 ## 向gerrit推送一个merge commit
@@ -119,9 +119,9 @@ git cherry-pick -m 1 <commit_id>
 “Resolved xxx using previous resolution”
 这就是git的自动沿用上一次冲突解决策略。
 可以使用下面的命令关掉。
-\code{bash}
+```bash
 git config --global rerere.enabled true
-\endcode
+```
 
 
 # 如何删除submodule

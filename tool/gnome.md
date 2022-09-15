@@ -4,9 +4,9 @@ Ubuntu 18.04开始又重新使用了gnome，真是分分合合。
 
 # 查看gonme版本
 
-\code{.sh}
+```bash
 gnome-shell --version
-\endcode
+```
 
 # 安装gnome插件
 

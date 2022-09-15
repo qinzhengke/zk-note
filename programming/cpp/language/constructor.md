@@ -4,7 +4,7 @@
 
 回答：是的，如下代码所示
 
-\code{.cpp}
+```cpp
 // swap queues
 #include <iostream>       // std::cout
 #include <queue>          // std::queue, std::swap(queue)
@@ -40,11 +40,11 @@ int main ()
 
   return 0;
 }
-\endcode
+```
 
 运行结果：
 
-\code
+```
 B deconst
 A deconst
 A deconst
@@ -52,13 +52,13 @@ A deconst
 B deconst
 A deconst
 A deconst
-\endcode
+```
 
-# 构造函数的参数隐式转换为对象
+## 构造函数的参数隐式转换为对象
 
 C++原来一直可以将构造函数的参数直接隐式转换成对象，如下代码所示，C++98就行。
 
-\code{cpp}
+```cpp
 // Example program
 #include <iostream>
 #include <string>
@@ -78,14 +78,14 @@ int main(){
     func(a2);
 }
 
-\endcode
+```
 
 运行结果：
 
-\code
+```
 5
 6
-\endcode
+```
 
 乍一看挺神奇的，从没有这么写过。
 如果不了解这种特性，那么有的时候出现问题可能一下子反应不过来。

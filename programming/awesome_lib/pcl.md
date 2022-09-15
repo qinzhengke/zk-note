@@ -1,8 +1,5 @@
 # Point Cloud Library（PCL）
 
-
-# pcl_trouble_shooting Trouble Shooting
-
 ## 1.82版本编译依赖项
 
 编译PCL的时候，其依赖项必须指定特定版本，太旧或者太新都会导致编译报错。显然PCL代码兼容性不是很好。

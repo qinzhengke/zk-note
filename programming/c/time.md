@@ -28,7 +28,7 @@ tm是一个结构体，包含了日历时间所需要的所有分成：年、月
 
 ## 日期加上秒数得到新的日期
 
-\code{cpp}
+```cpp
 #include <ctime>
 #include <cstdio>
 int main(){
@@ -38,13 +38,13 @@ int main(){
     printf("date:%d,%d,%d\n", ptm->tm_year, ptm->tm_mon, ptm->tm_mday);
 }
 
-\endcode
+```
 
 输出为：
 
-\code{bash}
+```bash
 date:120,11,1
-\endcode
+```
 
 注意，tm.tm_year以1900年为起点，也就是公元2020年，1606785706这个秒数本身是从1970年1月1日0时0分0秒开始计算的。
 另外，tm.mon的编码区间是[0,11]，所以tm.mon=11表示的是12月。
@@ -53,7 +53,7 @@ date:120,11,1
 
 ## 计算两个日期之间的秒数
 
-\code{cpp}
+```cpp
 /* time example */
 #include <stdio.h>      /* printf */
 #include <time.h>       /* time_t, struct tm, difftime, time, mktime */
@@ -75,4 +75,4 @@ int main ()
 
   return 0;
 }
-\endcode
+```

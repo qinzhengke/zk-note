@@ -2,7 +2,7 @@
 
 ## list容器的倒序访问
 
-\code{.cpp}
+```cpp
 // list::rbegin/rend
 #include <iostream>
 #include <list>
@@ -20,20 +20,20 @@ int main ()
 
   return 0;
 }
-\endcode
+```
 
 输出
 
-\code
+```
 mylist backwards:5 4 3 2 1 
-\endcode
+```
 
 
 ## list容器为空时的迭代结束条件
 容器为空时，begin()==end()，rbegin()==rend()，所以不需要先判断是不是空，直接用rbegin()!=rend()来结束循环是没问题的，
 这能够节省一些不必要的检查代码。
 
-\code{.cpp}
+```cpp
 // list::rbegin/rend
 #include <iostream>
 #include <list>
@@ -50,18 +50,18 @@ int main ()
 
   return 0;
 }
-\endcode
+```
 
 输出
 
-\code
+```
 mylist backwards:
-\endcode
+```
 
 
-# list容器insert示例
+## list容器insert示例
 
-\code{.cpp}
+```cpp
 // inserting into a list
 #include <iostream>
 #include <list>
@@ -96,12 +96,12 @@ int main ()
 
   return 0;
 }
-\endcode
+```
 
 
-# revserse_iterator的base()函数
+## revserse_iterator的base()函数
 
-\code{.cpp}
+```cpp
 // reverse_iterator::base example
 #include <iostream>     // std::cout
 #include <iterator>     // std::reverse_iterator
@@ -123,11 +123,11 @@ int main () {
 
   return 0;
 }
-\endcode
+```
 
 
-# 向空的list插入元素
-\code{.cpp}
+## 向空的list插入元素
+```cpp
 // inserting into a list
 #include <iostream>
 #include <list>
@@ -153,10 +153,10 @@ int main ()
 
   return 0;
 }
-\endcode
+```
 
 输出
 
-\code
+```
 1
-\endcode
+```

@@ -1,7 +1,5 @@
 # 读万卷书
 
-Programming
-
 - [CMake菜谱（CMake Cookbook中文版）](https://www.bookstack.cn/read/CMake-Cookbook/README.md)
 
 - [看见统计](https://seeing-theory.brown.edu/cn.html)

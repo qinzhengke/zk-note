@@ -2,7 +2,7 @@
 
 ## 如何将一个class变为可序列化的（serializable）？
 
-\code{python}
+```{python}
 class Param:
 def __init__(self):
     self.gt_path = ''
@@ -11,4 +11,4 @@ def __init__(self):
 
 with open('output.json', 'w') as ofs:
     json.dumps(Param().__dict__, ofs)
-\endcode
+```

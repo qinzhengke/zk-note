@@ -32,18 +32,18 @@ https://qmlbook.github.io/
 这个问题产生是因为g++没有在Linux下安装，g++是什么呢？gcc和g++都是编译器，gcc是C语言的编译器，而g++是针对C++的，我装的Ubuntu13.10预置安装了gcc但是没有安装g++，只要把g++安装一下就可以了。
 方法：
 
-\code{bash}
+```bash
 sudo apt-get install g++
-\endcode
+```
 
 ## cannot find -IGL
 
 这个问题是在安装好g++后出现的，查阅了网上的方法，应该是缺少libGL库的问题，这个时候安装一个Qt的库就可以（我觉得很奇怪，为什么一开始安装Qt的时候没有装上呢？）
 安装方法就是
 
-\code{bash}
+```bash
 sudo apt-get install libgl1-mesa-dev
-\endcode
+```
 
 free implementation of the OpenGL API -- GLX development files
 
@@ -103,15 +103,15 @@ connect函数连接方式比较多，而且都很有用，例如立即执行的�
 
 connection函数中的信号、槽函数使用的变量类型的名称，一定要和函数定义时候的名称完全一致，包括一些可有可无的类域符号（::）。代码1给出了一个示例，connection函数将rotate信号和onRotate函数进行连接，其中使用到了自定义的枚举类型：Rotator::Direction。代码2给出了onRotate的定义，原则上在onRotate定义的时候Rotator::Direction的类域名前缀Rotator::是可以不需要的，但是这样定义的话，connection函数会认为onRotate(Rotator::Direction)和onRotate(Direction)不是同一个函数，运行时会报错！
 
-\code{cpp}
+```cpp
 // 代码1：connection函数将rotate信号和onRotate槽进行连接。
 // Rotator interface inform
     qRegisterMetaType<Rotator::Direction>("Rotator::Direction");
     connect(controlProcessThread->cp->rttItf, SIGNAL(rotate(Rotator::Direction)),
             rotatorThread->rotator,SLOT(onRotate(Rotator::Direction)), Qt::QueuedConnection);
-\endcode
+```
 
-\code{cpp}
+```cpp
 // 代码2：onRotate槽函数的定义部分。
 class Rotator : public QObject
 {
@@ -126,12 +126,12 @@ public slots:
     //
     void onRotate(Direction dir);
 };
-\endcode
+```
 
 ![](files/connect函数报错.png "connect函数报错")
 图1：按照代码2方式定义槽函数，connection函数在运行时会报错。
 
-\code{cpp}
+```cpp
 // 代码2：正确的槽函数定义方式。
 class Rotator : public QObject
 {
@@ -146,7 +146,7 @@ public slots:
     //
     void onRotate(Rotator::Direction dir);
 };
-\endcode
+```
 
 
 
@@ -167,25 +167,25 @@ public slots:
 
 Qt中的信号与槽支持多个形参变量一起输入，只要顺序一致就可以。
 
-\code{cpp}
+```cpp
 // Inform UI one sub-step's status.
     void sendSubStepStatus(int idxCurrStep, int idxCurrSubStep, SubStep::Status s);
-\endcode
+```
 
 代码1：具有多个形参变量的信号定义。
 
-\code{cpp}
+```cpp
 // Receive sub step's status
     void onReceiveSubStepStatus(int idxCurrStep, int idxCurrSubStep, SubStep::Status s);
-\endcode
+```
 
 代码2：具有多个形参变量的槽函数定义。
 
-\code{cpp}
+```cpp
 // Control process send sub-step's status to UI
     qRegisterMetaType<SubStep::Status>("SubStep::Status");
     connect(controlProcessThread->cp, SIGNAL(sendSubStepStatus(int,int,SubStep::Status)), mw->tspw, SLOT(onReceiveSubStepStatus(int,int,SubStep::Status)), Qt::QueuedConnection);
-\endcode
+```
 
 代码：带有多个形参变量的信号与槽的连接。
 
@@ -244,7 +244,7 @@ QLabel显示图片不完整可能是因为QLabel对象没有加入母QWidget的�
 Qt有两种方式实现多线程：第一种建立QThread的子类，第二种是使用QObject :: moveToThread函数实现。
 第一种方法是建立QThread的子类，并且重写run()函数。在定义QThread的子类并重写run()函数后，使用QThread::start()函数就可以启动新线程。这里要注意的是：（1）只有run里面的代码会执行在新的线程里，QThread的构造函数本身还是在原线程中执行；（2） run()函数本身是一个过程代码，并没有事件循环，如果要实现事件循环，例如在run函数中新建一个带有事件循环的QObject子类，则必须要在run函数结束前添加exec()函数。代码1给出了Qt5.4帮助文档中关于QThread子类化使用的代码示例。
 
-\code{cpp}
+```cpp
 //代码1：Qt5.4帮助文档中关于QThread子类化使用方法的示例。
 class WorkerThread : public QThread
 {
@@ -265,11 +265,11 @@ void MyObject::startWorkInAThread()
     connect(workerThread, &WorkerThread::finished, workerThread, &QObject::deleteLater);
     workerThread->start();
 }
-\endcode
+```
 使用这种方式时，只有QThread的run函数里的代码才是新线程里执行的，其他的代码仍然在原线程中执行。也就是说如果我子类化了一个QThread类，这个子类的构造函数、槽函数以及其他函数不会在新线程中执行。在下面的笔记里会介绍怎么在新线程中新建QObject类以及完整的实现其所有功能。
 第二种方法是使用QObject::moveToThread()函数，在新建某个QObject子类之后，调用这个子类的moveToThread 函数，那么这个子类的槽函数就可以执行在新的线程里了。代码2给出了QtCreator关于多线程moveToThread的使用例程。
 
-\code{cpp}
+```cpp
 class Worker : public QObject
 {
     Q_OBJECT
@@ -307,7 +307,7 @@ public slots:
 signals:
     void operate(const QString &);
 };
-\endcode
+```
 
 
 ## 在新线程中使用QObject类
@@ -327,41 +327,41 @@ Ctrl+Shift+R，编辑完后按Esc退出统一修改模式。
 2.1 使用 Qt 自带的 windeployqt.exe 寻找依赖文件
 在 cmd 中，运行如下命令：
 
-\code{bash}
+```bash
 <Qt目录>\Qt5.5.1\5.5\mingw492_32\bin\windeployqt.exe   <*.exe>
-\endcode
+```
 程序会找到该可执行程序所需的所有依赖文件，并集成进该可执行文件所在的目录：
 
 
 ## linux下qt程序打包
 1.下载linuxdeployqt.AppImage工具和appimagetools.AppImage工具，网上一搜很多
 2.执行linuxdeployqt.AppImage
-\code{bash}
+```bash
 linuxdeployqt.AppImage my_exe -qmake="/home/zrinker/softs/Qt5.xx/5.xx/gccxx/bin/qmake" -appimage
-\endcode
+```
 上面命令中，qmake路径只是一个示例，自己运行的时候要找准。
 3.运行完后，当前目录会多出包含库文件的lib目录，AppRun超链接（直接运行它也可以跑程序），以及一个default.desktop文件。
 4.linuxdeployqt得到的default.desktop文件缺少categories项，要手动添加。
-\code{bash}
+```bash
 [Desktop Entry]
 Name=FooCorp Painter Pro
 Exec=foocorp-painter-pro
 Icon=foocorp-painter-pro
 Type=Application
 Categories=GTK;GNOME;Utility; 
-\endcode
+```
 最后一行是要手动加的，类别选择一个就行，但是别忘记分号！
 5.使用appimagetools工具打包整个目录成AppImage
-\code{bash}
+```bash
 appimagetool-x86_64.AppImage build/ #build目录就是我的可执行文件的目录，打包前把乱七八糟的中间文件删除掉，否则AppImage体积很大。
-\endcode
+```
 6.愉快地使用生成出来的AppImage吧。
 
 
 # qtcreator中开启gcc的c99支持
-\endcode
+```
 QMAKE_CFLAGS += -std=c99
-\endcode
+```
 
 
 ## 工程内外的头文件区别？

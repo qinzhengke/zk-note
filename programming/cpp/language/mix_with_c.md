@@ -1,9 +1,5 @@
 # C++与C语言混合编程
 
-
-## C语言调用C++模块
-
-
 ## C语言调用C++函数的正确姿势
 大家都知道，C++调用C语言模块很容易，就是在函数生命的地方使用#ifdef \_\_cplusplus extern "C" #endif 包起来就行。
 但是有的时候需要在C语言环境中调用C++的模块，虽然这种调用感觉很不合理，但是仍然不可避免，例如组里的顶层框架代码是C，我们自身的模块是C++，这时候必须要把C++模块塞到C模块里。
@@ -16,7 +12,7 @@
 这说明，extern "C"的包裹，虽然只是针对声明进行的，但是它会实际影响到定义部分，会让定义部分使用C的方式生成函数符号名。
 那最后留一个疑问，如果extern "C"包裹的C++函数有重载，那么会发生什么呢？
 
-\endcode
+```cpp
 //C++头文件 cppExample.h
 #ifndef CPP_EXAMPLE_H
 #define CPP_EXAMPLE_H
@@ -38,4 +34,4 @@ int main( int argc, char* argv[] )
 　add( 2, 3 );
 　return 0;
 }
-\endcode
+```

@@ -21,7 +21,7 @@
 
 这哥们做了很多的尝试，对我们非常有指导意义，很有意思，这里截取出来
 
-\code
+```
 We are currently investigating whether an SNMP search for printer devices can be performed from a Web browser.
 Premise: A web browser (Chrome for the time being) in a clean PC (no OS required).
 What I want to do: I want to do UDP communication using only client-side JavaScript.
@@ -64,7 +64,7 @@ Isn't it possible to communicate from the UDP port if you can make it with JavaS
 
 Are there any other means of UDP communication (SNMP search) from a web browser than the above means?
 that's all, thank you very much.
-\endcode
+```
 
 总结一下，提问者尝试了
 
@@ -78,6 +78,6 @@ that's all, thank you very much.
 
 从作者的多次尝试可以看出里面的心路历程。
 
-# 浏览器不能发送udp包的原因
+## 浏览器不能发送udp包的原因
 
 这篇文章给出了原因：https://gafferongames.com/post/why_cant_i_send_udp_packets_from_a_browser/
