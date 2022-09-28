@@ -25,8 +25,6 @@
 
 [C++构建报错合集](https://github.com/qinzhengke/zk-note/blob/master/programming/cpp/build_errors.md)
 
-
-
 ## 本仓库
 
 ## GitHub markdown LaTex公式支持
