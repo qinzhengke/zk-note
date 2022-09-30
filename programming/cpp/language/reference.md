@@ -8,10 +8,10 @@
 
 3. 常量左值引用和左值引用要分开，常量左值引用因为常量特性，是万能引用，具有特殊地位，它能指向右值，但不能修改左值内容。
 
-| | 左值引用 | const左值引用 | 右值引用 |
-========
-| 左值      | 可   | 可，但无法修改        | 可(std::move) |
-| 右值      | 不可 | 可（没有修改的必要）   | 可            |
+|      | 左值引用 | const左值引用   | 右值引用         |
+|------|----------|-----------------|------------------|
+| 左值 | √        | √（但无法修改） | √（std::move()） |
+| 右值 | ×        | √（但无法修改） | √                |
 
 总的来说，右值引用在传参上更为灵活一些，但仅仅是这个原因，引入右值是没有必要的。
 对于只读传参，只需要const引用即可，对于读写传参，修改传入的右值仿佛又没啥意义。
@@ -155,3 +155,122 @@ Move A(0x505520)
 
 ## 完美转发
 
+什么是转发？转发就是在函数中，将自己的参数传入到子函数中，我们常常会碰到一些壳函数，它们除了调用实际执行的函数外，就不做其他事情。
+一个函数的实现有可能会套多层“壳”，壳函数要做的事情就是把参数传递一下而已。
+
+我们之前说过，“右值引用其实是左值”，一旦进入函数，参数就变成了左值，可以取地址，如下代码所示
+
+```cpp
+#include <iostream>
+
+void foo(int && a) {
+    std::cout <<&a << "\n"; // 10以右值引用传入后，引用本身是左值，可以取地址。
+}
+ 
+int main(void) {
+    foo(10); // 10本身是右值
+}
+```
+
+运行结果
+
+```
+0x50527c
+```
+
+那么现在有一个问题，我希望右值参数进来之后，仍然能够以右值的身份传入子函数，怎么办呢？
+一种思路给参数套上std::move()之后传入子函数。
+
+那么我们再进一步提问：我希望右值进来之后，仍以右值传入子函数，并且，左值进来之后，以左值的身份传入子函数，怎么实现呢？
+实际上这个问题就是完美转发的需求了，这里我们就能够引出std::forward()了。
+
+- 首先确认一点，完美转发必须在函数模板中才能工作。
+- 如果传入参数为左值，那么forward()结果是左值。
+- 如果传入参数为右值，那么forward()结果为右值。
+
+来看以下代码，foo()函数内部将参数n传入子函数bar()，有三个版本的foo()函数，前两个是函数模板：基于forward()转发的foo_forward()，直接转发的foo()；
+后一个是函数（并非模板），让我们来看看到底谁能够实现完美转发。
+
+```cpp
+#include <iostream>
+#include <memory>
+#include <utility>
+
+void bar(int&& n) { std::cout << "rvalue overload, n=" << n << "\n"; }
+void bar (int& n)  { std::cout << "lvalue overload, n=" << n << "\n"; }
+ 
+template<class U>
+void foo_forward(U&& u) {
+    bar(std::forward<U>(u));
+}
+
+template< class U>
+void foo(U&& u) {
+    bar(u); // 这种写法，一定调用bar(int&)
+}
+
+template< class U>
+void foo_l(U&& u) {
+    bar(u); // 这种写法，一定调用bar(int&)
+}
+
+template< class U>
+void foo_r(U&& u) {
+    bar(std::move(u)); // 这种写法，一定调用bar(int&&)
+}
+
+void foo_ins(int&& n) {
+    bar(n); // 这种写法，一定调用bar(int&)
+    //bar(std::move(n)); // 这种写法，一定调用bar(int&&)
+}
+ 
+int main(void) {
+    std::cout <<"1111\n";
+    {
+        foo_forward(2); // rvalue
+        int i = 1;
+        foo_forward(i); // lvalue
+    }
+    
+    std::cout<< "2222\n";
+    {
+        foo(2); // rvalue
+        int i = 1;
+        foo(i); // lvalue
+    }
+
+    std::cout <<"3333\n";
+    {
+        foo_ins(2); // rvalue
+        int i = 1;
+        foo_ins(std::move(i)); // lvalue
+    }
+
+    std::cout <<"4444\n";
+    {
+        foo_l(2); // rvalue
+        int i = 1;
+        foo_r(std::move(i)); // lvalue
+    }
+}
+```
+
+运行结果如下所示：
+```
+1111
+rvalue overload, n=2
+lvalue overload, n=1
+2222
+lvalue overload, n=2
+lvalue overload, n=1
+3333
+lvalue overload, n=2
+lvalue overload, n=1
+4444
+lvalue overload, n=2
+rvalue overload, n=1
+```
+
+显然，只有基于forward()，并且在函数模板中实现的foo()函数才能实现完美转发。
+
+当然，如果按照第4种写法，写两个版本foo()，分别是针对左值和右值，也可以转发，但是必须得写2个版本函数，显然不够优雅。
