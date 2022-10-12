@@ -307,3 +307,32 @@ struct intermediate : base {
 struct derived : intermediate<derived> 
 { };
 ```
+
+## 基于引用实现多态
+
+除了“父指针指向子对象”这种方式外，也可以基于引用实现多态，即“父引用指向子对象”。
+
+```cpp
+#include <iostream>
+
+struct Base {int x = 7; };
+
+struct Derived : public Base { int y = 8; };
+
+void foo(Base & obj) {
+    std::cout << obj.x << "\n";
+    std::cout << static_cast<Derived&>(obj).y << "\n";
+}
+ 
+int main(void) {
+    Derived obj;
+    foo(obj);
+}
+```
+
+运行结果
+
+```
+7
+8
+```

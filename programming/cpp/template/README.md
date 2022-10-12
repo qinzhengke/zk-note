@@ -228,3 +228,38 @@ d1d2: 5.8
 common_type在std::chrono中有比较大量的使用。在std::chrono中，两个time_point相减，能得到一个duaration，但是两个time_point可能由不同的数值类型构建而来，所以需要一个最终的输出类型。
 
 详情参见 https://en.cppreference.com/w/cpp/chrono/time_point/operator_arith2。
+
+
+## 函数模板中的“typename”
+
+具体报错信息
+
+```
+error: need 'typename' before 'A:: B' because 'A' is a dependent scope
+```
+
+在类型定义的时候，必须加上typename，如下代码所示
+
+```cpp
+#include <iostream>
+
+struct A {
+    struct B;
+};
+
+struct A::B {
+    int x = 10;
+};
+
+template<typename T>
+void foo(T a) {
+    // T::B b;        // 直接定义会导致编译报错。
+    typename T::B b;  // 必须加上typenmae，编译器才能识别这是一个类型，而不是函数或者成员变量。
+    std::cout << b.x << "\n";
+}
+ 
+int main(void) {
+    A a;
+    foo<A>(a);
+}
+```
