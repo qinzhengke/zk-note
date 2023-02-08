@@ -41,3 +41,7 @@ sudo apt install libxt-dev
 #   vtkRenderingContextOpenGL2
 
 ```
+
+## ImageImport->SetImportVoidPointer不更新
+不知道为什么，vtkImageImport->SetImportVoidPointer绑定数据地址后，数据更新时，vtk不会更新显示，即使调用了update()方法。
+使用vtkImageImport->CopyImportVoidPointer就可以。
