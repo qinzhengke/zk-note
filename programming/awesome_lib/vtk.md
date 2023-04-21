@@ -45,3 +45,9 @@ sudo apt install libxt-dev
 ## ImageImport->SetImportVoidPointer不更新
 不知道为什么，vtkImageImport->SetImportVoidPointer绑定数据地址后，数据更新时，vtk不会更新显示，即使调用了update()方法。
 使用vtkImageImport->CopyImportVoidPointer就可以。
+
+## 运行报错
+2023-04-21 11:37:35.100 (   0.027s) [        FB9C9B00]vtkAbstractImageInterpo:264    ERR| vtkImageInterpolator (0x55eafb229b60): Initialize(): no image data to interpolate!
+2023-04-21 11:37:35.180 (   0.108s) [        FB9C9B00]vtkAbstractImageInterpo:264    ERR| vtkImageInterpolator (0x55eafce5f890): Initialize(): no image data to interpolate!
+
+这个错误无关紧要，程序仍然能正常运行，如果程序crash了，那一定是别的原因，别把自己绕进去了。
