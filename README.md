@@ -16,7 +16,15 @@
   * [感知算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/perception/README.md)
   * [SLAM算法](https://github.com/qinzhengke/zk-note/blob/master/algorithm/slam/README.md)
   * [机器学习](https://github.com/qinzhengke/zk-note/blob/master/algorithm/machine_learning/README.md)
-* [工具笔记](https://github.com/qinzhengke/zk-note/blob/master/tool/entry.md)
+* 工具
+  * [工具笔记](https://github.com/qinzhengke/zk-note/blob/master/tool/vscode.md)
+  * [工具笔记](https://github.com/qinzhengke/zk-note/blob/master/tool/git.md)
+  * [工具笔记](https://github.com/qinzhengke/zk-note/blob/master/tool/gitlab-ci.md)
+  * [工具笔记](https://github.com/qinzhengke/zk-note/blob/master/tool/latex.md)
+  * [工具笔记](https://github.com/qinzhengke/zk-note/blob/master/tool/regex.md)
+  * [工具笔记](https://github.com/qinzhengke/zk-note/blob/master/tool/sed.md)
+  * [工具笔记](https://github.com/qinzhengke/zk-note/blob/master/tool/doxygen.md)
+* 
 * [读万卷书](https://github.com/qinzhengke/zk-note/blob/master/awesome_ebooks.md)
 * [兴趣](https://github.com/qinzhengke/zk-note/blob/master/hobby/entry.md)
 * [简历](https://github.com/qinzhengke/zk-note/blob/master/resume.md)
